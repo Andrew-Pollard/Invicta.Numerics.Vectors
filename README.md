@@ -33,7 +33,7 @@ Within this repository each variant of the library will be maintained in a separ
 ### Licensing
 This library is derived from code from the [.NET runtime repository](https://github.com/dotnet/runtime/tree/v10.0.0) which is licensed under the [MIT license](https://github.com/dotnet/runtime/blob/v10.0.0/LICENSE.TXT), copyright .NET Foundation and Contributors. The modifications to this code are also licensed under the [MIT license](https://opensource.org/license/mit), copyright Andrew Pollard.
 
-See [LICENSE.txt](LICENSE.txt) for more detail.
+SPDX-License-Identifier: MIT, see [LICENSE.txt](LICENSE.txt).
 
 ## Steps to Create the Library
 
