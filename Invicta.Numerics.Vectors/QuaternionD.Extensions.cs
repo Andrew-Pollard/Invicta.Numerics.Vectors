@@ -7,10 +7,10 @@ namespace Invicta.Numerics
 {
     public static partial class Vector
     {
-        /// <summary>Reinterprets a <see cref="Quaternion" /> as a new <see cref="Vector4" />.</summary>
+        /// <summary>Reinterprets a <see cref="QuaternionD" /> as a new <see cref="Vector4D" />.</summary>
         /// <param name="value">The quaternion to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Quaternion" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="QuaternionD" />.</returns>
         [Intrinsic]
-        public static Vector4 AsVector4(this Quaternion value) => Unsafe.BitCast<Quaternion, Vector4>(value);
+        public static Vector4D AsVector4(this QuaternionD value) => Unsafe.BitCast<QuaternionD, Vector4D>(value);
     }
 }
