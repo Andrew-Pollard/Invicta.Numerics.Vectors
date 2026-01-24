@@ -1139,174 +1139,174 @@ namespace Invicta.Numerics
                 // This implementation is based on the DirectX Math Library XMMatrixInverse method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                if (Sse.IsSupported)
-                {
-                    return SseImpl(in matrix, out result);
-                }
+                //if (Sse.IsSupported)
+                //{
+                //    return SseImpl(in matrix, out result);
+                //}
 
                 return SoftwareFallback(in matrix, out result);
 
-                [CompExactlyDependsOn(typeof(Sse))]
-                static bool SseImpl(in Impl matrix, out Impl result)
-                {
-                    if (!Sse.IsSupported)
-                    {
-                        // Redundant test so we won't prejit remainder of this method on platforms without SSE.
-                        ThrowPlatformNotSupportedException();
-                    }
+                //[CompExactlyDependsOn(typeof(Sse))]
+                //static bool SseImpl(in Impl matrix, out Impl result)
+                //{
+                //    if (!Sse.IsSupported)
+                //    {
+                //        // Redundant test so we won't prejit remainder of this method on platforms without SSE.
+                //        ThrowPlatformNotSupportedException();
+                //    }
 
-                    // Load the matrix values into rows
-                    Vector128<float> row1 = matrix.X.AsVector128();
-                    Vector128<float> row2 = matrix.Y.AsVector128();
-                    Vector128<float> row3 = matrix.Z.AsVector128();
-                    Vector128<float> row4 = matrix.W.AsVector128();
+                //    // Load the matrix values into rows
+                //    Vector128<float> row1 = matrix.X.AsVector128();
+                //    Vector128<float> row2 = matrix.Y.AsVector128();
+                //    Vector128<float> row3 = matrix.Z.AsVector128();
+                //    Vector128<float> row4 = matrix.W.AsVector128();
 
-                    // Transpose the matrix
-                    Vector128<float> vTemp1 = Sse.Shuffle(row1, row2, 0b01_00_01_00); //_MM_SHUFFLE(1, 0, 1, 0)
-                    Vector128<float> vTemp3 = Sse.Shuffle(row1, row2, 0b11_10_11_10); //_MM_SHUFFLE(3, 2, 3, 2)
-                    Vector128<float> vTemp2 = Sse.Shuffle(row3, row4, 0b01_00_01_00); //_MM_SHUFFLE(1, 0, 1, 0)
-                    Vector128<float> vTemp4 = Sse.Shuffle(row3, row4, 0b11_10_11_10); //_MM_SHUFFLE(3, 2, 3, 2)
+                //    // Transpose the matrix
+                //    Vector128<float> vTemp1 = Sse.Shuffle(row1, row2, 0b01_00_01_00); //_MM_SHUFFLE(1, 0, 1, 0)
+                //    Vector128<float> vTemp3 = Sse.Shuffle(row1, row2, 0b11_10_11_10); //_MM_SHUFFLE(3, 2, 3, 2)
+                //    Vector128<float> vTemp2 = Sse.Shuffle(row3, row4, 0b01_00_01_00); //_MM_SHUFFLE(1, 0, 1, 0)
+                //    Vector128<float> vTemp4 = Sse.Shuffle(row3, row4, 0b11_10_11_10); //_MM_SHUFFLE(3, 2, 3, 2)
 
-                    row1 = Sse.Shuffle(vTemp1, vTemp2, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
-                    row2 = Sse.Shuffle(vTemp1, vTemp2, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
-                    row3 = Sse.Shuffle(vTemp3, vTemp4, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
-                    row4 = Sse.Shuffle(vTemp3, vTemp4, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
+                //    row1 = Sse.Shuffle(vTemp1, vTemp2, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
+                //    row2 = Sse.Shuffle(vTemp1, vTemp2, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
+                //    row3 = Sse.Shuffle(vTemp3, vTemp4, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
+                //    row4 = Sse.Shuffle(vTemp3, vTemp4, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
 
-                    Vector128<float> V00 = Vector128.Shuffle(row3, Vector128.Create(0, 0, 1, 1));
-                    Vector128<float> V10 = Vector128.Shuffle(row4, Vector128.Create(2, 3, 2, 3));
-                    Vector128<float> V01 = Vector128.Shuffle(row1, Vector128.Create(0, 0, 1, 1));
-                    Vector128<float> V11 = Vector128.Shuffle(row2, Vector128.Create(2, 3, 2, 3));
-                    Vector128<float> V02 = Sse.Shuffle(row3, row1, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
-                    Vector128<float> V12 = Sse.Shuffle(row4, row2, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
+                //    Vector128<float> V00 = Vector128.Shuffle(row3, Vector128.Create(0, 0, 1, 1));
+                //    Vector128<float> V10 = Vector128.Shuffle(row4, Vector128.Create(2, 3, 2, 3));
+                //    Vector128<float> V01 = Vector128.Shuffle(row1, Vector128.Create(0, 0, 1, 1));
+                //    Vector128<float> V11 = Vector128.Shuffle(row2, Vector128.Create(2, 3, 2, 3));
+                //    Vector128<float> V02 = Sse.Shuffle(row3, row1, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
+                //    Vector128<float> V12 = Sse.Shuffle(row4, row2, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
 
-                    Vector128<float> D0 = V00 * V10;
-                    Vector128<float> D1 = V01 * V11;
-                    Vector128<float> D2 = V02 * V12;
+                //    Vector128<float> D0 = V00 * V10;
+                //    Vector128<float> D1 = V01 * V11;
+                //    Vector128<float> D2 = V02 * V12;
 
-                    V00 = Vector128.Shuffle(row3, Vector128.Create(2, 3, 2, 3));
-                    V10 = Vector128.Shuffle(row4, Vector128.Create(0, 0, 1, 1));
-                    V01 = Vector128.Shuffle(row1, Vector128.Create(2, 3, 2, 3));
-                    V11 = Vector128.Shuffle(row2, Vector128.Create(0, 0, 1, 1));
-                    V02 = Sse.Shuffle(row3, row1, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
-                    V12 = Sse.Shuffle(row4, row2, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
+                //    V00 = Vector128.Shuffle(row3, Vector128.Create(2, 3, 2, 3));
+                //    V10 = Vector128.Shuffle(row4, Vector128.Create(0, 0, 1, 1));
+                //    V01 = Vector128.Shuffle(row1, Vector128.Create(2, 3, 2, 3));
+                //    V11 = Vector128.Shuffle(row2, Vector128.Create(0, 0, 1, 1));
+                //    V02 = Sse.Shuffle(row3, row1, 0b11_01_11_01); //_MM_SHUFFLE(3, 1, 3, 1)
+                //    V12 = Sse.Shuffle(row4, row2, 0b10_00_10_00); //_MM_SHUFFLE(2, 0, 2, 0)
 
-                    D0 = Vector128.MultiplyAddEstimate(-V00, V10, D0);
-                    D1 = Vector128.MultiplyAddEstimate(-V01, V11, D1);
-                    D2 = Vector128.MultiplyAddEstimate(-V02, V12, D2);
+                //    D0 = Vector128.MultiplyAddEstimate(-V00, V10, D0);
+                //    D1 = Vector128.MultiplyAddEstimate(-V01, V11, D1);
+                //    D2 = Vector128.MultiplyAddEstimate(-V02, V12, D2);
 
-                    // V11 = D0Y,D0W,D2Y,D2Y
-                    V11 = Sse.Shuffle(D0, D2, 0b01_01_11_01);  //_MM_SHUFFLE(1, 1, 3, 1)
-                    V00 = Vector128.Shuffle(row2, Vector128.Create(1, 2, 0, 1));
-                    V10 = Sse.Shuffle(V11, D0, 0b00_11_00_10); //_MM_SHUFFLE(0, 3, 0, 2)
-                    V01 = Vector128.Shuffle(row1, Vector128.Create(2, 0, 1, 0));
-                    V11 = Sse.Shuffle(V11, D0, 0b10_01_10_01); //_MM_SHUFFLE(2, 1, 2, 1)
+                //    // V11 = D0Y,D0W,D2Y,D2Y
+                //    V11 = Sse.Shuffle(D0, D2, 0b01_01_11_01);  //_MM_SHUFFLE(1, 1, 3, 1)
+                //    V00 = Vector128.Shuffle(row2, Vector128.Create(1, 2, 0, 1));
+                //    V10 = Sse.Shuffle(V11, D0, 0b00_11_00_10); //_MM_SHUFFLE(0, 3, 0, 2)
+                //    V01 = Vector128.Shuffle(row1, Vector128.Create(2, 0, 1, 0));
+                //    V11 = Sse.Shuffle(V11, D0, 0b10_01_10_01); //_MM_SHUFFLE(2, 1, 2, 1)
 
-                    // V13 = D1Y,D1W,D2W,D2W
-                    Vector128<float> V13 = Sse.Shuffle(D1, D2, 0b11_11_11_01); //_MM_SHUFFLE(3, 3, 3, 1)
-                    V02 = Vector128.Shuffle(row4, Vector128.Create(1, 2, 0, 1));
-                    V12 = Sse.Shuffle(V13, D1, 0b00_11_00_10);                 //_MM_SHUFFLE(0, 3, 0, 2)
-                    Vector128<float> V03 = Vector128.Shuffle(row3, Vector128.Create(2, 0, 1, 0));
-                    V13 = Sse.Shuffle(V13, D1, 0b10_01_10_01);                 //_MM_SHUFFLE(2, 1, 2, 1)
+                //    // V13 = D1Y,D1W,D2W,D2W
+                //    Vector128<float> V13 = Sse.Shuffle(D1, D2, 0b11_11_11_01); //_MM_SHUFFLE(3, 3, 3, 1)
+                //    V02 = Vector128.Shuffle(row4, Vector128.Create(1, 2, 0, 1));
+                //    V12 = Sse.Shuffle(V13, D1, 0b00_11_00_10);                 //_MM_SHUFFLE(0, 3, 0, 2)
+                //    Vector128<float> V03 = Vector128.Shuffle(row3, Vector128.Create(2, 0, 1, 0));
+                //    V13 = Sse.Shuffle(V13, D1, 0b10_01_10_01);                 //_MM_SHUFFLE(2, 1, 2, 1)
 
-                    Vector128<float> C0 = V00 * V10;
-                    Vector128<float> C2 = V01 * V11;
-                    Vector128<float> C4 = V02 * V12;
-                    Vector128<float> C6 = V03 * V13;
+                //    Vector128<float> C0 = V00 * V10;
+                //    Vector128<float> C2 = V01 * V11;
+                //    Vector128<float> C4 = V02 * V12;
+                //    Vector128<float> C6 = V03 * V13;
 
-                    // V11 = D0X,D0Y,D2X,D2X
-                    V11 = Sse.Shuffle(D0, D2, 0b00_00_01_00);   //_MM_SHUFFLE(0, 0, 1, 0)
-                    V00 = Vector128.Shuffle(row2, Vector128.Create(2, 3, 1, 2));
-                    V10 = Sse.Shuffle(D0, V11, 0b10_01_00_11);  //_MM_SHUFFLE(2, 1, 0, 3)
-                    V01 = Vector128.Shuffle(row1, Vector128.Create(3, 2, 3, 1));
-                    V11 = Sse.Shuffle(D0, V11, 0b00_10_01_10);  //_MM_SHUFFLE(0, 2, 1, 2)
+                //    // V11 = D0X,D0Y,D2X,D2X
+                //    V11 = Sse.Shuffle(D0, D2, 0b00_00_01_00);   //_MM_SHUFFLE(0, 0, 1, 0)
+                //    V00 = Vector128.Shuffle(row2, Vector128.Create(2, 3, 1, 2));
+                //    V10 = Sse.Shuffle(D0, V11, 0b10_01_00_11);  //_MM_SHUFFLE(2, 1, 0, 3)
+                //    V01 = Vector128.Shuffle(row1, Vector128.Create(3, 2, 3, 1));
+                //    V11 = Sse.Shuffle(D0, V11, 0b00_10_01_10);  //_MM_SHUFFLE(0, 2, 1, 2)
 
-                    // V13 = D1X,D1Y,D2Z,D2Z
-                    V13 = Sse.Shuffle(D1, D2, 0b10_10_01_00);   //_MM_SHUFFLE(2, 2, 1, 0)
-                    V02 = Vector128.Shuffle(row4, Vector128.Create(2, 3, 1, 2));
-                    V12 = Sse.Shuffle(D1, V13, 0b10_01_00_11);  //_MM_SHUFFLE(2, 1, 0, 3)
-                    V03 = Vector128.Shuffle(row3, Vector128.Create(3, 2, 3, 1));
-                    V13 = Sse.Shuffle(D1, V13, 0b_00_10_01_10); //_MM_SHUFFLE(0, 2, 1, 2)
+                //    // V13 = D1X,D1Y,D2Z,D2Z
+                //    V13 = Sse.Shuffle(D1, D2, 0b10_10_01_00);   //_MM_SHUFFLE(2, 2, 1, 0)
+                //    V02 = Vector128.Shuffle(row4, Vector128.Create(2, 3, 1, 2));
+                //    V12 = Sse.Shuffle(D1, V13, 0b10_01_00_11);  //_MM_SHUFFLE(2, 1, 0, 3)
+                //    V03 = Vector128.Shuffle(row3, Vector128.Create(3, 2, 3, 1));
+                //    V13 = Sse.Shuffle(D1, V13, 0b_00_10_01_10); //_MM_SHUFFLE(0, 2, 1, 2)
 
-                    C0 = Vector128.MultiplyAddEstimate(-V00, V10, C0);
-                    C2 = Vector128.MultiplyAddEstimate(-V01, V11, C2);
-                    C4 = Vector128.MultiplyAddEstimate(-V02, V12, C4);
-                    C6 = Vector128.MultiplyAddEstimate(-V03, V13, C6);
+                //    C0 = Vector128.MultiplyAddEstimate(-V00, V10, C0);
+                //    C2 = Vector128.MultiplyAddEstimate(-V01, V11, C2);
+                //    C4 = Vector128.MultiplyAddEstimate(-V02, V12, C4);
+                //    C6 = Vector128.MultiplyAddEstimate(-V03, V13, C6);
 
-                    V00 = Vector128.Shuffle(row2, Vector128.Create(3, 0, 3, 0));
+                //    V00 = Vector128.Shuffle(row2, Vector128.Create(3, 0, 3, 0));
 
-                    // V10 = D0Z,D0Z,D2X,D2Y
-                    V10 = Sse.Shuffle(D0, D2, 0b01_00_10_10); //_MM_SHUFFLE(1, 0, 2, 2)
-                    V10 = Vector128.Shuffle(V10, Vector128.Create(0, 3, 2, 0));
-                    V01 = Vector128.Shuffle(row1, Vector128.Create(1, 3, 0, 2));
+                //    // V10 = D0Z,D0Z,D2X,D2Y
+                //    V10 = Sse.Shuffle(D0, D2, 0b01_00_10_10); //_MM_SHUFFLE(1, 0, 2, 2)
+                //    V10 = Vector128.Shuffle(V10, Vector128.Create(0, 3, 2, 0));
+                //    V01 = Vector128.Shuffle(row1, Vector128.Create(1, 3, 0, 2));
 
-                    // V11 = D0X,D0W,D2X,D2Y
-                    V11 = Sse.Shuffle(D0, D2, 0b01_00_11_00); //_MM_SHUFFLE(1, 0, 3, 0)
-                    V11 = Vector128.Shuffle(V11, Vector128.Create(3, 0, 1, 2));
-                    V02 = Vector128.Shuffle(row4, Vector128.Create(3, 0, 3, 0));
+                //    // V11 = D0X,D0W,D2X,D2Y
+                //    V11 = Sse.Shuffle(D0, D2, 0b01_00_11_00); //_MM_SHUFFLE(1, 0, 3, 0)
+                //    V11 = Vector128.Shuffle(V11, Vector128.Create(3, 0, 1, 2));
+                //    V02 = Vector128.Shuffle(row4, Vector128.Create(3, 0, 3, 0));
 
-                    // V12 = D1Z,D1Z,D2Z,D2W
-                    V12 = Sse.Shuffle(D1, D2, 0b11_10_10_10); //_MM_SHUFFLE(3, 2, 2, 2)
-                    V12 = Vector128.Shuffle(V12, Vector128.Create(0, 3, 2, 0));
-                    V03 = Vector128.Shuffle(row3, Vector128.Create(1, 3, 0, 2));
+                //    // V12 = D1Z,D1Z,D2Z,D2W
+                //    V12 = Sse.Shuffle(D1, D2, 0b11_10_10_10); //_MM_SHUFFLE(3, 2, 2, 2)
+                //    V12 = Vector128.Shuffle(V12, Vector128.Create(0, 3, 2, 0));
+                //    V03 = Vector128.Shuffle(row3, Vector128.Create(1, 3, 0, 2));
 
-                    // V13 = D1X,D1W,D2Z,D2W
-                    V13 = Sse.Shuffle(D1, D2, 0b11_10_11_00); //_MM_SHUFFLE(3, 2, 3, 0)
-                    V13 = Vector128.Shuffle(V13, Vector128.Create(3, 0, 1, 2));
+                //    // V13 = D1X,D1W,D2Z,D2W
+                //    V13 = Sse.Shuffle(D1, D2, 0b11_10_11_00); //_MM_SHUFFLE(3, 2, 3, 0)
+                //    V13 = Vector128.Shuffle(V13, Vector128.Create(3, 0, 1, 2));
 
-                    V00 *= V10;
-                    V01 *= V11;
-                    V02 *= V12;
-                    V03 *= V13;
+                //    V00 *= V10;
+                //    V01 *= V11;
+                //    V02 *= V12;
+                //    V03 *= V13;
 
-                    Vector128<float> C1 = C0 - V00;
-                    C0 += V00;
+                //    Vector128<float> C1 = C0 - V00;
+                //    C0 += V00;
 
-                    Vector128<float> C3 = C2 + V01;
-                    C2 -= V01;
+                //    Vector128<float> C3 = C2 + V01;
+                //    C2 -= V01;
 
-                    Vector128<float> C5 = C4 - V02;
-                    C4 += V02;
+                //    Vector128<float> C5 = C4 - V02;
+                //    C4 += V02;
 
-                    Vector128<float> C7 = C6 + V03;
-                    C6 -= V03;
+                //    Vector128<float> C7 = C6 + V03;
+                //    C6 -= V03;
 
-                    C0 = Sse.Shuffle(C0, C1, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
-                    C2 = Sse.Shuffle(C2, C3, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
-                    C4 = Sse.Shuffle(C4, C5, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
-                    C6 = Sse.Shuffle(C6, C7, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
+                //    C0 = Sse.Shuffle(C0, C1, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
+                //    C2 = Sse.Shuffle(C2, C3, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
+                //    C4 = Sse.Shuffle(C4, C5, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
+                //    C6 = Sse.Shuffle(C6, C7, 0b11_01_10_00); //_MM_SHUFFLE(3, 1, 2, 0)
 
-                    C0 = Vector128.Shuffle(C0, Vector128.Create(0, 2, 1, 3));
-                    C2 = Vector128.Shuffle(C2, Vector128.Create(0, 2, 1, 3));
-                    C4 = Vector128.Shuffle(C4, Vector128.Create(0, 2, 1, 3));
-                    C6 = Vector128.Shuffle(C6, Vector128.Create(0, 2, 1, 3));
+                //    C0 = Vector128.Shuffle(C0, Vector128.Create(0, 2, 1, 3));
+                //    C2 = Vector128.Shuffle(C2, Vector128.Create(0, 2, 1, 3));
+                //    C4 = Vector128.Shuffle(C4, Vector128.Create(0, 2, 1, 3));
+                //    C6 = Vector128.Shuffle(C6, Vector128.Create(0, 2, 1, 3));
 
-                    // Get the determinant
-                    float det = Vector4D.Dot(C0.AsVector4D(), row1.AsVector4D());
+                //    // Get the determinant
+                //    float det = Vector4D.Dot(C0.AsVector4D(), row1.AsVector4D());
 
-                    // Check determinate is not zero
-                    if (float.Abs(det) < float.Epsilon)
-                    {
-                        Vector4D vNaN = Vector4D.Create(float.NaN);
+                //    // Check determinate is not zero
+                //    if (float.Abs(det) < float.Epsilon)
+                //    {
+                //        Vector4D vNaN = Vector4D.Create(float.NaN);
 
-                        result.X = vNaN;
-                        result.Y = vNaN;
-                        result.Z = vNaN;
-                        result.W = vNaN;
+                //        result.X = vNaN;
+                //        result.Y = vNaN;
+                //        result.Z = vNaN;
+                //        result.W = vNaN;
 
-                        return false;
-                    }
+                //        return false;
+                //    }
 
-                    // Create Vector128<float> copy of the determinant and invert them.
+                //    // Create Vector128<float> copy of the determinant and invert them.
 
-                    Vector128<float> vTemp = Vector128<float>.One / det;
+                //    Vector128<float> vTemp = Vector128<float>.One / det;
 
-                    result.X = (C0 * vTemp).AsVector4D();
-                    result.Y = (C2 * vTemp).AsVector4D();
-                    result.Z = (C4 * vTemp).AsVector4D();
-                    result.W = (C6 * vTemp).AsVector4D();
+                //    result.X = (C0 * vTemp).AsVector4D();
+                //    result.Y = (C2 * vTemp).AsVector4D();
+                //    result.Z = (C4 * vTemp).AsVector4D();
+                //    result.W = (C6 * vTemp).AsVector4D();
 
-                    return true;
-                }
+                //    return true;
+                //}
 
                 static bool SoftwareFallback(in Impl matrix, out Impl result)
                 {
