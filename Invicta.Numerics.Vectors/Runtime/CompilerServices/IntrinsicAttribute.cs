@@ -1,5 +1,5 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿// Copyright (c) Andrew Pollard, .NET Foundation and Contributors.
+// Licensed under the MIT license - see README.md for details.
 
 namespace Invicta.Runtime.CompilerServices
 {
