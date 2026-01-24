@@ -56,12 +56,12 @@ namespace Invicta.Numerics
             this = Create(value);
         }
 
-        /// <summary>Creates a   new <see cref="Vector4" /> object from the specified <see cref="Vector2" /> object and a Z and a W component.</summary>
+        /// <summary>Creates a   new <see cref="Vector4" /> object from the specified <see cref="Vector2D" /> object and a Z and a W component.</summary>
         /// <param name="value">The vector to use for the X and Y components.</param>
         /// <param name="z">The Z component.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector2 value, float z, float w)
+        public Vector4(Vector2D value, float z, float w)
         {
             this = Create(value, z, w);
         }
@@ -443,14 +443,14 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector4 Create(float value) => Vector128.Create(value).AsVector4();
 
-        /// <summary>Creates a new <see cref="Vector4" /> object from the specified <see cref="Vector2" /> object and a Z and a W component.</summary>
+        /// <summary>Creates a new <see cref="Vector4" /> object from the specified <see cref="Vector2D" /> object and a Z and a W component.</summary>
         /// <param name="vector">The vector to use for the X and Y components.</param>
         /// <param name="z">The Z component.</param>
         /// <param name="w">The W component.</param>
-        /// <returns>A new <see cref="Vector4" /> from the specified <see cref="Vector2" /> object and a Z and a W component.</returns>
+        /// <returns>A new <see cref="Vector4" /> from the specified <see cref="Vector2D" /> object and a Z and a W component.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Create(Vector2 vector, float z, float w)
+        public static Vector4 Create(Vector2D vector, float z, float w)
         {
             return vector.AsVector128Unsafe()
                          .WithElement(2, z)
@@ -725,7 +725,7 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="Lerp(Vector4, Vector4, Vector4)" />
         /// <remarks><format type="text/markdown"><![CDATA[
-        /// The behavior of this method changed in .NET 5.0. For more information, see [Behavior change for Vector2.Lerp and Vector4.Lerp](/dotnet/core/compatibility/3.1-5.0#behavior-change-for-vector2lerp-and-vector4lerp).
+        /// The behavior of this method changed in .NET 5.0. For more information, see [Behavior change for Vector2D.Lerp and Vector4.Lerp](/dotnet/core/compatibility/3.1-5.0#behavior-change-for-vector2lerp-and-vector4lerp).
         /// ]]></format></remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -967,7 +967,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector2 position, Matrix4x4D matrix)
+        public static Vector4 Transform(Vector2D position, Matrix4x4D matrix)
         {
             // This implementation is based on the DirectX Math Library XMVector2Transform method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
@@ -982,7 +982,7 @@ namespace Invicta.Numerics
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector2 value, QuaternionD rotation) => Transform(Create(value, 0.0f, 1.0f), rotation);
+        public static Vector4 Transform(Vector2D value, QuaternionD rotation) => Transform(Create(value, 0.0f, 1.0f), rotation);
 
         /// <summary>Transforms a three-dimensional vector by a specified 4x4 matrix.</summary>
         /// <param name="position">The vector to transform.</param>

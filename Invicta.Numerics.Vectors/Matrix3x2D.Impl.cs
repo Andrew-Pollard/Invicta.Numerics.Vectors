@@ -31,9 +31,9 @@ namespace Invicta.Numerics
 
             private const float RotationEpsilon = 0.001f * float.Pi / 180f;     // 0.1% of a degree
 
-            public Vector2 X;
-            public Vector2 Y;
-            public Vector2 Z;
+            public Vector2D X;
+            public Vector2D Y;
+            public Vector2D Z;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl operator +(in Impl left, in Impl right)
@@ -68,15 +68,15 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector2.Create(
+                result.X = Vector2D.Create(
                     left.X.X * right.X.X + left.X.Y * right.Y.X,
                     left.X.X * right.X.Y + left.X.Y * right.Y.Y
                 );
-                result.Y = Vector2.Create(
+                result.Y = Vector2D.Create(
                     left.Y.X * right.X.X + left.Y.Y * right.Y.X,
                     left.Y.X * right.X.Y + left.Y.Y * right.Y.Y
                 );
-                result.Z = Vector2.Create(
+                result.Z = Vector2D.Create(
                     left.Z.X * right.X.X + left.Z.Y * right.Y.X + right.Z.X,
                     left.Z.X * right.X.Y + left.Z.Y * right.Y.Y + right.Z.Y
                 );
@@ -164,15 +164,15 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector2.Create(c, s);
-                result.Y = Vector2.Create(-s, c);
-                result.Z = Vector2.Zero;
+                result.X = Vector2D.Create(c, s);
+                result.Y = Vector2D.Create(-s, c);
+                result.Z = Vector2D.Zero;
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotation(float radians, Vector2 centerPoint)
+            public static Impl CreateRotation(float radians, Vector2D centerPoint)
             {
                 radians = float.Ieee754Remainder(radians, float.Tau);
 
@@ -217,21 +217,21 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector2.Create(c, s);
-                result.Y = Vector2.Create(-s, c);
-                result.Z = Vector2.Create(x, y);
+                result.X = Vector2D.Create(c, s);
+                result.Y = Vector2D.Create(-s, c);
+                result.Z = Vector2D.Create(x, y);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(Vector2 scales)
+            public static Impl CreateScale(Vector2D scales)
             {
                 Impl result;
 
-                result.X = Vector2.CreateScalar(scales.X);
-                result.Y = Vector2.Create(0, scales.Y);
-                result.Z = Vector2.Zero;
+                result.X = Vector2D.CreateScalar(scales.X);
+                result.Y = Vector2D.Create(0, scales.Y);
+                result.Z = Vector2D.Zero;
 
                 return result;
             }
@@ -241,33 +241,33 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector2.CreateScalar(scaleX);
-                result.Y = Vector2.Create(0, scaleY);
-                result.Z = Vector2.Zero;
+                result.X = Vector2D.CreateScalar(scaleX);
+                result.Y = Vector2D.Create(0, scaleY);
+                result.Z = Vector2D.Zero;
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY, Vector2 centerPoint)
+            public static Impl CreateScale(float scaleX, float scaleY, Vector2D centerPoint)
             {
                 Impl result;
 
-                result.X = Vector2.CreateScalar(scaleX);
-                result.Y = Vector2.Create(0, scaleY);
-                result.Z = centerPoint * (Vector2.One - Vector2.Create(scaleX, scaleY));
+                result.X = Vector2D.CreateScalar(scaleX);
+                result.Y = Vector2D.Create(0, scaleY);
+                result.Z = centerPoint * (Vector2D.One - Vector2D.Create(scaleX, scaleY));
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(Vector2 scales, Vector2 centerPoint)
+            public static Impl CreateScale(Vector2D scales, Vector2D centerPoint)
             {
                 Impl result;
 
-                result.X = Vector2.CreateScalar(scales.X);
-                result.Y = Vector2.Create(0, scales.Y);
-                result.Z = centerPoint * (Vector2.One - scales);
+                result.X = Vector2D.CreateScalar(scales.X);
+                result.Y = Vector2D.Create(0, scales.Y);
+                result.Z = centerPoint * (Vector2D.One - scales);
 
                 return result;
             }
@@ -277,21 +277,21 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector2.CreateScalar(scale);
-                result.Y = Vector2.Create(0, scale);
-                result.Z = Vector2.Zero;
+                result.X = Vector2D.CreateScalar(scale);
+                result.Y = Vector2D.Create(0, scale);
+                result.Z = Vector2D.Zero;
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scale, Vector2 centerPoint)
+            public static Impl CreateScale(float scale, Vector2D centerPoint)
             {
                 Impl result;
 
-                result.X = Vector2.CreateScalar(scale);
-                result.Y = Vector2.Create(0, scale);
-                result.Z = centerPoint * (Vector2.One - Vector2.Create(scale));
+                result.X = Vector2D.CreateScalar(scale);
+                result.Y = Vector2D.Create(0, scale);
+                result.Z = centerPoint * (Vector2D.One - Vector2D.Create(scale));
 
                 return result;
             }
@@ -301,15 +301,15 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector2.Create(1, float.Tan(radiansY));
-                result.Y = Vector2.Create(float.Tan(radiansX), 1);
-                result.Z = Vector2.Zero;
+                result.X = Vector2D.Create(1, float.Tan(radiansY));
+                result.Y = Vector2D.Create(float.Tan(radiansX), 1);
+                result.Z = Vector2D.Zero;
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateSkew(float radiansX, float radiansY, Vector2 centerPoint)
+            public static Impl CreateSkew(float radiansX, float radiansY, Vector2D centerPoint)
             {
                 float xTan = float.Tan(radiansX);
                 float yTan = float.Tan(radiansY);
@@ -319,20 +319,20 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector2.Create(1, yTan);
-                result.Y = Vector2.Create(xTan, 1);
-                result.Z = Vector2.Create(tx, ty);
+                result.X = Vector2D.Create(1, yTan);
+                result.Y = Vector2D.Create(xTan, 1);
+                result.Z = Vector2D.Create(tx, ty);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateTranslation(Vector2 position)
+            public static Impl CreateTranslation(Vector2D position)
             {
                 Impl result;
 
-                result.X = Vector2.UnitX;
-                result.Y = Vector2.UnitY;
+                result.X = Vector2D.UnitX;
+                result.Y = Vector2D.UnitY;
                 result.Z = position;
 
                 return result;
@@ -343,9 +343,9 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector2.UnitX;
-                result.Y = Vector2.UnitY;
-                result.Z = Vector2.Create(positionX, positionY);
+                result.X = Vector2D.UnitX;
+                result.Y = Vector2D.UnitY;
+                result.Z = Vector2D.Create(positionX, positionY);
 
                 return result;
             }
@@ -357,7 +357,7 @@ namespace Invicta.Numerics
 
                 if (float.Abs(det) < float.Epsilon)
                 {
-                    Vector2 vNaN = Vector2.Create(float.NaN);
+                    Vector2D vNaN = Vector2D.Create(float.NaN);
 
                     result.X = vNaN;
                     result.Y = vNaN;
@@ -368,15 +368,15 @@ namespace Invicta.Numerics
 
                 float invDet = 1.0f / det;
 
-                result.X = Vector2.Create(
+                result.X = Vector2D.Create(
                     +matrix.Y.Y * invDet,
                     -matrix.X.Y * invDet
                 );
-                result.Y = Vector2.Create(
+                result.Y = Vector2D.Create(
                     -matrix.Y.X * invDet,
                     +matrix.X.X * invDet
                 );
-                result.Z = Vector2.Create(
+                result.Z = Vector2D.Create(
                     (matrix.Y.X * matrix.Z.Y - matrix.Z.X * matrix.Y.Y) * invDet,
                     (matrix.Z.X * matrix.X.Y - matrix.X.X * matrix.Z.Y) * invDet
                 );
@@ -389,9 +389,9 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector2.Lerp(left.X, right.X, amount);
-                result.Y = Vector2.Lerp(left.Y, right.Y, amount);
-                result.Z = Vector2.Lerp(left.Z, right.Z, amount);
+                result.X = Vector2D.Lerp(left.X, right.X, amount);
+                result.Y = Vector2D.Lerp(left.Y, right.Y, amount);
+                result.Z = Vector2D.Lerp(left.Z, right.Z, amount);
 
                 return result;
             }

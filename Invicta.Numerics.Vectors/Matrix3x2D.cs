@@ -16,7 +16,7 @@ namespace Invicta.Numerics
         private const int RowCount = 3;
         private const int ColumnCount = 2;
 
-        // In an ideal world, we'd have 3x Vector2 fields. However, Matrix3x2D was shipped with
+        // In an ideal world, we'd have 3x Vector2D fields. However, Matrix3x2D was shipped with
         // 6x public float fields and as such we cannot change the "backing" fields without it being
         // a breaking change. Likewise, we cannot switch to using something like ExplicitLayout
         // without it pessimizing other parts of the JIT and still preventing things like field promotion.
@@ -73,7 +73,7 @@ namespace Invicta.Numerics
         public static Matrix3x2D Identity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Create(Vector2.UnitX, Vector2.UnitY, Vector2.Zero);
+            get => Create(Vector2D.UnitX, Vector2D.UnitY, Vector2D.Zero);
         }
 
         /// <summary>Gets a value that indicates whether the current matrix is an identity matrix.</summary>
@@ -81,14 +81,14 @@ namespace Invicta.Numerics
         public readonly bool IsIdentity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (X == Vector2.UnitX)
-                && (Y == Vector2.UnitY)
-                && (Z == Vector2.Zero);
+            get => (X == Vector2D.UnitX)
+                && (Y == Vector2D.UnitY)
+                && (Z == Vector2D.Zero);
         }
 
         /// <summary>Gets or sets the translation component of this matrix.</summary>
         /// <remarks>The translation component is stored as <see cref="Z" />.</remarks>
-        public Vector2 Translation
+        public Vector2D Translation
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => Z;
@@ -99,7 +99,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the first row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M11" /> and <see cref="M12" />; it exists at index: <c>[0]</c>.</remarks>
-        public Vector2 X
+        public Vector2D X
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().X;
@@ -110,7 +110,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the second row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M21" /> and <see cref="M22" />; it exists at index: <c>[1]</c>.</remarks>
-        public Vector2 Y
+        public Vector2D Y
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().Y;
@@ -121,7 +121,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the third row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M31" /> and <see cref="M32" />; it exists at index: <c>[2]</c>.</remarks>
-        public Vector2 Z
+        public Vector2D Z
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().Z;
@@ -134,7 +134,7 @@ namespace Invicta.Numerics
         /// <param name="row">The index of the row to get or set.</param>
         /// <returns>The row at index: [<paramref name="row" />].</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="row" /> was less than zero or greater than or equal to the number of rows (<c>3</c>).</exception>
-        public Vector2 this[int row]
+        public Vector2D this[int row]
         {
             // When row is a known constant, we can use a switch to get
             // optimal codegen as we are likely coming from register.
@@ -397,13 +397,13 @@ namespace Invicta.Numerics
         /// <param name="value">The value to assign to all 6 elements.</param>
         /// <returns>A <see cref="Matrix3x2D" /> whose 6 elements are set to <paramref name="value" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Create(float value) => Create(Vector2.Create(value));
+        public static Matrix3x2D Create(float value) => Create(Vector2D.Create(value));
 
         /// <summary>Creates a <see cref="Matrix3x2D" /> whose 3 rows are set to the specified value.</summary>
         /// <param name="value">The value to assign to all 3 rows.</param>
         /// <returns>A <see cref="Matrix3x2D" /> whose 3 rows are set to <paramref name="value" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Create(Vector2 value) => Create(value, value, value);
+        public static Matrix3x2D Create(Vector2D value) => Create(value, value, value);
 
         /// <summary>Creates a <see cref="Matrix3x2D" /> from the specified rows.</summary>
         /// <param name="x">The value to assign to <see cref="X" />.</param>
@@ -411,7 +411,7 @@ namespace Invicta.Numerics
         /// <param name="z">The value to assign to <see cref="Z" />.</param>
         /// <returns>A <see cref="Matrix3x2D" /> whose rows are set to the specified values.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Create(Vector2 x, Vector2 y, Vector2 z)
+        public static Matrix3x2D Create(Vector2D x, Vector2D y, Vector2D z)
         {
             Unsafe.SkipInit(out Matrix3x2D result);
 
@@ -434,9 +434,9 @@ namespace Invicta.Numerics
         public static Matrix3x2D Create(float m11, float m12,
                                        float m21, float m22,
                                        float m31, float m32) => Create(
-            Vector2.Create(m11, m12),
-            Vector2.Create(m21, m22),
-            Vector2.Create(m31, m32)
+            Vector2D.Create(m11, m12),
+            Vector2D.Create(m21, m22),
+            Vector2D.Create(m31, m32)
         );
 
         /// <summary>Creates a rotation matrix using the given rotation in radians.</summary>
@@ -449,13 +449,13 @@ namespace Invicta.Numerics
         /// <param name="radians">The amount of rotation, in radians.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix3x2D CreateRotation(float radians, Vector2 centerPoint)
+        public static Matrix3x2D CreateRotation(float radians, Vector2D centerPoint)
             => Impl.CreateRotation(radians, centerPoint).AsM3x2();
 
         /// <summary>Creates a scaling matrix from the specified vector scale.</summary>
         /// <param name="scales">The scale to use.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(Vector2 scales)
+        public static Matrix3x2D CreateScale(Vector2D scales)
             => Impl.CreateScale(scales).AsM3x2();
 
         /// <summary>Creates a scaling matrix from the specified X and Y components.</summary>
@@ -470,14 +470,14 @@ namespace Invicta.Numerics
         /// <param name="yScale">The value to scale by on the Y axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(float xScale, float yScale, Vector2 centerPoint)
+        public static Matrix3x2D CreateScale(float xScale, float yScale, Vector2D centerPoint)
             => Impl.CreateScale(xScale, yScale, centerPoint).AsM3x2();
 
         /// <summary>Creates a scaling matrix from the specified vector scale with an offset from the specified center point.</summary>
         /// <param name="scales">The scale to use.</param>
         /// <param name="centerPoint">The center offset.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(Vector2 scales, Vector2 centerPoint)
+        public static Matrix3x2D CreateScale(Vector2D scales, Vector2D centerPoint)
             => Impl.CreateScale(scales, centerPoint).AsM3x2();
 
         /// <summary>Creates a scaling matrix that scales uniformly with the given scale.</summary>
@@ -490,7 +490,7 @@ namespace Invicta.Numerics
         /// <param name="scale">The uniform scale to use.</param>
         /// <param name="centerPoint">The center offset.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(float scale, Vector2 centerPoint)
+        public static Matrix3x2D CreateScale(float scale, Vector2D centerPoint)
             => Impl.CreateScale(scale, centerPoint).AsM3x2();
 
         /// <summary>Creates a skew matrix from the specified angles in radians.</summary>
@@ -505,13 +505,13 @@ namespace Invicta.Numerics
         /// <param name="radiansY">The Y angle, in radians.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The skew matrix.</returns>
-        public static Matrix3x2D CreateSkew(float radiansX, float radiansY, Vector2 centerPoint)
+        public static Matrix3x2D CreateSkew(float radiansX, float radiansY, Vector2D centerPoint)
             => Impl.CreateSkew(radiansX, radiansY, centerPoint).AsM3x2();
 
         /// <summary>Creates a translation matrix from the specified 2-dimensional vector.</summary>
         /// <param name="position">The translation position.</param>
         /// <returns>The translation matrix.</returns>
-        public static Matrix3x2D CreateTranslation(Vector2 position)
+        public static Matrix3x2D CreateTranslation(Vector2D position)
             => Impl.CreateTranslation(position).AsM3x2();
 
         /// <summary>Creates a translation matrix from the specified X and Y components.</summary>
@@ -611,7 +611,7 @@ namespace Invicta.Numerics
         /// <returns>The row at index: [<paramref name="index" />].</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than or equal to the number of rows (<c>3</c>).</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Vector2 GetRow(int index) => this[index];
+        public readonly Vector2D GetRow(int index) => this[index];
 
         /// <summary>Returns the hash code for this instance.</summary>
         /// <returns>The hash code.</returns>
@@ -649,7 +649,7 @@ namespace Invicta.Numerics
         /// <returns>A <see cref="Matrix3x2D" /> with the value of the row at index: [<paramref name="index"/>] set to <paramref name="value" /> and the remaining rows set to the same value as that in the current matrix.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than or equal to the number of rows (<c>3</c>).</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Matrix3x2D WithRow(int index, Vector2 value)
+        public readonly Matrix3x2D WithRow(int index, Vector2D value)
         {
             Matrix3x2D result = this;
             result[index] = value;
