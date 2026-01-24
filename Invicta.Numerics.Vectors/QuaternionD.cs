@@ -42,7 +42,7 @@ namespace Invicta.Numerics
         /// <param name="vectorPart">The vector part of the quaternion.</param>
         /// <param name="scalarPart">The rotation part of the quaternion.</param>
         [Intrinsic]
-        public QuaternionD(Vector3 vectorPart, float scalarPart)
+        public QuaternionD(Vector3D vectorPart, float scalarPart)
         {
             this = Create(vectorPart, scalarPart);
         }
@@ -205,7 +205,7 @@ namespace Invicta.Numerics
         /// <param name="scalarPart">The rotation part of the quaternion.</param>
         /// <returns>A <see cref="QuaternionD" /> created from the specified vector and rotation parts.</returns>
         [Intrinsic]
-        public static QuaternionD Create(Vector3 vectorPart, float scalarPart) => Vector4.Create(vectorPart, scalarPart).AsQuaternion();
+        public static QuaternionD Create(Vector3D vectorPart, float scalarPart) => Vector4.Create(vectorPart, scalarPart).AsQuaternion();
 
         /// <summary>Creates a quaternion from a unit vector and an angle to rotate around the vector.</summary>
         /// <param name="axis">The unit vector to rotate around.</param>
@@ -213,13 +213,13 @@ namespace Invicta.Numerics
         /// <returns>The newly created quaternion.</returns>
         /// <remarks><paramref name="axis" /> vector must be normalized before calling this method or the resulting <see cref="QuaternionD" /> will be incorrect.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD CreateFromAxisAngle(Vector3 axis, float angle)
+        public static QuaternionD CreateFromAxisAngle(Vector3D axis, float angle)
         {
             // This implementation is based on the DirectX Math Library XMQuaternionRotationNormal method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
             (float s, float c) = float.SinCos(angle * 0.5f);
-            return (Vector4.Create(axis, 1) * Vector4.Create(Vector3.Create(s), c)).AsQuaternion();
+            return (Vector4.Create(axis, 1) * Vector4.Create(Vector3D.Create(s), c)).AsQuaternion();
         }
 
         /// <summary>Creates a quaternion from the specified rotation matrix.</summary>
@@ -281,7 +281,7 @@ namespace Invicta.Numerics
         /// <returns>The resulting quaternion.</returns>
         public static QuaternionD CreateFromYawPitchRoll(float yaw, float pitch, float roll)
         {
-            (Vector3 sin, Vector3 cos) = Vector3.SinCos(Vector3.Create(roll, pitch, yaw) * 0.5f);
+            (Vector3D sin, Vector3D cos) = Vector3D.SinCos(Vector3D.Create(roll, pitch, yaw) * 0.5f);
 
             (float sr, float cr) = (sin.X, cos.X);
             (float sp, float cp) = (sin.Y, cos.Y);

@@ -20,7 +20,7 @@ namespace Invicta.Numerics
         /// <remarks>
         ///     <para>
         ///       Different environments all have their own concepts of alignment/packing.
-        ///       For example, a <c>Vector3</c> in .NET is 4-byte aligned and 12-bytes in size,
+        ///       For example, a <c>Vector3D</c> in .NET is 4-byte aligned and 12-bytes in size,
         ///       in GLSL a <c>vec3</c> is 16-byte aligned and 16-byte sized, while in HLSL a
         ///       <c>float3</c> is functionally 8-byte aligned and 12-byte sized. These differences
         ///       make it impossible to define a "correct" alignment; additionally, the nuance
@@ -66,11 +66,11 @@ namespace Invicta.Numerics
             this = Create(value, z, w);
         }
 
-        /// <summary>Constructs a new <see cref="Vector4" /> object from the specified <see cref="Vector3" /> object and a W component.</summary>
+        /// <summary>Constructs a new <see cref="Vector4" /> object from the specified <see cref="Vector3D" /> object and a W component.</summary>
         /// <param name="value">The vector to use for the X, Y, and Z components.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector3 value, float w)
+        public Vector4(Vector3D value, float w)
         {
             this = Create(value, w);
         }
@@ -458,13 +458,13 @@ namespace Invicta.Numerics
                          .AsVector4();
         }
 
-        /// <summary>Constructs a new <see cref="Vector4" /> object from the specified <see cref="Vector3" /> object and a W component.</summary>
+        /// <summary>Constructs a new <see cref="Vector4" /> object from the specified <see cref="Vector3D" /> object and a W component.</summary>
         /// <param name="vector">The vector to use for the X, Y, and Z components.</param>
         /// <param name="w">The W component.</param>
-        /// <returns>A new <see cref="Vector4" /> from the specified <see cref="Vector3" /> object and a W component.</returns>
+        /// <returns>A new <see cref="Vector4" /> from the specified <see cref="Vector3D" /> object and a W component.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Create(Vector3 vector, float w)
+        public static Vector4 Create(Vector3D vector, float w)
         {
             return vector.AsVector128Unsafe()
                          .WithElement(3, w)
@@ -507,9 +507,9 @@ namespace Invicta.Numerics
         /// <returns>The cross product.</returns>
         /// <remarks>
         /// The proposed Cross function for <see cref="Vector4"/> is nearly the same as that for
-        /// <see cref="Vector3.Cross"/> with the addition of the fourth value which is
+        /// <see cref="Vector3D.Cross"/> with the addition of the fourth value which is
         /// the product of the original two w's. This can be derived by symbolically performing
-        /// the cross product for <see cref="Vector3"/> with values [x_1/w_1, y_1/w_1, z_1/w_1]
+        /// the cross product for <see cref="Vector3D"/> with values [x_1/w_1, y_1/w_1, z_1/w_1]
         /// and [x_2/w_2, y_2/w_2, z_2/w_2].
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -989,7 +989,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector3 position, Matrix4x4D matrix)
+        public static Vector4 Transform(Vector3D position, Matrix4x4D matrix)
         {
             // This implementation is based on the DirectX Math Library XMVector3Transform method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
@@ -1005,7 +1005,7 @@ namespace Invicta.Numerics
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector3 value, QuaternionD rotation) => Transform(Create(value, 1.0f), rotation);
+        public static Vector4 Transform(Vector3D value, QuaternionD rotation) => Transform(Create(value, 1.0f), rotation);
 
         /// <summary>Transforms a four-dimensional vector by a specified 4x4 matrix.</summary>
         /// <param name="vector">The vector to transform.</param>

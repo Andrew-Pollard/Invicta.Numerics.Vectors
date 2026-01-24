@@ -112,11 +112,11 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateBillboard(in Vector3 objectPosition, in Vector3 cameraPosition, in Vector3 cameraUpVector, in Vector3 cameraForwardVector)
+            public static Impl CreateBillboard(in Vector3D objectPosition, in Vector3D cameraPosition, in Vector3D cameraUpVector, in Vector3D cameraForwardVector)
             {
                 // In a right-handed coordinate system, the object's positive z-axis is in the opposite direction as its forward vector,
                 // and spherical billboards by construction always face the camera.
-                Vector3 axisZ = objectPosition - cameraPosition;
+                Vector3D axisZ = objectPosition - cameraPosition;
 
                 // When object and camera position are approximately the same, the object should just face the
                 // same direction as the camera is facing.
@@ -126,11 +126,11 @@ namespace Invicta.Numerics
                 }
                 else
                 {
-                    axisZ = Vector3.Normalize(axisZ);
+                    axisZ = Vector3D.Normalize(axisZ);
                 }
 
-                Vector3 axisX = Vector3.Normalize(Vector3.Cross(cameraUpVector, axisZ));
-                Vector3 axisY = Vector3.Cross(axisZ, axisX);
+                Vector3D axisX = Vector3D.Normalize(Vector3D.Cross(cameraUpVector, axisZ));
+                Vector3D axisY = Vector3D.Cross(axisZ, axisX);
 
                 Impl result;
 
@@ -143,11 +143,11 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateBillboardLeftHanded(in Vector3 objectPosition, in Vector3 cameraPosition, in Vector3 cameraUpVector, in Vector3 cameraForwardVector)
+            public static Impl CreateBillboardLeftHanded(in Vector3D objectPosition, in Vector3D cameraPosition, in Vector3D cameraUpVector, in Vector3D cameraForwardVector)
             {
                 // In a left-handed coordinate system, the object's positive z-axis is in the same direction as its forward vector,
                 // and spherical billboards by construction always face the camera.
-                Vector3 axisZ = cameraPosition - objectPosition;
+                Vector3D axisZ = cameraPosition - objectPosition;
 
                 // When object and camera position are approximately the same, the object should just face the
                 // same direction as the camera is facing.
@@ -157,11 +157,11 @@ namespace Invicta.Numerics
                 }
                 else
                 {
-                    axisZ = Vector3.Normalize(axisZ);
+                    axisZ = Vector3D.Normalize(axisZ);
                 }
 
-                Vector3 axisX = Vector3.Normalize(Vector3.Cross(cameraUpVector, axisZ));
-                Vector3 axisY = Vector3.Cross(axisZ, axisX);
+                Vector3D axisX = Vector3D.Normalize(Vector3D.Cross(cameraUpVector, axisZ));
+                Vector3D axisY = Vector3D.Cross(axisZ, axisX);
 
                 Impl result;
 
@@ -174,11 +174,11 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateConstrainedBillboard(in Vector3 objectPosition, in Vector3 cameraPosition, in Vector3 rotateAxis, in Vector3 cameraForwardVector, in Vector3 objectForwardVector)
+            public static Impl CreateConstrainedBillboard(in Vector3D objectPosition, in Vector3D cameraPosition, in Vector3D rotateAxis, in Vector3D cameraForwardVector, in Vector3D objectForwardVector)
             {
                 // First find the Z-axis of the spherical/unconstrained rotation. We call this faceDir and in a right-handed coordinate system
                 // it will be in the opposite direction as from the object to the camera.
-                Vector3 faceDir = objectPosition - cameraPosition;
+                Vector3D faceDir = objectPosition - cameraPosition;
 
                 // When object and camera position are approximately the same this indicates that the object should also just face the
                 // same direction as the camera is facing.
@@ -188,12 +188,12 @@ namespace Invicta.Numerics
                 }
                 else
                 {
-                    faceDir = Vector3.Normalize(faceDir);
+                    faceDir = Vector3D.Normalize(faceDir);
                 }
 
-                Vector3 axisY = rotateAxis;
+                Vector3D axisY = rotateAxis;
 
-                float dot = Vector3.Dot(axisY, faceDir);
+                float dot = Vector3D.Dot(axisY, faceDir);
 
                 // Generally the approximation for small angles is cos theta = 1 - theta^2 / 2,
                 // but it seems that here we are using cos theta = 1 - theta. Letting theta be the angle
@@ -209,7 +209,7 @@ namespace Invicta.Numerics
                     // as the faceDir.
                     faceDir = objectForwardVector;
 
-                    dot = Vector3.Dot(axisY, faceDir);
+                    dot = Vector3D.Dot(axisY, faceDir);
 
                     // Similar to before, check if the faceDir is still is approximately the rotate axis.
                     // If so, then use either -UnitZ or UnitX as the fallback faceDir.
@@ -217,12 +217,12 @@ namespace Invicta.Numerics
                     {
                         // |axisY.Z| = |dot(axisY, -UnitZ)|, so this is checking if the rotate axis is approximately the same as -UnitZ.
                         // If is, then use UnitX as the fallback.
-                        faceDir = (float.Abs(axisY.Z) > BillboardMinAngle) ? Vector3.UnitX : Vector3.Create(0, 0, -1);
+                        faceDir = (float.Abs(axisY.Z) > BillboardMinAngle) ? Vector3D.UnitX : Vector3D.Create(0, 0, -1);
                     }
                 }
 
-                Vector3 axisX = Vector3.Normalize(Vector3.Cross(axisY, faceDir));
-                Vector3 axisZ = Vector3.Normalize(Vector3.Cross(axisX, axisY));
+                Vector3D axisX = Vector3D.Normalize(Vector3D.Cross(axisY, faceDir));
+                Vector3D axisZ = Vector3D.Normalize(Vector3D.Cross(axisX, axisY));
 
                 Impl result;
 
@@ -234,11 +234,11 @@ namespace Invicta.Numerics
                 return result;
             }
 
-            public static Impl CreateConstrainedBillboardLeftHanded(in Vector3 objectPosition, in Vector3 cameraPosition, in Vector3 rotateAxis, in Vector3 cameraForwardVector, in Vector3 objectForwardVector)
+            public static Impl CreateConstrainedBillboardLeftHanded(in Vector3D objectPosition, in Vector3D cameraPosition, in Vector3D rotateAxis, in Vector3D cameraForwardVector, in Vector3D objectForwardVector)
             {
                 // First find the Z-axis of the spherical/unconstrained rotation. We call this faceDir and in a left-handed coordinate system
                 // it will be in the same direction as from the object to the camera.
-                Vector3 faceDir = cameraPosition - objectPosition;
+                Vector3D faceDir = cameraPosition - objectPosition;
 
                 // When object and camera position are approximately the same this indicates that the object should also just face the
                 // same direction as the camera is facing.
@@ -248,12 +248,12 @@ namespace Invicta.Numerics
                 }
                 else
                 {
-                    faceDir = Vector3.Normalize(faceDir);
+                    faceDir = Vector3D.Normalize(faceDir);
                 }
 
-                Vector3 axisY = rotateAxis;
+                Vector3D axisY = rotateAxis;
 
-                float dot = Vector3.Dot(axisY, faceDir);
+                float dot = Vector3D.Dot(axisY, faceDir);
 
                 // Generally the approximation for small angles is cos theta = 1 - theta^2 / 2,
                 // but it seems that here we are using cos theta = 1 - theta. Letting theta be the angle
@@ -269,7 +269,7 @@ namespace Invicta.Numerics
                     // as the faceDir.
                     faceDir = -objectForwardVector;
 
-                    dot = Vector3.Dot(axisY, faceDir);
+                    dot = Vector3D.Dot(axisY, faceDir);
 
                     // Similar to before, check if the faceDir is still is approximately the rotate axis.
                     // If so, then use either -UnitZ or -UnitX as the fallback faceDir.
@@ -277,12 +277,12 @@ namespace Invicta.Numerics
                     {
                         // |axisY.Z| = |dot(axisY, -UnitZ)|, so this is checking if the rotate axis is approximately the same as -UnitZ.
                         // If is, then use -UnitX as the fallback.
-                        faceDir = (float.Abs(axisY.Z) > BillboardMinAngle) ? Vector3.Create(-1, 0, 0) : Vector3.Create(0, 0, -1);
+                        faceDir = (float.Abs(axisY.Z) > BillboardMinAngle) ? Vector3D.Create(-1, 0, 0) : Vector3D.Create(0, 0, -1);
                     }
                 }
 
-                Vector3 axisX = Vector3.Normalize(Vector3.Cross(axisY, faceDir));
-                Vector3 axisZ = Vector3.Normalize(Vector3.Cross(axisX, axisY));
+                Vector3D axisX = Vector3D.Normalize(Vector3D.Cross(axisY, faceDir));
+                Vector3D axisZ = Vector3D.Normalize(Vector3D.Cross(axisX, axisY));
 
                 Impl result;
 
@@ -295,7 +295,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateFromAxisAngle(in Vector3 axis, float angle)
+            public static Impl CreateFromAxisAngle(in Vector3D axis, float angle)
             {
                 QuaternionD q = QuaternionD.CreateFromAxisAngle(axis, angle);
                 return CreateFromQuaternion(q);
@@ -348,7 +348,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateLookTo(in Vector3 cameraPosition, in Vector3 cameraDirection, in Vector3 cameraUpVector)
+            public static Impl CreateLookTo(in Vector3D cameraPosition, in Vector3D cameraDirection, in Vector3D cameraUpVector)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixLookToRH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
@@ -357,21 +357,21 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateLookToLeftHanded(in Vector3 cameraPosition, in Vector3 cameraDirection, in Vector3 cameraUpVector)
+            public static Impl CreateLookToLeftHanded(in Vector3D cameraPosition, in Vector3D cameraDirection, in Vector3D cameraUpVector)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixLookToLH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                Vector3 axisZ = Vector3.Normalize(cameraDirection);
-                Vector3 axisX = Vector3.Normalize(Vector3.Cross(cameraUpVector, axisZ));
-                Vector3 axisY = Vector3.Cross(axisZ, axisX);
-                Vector3 negativeCameraPosition = -cameraPosition;
+                Vector3D axisZ = Vector3D.Normalize(cameraDirection);
+                Vector3D axisX = Vector3D.Normalize(Vector3D.Cross(cameraUpVector, axisZ));
+                Vector3D axisY = Vector3D.Cross(axisZ, axisX);
+                Vector3D negativeCameraPosition = -cameraPosition;
 
                 Impl result;
 
-                result.X = Vector4.Create(axisX, Vector3.Dot(axisX, negativeCameraPosition));
-                result.Y = Vector4.Create(axisY, Vector3.Dot(axisY, negativeCameraPosition));
-                result.Z = Vector4.Create(axisZ, Vector3.Dot(axisZ, negativeCameraPosition));
+                result.X = Vector4.Create(axisX, Vector3D.Dot(axisX, negativeCameraPosition));
+                result.Y = Vector4.Create(axisY, Vector3D.Dot(axisY, negativeCameraPosition));
+                result.Z = Vector4.Create(axisZ, Vector3D.Dot(axisZ, negativeCameraPosition));
                 result.W = Vector4.UnitW;
 
                 return Transpose(result);
@@ -663,7 +663,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationX(float radians, in Vector3 centerPoint)
+            public static Impl CreateRotationX(float radians, in Vector3D centerPoint)
             {
                 (float s, float c) = float.SinCos(radians);
 
@@ -706,7 +706,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationY(float radians, in Vector3 centerPoint)
+            public static Impl CreateRotationY(float radians, in Vector3D centerPoint)
             {
                 (float s, float c) = float.SinCos(radians);
 
@@ -749,7 +749,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationZ(float radians, in Vector3 centerPoint)
+            public static Impl CreateRotationZ(float radians, in Vector3D centerPoint)
             {
                 (float s, float c) = float.SinCos(radians);
 
@@ -785,20 +785,20 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY, float scaleZ, in Vector3 centerPoint)
+            public static Impl CreateScale(float scaleX, float scaleY, float scaleZ, in Vector3D centerPoint)
             {
                 Impl result;
 
                 result.X = Vector4.Create(scaleX, 0, 0, 0);
                 result.Y = Vector4.Create(0, scaleY, 0, 0);
                 result.Z = Vector4.Create(0, 0, scaleZ, 0);
-                result.W = Vector4.Create(centerPoint * (Vector3.One - Vector3.Create(scaleX, scaleY, scaleZ)), 1);
+                result.W = Vector4.Create(centerPoint * (Vector3D.One - Vector3D.Create(scaleX, scaleY, scaleZ)), 1);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(in Vector3 scales)
+            public static Impl CreateScale(in Vector3D scales)
             {
                 Impl result;
 
@@ -811,14 +811,14 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(in Vector3 scales, in Vector3 centerPoint)
+            public static Impl CreateScale(in Vector3D scales, in Vector3D centerPoint)
             {
                 Impl result;
 
                 result.X = Vector4.Create(scales.X, 0, 0, 0);
                 result.Y = Vector4.Create(0, scales.Y, 0, 0);
                 result.Z = Vector4.Create(0, 0, scales.Z, 0);
-                result.W = Vector4.Create(centerPoint * (Vector3.One - scales), 1);
+                result.W = Vector4.Create(centerPoint * (Vector3D.One - scales), 1);
 
                 return result;
             }
@@ -837,20 +837,20 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scale, in Vector3 centerPoint)
+            public static Impl CreateScale(float scale, in Vector3D centerPoint)
             {
                 Impl result;
 
                 result.X = Vector4.Create(scale, 0, 0, 0);
                 result.Y = Vector4.Create(0, scale, 0, 0);
                 result.Z = Vector4.Create(0, 0, scale, 0);
-                result.W = Vector4.Create(centerPoint * (Vector3.One - Vector3.Create(scale)), 1);
+                result.W = Vector4.Create(centerPoint * (Vector3D.One - Vector3D.Create(scale)), 1);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateShadow(in Vector3 lightDirection, in PlaneD plane)
+            public static Impl CreateShadow(in Vector3D lightDirection, in PlaneD plane)
             {
                 Vector4 p = PlaneD.Normalize(plane).AsVector4();
                 Vector4 l = lightDirection.AsVector4();
@@ -869,7 +869,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateTranslation(in Vector3 position)
+            public static Impl CreateTranslation(in Vector3D position)
             {
                 Impl result;
 
@@ -930,11 +930,11 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateWorld(in Vector3 position, in Vector3 forward, in Vector3 up)
+            public static Impl CreateWorld(in Vector3D position, in Vector3D forward, in Vector3D up)
             {
-                Vector3 axisZ = Vector3.Normalize(-forward);
-                Vector3 axisX = Vector3.Normalize(Vector3.Cross(up, axisZ));
-                Vector3 axisY = Vector3.Cross(axisZ, axisX);
+                Vector3D axisZ = Vector3D.Normalize(-forward);
+                Vector3D axisX = Vector3D.Normalize(Vector3D.Cross(up, axisZ));
+                Vector3D axisY = Vector3D.Cross(axisZ, axisX);
 
                 Impl result;
 
@@ -947,22 +947,22 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe bool Decompose(in Impl matrix, out Vector3 scale, out QuaternionD rotation, out Vector3 translation)
+            public static unsafe bool Decompose(in Impl matrix, out Vector3D scale, out QuaternionD rotation, out Vector3D translation)
             {
                 Impl matTemp = Matrix4x4D.Identity.AsImpl();
 
-                Vector3* canonicalBasis = stackalloc Vector3[3] {
-                    Vector3.UnitX,
-                    Vector3.UnitY,
-                    Vector3.UnitZ,
+                Vector3D* canonicalBasis = stackalloc Vector3D[3] {
+                    Vector3D.UnitX,
+                    Vector3D.UnitY,
+                    Vector3D.UnitZ,
                 };
 
                 translation = matrix.W.AsVector3();
 
-                Vector3** vectorBasis = stackalloc Vector3*[3] {
-                    (Vector3*)&matTemp.X,
-                    (Vector3*)&matTemp.Y,
-                    (Vector3*)&matTemp.Z,
+                Vector3D** vectorBasis = stackalloc Vector3D*[3] {
+                    (Vector3D*)&matTemp.X,
+                    (Vector3D*)&matTemp.Y,
+                    (Vector3D*)&matTemp.Z,
                 };
 
                 *(vectorBasis[0]) = matrix.X.AsVector3();
@@ -1037,7 +1037,7 @@ namespace Invicta.Numerics
                     *(vectorBasis[a]) = canonicalBasis[a];
                 }
 
-                *vectorBasis[a] = Vector3.Normalize(*vectorBasis[a]);
+                *vectorBasis[a] = Vector3D.Normalize(*vectorBasis[a]);
 
                 if (scales[b] < DecomposeEpsilon)
                 {
@@ -1087,17 +1087,17 @@ namespace Invicta.Numerics
                     }
                     #endregion
 
-                    *vectorBasis[b] = Vector3.Cross(*vectorBasis[a], canonicalBasis[cc]);
+                    *vectorBasis[b] = Vector3D.Cross(*vectorBasis[a], canonicalBasis[cc]);
                 }
 
-                *vectorBasis[b] = Vector3.Normalize(*vectorBasis[b]);
+                *vectorBasis[b] = Vector3D.Normalize(*vectorBasis[b]);
 
                 if (scales[c] < DecomposeEpsilon)
                 {
-                    *vectorBasis[c] = Vector3.Cross(*vectorBasis[a], *vectorBasis[b]);
+                    *vectorBasis[c] = Vector3D.Cross(*vectorBasis[a], *vectorBasis[b]);
                 }
 
-                *vectorBasis[c] = Vector3.Normalize(*vectorBasis[c]);
+                *vectorBasis[c] = Vector3D.Normalize(*vectorBasis[c]);
 
                 float det = matTemp.GetDeterminant();
 
@@ -1129,7 +1129,7 @@ namespace Invicta.Numerics
                     result = true;
                 }
 
-                scale = Unsafe.ReadUnaligned<Vector3>(scales);
+                scale = Unsafe.ReadUnaligned<Vector3D>(scales);
                 return result;
             }
 

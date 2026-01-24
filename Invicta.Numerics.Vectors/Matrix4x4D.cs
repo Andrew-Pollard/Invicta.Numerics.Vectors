@@ -149,7 +149,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the translation component of this matrix.</summary>
         /// <remarks>The translation component is stored as first 3 columns of <see cref="W" />.</remarks>
-        public Vector3 Translation
+        public Vector3D Translation
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => W.AsVector3();
@@ -577,7 +577,7 @@ namespace Invicta.Numerics
         /// <param name="cameraUpVector">The up vector of the camera.</param>
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <returns>The created billboard.</returns>
-        public static Matrix4x4D CreateBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUpVector, Vector3 cameraForwardVector)
+        public static Matrix4x4D CreateBillboard(Vector3D objectPosition, Vector3D cameraPosition, Vector3D cameraUpVector, Vector3D cameraForwardVector)
             => Impl.CreateBillboard(in objectPosition, in cameraPosition, in cameraUpVector, in cameraForwardVector).AsM4x4();
 
         /// <summary>Creates a left-handed spherical billboard matrix that rotates around a specified object position.</summary>
@@ -586,7 +586,7 @@ namespace Invicta.Numerics
         /// <param name="cameraUpVector">The up vector of the camera.</param>
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <returns>The created billboard.</returns>
-        public static Matrix4x4D CreateBillboardLeftHanded(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUpVector, Vector3 cameraForwardVector)
+        public static Matrix4x4D CreateBillboardLeftHanded(Vector3D objectPosition, Vector3D cameraPosition, Vector3D cameraUpVector, Vector3D cameraForwardVector)
             => Impl.CreateBillboardLeftHanded(in objectPosition, in cameraPosition, in cameraUpVector, in cameraForwardVector).AsM4x4();
 
         /// <summary>Creates a right-handed cylindrical billboard matrix that rotates around a specified axis.</summary>
@@ -596,7 +596,7 @@ namespace Invicta.Numerics
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <param name="objectForwardVector">The forward vector of the object.</param>
         /// <returns>The billboard matrix.</returns>
-        public static Matrix4x4D CreateConstrainedBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 rotateAxis, Vector3 cameraForwardVector, Vector3 objectForwardVector)
+        public static Matrix4x4D CreateConstrainedBillboard(Vector3D objectPosition, Vector3D cameraPosition, Vector3D rotateAxis, Vector3D cameraForwardVector, Vector3D objectForwardVector)
             => Impl.CreateConstrainedBillboard(in objectPosition, in cameraPosition, in rotateAxis, in cameraForwardVector, in objectForwardVector).AsM4x4();
 
         /// <summary>Creates a left-handed cylindrical billboard matrix that rotates around a specified axis.</summary>
@@ -606,14 +606,14 @@ namespace Invicta.Numerics
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <param name="objectForwardVector">The forward vector of the object.</param>
         /// <returns>The billboard matrix.</returns>
-        public static Matrix4x4D CreateConstrainedBillboardLeftHanded(Vector3 objectPosition, Vector3 cameraPosition, Vector3 rotateAxis, Vector3 cameraForwardVector, Vector3 objectForwardVector)
+        public static Matrix4x4D CreateConstrainedBillboardLeftHanded(Vector3D objectPosition, Vector3D cameraPosition, Vector3D rotateAxis, Vector3D cameraForwardVector, Vector3D objectForwardVector)
             => Impl.CreateConstrainedBillboardLeftHanded(in objectPosition, in cameraPosition, in rotateAxis, in cameraForwardVector, in objectForwardVector).AsM4x4();
 
         /// <summary>Creates a matrix that rotates around an arbitrary vector.</summary>
         /// <param name="axis">The axis to rotate around.</param>
         /// <param name="angle">The angle to rotate around <paramref name="axis" />, in radians.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateFromAxisAngle(Vector3 axis, float angle)
+        public static Matrix4x4D CreateFromAxisAngle(Vector3D axis, float angle)
             => Impl.CreateFromAxisAngle(in axis, angle).AsM4x4();
 
         /// <summary>Creates a rotation matrix from the specified QuaternionD rotation value.</summary>
@@ -635,9 +635,9 @@ namespace Invicta.Numerics
         /// <param name="cameraTarget">The target towards which the camera is pointing.</param>
         /// <param name="cameraUpVector">The direction that is "up" from the camera's point of view.</param>
         /// <returns>The right-handed view matrix.</returns>
-        public static Matrix4x4D CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUpVector)
+        public static Matrix4x4D CreateLookAt(Vector3D cameraPosition, Vector3D cameraTarget, Vector3D cameraUpVector)
         {
-            Vector3 cameraDirection = cameraTarget - cameraPosition;
+            Vector3D cameraDirection = cameraTarget - cameraPosition;
             return Impl.CreateLookTo(in cameraPosition, in cameraDirection, in cameraUpVector).AsM4x4();
         }
 
@@ -646,9 +646,9 @@ namespace Invicta.Numerics
         /// <param name="cameraTarget">The target towards which the camera is pointing.</param>
         /// <param name="cameraUpVector">The direction that is "up" from the camera's point of view.</param>
         /// <returns>The left-handed view matrix.</returns>
-        public static Matrix4x4D CreateLookAtLeftHanded(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUpVector)
+        public static Matrix4x4D CreateLookAtLeftHanded(Vector3D cameraPosition, Vector3D cameraTarget, Vector3D cameraUpVector)
         {
-            Vector3 cameraDirection = cameraTarget - cameraPosition;
+            Vector3D cameraDirection = cameraTarget - cameraPosition;
             return Impl.CreateLookToLeftHanded(in cameraPosition, in cameraDirection, in cameraUpVector).AsM4x4();
         }
 
@@ -657,7 +657,7 @@ namespace Invicta.Numerics
         /// <param name="cameraDirection">The direction in which the camera is pointing.</param>
         /// <param name="cameraUpVector">The direction that is "up" from the camera's point of view.</param>
         /// <returns>The right-handed view matrix.</returns>
-        public static Matrix4x4D CreateLookTo(Vector3 cameraPosition, Vector3 cameraDirection, Vector3 cameraUpVector)
+        public static Matrix4x4D CreateLookTo(Vector3D cameraPosition, Vector3D cameraDirection, Vector3D cameraUpVector)
             => Impl.CreateLookTo(in cameraPosition, in cameraDirection, in cameraUpVector).AsM4x4();
 
         /// <summary>Creates a left-handed view matrix.</summary>
@@ -665,7 +665,7 @@ namespace Invicta.Numerics
         /// <param name="cameraDirection">The direction in which the camera is pointing.</param>
         /// <param name="cameraUpVector">The direction that is "up" from the camera's point of view.</param>
         /// <returns>The left-handed view matrix.</returns>
-        public static Matrix4x4D CreateLookToLeftHanded(Vector3 cameraPosition, Vector3 cameraDirection, Vector3 cameraUpVector)
+        public static Matrix4x4D CreateLookToLeftHanded(Vector3D cameraPosition, Vector3D cameraDirection, Vector3D cameraUpVector)
         {
             return Impl.CreateLookToLeftHanded(in cameraPosition, in cameraDirection, in cameraUpVector).AsM4x4();
         }
@@ -820,7 +820,7 @@ namespace Invicta.Numerics
         /// <param name="radians">The amount, in radians, by which to rotate around the X axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationX(float radians, Vector3 centerPoint)
+        public static Matrix4x4D CreateRotationX(float radians, Vector3D centerPoint)
             => Impl.CreateRotationX(radians, in centerPoint).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the Y axis.</summary>
@@ -833,7 +833,7 @@ namespace Invicta.Numerics
         /// <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationY(float radians, Vector3 centerPoint)
+        public static Matrix4x4D CreateRotationY(float radians, Vector3D centerPoint)
             => Impl.CreateRotationY(radians, in centerPoint).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the Z axis.</summary>
@@ -846,7 +846,7 @@ namespace Invicta.Numerics
         /// <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationZ(float radians, Vector3 centerPoint)
+        public static Matrix4x4D CreateRotationZ(float radians, Vector3D centerPoint)
             => Impl.CreateRotationZ(radians, in centerPoint).AsM4x4();
 
         /// <summary>Creates a scaling matrix from the specified X, Y, and Z components.</summary>
@@ -863,20 +863,20 @@ namespace Invicta.Numerics
         /// <param name="zScale">The value to scale by on the Z axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(float xScale, float yScale, float zScale, Vector3 centerPoint)
+        public static Matrix4x4D CreateScale(float xScale, float yScale, float zScale, Vector3D centerPoint)
             => Impl.CreateScale(xScale, yScale, zScale, in centerPoint).AsM4x4();
 
         /// <summary>Creates a scaling matrix from the specified vector scale.</summary>
         /// <param name="scales">The scale to use.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(Vector3 scales)
+        public static Matrix4x4D CreateScale(Vector3D scales)
             => Impl.CreateScale(in scales).AsM4x4();
 
         /// <summary>Creates a scaling matrix with a center point.</summary>
         /// <param name="scales">The vector that contains the amount to scale on each axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(Vector3 scales, Vector3 centerPoint)
+        public static Matrix4x4D CreateScale(Vector3D scales, Vector3D centerPoint)
             => Impl.CreateScale(scales, in centerPoint).AsM4x4();
 
         /// <summary>Creates a uniform scaling matrix that scale equally on each axis.</summary>
@@ -889,20 +889,20 @@ namespace Invicta.Numerics
         /// <param name="scale">The uniform scaling factor.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(float scale, Vector3 centerPoint)
+        public static Matrix4x4D CreateScale(float scale, Vector3D centerPoint)
             => Impl.CreateScale(scale, in centerPoint).AsM4x4();
 
         /// <summary>Creates a matrix that flattens geometry into a specified plane as if casting a shadow from a specified light source.</summary>
         /// <param name="lightDirection">The direction from which the light that will cast the shadow is coming.</param>
         /// <param name="plane">The plane onto which the new matrix should flatten geometry so as to cast a shadow.</param>
         /// <returns>A new matrix that can be used to flatten geometry onto the specified plane from the specified direction.</returns>
-        public static Matrix4x4D CreateShadow(Vector3 lightDirection, PlaneD plane)
+        public static Matrix4x4D CreateShadow(Vector3D lightDirection, PlaneD plane)
             => Impl.CreateShadow(in lightDirection, in plane).AsM4x4();
 
         /// <summary>Creates a translation matrix from the specified 3-dimensional vector.</summary>
         /// <param name="position">The amount to translate in each axis.</param>
         /// <returns>The translation matrix.</returns>
-        public static Matrix4x4D CreateTranslation(Vector3 position)
+        public static Matrix4x4D CreateTranslation(Vector3D position)
             => Impl.CreateTranslation(in position).AsM4x4();
 
         /// <summary>Creates a translation matrix from the specified X, Y, and Z components.</summary>
@@ -955,7 +955,7 @@ namespace Invicta.Numerics
         /// <param name="up">The upward direction of the object. Its value is usually <c>[0, 1, 0]</c>.</param>
         /// <returns>The world matrix.</returns>
         /// <remarks><paramref name="position" /> is used in translation operations.</remarks>
-        public static Matrix4x4D CreateWorld(Vector3 position, Vector3 forward, Vector3 up)
+        public static Matrix4x4D CreateWorld(Vector3D position, Vector3D forward, Vector3D up)
             => Impl.CreateWorld(in position, in forward, in up).AsM4x4();
 
         /// <summary>Attempts to extract the scale, translation, and rotation components from the given scale, rotation, or translation matrix. The return value indicates whether the operation succeeded.</summary>
@@ -964,7 +964,7 @@ namespace Invicta.Numerics
         /// <param name="rotation">When this method returns, contains the rotation component of the transformation matrix if the operation succeeded.</param>
         /// <param name="translation">When the method returns, contains the translation component of the transformation matrix if the operation succeeded.</param>
         /// <returns><see langword="true" /> if <paramref name="matrix" /> was decomposed successfully; otherwise,  <see langword="false" />.</returns>
-        public static bool Decompose(Matrix4x4D matrix, out Vector3 scale, out QuaternionD rotation, out Vector3 translation)
+        public static bool Decompose(Matrix4x4D matrix, out Vector3D scale, out QuaternionD rotation, out Vector3D translation)
             => Impl.Decompose(in matrix.AsImpl(), out scale, out rotation, out translation);
 
         /// <summary>Tries to invert the specified matrix. The return value indicates whether the operation succeeded.</summary>
