@@ -120,10 +120,10 @@ namespace Invicta.Numerics
             );
         }
 
-        /// <summary>Initializes a <see cref="Matrix4x4" /> using the specified <see cref="Matrix3x2" />.</summary>
-        /// <param name="value">The <see cref="Matrix3x2" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
+        /// <summary>Initializes a <see cref="Matrix4x4" /> using the specified <see cref="Matrix3x2D" />.</summary>
+        /// <param name="value">The <see cref="Matrix3x2D" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
         /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4.UnitZ" />.</remarks>
-        public Matrix4x4(Matrix3x2 value)
+        public Matrix4x4(Matrix3x2D value)
         {
             this = Create(value);
         }
@@ -505,12 +505,12 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Create(float value) => Create(Vector4.Create(value));
 
-        /// <summary>Creates a <see cref="Matrix4x4" /> from the specified <see cref="Matrix3x2" />.</summary>
-        /// <param name="value">The <see cref="Matrix3x2" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
+        /// <summary>Creates a <see cref="Matrix4x4" /> from the specified <see cref="Matrix3x2D" />.</summary>
+        /// <param name="value">The <see cref="Matrix3x2D" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
         /// <returns>A <see cref="Matrix4x4" /> that was initialized using the elements from <paramref name="value" />.</returns>
         /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4.UnitZ" />.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4 Create(Matrix3x2 value) => Create(
+        public static Matrix4x4 Create(Matrix3x2D value) => Create(
             value.X.AsVector4(),
             value.Y.AsVector4(),
             Vector4.UnitZ,
@@ -542,7 +542,7 @@ namespace Invicta.Numerics
             return result;
         }
 
-        /// <summary>Creates a <see cref="Matrix3x2" /> from the specified elements.</summary>
+        /// <summary>Creates a <see cref="Matrix3x2D" /> from the specified elements.</summary>
         /// <param name="m11">The value to assign to <see cref="M11" />.</param>
         /// <param name="m12">The value to assign to <see cref="M12" />.</param>
         /// <param name="m13">The value to assign to <see cref="M13" />.</param>

@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace Invicta.Numerics
 {
-    public partial struct Matrix3x2
+    public partial struct Matrix3x2D
     {
-        // See Matrix3x2.cs for an explanation of why this file/type exists
+        // See Matrix3x2D.cs for an explanation of why this file/type exists
         //
         // Note that we use some particular patterns below, such as defining a result
         // and assigning the fields directly rather than using the object initializer
@@ -17,17 +17,17 @@ namespace Invicta.Numerics
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ref Impl AsImpl() => ref Unsafe.As<Matrix3x2, Impl>(ref this);
+        internal ref Impl AsImpl() => ref Unsafe.As<Matrix3x2D, Impl>(ref this);
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal readonly ref readonly Impl AsROImpl() => ref Unsafe.As<Matrix3x2, Impl>(ref Unsafe.AsRef(in this));
+        internal readonly ref readonly Impl AsROImpl() => ref Unsafe.As<Matrix3x2D, Impl>(ref Unsafe.AsRef(in this));
 
         internal struct Impl : IEquatable<Impl>
         {
             [UnscopedRef]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public ref Matrix3x2 AsM3x2() => ref Unsafe.As<Impl, Matrix3x2>(ref this);
+            public ref Matrix3x2D AsM3x2() => ref Unsafe.As<Impl, Matrix3x2D>(ref this);
 
             private const float RotationEpsilon = 0.001f * float.Pi / 180f;     // 0.1% of a degree
 
@@ -398,7 +398,7 @@ namespace Invicta.Numerics
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public override readonly bool Equals([NotNullWhen(true)] object? obj)
-                => (obj is Matrix3x2 other) && Equals(in other.AsImpl());
+                => (obj is Matrix3x2D other) && Equals(in other.AsImpl());
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public readonly bool Equals(in Impl other)

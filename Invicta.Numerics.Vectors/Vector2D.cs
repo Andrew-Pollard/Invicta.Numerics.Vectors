@@ -902,7 +902,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Transform(Vector2 position, Matrix3x2 matrix)
+        public static Vector2 Transform(Vector2 position, Matrix3x2D matrix)
         {
             Vector2 result = matrix.X * position.X;
             result = MultiplyAddEstimate(matrix.Y, Create(position.Y), result);
@@ -928,7 +928,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 TransformNormal(Vector2 normal, Matrix3x2 matrix)
+        public static Vector2 TransformNormal(Vector2 normal, Matrix3x2D matrix)
         {
             Vector2 result = matrix.X * normal.X;
             result = MultiplyAddEstimate(matrix.Y, Create(normal.Y), result);
