@@ -4,9 +4,8 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
-using Invicta;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     public static unsafe partial class Vector
     {

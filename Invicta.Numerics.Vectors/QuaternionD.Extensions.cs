@@ -3,7 +3,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     public static partial class Vector
     {
