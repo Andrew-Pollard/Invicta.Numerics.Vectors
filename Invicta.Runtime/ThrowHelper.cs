@@ -786,15 +786,15 @@ namespace Invicta
                 ThrowArgumentNullException(argName);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void ThrowForUnsupportedSimdVectorBaseType<TVector, T>()
-            where TVector : ISimdVector<TVector, T>
-        {
-            if (!TVector.IsSupported)
-            {
-                ThrowNotSupportedException(ExceptionResource.Arg_TypeNotSupported);
-            }
-        }
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //internal static void ThrowForUnsupportedSimdVectorBaseType<TVector, T>()
+        //    where TVector : ISimdVector<TVector, T>
+        //{
+        //    if (!TVector.IsSupported)
+        //    {
+        //        ThrowNotSupportedException(ExceptionResource.Arg_TypeNotSupported);
+        //    }
+        //}
 
         // Throws if 'T' is disallowed in Vector<T> in the Numerics namespace.
         // If 'T' is allowed, no-ops. JIT will elide the method entirely if 'T'
