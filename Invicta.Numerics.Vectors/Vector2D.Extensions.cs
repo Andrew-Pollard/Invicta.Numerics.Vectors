@@ -12,22 +12,22 @@ namespace Invicta.Numerics
         /// <summary>Reinterprets a <see cref="Vector2D" /> to a new <see cref="Vector3D" /> with the new elements zeroed.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted to a new <see cref="Vector3D" /> with the new elements zeroed.</returns>
-        public static Vector3D AsVector3(this Vector2D value) => value.AsVector128().AsVector3D();
+        public static Vector3D AsVector3D(this Vector2D value) => value.AsVector128().AsVector3D();
 
         /// <summary>Reinterprets a <see cref="Vector2D" /> to a new <see cref="Vector3D" /> with the new elements undefined.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted to a new <see cref="Vector3D" /> with the new elements undefined.</returns>
-        public static Vector3D AsVector3Unsafe(this Vector2D value) => value.AsVector128Unsafe().AsVector3D();
+        public static Vector3D AsVector3DUnsafe(this Vector2D value) => value.AsVector128Unsafe().AsVector3D();
 
         /// <summary>Reinterprets a <see cref="Vector2D" /> to a new <see cref="Vector4D" /> with the new elements zeroed.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted to a new <see cref="Vector4D" /> with the new elements zeroed.</returns>
-        public static Vector4D AsVector4(this Vector2D value) => value.AsVector128().AsVector4D();
+        public static Vector4D AsVector4D(this Vector2D value) => value.AsVector128().AsVector4D();
 
         /// <summary>Reinterprets a <see cref="Vector2D" /> to a new <see cref="Vector4D" /> with the new elements undefined.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted to a new <see cref="Vector4D" /> with the new elements undefined.</returns>
-        public static Vector4D AsVector4Unsafe(this Vector2D value) => value.AsVector128Unsafe().AsVector4D();
+        public static Vector4D AsVector4DUnsafe(this Vector2D value) => value.AsVector128Unsafe().AsVector4D();
 
         /// <inheritdoc cref="ExtractMostSignificantBits(Vector4D)" />
         [CLSCompliant(false)]

@@ -134,9 +134,9 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = axisX.AsVector4();
-                result.Y = axisY.AsVector4();
-                result.Z = axisZ.AsVector4();
+                result.X = axisX.AsVector4D();
+                result.Y = axisY.AsVector4D();
+                result.Z = axisZ.AsVector4D();
                 result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
@@ -165,9 +165,9 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = axisX.AsVector4();
-                result.Y = axisY.AsVector4();
-                result.Z = axisZ.AsVector4();
+                result.X = axisX.AsVector4D();
+                result.Y = axisY.AsVector4D();
+                result.Z = axisZ.AsVector4D();
                 result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
@@ -226,9 +226,9 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = axisX.AsVector4();
-                result.Y = axisY.AsVector4();
-                result.Z = axisZ.AsVector4();
+                result.X = axisX.AsVector4D();
+                result.Y = axisY.AsVector4D();
+                result.Z = axisZ.AsVector4D();
                 result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
@@ -286,9 +286,9 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = axisX.AsVector4();
-                result.Y = axisY.AsVector4();
-                result.Z = axisZ.AsVector4();
+                result.X = axisX.AsVector4D();
+                result.Y = axisY.AsVector4D();
+                result.Z = axisZ.AsVector4D();
                 result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
@@ -629,7 +629,7 @@ namespace Invicta.Numerics
                 // This implementation is based on the DirectX Math Library XMMatrixReflect method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                Vector4D p = PlaneD.Normalize(value).AsVector4();
+                Vector4D p = PlaneD.Normalize(value).AsVector4D();
                 Vector4D s = p * Vector4D.Create(-2.0f, -2.0f, -2.0f, 0.0f);
 
                 Impl result;
@@ -852,8 +852,8 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl CreateShadow(in Vector3D lightDirection, in PlaneD plane)
             {
-                Vector4D p = PlaneD.Normalize(plane).AsVector4();
-                Vector4D l = lightDirection.AsVector4();
+                Vector4D p = PlaneD.Normalize(plane).AsVector4D();
+                Vector4D l = lightDirection.AsVector4D();
                 float dot = Vector4D.Dot(p, l);
 
                 p = -p;
@@ -938,9 +938,9 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = axisX.AsVector4();
-                result.Y = axisY.AsVector4();
-                result.Z = axisZ.AsVector4();
+                result.X = axisX.AsVector4D();
+                result.Y = axisY.AsVector4D();
+                result.Z = axisZ.AsVector4D();
                 result.W = Vector4D.Create(position, 1);
 
                 return result;
@@ -957,7 +957,7 @@ namespace Invicta.Numerics
                     Vector3D.UnitZ,
                 };
 
-                translation = matrix.W.AsVector3();
+                translation = matrix.W.AsVector3D();
 
                 Vector3D** vectorBasis = stackalloc Vector3D*[3] {
                     (Vector3D*)&matTemp.X,
@@ -965,9 +965,9 @@ namespace Invicta.Numerics
                     (Vector3D*)&matTemp.Z,
                 };
 
-                *(vectorBasis[0]) = matrix.X.AsVector3();
-                *(vectorBasis[1]) = matrix.Y.AsVector3();
-                *(vectorBasis[2]) = matrix.Z.AsVector3();
+                *(vectorBasis[0]) = matrix.X.AsVector3D();
+                *(vectorBasis[1]) = matrix.Y.AsVector3D();
+                *(vectorBasis[2]) = matrix.Z.AsVector3D();
 
                 float* scales = stackalloc float[3] {
                     vectorBasis[0]->Length(),

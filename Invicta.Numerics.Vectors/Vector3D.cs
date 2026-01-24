@@ -933,14 +933,14 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Transform(Vector3D position, Matrix4x4D matrix) => Vector4D.Transform(position, matrix).AsVector3();
+        public static Vector3D Transform(Vector3D position, Matrix4x4D matrix) => Vector4D.Transform(position, matrix).AsVector3D();
 
         /// <summary>Transforms a vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Transform(Vector3D value, QuaternionD rotation) => Vector4D.Transform(value, rotation).AsVector3();
+        public static Vector3D Transform(Vector3D value, QuaternionD rotation) => Vector4D.Transform(value, rotation).AsVector3D();
 
         /// <summary>Transforms a vector normal by the given 4x4 matrix.</summary>
         /// <param name="normal">The source vector.</param>
@@ -954,7 +954,7 @@ namespace Invicta.Numerics
             result = Vector4D.MultiplyAddEstimate(matrix.Y, Vector4D.Create(normal.Y), result);
             result = Vector4D.MultiplyAddEstimate(matrix.Z, Vector4D.Create(normal.Z), result);
 
-            return result.AsVector3();
+            return result.AsVector3D();
         }
 
         /// <inheritdoc cref="Vector4D.Truncate(Vector4D)" />

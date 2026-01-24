@@ -1035,8 +1035,8 @@ namespace Invicta.Numerics
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
             QuaternionD conjuagate = QuaternionD.Conjugate(rotation);
-            QuaternionD temp = QuaternionD.Concatenate(conjuagate, value.AsQuaternion());
-            return QuaternionD.Concatenate(temp, rotation).AsVector4();
+            QuaternionD temp = QuaternionD.Concatenate(conjuagate, value.AsQuaternionD());
+            return QuaternionD.Concatenate(temp, rotation).AsVector4D();
         }
 
         /// <inheritdoc cref="Vector128.Truncate(Vector128{float})" />

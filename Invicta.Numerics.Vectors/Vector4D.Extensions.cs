@@ -12,22 +12,22 @@ namespace Invicta.Numerics
         /// <summary>Reinterprets a <see cref="Vector4D" /> as a new <see cref="PlaneD" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="PlaneD" />.</returns>
-        public static PlaneD AsPlane(this Vector4D value) => Unsafe.BitCast<Vector4D, PlaneD>(value);
+        public static PlaneD AsPlaneD(this Vector4D value) => Unsafe.BitCast<Vector4D, PlaneD>(value);
 
         /// <summary>Reinterprets a <see cref="Vector4D" /> as a new <see cref="QuaternionD" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="QuaternionD" />.</returns>
-        public static QuaternionD AsQuaternion(this Vector4D value) => Unsafe.BitCast<Vector4D, QuaternionD>(value);
+        public static QuaternionD AsQuaternionD(this Vector4D value) => Unsafe.BitCast<Vector4D, QuaternionD>(value);
 
         /// <summary>Reinterprets a <see cref="Vector4D" /> as a new <see cref="Vector2D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector2D" />.</returns>
-        public static Vector2D AsVector2(this Vector4D value) => value.AsVector128().AsVector2D();
+        public static Vector2D AsVector2D(this Vector4D value) => value.AsVector128().AsVector2D();
 
         /// <summary>Reinterprets a <see cref="Vector4D" /> as a new <see cref="Vector3D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector3D" />.</returns>
-        public static Vector3D AsVector3(this Vector4D value) => value.AsVector128().AsVector3D();
+        public static Vector3D AsVector3D(this Vector4D value) => value.AsVector128().AsVector3D();
 
         /// <inheritdoc cref="Vector128.ExtractMostSignificantBits{T}(Vector128{T})" />
         [CLSCompliant(false)]

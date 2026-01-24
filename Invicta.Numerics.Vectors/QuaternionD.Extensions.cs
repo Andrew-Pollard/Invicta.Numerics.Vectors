@@ -11,6 +11,6 @@ namespace Invicta.Numerics
         /// <param name="value">The quaternion to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="QuaternionD" />.</returns>
         [Intrinsic]
-        public static Vector4D AsVector4(this QuaternionD value) => Unsafe.BitCast<QuaternionD, Vector4D>(value);
+        public static Vector4D AsVector4D(this QuaternionD value) => Unsafe.BitCast<QuaternionD, Vector4D>(value);
     }
 }

@@ -11,6 +11,6 @@ namespace Invicta.Numerics
         /// <param name="value">The plane to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector4D" />.</returns>
         [Intrinsic]
-        public static Vector4D AsVector4(this PlaneD value) => Unsafe.BitCast<PlaneD, Vector4D>(value);
+        public static Vector4D AsVector4D(this PlaneD value) => Unsafe.BitCast<PlaneD, Vector4D>(value);
     }
 }

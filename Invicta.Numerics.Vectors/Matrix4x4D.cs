@@ -152,7 +152,7 @@ namespace Invicta.Numerics
         public Vector3D Translation
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            readonly get => W.AsVector3();
+            readonly get => W.AsVector3D();
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => W = Vector4D.Create(value, W.W);
@@ -511,8 +511,8 @@ namespace Invicta.Numerics
         /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4D.UnitZ" />.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4D Create(Matrix3x2D value) => Create(
-            value.X.AsVector4(),
-            value.Y.AsVector4(),
+            value.X.AsVector4D(),
+            value.Y.AsVector4D(),
             Vector4D.UnitZ,
             Vector4D.Create(value.Z, 0, 1)
         );

@@ -205,7 +205,7 @@ namespace Invicta.Numerics
         /// <param name="scalarPart">The rotation part of the quaternion.</param>
         /// <returns>A <see cref="QuaternionD" /> created from the specified vector and rotation parts.</returns>
         [Intrinsic]
-        public static QuaternionD Create(Vector3D vectorPart, float scalarPart) => Vector4D.Create(vectorPart, scalarPart).AsQuaternion();
+        public static QuaternionD Create(Vector3D vectorPart, float scalarPart) => Vector4D.Create(vectorPart, scalarPart).AsQuaternionD();
 
         /// <summary>Creates a quaternion from a unit vector and an angle to rotate around the vector.</summary>
         /// <param name="axis">The unit vector to rotate around.</param>
@@ -219,7 +219,7 @@ namespace Invicta.Numerics
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
             (float s, float c) = float.SinCos(angle * 0.5f);
-            return (Vector4D.Create(axis, 1) * Vector4D.Create(Vector3D.Create(s), c)).AsQuaternion();
+            return (Vector4D.Create(axis, 1) * Vector4D.Create(Vector3D.Create(s), c)).AsQuaternionD();
         }
 
         /// <summary>Creates a quaternion from the specified rotation matrix.</summary>
