@@ -807,7 +807,7 @@ namespace Invicta.Numerics
         /// <summary>Creates a matrix that reflects the coordinate system about a specified plane.</summary>
         /// <param name="value">The plane about which to create a reflection.</param>
         /// <returns>A new matrix expressing the reflection.</returns>
-        public static Matrix4x4D CreateReflection(Plane value)
+        public static Matrix4x4D CreateReflection(PlaneD value)
             => Impl.CreateReflection(in value).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the X axis.</summary>
@@ -896,7 +896,7 @@ namespace Invicta.Numerics
         /// <param name="lightDirection">The direction from which the light that will cast the shadow is coming.</param>
         /// <param name="plane">The plane onto which the new matrix should flatten geometry so as to cast a shadow.</param>
         /// <returns>A new matrix that can be used to flatten geometry onto the specified plane from the specified direction.</returns>
-        public static Matrix4x4D CreateShadow(Vector3 lightDirection, Plane plane)
+        public static Matrix4x4D CreateShadow(Vector3 lightDirection, PlaneD plane)
             => Impl.CreateShadow(in lightDirection, in plane).AsM4x4();
 
         /// <summary>Creates a translation matrix from the specified 3-dimensional vector.</summary>

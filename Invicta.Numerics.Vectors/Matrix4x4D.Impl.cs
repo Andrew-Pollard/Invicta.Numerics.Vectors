@@ -624,12 +624,12 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateReflection(in Plane value)
+            public static Impl CreateReflection(in PlaneD value)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixReflect method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                Vector4 p = Plane.Normalize(value).AsVector4();
+                Vector4 p = PlaneD.Normalize(value).AsVector4();
                 Vector4 s = p * Vector4.Create(-2.0f, -2.0f, -2.0f, 0.0f);
 
                 Impl result;
@@ -850,9 +850,9 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateShadow(in Vector3 lightDirection, in Plane plane)
+            public static Impl CreateShadow(in Vector3 lightDirection, in PlaneD plane)
             {
-                Vector4 p = Plane.Normalize(plane).AsVector4();
+                Vector4 p = PlaneD.Normalize(plane).AsVector4();
                 Vector4 l = lightDirection.AsVector4();
                 float dot = Vector4.Dot(p, l);
 
