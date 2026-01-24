@@ -18,49 +18,49 @@ namespace Invicta
         // The trimming tools are also capable of replacing the value of this method when the application is being trimmed.
         internal static bool UsingResourceKeys() => s_usingResourceKeys;
 
-        // We can optimize out the resource string blob if we can see all accesses to it happening
-        // through the generated SR.XXX properties.
-        // If a call to GetResourceString is left, the optimization gets defeated and we need to keep
-        // the whole resource blob. It's important to keep this private. CoreCLR's CoreLib gets a free
-        // pass because the VM needs to be able to call into this, but that's a known set of constants.
-#if CORECLR || LEGACY_GETRESOURCESTRING_USER
-        internal
-#else
-        private
-#endif
-        static string GetResourceString(string resourceKey)
-        {
-            if (UsingResourceKeys())
-            {
-                return resourceKey;
-            }
+//        // We can optimize out the resource string blob if we can see all accesses to it happening
+//        // through the generated SR.XXX properties.
+//        // If a call to GetResourceString is left, the optimization gets defeated and we need to keep
+//        // the whole resource blob. It's important to keep this private. CoreCLR's CoreLib gets a free
+//        // pass because the VM needs to be able to call into this, but that's a known set of constants.
+//#if CORECLR || LEGACY_GETRESOURCESTRING_USER
+//        internal
+//#else
+//        private
+//#endif
+//        static string GetResourceString(string resourceKey)
+//        {
+//            if (UsingResourceKeys())
+//            {
+//                return resourceKey;
+//            }
 
-            string? resourceString = null;
-            try
-            {
-                resourceString =
-#if SYSTEM_PRIVATE_CORELIB || NATIVEAOT
-                    InternalGetResourceString(resourceKey);
-#else
-                    ResourceManager.GetString(resourceKey);
-#endif
-            }
-            catch (MissingManifestResourceException) { }
+//            string? resourceString = null;
+//            try
+//            {
+//                resourceString =
+//#if INVICTA_PRIVATE_CORELIB || NATIVEAOT
+//                    InternalGetResourceString(resourceKey);
+//#else
+//                    ResourceManager.GetString(resourceKey);
+//#endif
+//            }
+//            catch (MissingManifestResourceException) { }
 
-            return resourceString!; // only null if missing resources
-        }
+//            return resourceString!; // only null if missing resources
+//        }
 
-#if LEGACY_GETRESOURCESTRING_USER
-        internal
-#else
-        private
-#endif
-        static string GetResourceString(string resourceKey, string defaultString)
-        {
-            string resourceString = GetResourceString(resourceKey);
+//#if LEGACY_GETRESOURCESTRING_USER
+//        internal
+//#else
+//        private
+//#endif
+//        static string GetResourceString(string resourceKey, string defaultString)
+//        {
+//            string resourceString = GetResourceString(resourceKey);
 
-            return resourceKey == resourceString || resourceString == null ? defaultString : resourceString;
-        }
+//            return resourceKey == resourceString || resourceString == null ? defaultString : resourceString;
+//        }
 
         internal static string Format(string resourceFormat, object? p1)
         {
