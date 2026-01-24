@@ -9,9 +9,9 @@ using System.Runtime.Intrinsics.X86;
 
 namespace Invicta.Numerics
 {
-    public partial struct Matrix4x4
+    public partial struct Matrix4x4D
     {
-        // See Matrix4x4.cs for an explanation of why this file/type exists
+        // See Matrix4x4D.cs for an explanation of why this file/type exists
         //
         // Note that we use some particular patterns below, such as defining a result
         // and assigning the fields directly rather than using the object initializer
@@ -20,17 +20,17 @@ namespace Invicta.Numerics
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ref Impl AsImpl() => ref Unsafe.As<Matrix4x4, Impl>(ref this);
+        internal ref Impl AsImpl() => ref Unsafe.As<Matrix4x4D, Impl>(ref this);
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal readonly ref readonly Impl AsROImpl() => ref Unsafe.As<Matrix4x4, Impl>(ref Unsafe.AsRef(in this));
+        internal readonly ref readonly Impl AsROImpl() => ref Unsafe.As<Matrix4x4D, Impl>(ref Unsafe.AsRef(in this));
 
         internal struct Impl : IEquatable<Impl>
         {
             [UnscopedRef]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public ref Matrix4x4 AsM4x4() => ref Unsafe.As<Impl, Matrix4x4>(ref this);
+            public ref Matrix4x4D AsM4x4() => ref Unsafe.As<Impl, Matrix4x4D>(ref this);
 
             private const float BillboardEpsilon = 1e-4f;
             private const float BillboardMinAngle = 1.0f - (0.1f * (float.Pi / 180.0f)); // 0.1 degrees
@@ -949,7 +949,7 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe bool Decompose(in Impl matrix, out Vector3 scale, out Quaternion rotation, out Vector3 translation)
             {
-                Impl matTemp = Matrix4x4.Identity.AsImpl();
+                Impl matTemp = Matrix4x4D.Identity.AsImpl();
 
                 Vector3* canonicalBasis = stackalloc Vector3[3] {
                     Vector3.UnitX,
@@ -1604,7 +1604,7 @@ namespace Invicta.Numerics
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public override readonly bool Equals([NotNullWhen(true)] object? obj)
-                => (obj is Matrix4x4 other) && Equals(in other.AsImpl());
+                => (obj is Matrix4x4D other) && Equals(in other.AsImpl());
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public readonly bool Equals(in Impl other)

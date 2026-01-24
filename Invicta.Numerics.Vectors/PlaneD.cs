@@ -143,10 +143,10 @@ namespace Invicta.Numerics
         /// <returns>The transformed plane.</returns>
         /// <remarks><paramref name="plane" /> must already be normalized so that its <see cref="Normal" /> vector is of unit length before this method is called.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Plane Transform(Plane plane, Matrix4x4 matrix)
+        public static Plane Transform(Plane plane, Matrix4x4D matrix)
         {
-            Matrix4x4.Invert(matrix, out Matrix4x4 inverseMatrix);
-            return Vector4.Transform(plane.AsVector4(), Matrix4x4.Transpose(inverseMatrix)).AsPlane();
+            Matrix4x4D.Invert(matrix, out Matrix4x4D inverseMatrix);
+            return Vector4.Transform(plane.AsVector4(), Matrix4x4D.Transpose(inverseMatrix)).AsPlane();
         }
 
         /// <summary>Transforms a normalized plane by a Quaternion rotation.</summary>

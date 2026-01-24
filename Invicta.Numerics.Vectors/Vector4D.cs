@@ -967,7 +967,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector2 position, Matrix4x4 matrix)
+        public static Vector4 Transform(Vector2 position, Matrix4x4D matrix)
         {
             // This implementation is based on the DirectX Math Library XMVector2Transform method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
@@ -989,7 +989,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector3 position, Matrix4x4 matrix)
+        public static Vector4 Transform(Vector3 position, Matrix4x4D matrix)
         {
             // This implementation is based on the DirectX Math Library XMVector3Transform method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
@@ -1012,7 +1012,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix)
+        public static Vector4 Transform(Vector4 vector, Matrix4x4D matrix)
         {
             // This implementation is based on the DirectX Math Library XMVector4Transform method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl

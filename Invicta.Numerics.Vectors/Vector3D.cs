@@ -933,7 +933,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Transform(Vector3 position, Matrix4x4 matrix) => Vector4.Transform(position, matrix).AsVector3();
+        public static Vector3 Transform(Vector3 position, Matrix4x4D matrix) => Vector4.Transform(position, matrix).AsVector3();
 
         /// <summary>Transforms a vector by the specified Quaternion rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
@@ -947,7 +947,7 @@ namespace Invicta.Numerics
         /// <param name="matrix">The matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 TransformNormal(Vector3 normal, Matrix4x4 matrix)
+        public static Vector3 TransformNormal(Vector3 normal, Matrix4x4D matrix)
         {
             Vector4 result = matrix.X * normal.X;
 

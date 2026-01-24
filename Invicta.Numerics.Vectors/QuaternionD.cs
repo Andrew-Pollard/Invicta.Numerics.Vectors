@@ -225,7 +225,7 @@ namespace Invicta.Numerics
         /// <summary>Creates a quaternion from the specified rotation matrix.</summary>
         /// <param name="matrix">The rotation matrix.</param>
         /// <returns>The newly created quaternion.</returns>
-        public static Quaternion CreateFromRotationMatrix(Matrix4x4 matrix)
+        public static Quaternion CreateFromRotationMatrix(Matrix4x4D matrix)
         {
             float trace = matrix.M11 + matrix.M22 + matrix.M33;
 
