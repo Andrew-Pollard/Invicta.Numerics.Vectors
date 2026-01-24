@@ -4,11 +4,10 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Invicta.Numerics</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Invicta.Runtime\Invicta.Runtime.csproj" />
+    <InternalsVisibleTo Include="Invicta.Numerics.Vectors" />
   </ItemGroup>
 
 </Project>
