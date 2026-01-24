@@ -7,10 +7,10 @@ namespace Invicta.Numerics
 {
     public static partial class Vector
     {
-        /// <summary>Reinterprets a <see cref="Plane" /> as a new <see cref="Vector4" />.</summary>
+        /// <summary>Reinterprets a <see cref="PlaneD" /> as a new <see cref="Vector4D" />.</summary>
         /// <param name="value">The plane to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector4" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector4D" />.</returns>
         [Intrinsic]
-        public static Vector4 AsVector4(this Plane value) => Unsafe.BitCast<Plane, Vector4>(value);
+        public static Vector4D AsVector4(this PlaneD value) => Unsafe.BitCast<PlaneD, Vector4D>(value);
     }
 }
