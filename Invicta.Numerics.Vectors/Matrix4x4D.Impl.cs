@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     public partial struct Matrix4x4
     {

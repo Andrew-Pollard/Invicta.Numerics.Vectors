@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     /// <summary>Represents a vector with four single-precision floating-point values.</summary>
     /// <remarks><format type="text/markdown"><![CDATA[

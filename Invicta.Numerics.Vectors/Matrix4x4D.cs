@@ -4,7 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     /// <summary>Represents a 4x4 matrix.</summary>
     /// <remarks><format type="text/markdown"><![CDATA[

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     /// <summary>Represents a vector that is used to encode three-dimensional physical rotations.</summary>
     /// <remarks>The <see cref="Quaternion" /> structure is used to efficiently rotate an object about the (x,y,z) vector by the angle theta, where:

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     /// <summary>Represents a plane in three-dimensional space.</summary>
     /// <remarks><format type="text/markdown"><![CDATA[

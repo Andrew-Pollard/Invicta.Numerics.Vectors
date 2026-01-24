@@ -4,7 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace System.Numerics
+namespace Invicta.Numerics
 {
     public partial struct Matrix3x2
     {
