@@ -1281,7 +1281,7 @@ namespace Invicta.Numerics
                     C6 = Vector128.Shuffle(C6, Vector128.Create(0, 2, 1, 3));
 
                     // Get the determinant
-                    float det = Vector4D.Dot(C0.AsVector4(), row1.AsVector4());
+                    float det = Vector4D.Dot(C0.AsVector4D(), row1.AsVector4D());
 
                     // Check determinate is not zero
                     if (float.Abs(det) < float.Epsilon)
@@ -1300,10 +1300,10 @@ namespace Invicta.Numerics
 
                     Vector128<float> vTemp = Vector128<float>.One / det;
 
-                    result.X = (C0 * vTemp).AsVector4();
-                    result.Y = (C2 * vTemp).AsVector4();
-                    result.Z = (C4 * vTemp).AsVector4();
-                    result.W = (C6 * vTemp).AsVector4();
+                    result.X = (C0 * vTemp).AsVector4D();
+                    result.Y = (C2 * vTemp).AsVector4D();
+                    result.Z = (C4 * vTemp).AsVector4D();
+                    result.W = (C6 * vTemp).AsVector4D();
 
                     return true;
                 }
@@ -1569,10 +1569,10 @@ namespace Invicta.Numerics
                     Vector128<float> upperXZ = AdvSimd.Arm64.ZipHigh(x, z);         // x[2], z[2], x[3], z[3]
                     Vector128<float> upperYW = AdvSimd.Arm64.ZipHigh(y, w);         // y[2], w[2], y[3], z[3]
 
-                    result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4();  // x[0], y[0], z[0], w[0]
-                    result.Y = AdvSimd.Arm64.ZipHigh(lowerXZ, lowerYW).AsVector4(); // x[1], y[1], z[1], w[1]
-                    result.Z = AdvSimd.Arm64.ZipLow(upperXZ, upperYW).AsVector4();  // x[2], y[2], z[2], w[2]
-                    result.W = AdvSimd.Arm64.ZipHigh(upperXZ, upperYW).AsVector4(); // x[3], y[3], z[3], w[3]
+                    result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4D();  // x[0], y[0], z[0], w[0]
+                    result.Y = AdvSimd.Arm64.ZipHigh(lowerXZ, lowerYW).AsVector4D(); // x[1], y[1], z[1], w[1]
+                    result.Z = AdvSimd.Arm64.ZipLow(upperXZ, upperYW).AsVector4D();  // x[2], y[2], z[2], w[2]
+                    result.W = AdvSimd.Arm64.ZipHigh(upperXZ, upperYW).AsVector4D(); // x[3], y[3], z[3], w[3]
                 }
                 else if (Sse.IsSupported)
                 {
@@ -1586,10 +1586,10 @@ namespace Invicta.Numerics
                     Vector128<float> upperXZ = Sse.UnpackHigh(x, z);                // x[2], z[2], x[3], z[3]
                     Vector128<float> upperYW = Sse.UnpackHigh(y, w);                // y[2], w[2], y[3], z[3]
 
-                    result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4();         // x[0], y[0], z[0], w[0]
-                    result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4();        // x[1], y[1], z[1], w[1]
-                    result.Z = Sse.UnpackLow(upperXZ, upperYW).AsVector4();         // x[2], y[2], z[2], w[2]
-                    result.W = Sse.UnpackHigh(upperXZ, upperYW).AsVector4();        // x[3], y[3], z[3], w[3]
+                    result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4D();         // x[0], y[0], z[0], w[0]
+                    result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4D();        // x[1], y[1], z[1], w[1]
+                    result.Z = Sse.UnpackLow(upperXZ, upperYW).AsVector4D();         // x[2], y[2], z[2], w[2]
+                    result.W = Sse.UnpackHigh(upperXZ, upperYW).AsVector4D();        // x[3], y[3], z[3], w[3]
                 }
                 else
                 {

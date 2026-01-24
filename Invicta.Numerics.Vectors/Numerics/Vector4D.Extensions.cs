@@ -80,6 +80,6 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="Vector128.WithElement{T}(Vector128{T}, int, T)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4D WithElement(this Vector4D vector, int index, float value) => vector.AsVector128().WithElement(index, value).AsVector4();
+        public static Vector4D WithElement(this Vector4D vector, int index, float value) => vector.AsVector128().WithElement(index, value).AsVector4D();
     }
 }

@@ -68,7 +68,7 @@ namespace Invicta.Numerics
         /// <param name="d">The distance of the plane along its normal from the origin.</param>
         /// <returns>A <see cref="PlaneD" /> created from the X, Y, and Z components of its normal, and its distance from the origin on that normal.</returns>
         [Intrinsic]
-        public static PlaneD Create(float x, float y, float z, float d) => Vector128.Create(x, y, z, d).AsPlane();
+        public static PlaneD Create(float x, float y, float z, float d) => Vector128.Create(x, y, z, d).AsPlaneD();
 
         /// <summary>Creates a <see cref="PlaneD" /> object that contains three specified points.</summary>
         /// <param name="point1">The first point defining the plane.</param>
@@ -134,7 +134,7 @@ namespace Invicta.Numerics
             return Vector128.AndNot(
                 (value.AsVector128() / Vector128.Sqrt(lengthSquared)),
                 Vector128.Equals(lengthSquared, Vector128.Create(float.PositiveInfinity))
-            ).AsPlane();
+            ).AsPlaneD();
         }
 
         /// <summary>Transforms a normalized plane by a 4x4 matrix.</summary>
