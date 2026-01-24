@@ -36,10 +36,10 @@ namespace Invicta.Numerics
             private const float BillboardMinAngle = 1.0f - (0.1f * (float.Pi / 180.0f)); // 0.1 degrees
             private const float DecomposeEpsilon = 0.0001f;
 
-            public Vector4 X;
-            public Vector4 Y;
-            public Vector4 Z;
-            public Vector4 W;
+            public Vector4D X;
+            public Vector4D Y;
+            public Vector4D Z;
+            public Vector4D W;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl operator +(in Impl left, in Impl right)
@@ -137,7 +137,7 @@ namespace Invicta.Numerics
                 result.X = axisX.AsVector4();
                 result.Y = axisY.AsVector4();
                 result.Z = axisZ.AsVector4();
-                result.W = Vector4.Create(objectPosition, 1);
+                result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
             }
@@ -168,7 +168,7 @@ namespace Invicta.Numerics
                 result.X = axisX.AsVector4();
                 result.Y = axisY.AsVector4();
                 result.Z = axisZ.AsVector4();
-                result.W = Vector4.Create(objectPosition, 1);
+                result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
             }
@@ -229,7 +229,7 @@ namespace Invicta.Numerics
                 result.X = axisX.AsVector4();
                 result.Y = axisY.AsVector4();
                 result.Z = axisZ.AsVector4();
-                result.W = Vector4.Create(objectPosition, 1);
+                result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
             }
@@ -289,7 +289,7 @@ namespace Invicta.Numerics
                 result.X = axisX.AsVector4();
                 result.Y = axisY.AsVector4();
                 result.Z = axisZ.AsVector4();
-                result.W = Vector4.Create(objectPosition, 1);
+                result.W = Vector4D.Create(objectPosition, 1);
 
                 return result;
             }
@@ -317,25 +317,25 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(
+                result.X = Vector4D.Create(
                     1.0f - 2.0f * (yy + zz),
                     2.0f * (xy + wz),
                     2.0f * (xz - wy),
                     0
                 );
-                result.Y = Vector4.Create(
+                result.Y = Vector4D.Create(
                     2.0f * (xy - wz),
                     1.0f - 2.0f * (zz + xx),
                     2.0f * (yz + wx),
                     0
                 );
-                result.Z = Vector4.Create(
+                result.Z = Vector4D.Create(
                     2.0f * (xz + wy),
                     2.0f * (yz - wx),
                     1.0f - 2.0f * (yy + xx),
                     0
                 );
-                result.W = Vector4.UnitW;
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -369,10 +369,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(axisX, Vector3D.Dot(axisX, negativeCameraPosition));
-                result.Y = Vector4.Create(axisY, Vector3D.Dot(axisY, negativeCameraPosition));
-                result.Z = Vector4.Create(axisZ, Vector3D.Dot(axisZ, negativeCameraPosition));
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.Create(axisX, Vector3D.Dot(axisX, negativeCameraPosition));
+                result.Y = Vector4D.Create(axisY, Vector3D.Dot(axisY, negativeCameraPosition));
+                result.Z = Vector4D.Create(axisZ, Vector3D.Dot(axisZ, negativeCameraPosition));
+                result.W = Vector4D.UnitW;
 
                 return Transpose(result);
             }
@@ -387,10 +387,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(2.0f / width, 0, 0, 0);
-                result.Y = Vector4.Create(0, 2.0f / height, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, 0);
-                result.W = Vector4.Create(0, 0, range * zNearPlane, 1);
+                result.X = Vector4D.Create(2.0f / width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, 2.0f / height, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, 0);
+                result.W = Vector4D.Create(0, 0, range * zNearPlane, 1);
 
                 return result;
             }
@@ -405,10 +405,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(2.0f / width, 0, 0, 0);
-                result.Y = Vector4.Create(0, 2.0f / height, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, 0);
-                result.W = Vector4.Create(0, 0, -range * zNearPlane, 1);
+                result.X = Vector4D.Create(2.0f / width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, 2.0f / height, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, 0);
+                result.W = Vector4D.Create(0, 0, -range * zNearPlane, 1);
 
                 return result;
             }
@@ -425,10 +425,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(reciprocalWidth + reciprocalWidth, 0, 0, 0);
-                result.Y = Vector4.Create(0, reciprocalHeight + reciprocalHeight, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, 0);
-                result.W = Vector4.Create(
+                result.X = Vector4D.Create(reciprocalWidth + reciprocalWidth, 0, 0, 0);
+                result.Y = Vector4D.Create(0, reciprocalHeight + reciprocalHeight, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, 0);
+                result.W = Vector4D.Create(
                     -(left + right) * reciprocalWidth,
                     -(top + bottom) * reciprocalHeight,
                     range * zNearPlane,
@@ -450,10 +450,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(reciprocalWidth + reciprocalWidth, 0, 0, 0);
-                result.Y = Vector4.Create(0, reciprocalHeight + reciprocalHeight, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, 0);
-                result.W = Vector4.Create(
+                result.X = Vector4D.Create(reciprocalWidth + reciprocalWidth, 0, 0, 0);
+                result.Y = Vector4D.Create(0, reciprocalHeight + reciprocalHeight, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, 0);
+                result.W = Vector4D.Create(
                     -(left + right) * reciprocalWidth,
                     -(top + bottom) * reciprocalHeight,
                     -range * zNearPlane,
@@ -478,10 +478,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(dblNearPlaneDistance / width, 0, 0, 0);
-                result.Y = Vector4.Create(0, dblNearPlaneDistance / height, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, -1.0f);
-                result.W = Vector4.Create(0, 0, range * nearPlaneDistance, 0);
+                result.X = Vector4D.Create(dblNearPlaneDistance / width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, dblNearPlaneDistance / height, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, -1.0f);
+                result.W = Vector4D.Create(0, 0, range * nearPlaneDistance, 0);
 
                 return result;
             }
@@ -501,10 +501,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(dblNearPlaneDistance / width, 0, 0, 0);
-                result.Y = Vector4.Create(0, dblNearPlaneDistance / height, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, 1.0f);
-                result.W = Vector4.Create(0, 0, -range * nearPlaneDistance, 0);
+                result.X = Vector4D.Create(dblNearPlaneDistance / width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, dblNearPlaneDistance / height, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, 1.0f);
+                result.W = Vector4D.Create(0, 0, -range * nearPlaneDistance, 0);
 
                 return result;
             }
@@ -528,10 +528,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(width, 0, 0, 0);
-                result.Y = Vector4.Create(0, height, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, -1.0f);
-                result.W = Vector4.Create(0, 0, range * nearPlaneDistance, 0);
+                result.X = Vector4D.Create(width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, height, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, -1.0f);
+                result.W = Vector4D.Create(0, 0, range * nearPlaneDistance, 0);
 
                 return result;
             }
@@ -555,10 +555,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(width, 0, 0, 0);
-                result.Y = Vector4.Create(0, height, 0, 0);
-                result.Z = Vector4.Create(0, 0, range, 1.0f);
-                result.W = Vector4.Create(0, 0, -range * nearPlaneDistance, 0);
+                result.X = Vector4D.Create(width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, height, 0, 0);
+                result.Z = Vector4D.Create(0, 0, range, 1.0f);
+                result.W = Vector4D.Create(0, 0, -range * nearPlaneDistance, 0);
 
                 return result;
             }
@@ -580,15 +580,15 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(dblNearPlaneDistance * reciprocalWidth, 0, 0, 0);
-                result.Y = Vector4.Create(0, dblNearPlaneDistance * reciprocalHeight, 0, 0);
-                result.Z = Vector4.Create(
+                result.X = Vector4D.Create(dblNearPlaneDistance * reciprocalWidth, 0, 0, 0);
+                result.Y = Vector4D.Create(0, dblNearPlaneDistance * reciprocalHeight, 0, 0);
+                result.Z = Vector4D.Create(
                     (left + right) * reciprocalWidth,
                     (top + bottom) * reciprocalHeight,
                     range,
                     -1.0f
                 );
-                result.W = Vector4.Create(0, 0, range * nearPlaneDistance, 0);
+                result.W = Vector4D.Create(0, 0, range * nearPlaneDistance, 0);
 
                 return result;
             }
@@ -610,15 +610,15 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(dblNearPlaneDistance * reciprocalWidth, 0, 0, 0);
-                result.Y = Vector4.Create(0, dblNearPlaneDistance * reciprocalHeight, 0, 0);
-                result.Z = Vector4.Create(
+                result.X = Vector4D.Create(dblNearPlaneDistance * reciprocalWidth, 0, 0, 0);
+                result.Y = Vector4D.Create(0, dblNearPlaneDistance * reciprocalHeight, 0, 0);
+                result.Z = Vector4D.Create(
                     -(left + right) * reciprocalWidth,
                     -(top + bottom) * reciprocalHeight,
                     range,
                     1.0f
                 );
-                result.W = Vector4.Create(0, 0, -range * nearPlaneDistance, 0);
+                result.W = Vector4D.Create(0, 0, -range * nearPlaneDistance, 0);
 
                 return result;
             }
@@ -629,15 +629,15 @@ namespace Invicta.Numerics
                 // This implementation is based on the DirectX Math Library XMMatrixReflect method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                Vector4 p = PlaneD.Normalize(value).AsVector4();
-                Vector4 s = p * Vector4.Create(-2.0f, -2.0f, -2.0f, 0.0f);
+                Vector4D p = PlaneD.Normalize(value).AsVector4();
+                Vector4D s = p * Vector4D.Create(-2.0f, -2.0f, -2.0f, 0.0f);
 
                 Impl result;
 
-                result.X = Vector4.MultiplyAddEstimate(Vector4.Create(p.X), s, Vector4.UnitX);
-                result.Y = Vector4.MultiplyAddEstimate(Vector4.Create(p.Y), s, Vector4.UnitY);
-                result.Z = Vector4.MultiplyAddEstimate(Vector4.Create(p.Z), s, Vector4.UnitZ);
-                result.W = Vector4.MultiplyAddEstimate(Vector4.Create(p.W), s, Vector4.UnitW);
+                result.X = Vector4D.MultiplyAddEstimate(Vector4D.Create(p.X), s, Vector4D.UnitX);
+                result.Y = Vector4D.MultiplyAddEstimate(Vector4D.Create(p.Y), s, Vector4D.UnitY);
+                result.Z = Vector4D.MultiplyAddEstimate(Vector4D.Create(p.Z), s, Vector4D.UnitZ);
+                result.W = Vector4D.MultiplyAddEstimate(Vector4D.Create(p.W), s, Vector4D.UnitW);
 
                 return result;
             }
@@ -654,10 +654,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.UnitX;
-                result.Y = Vector4.Create(0, c, s, 0);
-                result.Z = Vector4.Create(0, -s, c, 0);
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.UnitX;
+                result.Y = Vector4D.Create(0, c, s, 0);
+                result.Z = Vector4D.Create(0, -s, c, 0);
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -677,10 +677,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.UnitX;
-                result.Y = Vector4.Create(0, c, s, 0);
-                result.Z = Vector4.Create(0, -s, c, 0);
-                result.W = Vector4.Create(0, y, z, 1);
+                result.X = Vector4D.UnitX;
+                result.Y = Vector4D.Create(0, c, s, 0);
+                result.Z = Vector4D.Create(0, -s, c, 0);
+                result.W = Vector4D.Create(0, y, z, 1);
 
                 return result;
             }
@@ -697,10 +697,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(c, 0, -s, 0);
-                result.Y = Vector4.UnitY;
-                result.Z = Vector4.Create(s, 0, c, 0);
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.Create(c, 0, -s, 0);
+                result.Y = Vector4D.UnitY;
+                result.Z = Vector4D.Create(s, 0, c, 0);
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -720,10 +720,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(c, 0, -s, 0);
-                result.Y = Vector4.UnitY;
-                result.Z = Vector4.Create(s, 0, c, 0);
-                result.W = Vector4.Create(x, 0, z, 1);
+                result.X = Vector4D.Create(c, 0, -s, 0);
+                result.Y = Vector4D.UnitY;
+                result.Z = Vector4D.Create(s, 0, c, 0);
+                result.W = Vector4D.Create(x, 0, z, 1);
 
                 return result;
             }
@@ -740,10 +740,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(c, s, 0, 0);
-                result.Y = Vector4.Create(-s, c, 0, 0);
-                result.Z = Vector4.UnitZ;
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.Create(c, s, 0, 0);
+                result.Y = Vector4D.Create(-s, c, 0, 0);
+                result.Z = Vector4D.UnitZ;
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -763,10 +763,10 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(c, s, 0, 0);
-                result.Y = Vector4.Create(-s, c, 0, 0);
-                result.Z = Vector4.UnitZ;
-                result.W = Vector4.Create(x, y, 0, 1);
+                result.X = Vector4D.Create(c, s, 0, 0);
+                result.Y = Vector4D.Create(-s, c, 0, 0);
+                result.Z = Vector4D.UnitZ;
+                result.W = Vector4D.Create(x, y, 0, 1);
 
                 return result;
             }
@@ -776,10 +776,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Create(scaleX, 0, 0, 0);
-                result.Y = Vector4.Create(0, scaleY, 0, 0);
-                result.Z = Vector4.Create(0, 0, scaleZ, 0);
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.Create(scaleX, 0, 0, 0);
+                result.Y = Vector4D.Create(0, scaleY, 0, 0);
+                result.Z = Vector4D.Create(0, 0, scaleZ, 0);
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -789,10 +789,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Create(scaleX, 0, 0, 0);
-                result.Y = Vector4.Create(0, scaleY, 0, 0);
-                result.Z = Vector4.Create(0, 0, scaleZ, 0);
-                result.W = Vector4.Create(centerPoint * (Vector3D.One - Vector3D.Create(scaleX, scaleY, scaleZ)), 1);
+                result.X = Vector4D.Create(scaleX, 0, 0, 0);
+                result.Y = Vector4D.Create(0, scaleY, 0, 0);
+                result.Z = Vector4D.Create(0, 0, scaleZ, 0);
+                result.W = Vector4D.Create(centerPoint * (Vector3D.One - Vector3D.Create(scaleX, scaleY, scaleZ)), 1);
 
                 return result;
             }
@@ -802,10 +802,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Create(scales.X, 0, 0, 0);
-                result.Y = Vector4.Create(0, scales.Y, 0, 0);
-                result.Z = Vector4.Create(0, 0, scales.Z, 0);
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.Create(scales.X, 0, 0, 0);
+                result.Y = Vector4D.Create(0, scales.Y, 0, 0);
+                result.Z = Vector4D.Create(0, 0, scales.Z, 0);
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -815,10 +815,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Create(scales.X, 0, 0, 0);
-                result.Y = Vector4.Create(0, scales.Y, 0, 0);
-                result.Z = Vector4.Create(0, 0, scales.Z, 0);
-                result.W = Vector4.Create(centerPoint * (Vector3D.One - scales), 1);
+                result.X = Vector4D.Create(scales.X, 0, 0, 0);
+                result.Y = Vector4D.Create(0, scales.Y, 0, 0);
+                result.Z = Vector4D.Create(0, 0, scales.Z, 0);
+                result.W = Vector4D.Create(centerPoint * (Vector3D.One - scales), 1);
 
                 return result;
             }
@@ -828,10 +828,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Create(scale, 0, 0, 0);
-                result.Y = Vector4.Create(0, scale, 0, 0);
-                result.Z = Vector4.Create(0, 0, scale, 0);
-                result.W = Vector4.UnitW;
+                result.X = Vector4D.Create(scale, 0, 0, 0);
+                result.Y = Vector4D.Create(0, scale, 0, 0);
+                result.Z = Vector4D.Create(0, 0, scale, 0);
+                result.W = Vector4D.UnitW;
 
                 return result;
             }
@@ -841,10 +841,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Create(scale, 0, 0, 0);
-                result.Y = Vector4.Create(0, scale, 0, 0);
-                result.Z = Vector4.Create(0, 0, scale, 0);
-                result.W = Vector4.Create(centerPoint * (Vector3D.One - Vector3D.Create(scale)), 1);
+                result.X = Vector4D.Create(scale, 0, 0, 0);
+                result.Y = Vector4D.Create(0, scale, 0, 0);
+                result.Z = Vector4D.Create(0, 0, scale, 0);
+                result.W = Vector4D.Create(centerPoint * (Vector3D.One - Vector3D.Create(scale)), 1);
 
                 return result;
             }
@@ -852,18 +852,18 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl CreateShadow(in Vector3D lightDirection, in PlaneD plane)
             {
-                Vector4 p = PlaneD.Normalize(plane).AsVector4();
-                Vector4 l = lightDirection.AsVector4();
-                float dot = Vector4.Dot(p, l);
+                Vector4D p = PlaneD.Normalize(plane).AsVector4();
+                Vector4D l = lightDirection.AsVector4();
+                float dot = Vector4D.Dot(p, l);
 
                 p = -p;
 
                 Impl result;
 
-                result.X = Vector4.MultiplyAddEstimate(l, Vector4.Create(p.X), Vector4.Create(dot, 0, 0, 0));
-                result.Y = Vector4.MultiplyAddEstimate(l, Vector4.Create(p.Y), Vector4.Create(0, dot, 0, 0));
-                result.Z = Vector4.MultiplyAddEstimate(l, Vector4.Create(p.Z), Vector4.Create(0, 0, dot, 0));
-                result.W = Vector4.MultiplyAddEstimate(l, Vector4.Create(p.W), Vector4.Create(0, 0, 0, dot));
+                result.X = Vector4D.MultiplyAddEstimate(l, Vector4D.Create(p.X), Vector4D.Create(dot, 0, 0, 0));
+                result.Y = Vector4D.MultiplyAddEstimate(l, Vector4D.Create(p.Y), Vector4D.Create(0, dot, 0, 0));
+                result.Z = Vector4D.MultiplyAddEstimate(l, Vector4D.Create(p.Z), Vector4D.Create(0, 0, dot, 0));
+                result.W = Vector4D.MultiplyAddEstimate(l, Vector4D.Create(p.W), Vector4D.Create(0, 0, 0, dot));
 
                 return result;
             }
@@ -873,10 +873,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.UnitX;
-                result.Y = Vector4.UnitY;
-                result.Z = Vector4.UnitZ;
-                result.W = Vector4.Create(position, 1);
+                result.X = Vector4D.UnitX;
+                result.Y = Vector4D.UnitY;
+                result.Z = Vector4D.UnitZ;
+                result.W = Vector4D.Create(position, 1);
 
                 return result;
             }
@@ -886,10 +886,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.UnitX;
-                result.Y = Vector4.UnitY;
-                result.Z = Vector4.UnitZ;
-                result.W = Vector4.Create(positionX, positionY, positionZ, 1);
+                result.X = Vector4D.UnitX;
+                result.Y = Vector4D.UnitY;
+                result.Z = Vector4D.UnitZ;
+                result.W = Vector4D.Create(positionX, positionY, positionZ, 1);
 
                 return result;
             }
@@ -901,13 +901,13 @@ namespace Invicta.Numerics
                 Impl result;
 
                 // 4x SIMD fields to get a lot better codegen
-                result.W = Vector4.Create(width, height, 0f, 0f);
-                result.W *= Vector4.Create(0.5f, 0.5f, 0f, 0f);
+                result.W = Vector4D.Create(width, height, 0f, 0f);
+                result.W *= Vector4D.Create(0.5f, 0.5f, 0f, 0f);
 
-                result.X = Vector4.Create(result.W.X, 0f, 0f, 0f);
-                result.Y = Vector4.Create(0f, -result.W.Y, 0f, 0f);
-                result.Z = Vector4.Create(0f, 0f, minDepth - maxDepth, 0f);
-                result.W += Vector4.Create(x, y, minDepth, 1f);
+                result.X = Vector4D.Create(result.W.X, 0f, 0f, 0f);
+                result.Y = Vector4D.Create(0f, -result.W.Y, 0f, 0f);
+                result.Z = Vector4D.Create(0f, 0f, minDepth - maxDepth, 0f);
+                result.W += Vector4D.Create(x, y, minDepth, 1f);
 
                 return result;
             }
@@ -918,13 +918,13 @@ namespace Invicta.Numerics
                 Impl result;
 
                 // 4x SIMD fields to get a lot better codegen
-                result.W = Vector4.Create(width, height, 0f, 0f);
-                result.W *= Vector4.Create(0.5f, 0.5f, 0f, 0f);
+                result.W = Vector4D.Create(width, height, 0f, 0f);
+                result.W *= Vector4D.Create(0.5f, 0.5f, 0f, 0f);
 
-                result.X = Vector4.Create(result.W.X, 0f, 0f, 0f);
-                result.Y = Vector4.Create(0f, -result.W.Y, 0f, 0f);
-                result.Z = Vector4.Create(0f, 0f, maxDepth - minDepth, 0f);
-                result.W += Vector4.Create(x, y, minDepth, 1f);
+                result.X = Vector4D.Create(result.W.X, 0f, 0f, 0f);
+                result.Y = Vector4D.Create(0f, -result.W.Y, 0f, 0f);
+                result.Z = Vector4D.Create(0f, 0f, maxDepth - minDepth, 0f);
+                result.W += Vector4D.Create(x, y, minDepth, 1f);
 
                 return result;
             }
@@ -941,7 +941,7 @@ namespace Invicta.Numerics
                 result.X = axisX.AsVector4();
                 result.Y = axisY.AsVector4();
                 result.Z = axisZ.AsVector4();
-                result.W = Vector4.Create(position, 1);
+                result.W = Vector4D.Create(position, 1);
 
                 return result;
             }
@@ -1281,12 +1281,12 @@ namespace Invicta.Numerics
                     C6 = Vector128.Shuffle(C6, Vector128.Create(0, 2, 1, 3));
 
                     // Get the determinant
-                    float det = Vector4.Dot(C0.AsVector4(), row1.AsVector4());
+                    float det = Vector4D.Dot(C0.AsVector4(), row1.AsVector4());
 
                     // Check determinate is not zero
                     if (float.Abs(det) < float.Epsilon)
                     {
-                        Vector4 vNaN = Vector4.Create(float.NaN);
+                        Vector4D vNaN = Vector4D.Create(float.NaN);
 
                         result.X = vNaN;
                         result.Y = vNaN;
@@ -1424,7 +1424,7 @@ namespace Invicta.Numerics
 
                     if (float.Abs(det) < float.Epsilon)
                     {
-                        Vector4 vNaN = Vector4.Create(float.NaN);
+                        Vector4D vNaN = Vector4D.Create(float.NaN);
 
                         result.X = vNaN;
                         result.Y = vNaN;
@@ -1479,10 +1479,10 @@ namespace Invicta.Numerics
             {
                 Impl result;
 
-                result.X = Vector4.Lerp(left.X, right.X, amount);
-                result.Y = Vector4.Lerp(left.Y, right.Y, amount);
-                result.Z = Vector4.Lerp(left.Z, right.Z, amount);
-                result.W = Vector4.Lerp(left.W, right.W, amount);
+                result.X = Vector4D.Lerp(left.X, right.X, amount);
+                result.Y = Vector4D.Lerp(left.Y, right.Y, amount);
+                result.Z = Vector4D.Lerp(left.Z, right.Z, amount);
+                result.W = Vector4D.Lerp(left.W, right.W, amount);
 
                 return result;
             }
@@ -1521,25 +1521,25 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                result.X = Vector4.Create(
+                result.X = Vector4D.Create(
                     value.X.X * q11 + value.X.Y * q21 + value.X.Z * q31,
                     value.X.X * q12 + value.X.Y * q22 + value.X.Z * q32,
                     value.X.X * q13 + value.X.Y * q23 + value.X.Z * q33,
                     value.X.W
                 );
-                result.Y = Vector4.Create(
+                result.Y = Vector4D.Create(
                     value.Y.X * q11 + value.Y.Y * q21 + value.Y.Z * q31,
                     value.Y.X * q12 + value.Y.Y * q22 + value.Y.Z * q32,
                     value.Y.X * q13 + value.Y.Y * q23 + value.Y.Z * q33,
                     value.Y.W
                 );
-                result.Z = Vector4.Create(
+                result.Z = Vector4D.Create(
                     value.Z.X * q11 + value.Z.Y * q21 + value.Z.Z * q31,
                     value.Z.X * q12 + value.Z.Y * q22 + value.Z.Z * q32,
                     value.Z.X * q13 + value.Z.Y * q23 + value.Z.Z * q33,
                     value.Z.W
                 );
-                result.W = Vector4.Create(
+                result.W = Vector4D.Create(
                     value.W.X * q11 + value.W.Y * q21 + value.W.Z * q31,
                     value.W.X * q12 + value.W.Y * q22 + value.W.Z * q32,
                     value.W.X * q13 + value.W.Y * q23 + value.W.Z * q33,
@@ -1593,10 +1593,10 @@ namespace Invicta.Numerics
                 }
                 else
                 {
-                    result.X = Vector4.Create(matrix.X.X, matrix.Y.X, matrix.Z.X, matrix.W.X);
-                    result.Y = Vector4.Create(matrix.X.Y, matrix.Y.Y, matrix.Z.Y, matrix.W.Y);
-                    result.Z = Vector4.Create(matrix.X.Z, matrix.Y.Z, matrix.Z.Z, matrix.W.Z);
-                    result.W = Vector4.Create(matrix.X.W, matrix.Y.W, matrix.Z.W, matrix.W.W);
+                    result.X = Vector4D.Create(matrix.X.X, matrix.Y.X, matrix.Z.X, matrix.W.X);
+                    result.Y = Vector4D.Create(matrix.X.Y, matrix.Y.Y, matrix.Z.Y, matrix.W.Y);
+                    result.Z = Vector4D.Create(matrix.X.Z, matrix.Y.Z, matrix.Z.Z, matrix.W.Z);
+                    result.W = Vector4D.Create(matrix.X.W, matrix.Y.W, matrix.Z.W, matrix.W.W);
                 }
 
                 return result;

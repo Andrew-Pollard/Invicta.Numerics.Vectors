@@ -41,25 +41,25 @@ namespace Invicta.Numerics
         }
 
         /// <summary>Initializes a <see cref="PlaneD" /> from a specified four-dimensional vector.</summary>
-        /// <param name="value">A vector whose first three elements describe the normal vector, and whose <see cref="Vector4.W" /> defines the distance along that normal from the origin.</param>
+        /// <param name="value">A vector whose first three elements describe the normal vector, and whose <see cref="Vector4D.W" /> defines the distance along that normal from the origin.</param>
         [Intrinsic]
-        public PlaneD(Vector4 value)
+        public PlaneD(Vector4D value)
         {
             this = value.AsPlane();
         }
 
         /// <summary>Creates a <see cref="PlaneD" /> from a specified four-dimensional vector.</summary>
-        /// <param name="value">A vector whose first three elements describe the normal vector, and whose <see cref="Vector4.W" /> defines the distance along that normal from the origin.</param>
+        /// <param name="value">A vector whose first three elements describe the normal vector, and whose <see cref="Vector4D.W" /> defines the distance along that normal from the origin.</param>
         /// <remarks>A <see cref="PlaneD" /> created using <paramref name="value" />.</remarks>
         [Intrinsic]
-        public static PlaneD Create(Vector4 value) => value.AsPlane();
+        public static PlaneD Create(Vector4D value) => value.AsPlane();
 
         /// <summary>Creates a <see cref="PlaneD" /> from a specified normal and the distance along the normal from the origin.</summary>
         /// <param name="normal">The plane's normal vector.</param>
         /// <param name="d">The plane's distance from the origin along its normal vector.</param>\
         /// <returns>A <see cref="PlaneD" /> created from a specified normal and the distance along the normal from the origin.</returns>
         [Intrinsic]
-        public static PlaneD Create(Vector3D normal, float d) => Vector4.Create(normal, d).AsPlane();
+        public static PlaneD Create(Vector3D normal, float d) => Vector4D.Create(normal, d).AsPlane();
 
         /// <summary>Creates a <see cref="PlaneD" /> from the X, Y, and Z components of its normal, and its distance from the origin on that normal.</summary>
         /// <param name="x">The X component of the normal.</param>
@@ -95,7 +95,7 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(PlaneD plane, Vector4 value) => Vector128.Dot(plane.AsVector128(), value.AsVector128());
+        public static float Dot(PlaneD plane, Vector4D value) => Vector128.Dot(plane.AsVector128(), value.AsVector128());
 
         /// <summary>Returns the dot product of a specified three-dimensional vector and the normal vector of this plane plus the distance (<see cref="D" />) value of the plane.</summary>
         /// <param name="plane">The plane.</param>
@@ -106,7 +106,7 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMPlaneDotCoord method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            return Dot(plane, Vector4.Create(value, 1.0f));
+            return Dot(plane, Vector4D.Create(value, 1.0f));
         }
 
         /// <summary>Returns the dot product of a specified three-dimensional vector and the <see cref="Normal" /> vector of this plane.</summary>
@@ -146,7 +146,7 @@ namespace Invicta.Numerics
         public static PlaneD Transform(PlaneD plane, Matrix4x4D matrix)
         {
             Matrix4x4D.Invert(matrix, out Matrix4x4D inverseMatrix);
-            return Vector4.Transform(plane.AsVector4(), Matrix4x4D.Transpose(inverseMatrix)).AsPlane();
+            return Vector4D.Transform(plane.AsVector4(), Matrix4x4D.Transpose(inverseMatrix)).AsPlane();
         }
 
         /// <summary>Transforms a normalized plane by a QuaternionD rotation.</summary>
@@ -155,7 +155,7 @@ namespace Invicta.Numerics
         /// <returns>A new plane that results from applying the QuaternionD rotation.</returns>
         /// <remarks><paramref name="plane" /> must already be normalized so that its <see cref="Normal" /> vector is of unit length before this method is called.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PlaneD Transform(PlaneD plane, QuaternionD rotation) => Vector4.Transform(plane.AsVector4(), rotation).AsPlane();
+        public static PlaneD Transform(PlaneD plane, QuaternionD rotation) => Vector4D.Transform(plane.AsVector4(), rotation).AsPlane();
 
         /// <summary>Returns a value that indicates whether two planes are equal.</summary>
         /// <param name="value1">The first plane to compare.</param>

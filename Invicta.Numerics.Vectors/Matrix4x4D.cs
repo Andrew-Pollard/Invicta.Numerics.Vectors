@@ -16,7 +16,7 @@ namespace Invicta.Numerics
         internal const int RowCount = 4;
         internal const int ColumnCount = 4;
 
-        // In an ideal world, we'd have 4x Vector4 fields. However, Matrix4x4D was shipped with
+        // In an ideal world, we'd have 4x Vector4D fields. However, Matrix4x4D was shipped with
         // 16x public float fields and as such we cannot change the "backing" fields without it being
         // a breaking change. Likewise, we cannot switch to using something like ExplicitLayout
         // without it pessimizing other parts of the JIT and still preventing things like field promotion.
@@ -122,7 +122,7 @@ namespace Invicta.Numerics
 
         /// <summary>Initializes a <see cref="Matrix4x4D" /> using the specified <see cref="Matrix3x2D" />.</summary>
         /// <param name="value">The <see cref="Matrix3x2D" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
-        /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4.UnitZ" />.</remarks>
+        /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4D.UnitZ" />.</remarks>
         public Matrix4x4D(Matrix3x2D value)
         {
             this = Create(value);
@@ -133,7 +133,7 @@ namespace Invicta.Numerics
         public static Matrix4x4D Identity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Create(Vector4.UnitX, Vector4.UnitY, Vector4.UnitZ, Vector4.UnitW);
+            get => Create(Vector4D.UnitX, Vector4D.UnitY, Vector4D.UnitZ, Vector4D.UnitW);
         }
 
         /// <summary>Indicates whether the current matrix is the identity matrix.</summary>
@@ -141,10 +141,10 @@ namespace Invicta.Numerics
         public readonly bool IsIdentity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (X == Vector4.UnitX)
-                && (Y == Vector4.UnitY)
-                && (Z == Vector4.UnitZ)
-                && (W == Vector4.UnitW);
+            get => (X == Vector4D.UnitX)
+                && (Y == Vector4D.UnitY)
+                && (Z == Vector4D.UnitZ)
+                && (W == Vector4D.UnitW);
         }
 
         /// <summary>Gets or sets the translation component of this matrix.</summary>
@@ -155,12 +155,12 @@ namespace Invicta.Numerics
             readonly get => W.AsVector3();
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => W = Vector4.Create(value, W.W);
+            set => W = Vector4D.Create(value, W.W);
         }
 
         /// <summary>Gets or sets the first row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M11" />, <see cref="M12" />, <see cref="M13" />, and <see cref="M14" />; it exists at index: <c>[0]</c>.</remarks>
-        public Vector4 X
+        public Vector4D X
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().X;
@@ -171,7 +171,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the second row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M21" />, <see cref="M22" />, <see cref="M23" />, and <see cref="M24" />; it exists at index: <c>[1]</c>.</remarks>
-        public Vector4 Y
+        public Vector4D Y
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().Y;
@@ -182,7 +182,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the third row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M31" />, <see cref="M32" />, <see cref="M33" />, and <see cref="M34" />; it exists at index: <c>[2]</c>.</remarks>
-        public Vector4 Z
+        public Vector4D Z
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().Z;
@@ -193,7 +193,7 @@ namespace Invicta.Numerics
 
         /// <summary>Gets or sets the fourth row of the matrix.</summary>
         /// <remarks>This row comprises <see cref="M41" />, <see cref="M42" />, <see cref="M43" />, and <see cref="M44" />; it exists at index: <c>[3]</c>.</remarks>
-        public Vector4 W
+        public Vector4D W
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => AsROImpl().W;
@@ -206,7 +206,7 @@ namespace Invicta.Numerics
         /// <param name="row">The index of the row to get or set.</param>
         /// <returns>The row that at index: [<paramref name="row" />].</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="row" /> was less than zero or greater than or equal to the number of rows (<c>4</c>).</exception>
-        public Vector4 this[int row]
+        public Vector4D this[int row]
         {
             // When row is a known constant, we can use a switch to get
             // optimal codegen as we are likely coming from register.
@@ -460,10 +460,10 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Matrix4x4D.op_Multiply" /> method defines the operation of the multiplication operator for <see cref="Matrix4x4D" /> objects.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4D operator *(Matrix4x4D value1, Matrix4x4D value2) => Create(
-            Vector4.Transform(value1.X, value2),
-            Vector4.Transform(value1.Y, value2),
-            Vector4.Transform(value1.Z, value2),
-            Vector4.Transform(value1.W, value2)
+            Vector4D.Transform(value1.X, value2),
+            Vector4D.Transform(value1.Y, value2),
+            Vector4D.Transform(value1.Z, value2),
+            Vector4D.Transform(value1.W, value2)
         );
 
         /// <summary>Multiplies a matrix by a float to compute the product.</summary>
@@ -503,25 +503,25 @@ namespace Invicta.Numerics
         /// <param name="value">The value to assign to all 16 elements.</param>
         /// <returns>A <see cref="Matrix4x4D" /> whose 16 elements are set to <paramref name="value" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Create(float value) => Create(Vector4.Create(value));
+        public static Matrix4x4D Create(float value) => Create(Vector4D.Create(value));
 
         /// <summary>Creates a <see cref="Matrix4x4D" /> from the specified <see cref="Matrix3x2D" />.</summary>
         /// <param name="value">The <see cref="Matrix3x2D" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
         /// <returns>A <see cref="Matrix4x4D" /> that was initialized using the elements from <paramref name="value" />.</returns>
-        /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4.UnitZ" />.</remarks>
+        /// <remarks>The last two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" /> are initialized to zero; while <see cref="Z" /> is initialized to <see cref="Vector4D.UnitZ" />.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4D Create(Matrix3x2D value) => Create(
             value.X.AsVector4(),
             value.Y.AsVector4(),
-            Vector4.UnitZ,
-            Vector4.Create(value.Z, 0, 1)
+            Vector4D.UnitZ,
+            Vector4D.Create(value.Z, 0, 1)
         );
 
         /// <summary>Creates a <see cref="Matrix4x4D" /> whose 4 rows are set to the specified value.</summary>
         /// <param name="value">The value to assign to all 4 rows.</param>
         /// <returns>A <see cref="Matrix4x4D" /> whose 4 rows are set to <paramref name="value" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Create(Vector4 value) => Create(value, value, value, value);
+        public static Matrix4x4D Create(Vector4D value) => Create(value, value, value, value);
 
         /// <summary>Creates a <see cref="Matrix4x4D" /> from the specified rows.</summary>
         /// <param name="x">The value to assign to <see cref="X" />.</param>
@@ -530,7 +530,7 @@ namespace Invicta.Numerics
         /// <param name="w">The value to assign to <see cref="W" />.</param>
         /// <returns>A <see cref="Matrix4x4D" /> whose rows are set to the specified values.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Create(Vector4 x, Vector4 y, Vector4 z, Vector4 w)
+        public static Matrix4x4D Create(Vector4D x, Vector4D y, Vector4D z, Vector4D w)
         {
             Unsafe.SkipInit(out Matrix4x4D result);
 
@@ -565,10 +565,10 @@ namespace Invicta.Numerics
                                        float m21, float m22, float m23, float m24,
                                        float m31, float m32, float m33, float m34,
                                        float m41, float m42, float m43, float m44) => Create(
-            Vector4.Create(m11, m12, m13, m14),
-            Vector4.Create(m21, m22, m23, m24),
-            Vector4.Create(m31, m32, m33, m34),
-            Vector4.Create(m41, m42, m43, m44)
+            Vector4D.Create(m11, m12, m13, m14),
+            Vector4D.Create(m21, m22, m23, m24),
+            Vector4D.Create(m31, m32, m33, m34),
+            Vector4D.Create(m41, m42, m43, m44)
         );
 
         /// <summary>Creates a right-handed spherical billboard matrix that rotates around a specified object position.</summary>
@@ -1065,7 +1065,7 @@ namespace Invicta.Numerics
         /// <returns>The row at index: [<paramref name="index" />].</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than or equal to the number of rows (<c>4</c>).</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Vector4 GetRow(int index) => this[index];
+        public readonly Vector4D GetRow(int index) => this[index];
 
         /// <summary>Returns the hash code for this instance.</summary>
         /// <returns>The hash code.</returns>
@@ -1103,7 +1103,7 @@ namespace Invicta.Numerics
         /// <returns>A <see cref="Matrix4x4D" /> with the value of the row at index: [<paramref name="index"/>] set to <paramref name="value" /> and the remaining rows set to the same value as that in the current matrix.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than or equal to the number of rows (<c>4</c>).</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Matrix4x4D WithRow(int index, Vector4 value)
+        public readonly Matrix4x4D WithRow(int index, Vector4D value)
         {
             Matrix4x4D result = this;
             result[index] = value;

@@ -68,70 +68,70 @@ namespace Invicta.Numerics
             this = Create(values);
         }
 
-        /// <inheritdoc cref="Vector4.AllBitsSet" />
+        /// <inheritdoc cref="Vector4D.AllBitsSet" />
         public static Vector2D AllBitsSet
         {
             [Intrinsic]
             get => Vector128<float>.AllBitsSet.AsVector2();
         }
 
-        /// <inheritdoc cref="Vector4.E" />
+        /// <inheritdoc cref="Vector4D.E" />
         public static Vector2D E
         {
             [Intrinsic]
             get => Create(float.E);
         }
 
-        /// <inheritdoc cref="Vector4.Epsilon" />
+        /// <inheritdoc cref="Vector4D.Epsilon" />
         public static Vector2D Epsilon
         {
             [Intrinsic]
             get => Create(float.Epsilon);
         }
 
-        /// <inheritdoc cref="Vector4.NaN" />
+        /// <inheritdoc cref="Vector4D.NaN" />
         public static Vector2D NaN
         {
             [Intrinsic]
             get => Create(float.NaN);
         }
 
-        /// <inheritdoc cref="Vector4.NegativeInfinity" />
+        /// <inheritdoc cref="Vector4D.NegativeInfinity" />
         public static Vector2D NegativeInfinity
         {
             [Intrinsic]
             get => Create(float.NegativeInfinity);
         }
 
-        /// <inheritdoc cref="Vector4.NegativeZero" />
+        /// <inheritdoc cref="Vector4D.NegativeZero" />
         public static Vector2D NegativeZero
         {
             [Intrinsic]
             get => Create(float.NegativeZero);
         }
 
-        /// <inheritdoc cref="Vector4.One" />
+        /// <inheritdoc cref="Vector4D.One" />
         public static Vector2D One
         {
             [Intrinsic]
             get => Create(1.0f);
         }
 
-        /// <inheritdoc cref="Vector4.Pi" />
+        /// <inheritdoc cref="Vector4D.Pi" />
         public static Vector2D Pi
         {
             [Intrinsic]
             get => Create(float.Pi);
         }
 
-        /// <inheritdoc cref="Vector4.PositiveInfinity" />
+        /// <inheritdoc cref="Vector4D.PositiveInfinity" />
         public static Vector2D PositiveInfinity
         {
             [Intrinsic]
             get => Create(float.PositiveInfinity);
         }
 
-        /// <inheritdoc cref="Vector4.Tau" />
+        /// <inheritdoc cref="Vector4D.Tau" />
         public static Vector2D Tau
         {
             [Intrinsic]
@@ -154,7 +154,7 @@ namespace Invicta.Numerics
             get => Create(0.0f, 1.0f);
         }
 
-        /// <inheritdoc cref="Vector4.Zero" />
+        /// <inheritdoc cref="Vector4D.Zero" />
         public static Vector2D Zero
         {
             [Intrinsic]
@@ -263,42 +263,42 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator -(Vector2D value) => (-value.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_BitwiseAnd(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.op_BitwiseAnd(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator &(Vector2D left, Vector2D right) => (left.AsVector128Unsafe() & right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_BitwiseOr(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.op_BitwiseOr(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator |(Vector2D left, Vector2D right) => (left.AsVector128Unsafe() | right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_ExclusiveOr(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.op_ExclusiveOr(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator ^(Vector2D left, Vector2D right) => (left.AsVector128Unsafe() ^ right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_LeftShift(Vector4, int)" />
+        /// <inheritdoc cref="Vector4D.op_LeftShift(Vector4D, int)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator <<(Vector2D value, int shiftAmount) => (value.AsVector128Unsafe() << shiftAmount).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_OnesComplement(Vector4)" />
+        /// <inheritdoc cref="Vector4D.op_OnesComplement(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator ~(Vector2D value) => (~value.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_RightShift(Vector4, int)" />
+        /// <inheritdoc cref="Vector4D.op_RightShift(Vector4D, int)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator >>(Vector2D value, int shiftAmount) => (value.AsVector128Unsafe() >> shiftAmount).AsVector2();
 
-        /// <inheritdoc cref="Vector4.op_UnaryPlus(Vector4)" />
+        /// <inheritdoc cref="Vector4D.op_UnaryPlus(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator +(Vector2D value) => value;
 
-        /// <inheritdoc cref="Vector4.op_UnsignedRightShift(Vector4, int)" />
+        /// <inheritdoc cref="Vector4D.op_UnsignedRightShift(Vector4D, int)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D operator >>>(Vector2D value, int shiftAmount) => (value.AsVector128Unsafe() >>> shiftAmount).AsVector2();
@@ -317,69 +317,69 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector2D Add(Vector2D left, Vector2D right) => left + right;
 
-        /// <inheritdoc cref="Vector4.All(Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.All(Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool All(Vector2D vector, float value) => Vector128.All(vector, value);
 
-        /// <inheritdoc cref="Vector4.AllWhereAllBitsSet(Vector4)" />
+        /// <inheritdoc cref="Vector4D.AllWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool AllWhereAllBitsSet(Vector2D vector) => Vector128.AllWhereAllBitsSet(vector);
 
-        /// <inheritdoc cref="Vector4.AndNot(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.AndNot(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D AndNot(Vector2D left, Vector2D right) => Vector128.AndNot(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Any(Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.Any(Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Any(Vector2D vector, float value) => Vector128.Any(vector, value);
 
-        /// <inheritdoc cref="Vector4.AnyWhereAllBitsSet(Vector4)" />
+        /// <inheritdoc cref="Vector4D.AnyWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool AnyWhereAllBitsSet(Vector2D vector) => Vector128.AnyWhereAllBitsSet(vector);
 
-        /// <inheritdoc cref="Vector4.BitwiseAnd(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.BitwiseAnd(Vector4D, Vector4D)" />
         [Intrinsic]
         public static Vector2D BitwiseAnd(Vector2D left, Vector2D right) => left & right;
 
-        /// <inheritdoc cref="Vector4.BitwiseOr(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.BitwiseOr(Vector4D, Vector4D)" />
         [Intrinsic]
         public static Vector2D BitwiseOr(Vector2D left, Vector2D right) => left | right;
 
-        /// <inheritdoc cref="Vector4.Clamp(Vector4, Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Clamp(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Clamp(Vector2D value1, Vector2D min, Vector2D max) => Vector128.Clamp(value1.AsVector128Unsafe(), min.AsVector128Unsafe(), max.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.ClampNative(Vector4, Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.ClampNative(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D ClampNative(Vector2D value1, Vector2D min, Vector2D max) => Vector128.ClampNative(value1.AsVector128Unsafe(), min.AsVector128Unsafe(), max.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.ConditionalSelect(Vector4, Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.ConditionalSelect(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D ConditionalSelect(Vector2D condition, Vector2D left, Vector2D right) => Vector128.ConditionalSelect(condition.AsVector128Unsafe(), left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.CopySign(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.CopySign(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D CopySign(Vector2D value, Vector2D sign) => Vector128.CopySign(value.AsVector128Unsafe(), sign.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Cos(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Cos(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Cos(Vector2D vector) => Vector128.Cos(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Count(Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.Count(Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Count(Vector2D vector, float value) => Vector128.Count(vector, value);
 
-        /// <inheritdoc cref="Vector4.CountWhereAllBitsSet(Vector4)" />
+        /// <inheritdoc cref="Vector4D.CountWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountWhereAllBitsSet(Vector2D vector) => Vector128.CountWhereAllBitsSet(vector);
@@ -447,7 +447,7 @@ namespace Invicta.Numerics
             return (mul - Vector128.Shuffle(mul, Vector128.Create(1, 0, 1, 0))).ToScalar();
         }
 
-        /// <inheritdoc cref="Vector4.DegreesToRadians(Vector4)" />
+        /// <inheritdoc cref="Vector4D.DegreesToRadians(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D DegreesToRadians(Vector2D degrees) => Vector128.DegreesToRadians(degrees.AsVector128Unsafe()).AsVector2();
@@ -488,21 +488,21 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector2D value1, Vector2D value2) => Vector128.Dot(value1.AsVector128(), value2.AsVector128());
 
-        /// <inheritdoc cref="Vector4.Exp(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Exp(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Exp(Vector2D vector) => Vector128.Exp(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Equals(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Equals(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Equals(Vector2D left, Vector2D right) => Vector128.Equals(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.EqualsAll(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.EqualsAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool EqualsAll(Vector2D left, Vector2D right) => Vector128.EqualsAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.EqualsAny(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.EqualsAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool EqualsAny(Vector2D left, Vector2D right) => Vector128.EqualsAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
@@ -512,172 +512,172 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D FusedMultiplyAdd(Vector2D left, Vector2D right, Vector2D addend) => Vector128.FusedMultiplyAdd(left.AsVector128Unsafe(), right.AsVector128Unsafe(), addend.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.GreaterThan(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.GreaterThan(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D GreaterThan(Vector2D left, Vector2D right) => Vector128.GreaterThan(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.GreaterThanAll(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.GreaterThanAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanAll(Vector2D left, Vector2D right) => Vector128.GreaterThanAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.GreaterThanAny(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.GreaterThanAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanAny(Vector2D left, Vector2D right) => Vector128.GreaterThanAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.GreaterThanOrEqual(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.GreaterThanOrEqual(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D GreaterThanOrEqual(Vector2D left, Vector2D right) => Vector128.GreaterThanOrEqual(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.GreaterThanOrEqualAll(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.GreaterThanOrEqualAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanOrEqualAll(Vector2D left, Vector2D right) => Vector128.GreaterThanOrEqualAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.GreaterThanOrEqualAny(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.GreaterThanOrEqualAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanOrEqualAny(Vector2D left, Vector2D right) => Vector128.GreaterThanOrEqualAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.Hypot(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Hypot(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Hypot(Vector2D x, Vector2D y) => Vector128.Hypot(x.AsVector128Unsafe(), y.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IndexOf(Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.IndexOf(Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int IndexOf(Vector2D vector, float value) => Vector128.IndexOf(vector, value);
 
-        /// <inheritdoc cref="Vector4.IndexOfWhereAllBitsSet(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IndexOfWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int IndexOfWhereAllBitsSet(Vector2D vector) => Vector128.IndexOfWhereAllBitsSet(vector);
 
-        /// <inheritdoc cref="Vector4.IsEvenInteger(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsEvenInteger(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsEvenInteger(Vector2D vector) => Vector128.IsEvenInteger(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsFinite(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsFinite(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsFinite(Vector2D vector) => Vector128.IsFinite(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsInfinity(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsInfinity(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsInfinity(Vector2D vector) => Vector128.IsInfinity(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsInteger(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsInteger(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsInteger(Vector2D vector) => Vector128.IsInteger(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsNaN(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsNaN(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsNaN(Vector2D vector) => Vector128.IsNaN(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsNegative(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsNegative(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsNegative(Vector2D vector) => Vector128.IsNegative(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsNegativeInfinity(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsNegativeInfinity(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsNegativeInfinity(Vector2D vector) => Vector128.IsNegativeInfinity(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsNormal(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsNormal(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsNormal(Vector2D vector) => Vector128.IsNormal(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsOddInteger(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsOddInteger(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsOddInteger(Vector2D vector) => Vector128.IsOddInteger(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsPositive(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsPositive(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsPositive(Vector2D vector) => Vector128.IsPositive(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsPositiveInfinity(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsPositiveInfinity(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsPositiveInfinity(Vector2D vector) => Vector128.IsPositiveInfinity(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsSubnormal(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsSubnormal(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsSubnormal(Vector2D vector) => Vector128.IsSubnormal(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.IsZero(Vector4)" />
+        /// <inheritdoc cref="Vector4D.IsZero(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D IsZero(Vector2D vector) => Vector128.IsZero(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.LastIndexOf(Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.LastIndexOf(Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LastIndexOf(Vector2D vector, float value) => Vector128.LastIndexOf(vector, value);
 
-        /// <inheritdoc cref="Vector4.LastIndexOfWhereAllBitsSet(Vector4)" />
+        /// <inheritdoc cref="Vector4D.LastIndexOfWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LastIndexOfWhereAllBitsSet(Vector2D vector) => Vector128.LastIndexOfWhereAllBitsSet(vector);
 
-        /// <inheritdoc cref="Vector4.Lerp(Vector4, Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Lerp(Vector2D value1, Vector2D value2, float amount) => Lerp(value1, value2, Create(amount));
 
-        /// <inheritdoc cref="Vector4.Lerp(Vector4, Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Lerp(Vector2D value1, Vector2D value2, Vector2D amount) => Vector128.Lerp(value1.AsVector128Unsafe(), value2.AsVector128Unsafe(), amount.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.LessThan(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.LessThan(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D LessThan(Vector2D left, Vector2D right) => Vector128.LessThan(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.LessThanAll(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.LessThanAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool LessThanAll(Vector2D left, Vector2D right) => Vector128.LessThanAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.LessThanAny(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.LessThanAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool LessThanAny(Vector2D left, Vector2D right) => Vector128.LessThanAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.LessThanOrEqual(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.LessThanOrEqual(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D LessThanOrEqual(Vector2D left, Vector2D right) => Vector128.LessThanOrEqual(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.LessThanOrEqualAll(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.LessThanOrEqualAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool LessThanOrEqualAll(Vector2D left, Vector2D right) => Vector128.LessThanOrEqualAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.LessThanOrEqualAny(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.LessThanOrEqualAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool LessThanOrEqualAny(Vector2D left, Vector2D right) => Vector128.LessThanOrEqualAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4.Load(float*)" />
+        /// <inheritdoc cref="Vector4D.Load(float*)" />
         [Intrinsic]
         [CLSCompliant(false)]
         public static unsafe Vector2D Load(float* source) => LoadUnsafe(in *source);
 
-        /// <inheritdoc cref="Vector4.LoadAligned(float*)" />
+        /// <inheritdoc cref="Vector4D.LoadAligned(float*)" />
         [Intrinsic]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -691,7 +691,7 @@ namespace Invicta.Numerics
             return *(Vector2D*)source;
         }
 
-        /// <inheritdoc cref="Vector4.LoadAlignedNonTemporal(float*)" />
+        /// <inheritdoc cref="Vector4D.LoadAlignedNonTemporal(float*)" />
         [Intrinsic]
         [CLSCompliant(false)]
         public static unsafe Vector2D LoadAlignedNonTemporal(float* source) => LoadAligned(source);
@@ -705,7 +705,7 @@ namespace Invicta.Numerics
             return Unsafe.ReadUnaligned<Vector2D>(in address);
         }
 
-        /// <inheritdoc cref="Vector4.LoadUnsafe(ref readonly float, nuint)" />
+        /// <inheritdoc cref="Vector4D.LoadUnsafe(ref readonly float, nuint)" />
         [Intrinsic]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -715,60 +715,60 @@ namespace Invicta.Numerics
             return Unsafe.ReadUnaligned<Vector2D>(in address);
         }
 
-        /// <inheritdoc cref="Vector4.Log(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Log(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D Log(Vector2D vector) => Vector128.Log(Vector4.Create(vector, 1.0f, 1.0f).AsVector128()).AsVector2();
+        public static Vector2D Log(Vector2D vector) => Vector128.Log(Vector4D.Create(vector, 1.0f, 1.0f).AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Log2(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Log2(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D Log2(Vector2D vector) => Vector128.Log2(Vector4.Create(vector, 1.0f, 1.0f).AsVector128()).AsVector2();
+        public static Vector2D Log2(Vector2D vector) => Vector128.Log2(Vector4D.Create(vector, 1.0f, 1.0f).AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Max(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Max(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Max(Vector2D value1, Vector2D value2) => Vector128.Max(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MaxMagnitude(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MaxMagnitude(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MaxMagnitude(Vector2D value1, Vector2D value2) => Vector128.MaxMagnitude(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MaxMagnitudeNumber(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MaxMagnitudeNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MaxMagnitudeNumber(Vector2D value1, Vector2D value2) => Vector128.MaxMagnitudeNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MaxNative(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MaxNative(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MaxNative(Vector2D value1, Vector2D value2) => Vector128.MaxNative(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MaxNumber(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MaxNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MaxNumber(Vector2D value1, Vector2D value2) => Vector128.MaxNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Min(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Min(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Min(Vector2D value1, Vector2D value2) => Vector128.Min(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MinMagnitude(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MinMagnitude(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MinMagnitude(Vector2D value1, Vector2D value2) => Vector128.MinMagnitude(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MinMagnitudeNumber(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MinMagnitudeNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MinMagnitudeNumber(Vector2D value1, Vector2D value2) => Vector128.MinMagnitudeNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MinNative(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MinNative(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MinNative(Vector2D value1, Vector2D value2) => Vector128.MinNative(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.MinNumber(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.MinNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D MinNumber(Vector2D value1, Vector2D value2) => Vector128.MinNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector2();
@@ -805,12 +805,12 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector2D Negate(Vector2D value) => -value;
 
-        /// <inheritdoc cref="Vector4.None(Vector4, float)" />
+        /// <inheritdoc cref="Vector4D.None(Vector4D, float)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool None(Vector2D vector, float value) => Vector128.None(vector, value);
 
-        /// <inheritdoc cref="Vector4.NoneWhereAllBitsSet(Vector4)" />
+        /// <inheritdoc cref="Vector4D.NoneWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool NoneWhereAllBitsSet(Vector2D vector) => Vector128.NoneWhereAllBitsSet(vector);
@@ -821,11 +821,11 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector2D Normalize(Vector2D value) => value / value.Length();
 
-        /// <inheritdoc cref="Vector4.OnesComplement(Vector4)" />
+        /// <inheritdoc cref="Vector4D.OnesComplement(Vector4D)" />
         [Intrinsic]
         public static Vector2D OnesComplement(Vector2D value) => ~value;
 
-        /// <inheritdoc cref="Vector4.RadiansToDegrees(Vector4)" />
+        /// <inheritdoc cref="Vector4D.RadiansToDegrees(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D RadiansToDegrees(Vector2D radians) => Vector128.RadiansToDegrees(radians.AsVector128Unsafe()).AsVector2();
@@ -845,11 +845,11 @@ namespace Invicta.Numerics
             return MultiplyAddEstimate(-tmp, normal, vector);
         }
 
-        /// <inheritdoc cref="Vector4.Round(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Round(Vector4D)" />
         [Intrinsic]
         public static Vector2D Round(Vector2D vector) => Vector128.Round(vector.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Round(Vector4, MidpointRounding)" />
+        /// <inheritdoc cref="Vector4D.Round(Vector4D, MidpointRounding)" />
         [Intrinsic]
         public static Vector2D Round(Vector2D vector, MidpointRounding mode) => Vector128.Round(vector.AsVector128Unsafe(), mode).AsVector2();
 
@@ -866,11 +866,11 @@ namespace Invicta.Numerics
             return Vector128.Shuffle(vector.AsVector128(), Vector128.Create(xIndex, yIndex, 2, 3)).AsVector2();
         }
 
-        /// <inheritdoc cref="Vector4.Sin(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Sin(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D Sin(Vector2D vector) => Vector128.Sin(vector.AsVector128()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.SinCos(Vector4)" />
+        /// <inheritdoc cref="Vector4D.SinCos(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector2D Sin, Vector2D Cos) SinCos(Vector2D vector)
         {
@@ -892,7 +892,7 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector2D Subtract(Vector2D left, Vector2D right) => left - right;
 
-        /// <inheritdoc cref="Vector4.Sum(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Sum(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sum(Vector2D value) => Vector128.Sum(value.AsVector128());
@@ -914,14 +914,14 @@ namespace Invicta.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D Transform(Vector2D position, Matrix4x4D matrix) => Vector4.Transform(position, matrix).AsVector2();
+        public static Vector2D Transform(Vector2D position, Matrix4x4D matrix) => Vector4D.Transform(position, matrix).AsVector2();
 
         /// <summary>Transforms a vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D Transform(Vector2D value, QuaternionD rotation) => Vector4.Transform(value, rotation).AsVector2();
+        public static Vector2D Transform(Vector2D value, QuaternionD rotation) => Vector4D.Transform(value, rotation).AsVector2();
 
         /// <summary>Transforms a vector normal by the given 3x2 matrix.</summary>
         /// <param name="normal">The source vector.</param>
@@ -942,16 +942,16 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2D TransformNormal(Vector2D normal, Matrix4x4D matrix)
         {
-            Vector4 result = matrix.X * normal.X;
-            result = Vector4.MultiplyAddEstimate(matrix.Y, Vector4.Create(normal.Y), result);
+            Vector4D result = matrix.X * normal.X;
+            result = Vector4D.MultiplyAddEstimate(matrix.Y, Vector4D.Create(normal.Y), result);
             return result.AsVector2();
         }
 
-        /// <inheritdoc cref="Vector4.Truncate(Vector4)" />
+        /// <inheritdoc cref="Vector4D.Truncate(Vector4D)" />
         [Intrinsic]
         public static Vector2D Truncate(Vector2D vector) => Vector128.Truncate(vector.AsVector128Unsafe()).AsVector2();
 
-        /// <inheritdoc cref="Vector4.Xor(Vector4, Vector4)" />
+        /// <inheritdoc cref="Vector4D.Xor(Vector4D, Vector4D)" />
         [Intrinsic]
         public static Vector2D Xor(Vector2D left, Vector2D right) => left ^ right;
 
