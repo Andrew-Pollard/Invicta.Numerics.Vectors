@@ -916,12 +916,12 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Transform(Vector2 position, Matrix4x4D matrix) => Vector4.Transform(position, matrix).AsVector2();
 
-        /// <summary>Transforms a vector by the specified Quaternion rotation value.</summary>
+        /// <summary>Transforms a vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Transform(Vector2 value, Quaternion rotation) => Vector4.Transform(value, rotation).AsVector2();
+        public static Vector2 Transform(Vector2 value, QuaternionD rotation) => Vector4.Transform(value, rotation).AsVector2();
 
         /// <summary>Transforms a vector normal by the given 3x2 matrix.</summary>
         /// <param name="normal">The source vector.</param>

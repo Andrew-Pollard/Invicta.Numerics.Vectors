@@ -935,12 +935,12 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Transform(Vector3 position, Matrix4x4D matrix) => Vector4.Transform(position, matrix).AsVector3();
 
-        /// <summary>Transforms a vector by the specified Quaternion rotation value.</summary>
+        /// <summary>Transforms a vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Transform(Vector3 value, Quaternion rotation) => Vector4.Transform(value, rotation).AsVector3();
+        public static Vector3 Transform(Vector3 value, QuaternionD rotation) => Vector4.Transform(value, rotation).AsVector3();
 
         /// <summary>Transforms a vector normal by the given 4x4 matrix.</summary>
         /// <param name="normal">The source vector.</param>

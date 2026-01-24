@@ -616,10 +616,10 @@ namespace Invicta.Numerics
         public static Matrix4x4D CreateFromAxisAngle(Vector3 axis, float angle)
             => Impl.CreateFromAxisAngle(in axis, angle).AsM4x4();
 
-        /// <summary>Creates a rotation matrix from the specified Quaternion rotation value.</summary>
-        /// <param name="quaternion">The source Quaternion.</param>
+        /// <summary>Creates a rotation matrix from the specified QuaternionD rotation value.</summary>
+        /// <param name="quaternion">The source QuaternionD.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateFromQuaternion(Quaternion quaternion)
+        public static Matrix4x4D CreateFromQuaternion(QuaternionD quaternion)
             => Impl.CreateFromQuaternion(in quaternion).AsM4x4();
 
         /// <summary>Creates a rotation matrix from the specified yaw, pitch, and roll.</summary>
@@ -964,7 +964,7 @@ namespace Invicta.Numerics
         /// <param name="rotation">When this method returns, contains the rotation component of the transformation matrix if the operation succeeded.</param>
         /// <param name="translation">When the method returns, contains the translation component of the transformation matrix if the operation succeeded.</param>
         /// <returns><see langword="true" /> if <paramref name="matrix" /> was decomposed successfully; otherwise,  <see langword="false" />.</returns>
-        public static bool Decompose(Matrix4x4D matrix, out Vector3 scale, out Quaternion rotation, out Vector3 translation)
+        public static bool Decompose(Matrix4x4D matrix, out Vector3 scale, out QuaternionD rotation, out Vector3 translation)
             => Impl.Decompose(in matrix.AsImpl(), out scale, out rotation, out translation);
 
         /// <summary>Tries to invert the specified matrix. The return value indicates whether the operation succeeded.</summary>
@@ -1015,11 +1015,11 @@ namespace Invicta.Numerics
         public static Matrix4x4D Subtract(Matrix4x4D value1, Matrix4x4D value2)
             => (value1.AsImpl() - value2.AsImpl()).AsM4x4();
 
-        /// <summary>Transforms the specified matrix by applying the specified Quaternion rotation.</summary>
+        /// <summary>Transforms the specified matrix by applying the specified QuaternionD rotation.</summary>
         /// <param name="value">The matrix to transform.</param>
         /// <param name="rotation">The rotation t apply.</param>
         /// <returns>The transformed matrix.</returns>
-        public static Matrix4x4D Transform(Matrix4x4D value, Quaternion rotation)
+        public static Matrix4x4D Transform(Matrix4x4D value, QuaternionD rotation)
             => Impl.Transform(in value.AsImpl(), in rotation).AsM4x4();
 
         /// <summary>Transposes the rows and columns of a matrix.</summary>

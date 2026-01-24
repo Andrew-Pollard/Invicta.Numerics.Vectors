@@ -977,12 +977,12 @@ namespace Invicta.Numerics
             return result + matrix.W;
         }
 
-        /// <summary>Transforms a two-dimensional vector by the specified Quaternion rotation value.</summary>
+        /// <summary>Transforms a two-dimensional vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector2 value, Quaternion rotation) => Transform(Create(value, 0.0f, 1.0f), rotation);
+        public static Vector4 Transform(Vector2 value, QuaternionD rotation) => Transform(Create(value, 0.0f, 1.0f), rotation);
 
         /// <summary>Transforms a three-dimensional vector by a specified 4x4 matrix.</summary>
         /// <param name="position">The vector to transform.</param>
@@ -1000,12 +1000,12 @@ namespace Invicta.Numerics
             return result + matrix.W;
         }
 
-        /// <summary>Transforms a three-dimensional vector by the specified Quaternion rotation value.</summary>
+        /// <summary>Transforms a three-dimensional vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector3 value, Quaternion rotation) => Transform(Create(value, 1.0f), rotation);
+        public static Vector4 Transform(Vector3 value, QuaternionD rotation) => Transform(Create(value, 1.0f), rotation);
 
         /// <summary>Transforms a four-dimensional vector by a specified 4x4 matrix.</summary>
         /// <param name="vector">The vector to transform.</param>
@@ -1024,19 +1024,19 @@ namespace Invicta.Numerics
             return result;
         }
 
-        /// <summary>Transforms a four-dimensional vector by the specified Quaternion rotation value.</summary>
+        /// <summary>Transforms a four-dimensional vector by the specified QuaternionD rotation value.</summary>
         /// <param name="value">The vector to rotate.</param>
         /// <param name="rotation">The rotation to apply.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector4 value, Quaternion rotation)
+        public static Vector4 Transform(Vector4 value, QuaternionD rotation)
         {
             // This implementation is based on the DirectX Math Library XMVector3Rotate method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
-            Quaternion conjuagate = Quaternion.Conjugate(rotation);
-            Quaternion temp = Quaternion.Concatenate(conjuagate, value.AsQuaternion());
-            return Quaternion.Concatenate(temp, rotation).AsVector4();
+            QuaternionD conjuagate = QuaternionD.Conjugate(rotation);
+            QuaternionD temp = QuaternionD.Concatenate(conjuagate, value.AsQuaternion());
+            return QuaternionD.Concatenate(temp, rotation).AsVector4();
         }
 
         /// <inheritdoc cref="Vector128.Truncate(Vector128{float})" />

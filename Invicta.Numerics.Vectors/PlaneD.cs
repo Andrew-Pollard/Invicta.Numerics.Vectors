@@ -149,13 +149,13 @@ namespace Invicta.Numerics
             return Vector4.Transform(plane.AsVector4(), Matrix4x4D.Transpose(inverseMatrix)).AsPlane();
         }
 
-        /// <summary>Transforms a normalized plane by a Quaternion rotation.</summary>
+        /// <summary>Transforms a normalized plane by a QuaternionD rotation.</summary>
         /// <param name="plane">The normalized plane to transform.</param>
-        /// <param name="rotation">The Quaternion rotation to apply to the plane.</param>
-        /// <returns>A new plane that results from applying the Quaternion rotation.</returns>
+        /// <param name="rotation">The QuaternionD rotation to apply to the plane.</param>
+        /// <returns>A new plane that results from applying the QuaternionD rotation.</returns>
         /// <remarks><paramref name="plane" /> must already be normalized so that its <see cref="Normal" /> vector is of unit length before this method is called.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static PlaneD Transform(PlaneD plane, Quaternion rotation) => Vector4.Transform(plane.AsVector4(), rotation).AsPlane();
+        public static PlaneD Transform(PlaneD plane, QuaternionD rotation) => Vector4.Transform(plane.AsVector4(), rotation).AsPlane();
 
         /// <summary>Returns a value that indicates whether two planes are equal.</summary>
         /// <param name="value1">The first plane to compare.</param>

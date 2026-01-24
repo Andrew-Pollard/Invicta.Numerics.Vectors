@@ -297,12 +297,12 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl CreateFromAxisAngle(in Vector3 axis, float angle)
             {
-                Quaternion q = Quaternion.CreateFromAxisAngle(axis, angle);
+                QuaternionD q = QuaternionD.CreateFromAxisAngle(axis, angle);
                 return CreateFromQuaternion(q);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateFromQuaternion(in Quaternion quaternion)
+            public static Impl CreateFromQuaternion(in QuaternionD quaternion)
             {
                 float xx = quaternion.X * quaternion.X;
                 float yy = quaternion.Y * quaternion.Y;
@@ -343,7 +343,7 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl CreateFromYawPitchRoll(float yaw, float pitch, float roll)
             {
-                Quaternion q = Quaternion.CreateFromYawPitchRoll(yaw, pitch, roll);
+                QuaternionD q = QuaternionD.CreateFromYawPitchRoll(yaw, pitch, roll);
                 return CreateFromQuaternion(q);
             }
 
@@ -947,7 +947,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe bool Decompose(in Impl matrix, out Vector3 scale, out Quaternion rotation, out Vector3 translation)
+            public static unsafe bool Decompose(in Impl matrix, out Vector3 scale, out QuaternionD rotation, out Vector3 translation)
             {
                 Impl matTemp = Matrix4x4D.Identity.AsImpl();
 
@@ -1119,13 +1119,13 @@ namespace Invicta.Numerics
                 if (DecomposeEpsilon < det)
                 {
                     // Non-SRT matrix encountered
-                    rotation = Quaternion.Identity;
+                    rotation = QuaternionD.Identity;
                     result = false;
                 }
                 else
                 {
                     // generate the quaternion from the matrix
-                    rotation = Quaternion.CreateFromRotationMatrix(matTemp.AsM4x4());
+                    rotation = QuaternionD.CreateFromRotationMatrix(matTemp.AsM4x4());
                     result = true;
                 }
 
@@ -1488,7 +1488,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl Transform(in Impl value, in Quaternion rotation)
+            public static Impl Transform(in Impl value, in QuaternionD rotation)
             {
                 // Compute rotation matrix.
                 float x2 = rotation.X + rotation.X;
