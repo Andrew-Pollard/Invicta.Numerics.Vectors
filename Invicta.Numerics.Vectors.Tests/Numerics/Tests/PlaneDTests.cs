@@ -7,14 +7,14 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public class PlaneDTests
+    public class PlaneDDTests
     {
-        // A test for Equals (Plane)
+        // A test for Equals (PlaneD)
         [Fact]
-        public void PlaneEqualsTest1()
+        public void PlaneDEqualsTest1()
         {
-            Plane a = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
-            Plane b = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD a = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD b = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
 
             // case 1: compare between same values
             bool expected = true;
@@ -22,7 +22,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.Normal = new Vector3(10.0f, b.Normal.Y, b.Normal.Z);
+            b.Normal = new Vector3D(10.0f, b.Normal.Y, b.Normal.Z);
             expected = false;
             actual = a.Equals(b);
             Assert.Equal(expected, actual);
@@ -30,10 +30,10 @@ namespace Invicta.Numerics.Tests
 
         // A test for Equals (object)
         [Fact]
-        public void PlaneEqualsTest()
+        public void PlaneDEqualsTest()
         {
-            Plane a = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
-            Plane b = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD a = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD b = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
 
             // case 1: compare between same values
             object obj = b;
@@ -43,7 +43,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.Normal = new Vector3(10.0f, b.Normal.Y, b.Normal.Z);
+            b.Normal = new Vector3D(10.0f, b.Normal.Y, b.Normal.Z);
 
             obj = b;
             expected = false;
@@ -51,7 +51,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 3: compare between different types.
-            obj = new Quaternion();
+            obj = new QuaternionD();
             expected = false;
             actual = a.Equals(obj);
             Assert.Equal(expected, actual);
@@ -63,12 +63,12 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for operator != (Plane, Plane)
+        // A test for operator != (PlaneD, PlaneD)
         [Fact]
-        public void PlaneInequalityTest()
+        public void PlaneDInequalityTest()
         {
-            Plane a = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
-            Plane b = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD a = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD b = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
 
             // case 1: compare between same values
             bool expected = false;
@@ -76,18 +76,18 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.Normal = new Vector3(10.0f, b.Normal.Y, b.Normal.Z);
+            b.Normal = new Vector3D(10.0f, b.Normal.Y, b.Normal.Z);
             expected = true;
             actual = a != b;
             Assert.Equal(expected, actual);
         }
 
-        // A test for operator == (Plane, Plane)
+        // A test for operator == (PlaneD, PlaneD)
         [Fact]
-        public void PlaneEqualityTest()
+        public void PlaneDEqualityTest()
         {
-            Plane a = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
-            Plane b = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD a = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD b = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
 
             // case 1: compare between same values
             bool expected = true;
@@ -95,7 +95,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.Normal = new Vector3(10.0f, b.Normal.Y, b.Normal.Z);
+            b.Normal = new Vector3D(10.0f, b.Normal.Y, b.Normal.Z);
             expected = false;
             actual = a == b;
             Assert.Equal(expected, actual);
@@ -103,210 +103,210 @@ namespace Invicta.Numerics.Tests
 
         // A test for GetHashCode ()
         [Fact]
-        public void PlaneGetHashCodeTest()
+        public void PlaneDGetHashCodeTest()
         {
-            Plane target = new Plane(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD target = new PlaneD(1.0f, 2.0f, 3.0f, 4.0f);
 
             int expected = HashCode.Combine(target.Normal, target.D);
             int actual = target.GetHashCode();
             Assert.Equal(expected, actual);
         }
 
-        // A test for Plane (float, float, float, float)
+        // A test for PlaneD (float, float, float, float)
         [Fact]
-        public void PlaneConstructorTest1()
+        public void PlaneDConstructorTest1()
         {
             float a = 1.0f, b = 2.0f, c = 3.0f, d = 4.0f;
-            Plane target = new Plane(a, b, c, d);
+            PlaneD target = new PlaneD(a, b, c, d);
 
             Assert.True(
                 target.Normal.X == a && target.Normal.Y == b && target.Normal.Z == c && target.D == d,
-                "Plane.cstor did not return the expected value.");
+                "PlaneD.cstor did not return the expected value.");
         }
 
-        // A test for Plane.CreateFromVertices
+        // A test for PlaneD.CreateFromVertices
         [Fact]
-        public void PlaneCreateFromVerticesTest()
+        public void PlaneDCreateFromVerticesTest()
         {
-            Vector3 point1 = new Vector3(0.0f, 1.0f, 1.0f);
-            Vector3 point2 = new Vector3(0.0f, 0.0f, 1.0f);
-            Vector3 point3 = new Vector3(1.0f, 0.0f, 1.0f);
+            Vector3D point1 = new Vector3D(0.0f, 1.0f, 1.0f);
+            Vector3D point2 = new Vector3D(0.0f, 0.0f, 1.0f);
+            Vector3D point3 = new Vector3D(1.0f, 0.0f, 1.0f);
 
-            Plane target = Plane.CreateFromVertices(point1, point2, point3);
-            Plane expected = new Plane(new Vector3(0, 0, 1), -1.0f);
+            PlaneD target = PlaneD.CreateFromVertices(point1, point2, point3);
+            PlaneD expected = new PlaneD(new Vector3D(0, 0, 1), -1.0f);
             Assert.Equal(target, expected);
         }
 
-        // A test for Plane.CreateFromVertices
+        // A test for PlaneD.CreateFromVertices
         [Fact]
-        public void PlaneCreateFromVerticesTest2()
+        public void PlaneDCreateFromVerticesTest2()
         {
-            Vector3 point1 = new Vector3(0.0f, 0.0f, 1.0f);
-            Vector3 point2 = new Vector3(1.0f, 0.0f, 0.0f);
-            Vector3 point3 = new Vector3(1.0f, 1.0f, 0.0f);
+            Vector3D point1 = new Vector3D(0.0f, 0.0f, 1.0f);
+            Vector3D point2 = new Vector3D(1.0f, 0.0f, 0.0f);
+            Vector3D point3 = new Vector3D(1.0f, 1.0f, 0.0f);
 
-            Plane target = Plane.CreateFromVertices(point1, point2, point3);
+            PlaneD target = PlaneD.CreateFromVertices(point1, point2, point3);
             float invRoot2 = (float)(1 / Math.Sqrt(2));
 
-            Plane expected = new Plane(new Vector3(invRoot2, 0, invRoot2), -invRoot2);
-            Assert.True(MathHelper.Equal(target, expected), "Plane.cstor did not return the expected value.");
+            PlaneD expected = new PlaneD(new Vector3D(invRoot2, 0, invRoot2), -invRoot2);
+            Assert.True(MathHelper.Equal(target, expected), "PlaneD.cstor did not return the expected value.");
         }
 
-        // A test for Plane (Vector3f, float)
+        // A test for PlaneD (Vector3Df, float)
         [Fact]
-        public void PlaneConstructorTest3()
+        public void PlaneDConstructorTest3()
         {
-            Vector3 normal = new Vector3(1, 2, 3);
+            Vector3D normal = new Vector3D(1, 2, 3);
             float d = 4;
 
-            Plane target = new Plane(normal, d);
+            PlaneD target = new PlaneD(normal, d);
             Assert.True(
                 target.Normal == normal && target.D == d,
-                "Plane.cstor did not return the expected value.");
+                "PlaneD.cstor did not return the expected value.");
         }
 
-        // A test for Plane (Vector4f)
+        // A test for PlaneD (Vector4Df)
         [Fact]
-        public void PlaneConstructorTest()
+        public void PlaneDConstructorTest()
         {
-            Vector4 value = new Vector4(1.0f, 2.0f, 3.0f, 4.0f);
-            Plane target = new Plane(value);
+            Vector4D value = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            PlaneD target = new PlaneD(value);
 
             Assert.True(
                 target.Normal.X == value.X && target.Normal.Y == value.Y && target.Normal.Z == value.Z && target.D == value.W,
-                "Plane.cstor did not return the expected value.");
+                "PlaneD.cstor did not return the expected value.");
         }
 
         [Fact]
-        public void PlaneDotTest()
+        public void PlaneDDotTest()
         {
-            Plane target = new Plane(2, 3, 4, 5);
-            Vector4 value = new Vector4(5, 4, 3, 2);
+            PlaneD target = new PlaneD(2, 3, 4, 5);
+            Vector4D value = new Vector4D(5, 4, 3, 2);
 
             float expected = 10 + 12 + 12 + 10;
-            float actual = Plane.Dot(target, value);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Dot returns unexpected value.");
+            float actual = PlaneD.Dot(target, value);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.Dot returns unexpected value.");
         }
 
         [Fact]
-        public void PlaneDotCoordinateTest()
+        public void PlaneDDotCoordinateTest()
         {
-            Plane target = new Plane(2, 3, 4, 5);
-            Vector3 value = new Vector3(5, 4, 3);
+            PlaneD target = new PlaneD(2, 3, 4, 5);
+            Vector3D value = new Vector3D(5, 4, 3);
 
             float expected = 10 + 12 + 12 + 5;
-            float actual = Plane.DotCoordinate(target, value);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.DotCoordinate returns unexpected value.");
+            float actual = PlaneD.DotCoordinate(target, value);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.DotCoordinate returns unexpected value.");
         }
 
         [Fact]
-        public void PlaneDotNormalTest()
+        public void PlaneDDotNormalTest()
         {
-            Plane target = new Plane(2, 3, 4, 5);
-            Vector3 value = new Vector3(5, 4, 3);
+            PlaneD target = new PlaneD(2, 3, 4, 5);
+            Vector3D value = new Vector3D(5, 4, 3);
 
             float expected = 10 + 12 + 12;
-            float actual = Plane.DotNormal(target, value);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.DotCoordinate returns unexpected value.");
+            float actual = PlaneD.DotNormal(target, value);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.DotCoordinate returns unexpected value.");
         }
 
         [Fact]
-        public void PlaneNormalizeTest()
+        public void PlaneDNormalizeTest()
         {
-            Plane target = new Plane(1, 2, 3, 4);
+            PlaneD target = new PlaneD(1, 2, 3, 4);
 
             float f = target.Normal.LengthSquared();
             float invF = 1.0f / (float)Math.Sqrt(f);
-            Plane expected = new Plane(target.Normal * invF, target.D * invF);
+            PlaneD expected = new PlaneD(target.Normal * invF, target.D * invF);
 
-            Plane actual = Plane.Normalize(target);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Normalize returns unexpected value.");
+            PlaneD actual = PlaneD.Normalize(target);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.Normalize returns unexpected value.");
 
             // normalize, normalized normal.
-            actual = Plane.Normalize(actual);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Normalize returns unexpected value.");
+            actual = PlaneD.Normalize(actual);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.Normalize returns unexpected value.");
         }
 
         [Fact]
         // Transform by matrix
-        public void PlaneTransformTest1()
+        public void PlaneDTransformTest1()
         {
-            Plane target = new Plane(1, 2, 3, 4);
-            target = Plane.Normalize(target);
+            PlaneD target = new PlaneD(1, 2, 3, 4);
+            target = PlaneD.Normalize(target);
 
-            Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+            Matrix4x4D m =
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
 
-            Plane expected = new Plane();
-            Matrix4x4 inv;
-            Matrix4x4.Invert(m, out inv);
-            Matrix4x4 itm = Matrix4x4.Transpose(inv);
+            PlaneD expected = new PlaneD();
+            Matrix4x4D inv;
+            Matrix4x4D.Invert(m, out inv);
+            Matrix4x4D itm = Matrix4x4D.Transpose(inv);
             float x = target.Normal.X, y = target.Normal.Y, z = target.Normal.Z, w = target.D;
-            expected.Normal = new Vector3(
+            expected.Normal = new Vector3D(
                 x * itm.M11 + y * itm.M21 + z * itm.M31 + w * itm.M41,
                 x * itm.M12 + y * itm.M22 + z * itm.M32 + w * itm.M42,
                 x * itm.M13 + y * itm.M23 + z * itm.M33 + w * itm.M43);
             expected.D = x * itm.M14 + y * itm.M24 + z * itm.M34 + w * itm.M44;
 
-            Plane actual;
-            actual = Plane.Transform(target, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Transform did not return the expected value.");
+            PlaneD actual;
+            actual = PlaneD.Transform(target, m);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.Transform did not return the expected value.");
         }
 
         [Fact]
         // Transform by quaternion
-        public void PlaneTransformTest2()
+        public void PlaneDTransformTest2()
         {
-            Plane target = new Plane(1, 2, 3, 4);
-            target = Plane.Normalize(target);
+            PlaneD target = new PlaneD(1, 2, 3, 4);
+            target = PlaneD.Normalize(target);
 
-            Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            Quaternion q = Quaternion.CreateFromRotationMatrix(m);
+            Matrix4x4D m =
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+            QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
-            Plane expected = new Plane();
+            PlaneD expected = new PlaneD();
             float x = target.Normal.X, y = target.Normal.Y, z = target.Normal.Z, w = target.D;
-            expected.Normal = new Vector3(
+            expected.Normal = new Vector3D(
                 x * m.M11 + y * m.M21 + z * m.M31 + w * m.M41,
                 x * m.M12 + y * m.M22 + z * m.M32 + w * m.M42,
                 x * m.M13 + y * m.M23 + z * m.M33 + w * m.M43);
             expected.D = x * m.M14 + y * m.M24 + z * m.M34 + w * m.M44;
 
-            Plane actual;
-            actual = Plane.Transform(target, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Plane.Transform did not return the expected value.");
+            PlaneD actual;
+            actual = PlaneD.Transform(target, q);
+            Assert.True(MathHelper.Equal(expected, actual), "PlaneD.Transform did not return the expected value.");
         }
 
-        // A test for Plane comparison involving NaN values
+        // A test for PlaneD comparison involving NaN values
         [Fact]
-        public void PlaneEqualsNaNTest()
+        public void PlaneDEqualsNaNTest()
         {
-            Plane a = new Plane(float.NaN, 0, 0, 0);
-            Plane b = new Plane(0, float.NaN, 0, 0);
-            Plane c = new Plane(0, 0, float.NaN, 0);
-            Plane d = new Plane(0, 0, 0, float.NaN);
+            PlaneD a = new PlaneD(float.NaN, 0, 0, 0);
+            PlaneD b = new PlaneD(0, float.NaN, 0, 0);
+            PlaneD c = new PlaneD(0, 0, float.NaN, 0);
+            PlaneD d = new PlaneD(0, 0, 0, float.NaN);
 
-            Assert.False(a == new Plane(0, 0, 0, 0));
-            Assert.False(b == new Plane(0, 0, 0, 0));
-            Assert.False(c == new Plane(0, 0, 0, 0));
-            Assert.False(d == new Plane(0, 0, 0, 0));
+            Assert.False(a == new PlaneD(0, 0, 0, 0));
+            Assert.False(b == new PlaneD(0, 0, 0, 0));
+            Assert.False(c == new PlaneD(0, 0, 0, 0));
+            Assert.False(d == new PlaneD(0, 0, 0, 0));
 
-            Assert.True(a != new Plane(0, 0, 0, 0));
-            Assert.True(b != new Plane(0, 0, 0, 0));
-            Assert.True(c != new Plane(0, 0, 0, 0));
-            Assert.True(d != new Plane(0, 0, 0, 0));
+            Assert.True(a != new PlaneD(0, 0, 0, 0));
+            Assert.True(b != new PlaneD(0, 0, 0, 0));
+            Assert.True(c != new PlaneD(0, 0, 0, 0));
+            Assert.True(d != new PlaneD(0, 0, 0, 0));
 
-            Assert.False(a.Equals(new Plane(0, 0, 0, 0)));
-            Assert.False(b.Equals(new Plane(0, 0, 0, 0)));
-            Assert.False(c.Equals(new Plane(0, 0, 0, 0)));
-            Assert.False(d.Equals(new Plane(0, 0, 0, 0)));
+            Assert.False(a.Equals(new PlaneD(0, 0, 0, 0)));
+            Assert.False(b.Equals(new PlaneD(0, 0, 0, 0)));
+            Assert.False(c.Equals(new PlaneD(0, 0, 0, 0)));
+            Assert.False(d.Equals(new PlaneD(0, 0, 0, 0)));
 
             Assert.True(a.Equals(a));
             Assert.True(b.Equals(b));
@@ -314,22 +314,22 @@ namespace Invicta.Numerics.Tests
             Assert.True(d.Equals(d));
         }
 
-        /* Enable when size of Vector3 is correct
+        /* Enable when size of Vector3D is correct
         // A test to make sure these types are blittable directly into GPU buffer memory layouts
         [Fact]
-        public unsafe void PlaneSizeofTest()
+        public unsafe void PlaneDSizeofTest()
         {
-            Assert.Equal(16, sizeof(Plane));
-            Assert.Equal(32, sizeof(Plane_2x));
-            Assert.Equal(20, sizeof(PlanePlusFloat));
-            Assert.Equal(40, sizeof(PlanePlusFloat_2x));
+            Assert.Equal(16, sizeof(PlaneD));
+            Assert.Equal(32, sizeof(PlaneD_2x));
+            Assert.Equal(20, sizeof(PlaneDPlusFloat));
+            Assert.Equal(40, sizeof(PlaneDPlusFloat_2x));
         }
         */
 
         [Fact]
-        public void PlaneToStringTest()
+        public void PlaneDToStringTest()
         {
-            Plane target = new Plane(1, 2, 3, 4);
+            PlaneD target = new PlaneD(1, 2, 3, 4);
             string expected = string.Format(
                 CultureInfo.CurrentCulture,
                 "{{Normal:{0:G} D:{1}}}",
@@ -340,34 +340,34 @@ namespace Invicta.Numerics.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Plane_2x
+        struct PlaneD_2x
         {
-            private Plane _a;
-            private Plane _b;
+            private PlaneD _a;
+            private PlaneD _b;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct PlanePlusFloat
+        struct PlaneDPlusFloat
         {
-            private Plane _v;
+            private PlaneD _v;
             private float _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct PlanePlusFloat_2x
+        struct PlaneDPlusFloat_2x
         {
-            private PlanePlusFloat _a;
-            private PlanePlusFloat _b;
+            private PlaneDPlusFloat _a;
+            private PlaneDPlusFloat _b;
         }
 
         // A test to make sure the fields are laid out how we expect
         [Fact]
-        public unsafe void PlaneFieldOffsetTest()
+        public unsafe void PlaneDFieldOffsetTest()
         {
-            Plane plane = new Plane();
+            PlaneD plane = new PlaneD();
 
             float* basePtr = &plane.Normal.X; // Take address of first element
-            Plane* planePtr = &plane; // Take address of whole Plane
+            PlaneD* planePtr = &plane; // Take address of whole PlaneD
 
             Assert.Equal(new IntPtr(basePtr), new IntPtr(planePtr));
 
