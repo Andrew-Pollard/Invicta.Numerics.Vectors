@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Invicta.Numerics.Vectors.Tests/Invicta.Numerics.Vectors.Tests.csproj" Id="96671101-d352-4d13-9ae0-1a57daa852af" />
   <Project Path="Invicta.Numerics.Vectors/Invicta.Numerics.Vectors.csproj" />
 </Solution>
