@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Xunit
+namespace Invicta
 {
     [Flags]
     public enum TestPlatforms

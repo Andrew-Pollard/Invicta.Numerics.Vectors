@@ -4,7 +4,7 @@
 using System.Runtime.InteropServices;
 using Xunit;
 
-namespace System.Numerics.Tests
+namespace Invicta.Numerics.Tests
 {
     public sealed class Matrix3x2Tests
     {

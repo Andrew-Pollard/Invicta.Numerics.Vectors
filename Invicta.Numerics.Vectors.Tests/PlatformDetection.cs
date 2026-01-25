@@ -13,7 +13,7 @@ using System.Security.Authentication;
 using Microsoft.Win32;
 using Xunit;
 
-namespace System
+namespace Invicta
 {
     public static partial class PlatformDetection
     {

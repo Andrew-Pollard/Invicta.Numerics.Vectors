@@ -8,7 +8,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 using Xunit.Sdk;
 
-namespace Xunit
+namespace Invicta
 {
     /// <summary>
     /// Apply this attribute to your test method to specify an active issue.

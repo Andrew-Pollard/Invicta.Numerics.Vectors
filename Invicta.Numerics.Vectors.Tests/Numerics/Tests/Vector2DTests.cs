@@ -5,10 +5,10 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
-using System.Tests;
+//using System.Tests;
 using Xunit;
 
-namespace System.Numerics.Tests
+namespace Invicta.Numerics.Tests
 {
     public sealed class Vector2Tests
     {

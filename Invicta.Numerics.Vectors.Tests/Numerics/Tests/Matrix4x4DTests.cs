@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 using Xunit;
 
-namespace System.Numerics.Tests
+namespace Invicta.Numerics.Tests
 {
     public sealed class Matrix4x4Tests
     {

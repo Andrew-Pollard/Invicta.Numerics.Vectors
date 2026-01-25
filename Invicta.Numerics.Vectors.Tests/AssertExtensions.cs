@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Sdk;
 
-namespace System
+namespace Invicta
 {
     public static class AssertExtensions
     {

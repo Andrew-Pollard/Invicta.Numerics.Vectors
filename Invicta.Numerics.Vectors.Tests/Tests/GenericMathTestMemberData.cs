@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace System.Tests
+namespace Invicta.Tests
 {
     internal static class GenericMathTestMemberData
     {

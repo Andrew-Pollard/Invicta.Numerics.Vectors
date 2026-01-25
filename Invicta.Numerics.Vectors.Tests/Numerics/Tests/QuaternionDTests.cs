@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using Xunit;
 
-namespace System.Numerics.Tests
+namespace Invicta.Numerics.Tests
 {
     public sealed class QuaternionTests
     {
