@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public sealed class Vector3Tests
+    public sealed class Vector3DTests
     {
         private const int ElementCount = 3;
 

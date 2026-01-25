@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public class PlaneTests
+    public class PlaneDTests
     {
         // A test for Equals (Plane)
         [Fact]

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public sealed class Matrix4x4Tests
+    public sealed class Matrix4x4DTests
     {
         private static Matrix4x4 GenerateIncrementalMatrixNumber(float value = 0.0f)
         {

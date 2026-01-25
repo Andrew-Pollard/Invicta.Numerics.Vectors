@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public sealed class QuaternionTests
+    public sealed class QuaternionDTests
     {
         // A test for Dot (Quaternion, Quaternion)
         [Fact]

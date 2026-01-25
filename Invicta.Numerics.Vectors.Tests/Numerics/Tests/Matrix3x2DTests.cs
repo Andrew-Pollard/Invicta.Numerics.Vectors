@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public sealed class Matrix3x2Tests
+    public sealed class Matrix3x2DTests
     {
         static Matrix3x2 GenerateIncrementalMatrixNumber(float value = 0.0f)
         {
