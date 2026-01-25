@@ -23,22 +23,22 @@ namespace Invicta.Numerics
             return (Math.Abs(a - b) < 1e-5);
         }
 
-        public static bool Equal(Vector2 a, Vector2 b)
+        public static bool Equal(Vector2D a, Vector2D b)
         {
             return Equal(a.X, b.X) && Equal(a.Y, b.Y);
         }
 
-        public static bool Equal(Vector3 a, Vector3 b)
+        public static bool Equal(Vector3D a, Vector3D b)
         {
             return Equal(a.X, b.X) && Equal(a.Y, b.Y) && Equal(a.Z, b.Z);
         }
 
-        public static bool Equal(Vector4 a, Vector4 b)
+        public static bool Equal(Vector4D a, Vector4D b)
         {
             return Equal(a.X, b.X) && Equal(a.Y, b.Y) && Equal(a.Z, b.Z) && Equal(a.W, b.W);
         }
 
-        public static bool Equal(Matrix4x4 a, Matrix4x4 b)
+        public static bool Equal(Matrix4x4D a, Matrix4x4D b)
         {
             return
                 Equal(a.M11, b.M11) && Equal(a.M12, b.M12) && Equal(a.M13, b.M13) && Equal(a.M14, b.M14) &&
@@ -47,7 +47,7 @@ namespace Invicta.Numerics
                 Equal(a.M41, b.M41) && Equal(a.M42, b.M42) && Equal(a.M43, b.M43) && Equal(a.M44, b.M44);
         }
 
-        public static bool Equal(Matrix3x2 a, Matrix3x2 b)
+        public static bool Equal(Matrix3x2D a, Matrix3x2D b)
         {
             return
                 Equal(a.M11, b.M11) && Equal(a.M12, b.M12) &&
@@ -55,17 +55,17 @@ namespace Invicta.Numerics
                 Equal(a.M31, b.M31) && Equal(a.M32, b.M32);
         }
 
-        public static bool Equal(Plane a, Plane b)
+        public static bool Equal(PlaneD a, PlaneD b)
         {
             return Equal(a.Normal, b.Normal) && Equal(a.D, b.D);
         }
 
-        public static bool Equal(Quaternion a, Quaternion b)
+        public static bool Equal(QuaternionD a, QuaternionD b)
         {
             return Equal(a.X, b.X) && Equal(a.Y, b.Y) && Equal(a.Z, b.Z) && Equal(a.W, b.W);
         }
 
-        public static bool EqualRotation(Quaternion a, Quaternion b)
+        public static bool EqualRotation(QuaternionD a, QuaternionD b)
         {
             return Equal(a, b) || Equal(a, -b);
         }
