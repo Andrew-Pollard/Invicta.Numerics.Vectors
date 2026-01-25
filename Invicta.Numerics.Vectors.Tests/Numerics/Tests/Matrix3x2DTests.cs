@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Invicta.Numerics.Tests
 {
-    public sealed class Matrix3x2DTests
+    public sealed class Matrix3x2DDTests
     {
-        static Matrix3x2 GenerateIncrementalMatrixNumber(float value = 0.0f)
+        static Matrix3x2D GenerateIncrementalMatrixNumber(float value = 0.0f)
         {
-            Matrix3x2 a = new Matrix3x2();
+            Matrix3x2D a = new Matrix3x2D();
             a.M11 = value + 1.0f;
             a.M12 = value + 2.0f;
             a.M21 = value + 3.0f;
@@ -20,10 +20,10 @@ namespace Invicta.Numerics.Tests
             return a;
         }
 
-        static Matrix3x2 GenerateTestMatrix()
+        static Matrix3x2D GenerateTestMatrix()
         {
-            Matrix3x2 m = Matrix3x2.CreateRotation(MathHelper.ToRadians(30.0f));
-            m.Translation = new Vector2(111.0f, 222.0f);
+            Matrix3x2D m = Matrix3x2D.CreateRotation(MathHelper.ToRadians(30.0f));
+            m.Translation = new Vector2D(111.0f, 222.0f);
             return m;
         }
 
@@ -32,9 +32,9 @@ namespace Invicta.Numerics.Tests
         [InlineData(1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f)]
         [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f, 3.1434343f, 1.1234123f)]
         [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f, 1.0000001f, 0.0000001f)]
-        public void Matrix3x2IndexerGetTest(float m11, float m12, float m21, float m22, float m31, float m32)
+        public void Matrix3x2DIndexerGetTest(float m11, float m12, float m21, float m22, float m31, float m32)
         {
-            var matrix = new Matrix3x2(m11, m12, m21, m22, m31, m32);
+            var matrix = new Matrix3x2D(m11, m12, m21, m22, m31, m32);
 
             Assert.Equal(m11, matrix[0, 0]);
             Assert.Equal(m12, matrix[0, 1]);
@@ -49,9 +49,9 @@ namespace Invicta.Numerics.Tests
         [InlineData(1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f)]
         [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f, 3.1434343f, 1.1234123f)]
         [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f, 1.0000001f, 0.0000001f)]
-        public void Matrix3x2IndexerSetTest(float m11, float m12, float m21, float m22, float m31, float m32)
+        public void Matrix3x2DIndexerSetTest(float m11, float m12, float m21, float m22, float m31, float m32)
         {
-            var matrix = new Matrix3x2(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+            var matrix = new Matrix3x2D(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
             matrix[0, 0] = m11;
             matrix[0, 1] = m12;
@@ -70,60 +70,60 @@ namespace Invicta.Numerics.Tests
 
         // A test for Identity
         [Fact]
-        public void Matrix3x2IdentityTest()
+        public void Matrix3x2DIdentityTest()
         {
-            Matrix3x2 val = new Matrix3x2();
+            Matrix3x2D val = new Matrix3x2D();
             val.M11 = val.M22 = 1.0f;
 
-            Assert.True(MathHelper.Equal(val, Matrix3x2.Identity), "Matrix3x2.Indentity was not set correctly.");
+            Assert.True(MathHelper.Equal(val, Matrix3x2D.Identity), "Matrix3x2D.Indentity was not set correctly.");
         }
 
         // A test for Determinant
         [Fact]
-        public void Matrix3x2DeterminantTest()
+        public void Matrix3x2DDeterminantTest()
         {
-            Matrix3x2 target = Matrix3x2.CreateRotation(MathHelper.ToRadians(30.0f));
+            Matrix3x2D target = Matrix3x2D.CreateRotation(MathHelper.ToRadians(30.0f));
 
             float val = 1.0f;
             float det = target.GetDeterminant();
 
-            Assert.True(MathHelper.Equal(val, det), "Matrix3x2.Determinant was not set correctly.");
+            Assert.True(MathHelper.Equal(val, det), "Matrix3x2D.Determinant was not set correctly.");
         }
 
         // A test for Determinant
         // Determinant test |A| = 1 / |A'|
         [Fact]
-        public void Matrix3x2DeterminantTest1()
+        public void Matrix3x2DDeterminantTest1()
         {
-            Matrix3x2 a = new Matrix3x2();
+            Matrix3x2D a = new Matrix3x2D();
             a.M11 = 5.0f;
             a.M12 = 2.0f;
             a.M21 = 12.0f;
             a.M22 = 6.8f;
             a.M31 = 6.5f;
             a.M32 = 1.0f;
-            Matrix3x2 i;
-            Assert.True(Matrix3x2.Invert(a, out i));
+            Matrix3x2D i;
+            Assert.True(Matrix3x2D.Invert(a, out i));
 
             float detA = a.GetDeterminant();
             float detI = i.GetDeterminant();
             float t = 1.0f / detI;
 
             // only accurate to 3 precision
-            Assert.True(System.Math.Abs(detA - t) < 1e-3, "Matrix3x2.Determinant was not set correctly.");
+            Assert.True(System.Math.Abs(detA - t) < 1e-3, "Matrix3x2D.Determinant was not set correctly.");
 
             // sanity check against 4x4 version
-            Assert.Equal(new Matrix4x4(a).GetDeterminant(), detA);
-            Assert.Equal(new Matrix4x4(i).GetDeterminant(), detI);
+            Assert.Equal(new Matrix4x4D(a).GetDeterminant(), detA);
+            Assert.Equal(new Matrix4x4D(i).GetDeterminant(), detI);
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         [Fact]
-        public void Matrix3x2InvertTest()
+        public void Matrix3x2DInvertTest()
         {
-            Matrix3x2 mtx = Matrix3x2.CreateRotation(MathHelper.ToRadians(30.0f));
+            Matrix3x2D mtx = Matrix3x2D.CreateRotation(MathHelper.ToRadians(30.0f));
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = 0.8660254f;
             expected.M12 = -0.5f;
 
@@ -133,196 +133,196 @@ namespace Invicta.Numerics.Tests
             expected.M31 = 0;
             expected.M32 = 0;
 
-            Matrix3x2 actual;
+            Matrix3x2D actual;
 
-            Assert.True(Matrix3x2.Invert(mtx, out actual));
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.Invert did not return the expected value.");
+            Assert.True(Matrix3x2D.Invert(mtx, out actual));
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.Invert did not return the expected value.");
 
-            Matrix3x2 i = mtx * actual;
-            Assert.True(MathHelper.Equal(i, Matrix3x2.Identity), "Matrix3x2.Invert did not return the expected value.");
+            Matrix3x2D i = mtx * actual;
+            Assert.True(MathHelper.Equal(i, Matrix3x2D.Identity), "Matrix3x2D.Invert did not return the expected value.");
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         [Fact]
-        public void Matrix3x2InvertIdentityTest()
+        public void Matrix3x2DInvertIdentityTest()
         {
-            Matrix3x2 mtx = Matrix3x2.Identity;
+            Matrix3x2D mtx = Matrix3x2D.Identity;
 
-            Matrix3x2 actual;
-            Assert.True(Matrix3x2.Invert(mtx, out actual));
+            Matrix3x2D actual;
+            Assert.True(Matrix3x2D.Invert(mtx, out actual));
 
-            Assert.True(MathHelper.Equal(actual, Matrix3x2.Identity));
+            Assert.True(MathHelper.Equal(actual, Matrix3x2D.Identity));
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         [Fact]
-        public void Matrix3x2InvertTranslationTest()
+        public void Matrix3x2DInvertTranslationTest()
         {
-            Matrix3x2 mtx = Matrix3x2.CreateTranslation(23, 42);
+            Matrix3x2D mtx = Matrix3x2D.CreateTranslation(23, 42);
 
-            Matrix3x2 actual;
-            Assert.True(Matrix3x2.Invert(mtx, out actual));
+            Matrix3x2D actual;
+            Assert.True(Matrix3x2D.Invert(mtx, out actual));
 
-            Matrix3x2 i = mtx * actual;
-            Assert.True(MathHelper.Equal(i, Matrix3x2.Identity));
+            Matrix3x2D i = mtx * actual;
+            Assert.True(MathHelper.Equal(i, Matrix3x2D.Identity));
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         [Fact]
-        public void Matrix3x2InvertRotationTest()
+        public void Matrix3x2DInvertRotationTest()
         {
-            Matrix3x2 mtx = Matrix3x2.CreateRotation(2);
+            Matrix3x2D mtx = Matrix3x2D.CreateRotation(2);
 
-            Matrix3x2 actual;
-            Assert.True(Matrix3x2.Invert(mtx, out actual));
+            Matrix3x2D actual;
+            Assert.True(Matrix3x2D.Invert(mtx, out actual));
 
-            Matrix3x2 i = mtx * actual;
-            Assert.True(MathHelper.Equal(i, Matrix3x2.Identity));
+            Matrix3x2D i = mtx * actual;
+            Assert.True(MathHelper.Equal(i, Matrix3x2D.Identity));
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         [Fact]
-        public void Matrix3x2InvertScaleTest()
+        public void Matrix3x2DInvertScaleTest()
         {
-            Matrix3x2 mtx = Matrix3x2.CreateScale(23, -42);
+            Matrix3x2D mtx = Matrix3x2D.CreateScale(23, -42);
 
-            Matrix3x2 actual;
-            Assert.True(Matrix3x2.Invert(mtx, out actual));
+            Matrix3x2D actual;
+            Assert.True(Matrix3x2D.Invert(mtx, out actual));
 
-            Matrix3x2 i = mtx * actual;
-            Assert.True(MathHelper.Equal(i, Matrix3x2.Identity));
+            Matrix3x2D i = mtx * actual;
+            Assert.True(MathHelper.Equal(i, Matrix3x2D.Identity));
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         [Fact]
-        public void Matrix3x2InvertAffineTest()
+        public void Matrix3x2DInvertAffineTest()
         {
-            Matrix3x2 mtx = Matrix3x2.CreateRotation(2) *
-                            Matrix3x2.CreateScale(23, -42) *
-                            Matrix3x2.CreateTranslation(17, 53);
+            Matrix3x2D mtx = Matrix3x2D.CreateRotation(2) *
+                            Matrix3x2D.CreateScale(23, -42) *
+                            Matrix3x2D.CreateTranslation(17, 53);
 
-            Matrix3x2 actual;
-            Assert.True(Matrix3x2.Invert(mtx, out actual));
+            Matrix3x2D actual;
+            Assert.True(Matrix3x2D.Invert(mtx, out actual));
 
-            Matrix3x2 i = mtx * actual;
-            Assert.True(MathHelper.Equal(i, Matrix3x2.Identity));
+            Matrix3x2D i = mtx * actual;
+            Assert.True(MathHelper.Equal(i, Matrix3x2D.Identity));
         }
 
 
 
         // A test for CreateRotation (float)
         [Fact]
-        public void Matrix3x2CreateRotationTest()
+        public void Matrix3x2DCreateRotationTest()
         {
             float radians = MathHelper.ToRadians(50.0f);
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = 0.642787635f;
             expected.M12 = 0.766044438f;
             expected.M21 = -0.766044438f;
             expected.M22 = 0.642787635f;
 
-            Matrix3x2 actual;
-            actual = Matrix3x2.CreateRotation(radians);
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.CreateRotation did not return the expected value.");
+            Matrix3x2D actual;
+            actual = Matrix3x2D.CreateRotation(radians);
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.CreateRotation did not return the expected value.");
         }
 
-        // A test for CreateRotation (float, Vector2f)
+        // A test for CreateRotation (float, Vector2D)
         [Fact]
-        public void Matrix3x2CreateRotationCenterTest()
+        public void Matrix3x2DCreateRotationCenterTest()
         {
             float radians = MathHelper.ToRadians(30.0f);
-            Vector2 center = new Vector2(23, 42);
+            Vector2D center = new Vector2D(23, 42);
 
-            Matrix3x2 rotateAroundZero = Matrix3x2.CreateRotation(radians, Vector2.Zero);
-            Matrix3x2 rotateAroundZeroExpected = Matrix3x2.CreateRotation(radians);
+            Matrix3x2D rotateAroundZero = Matrix3x2D.CreateRotation(radians, Vector2D.Zero);
+            Matrix3x2D rotateAroundZeroExpected = Matrix3x2D.CreateRotation(radians);
             Assert.True(MathHelper.Equal(rotateAroundZero, rotateAroundZeroExpected));
 
-            Matrix3x2 rotateAroundCenter = Matrix3x2.CreateRotation(radians, center);
-            Matrix3x2 rotateAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateRotation(radians) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2D rotateAroundCenter = Matrix3x2D.CreateRotation(radians, center);
+            Matrix3x2D rotateAroundCenterExpected = Matrix3x2D.CreateTranslation(-center) * Matrix3x2D.CreateRotation(radians) * Matrix3x2D.CreateTranslation(center);
             Assert.True(MathHelper.Equal(rotateAroundCenter, rotateAroundCenterExpected));
         }
 
         // A test for CreateRotation (float)
         [Fact]
-        public void Matrix3x2CreateRotationRightAngleTest()
+        public void Matrix3x2DCreateRotationRightAngleTest()
         {
             // 90 degree rotations must be exact!
-            Matrix3x2 actual = Matrix3x2.CreateRotation(0);
-            Assert.Equal(new Matrix3x2(1, 0, 0, 1, 0, 0), actual);
+            Matrix3x2D actual = Matrix3x2D.CreateRotation(0);
+            Assert.Equal(new Matrix3x2D(1, 0, 0, 1, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi / 2);
-            Assert.Equal(new Matrix3x2(0, 1, -1, 0, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi / 2);
+            Assert.Equal(new Matrix3x2D(0, 1, -1, 0, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi);
-            Assert.Equal(new Matrix3x2(-1, 0, 0, -1, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi);
+            Assert.Equal(new Matrix3x2D(-1, 0, 0, -1, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi * 3 / 2);
-            Assert.Equal(new Matrix3x2(0, -1, 1, 0, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi * 3 / 2);
+            Assert.Equal(new Matrix3x2D(0, -1, 1, 0, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi * 2);
-            Assert.Equal(new Matrix3x2(1, 0, 0, 1, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi * 2);
+            Assert.Equal(new Matrix3x2D(1, 0, 0, 1, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi * 5 / 2);
-            Assert.Equal(new Matrix3x2(0, 1, -1, 0, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi * 5 / 2);
+            Assert.Equal(new Matrix3x2D(0, 1, -1, 0, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(-MathHelper.Pi / 2);
-            Assert.Equal(new Matrix3x2(0, -1, 1, 0, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(-MathHelper.Pi / 2);
+            Assert.Equal(new Matrix3x2D(0, -1, 1, 0, 0, 0), actual);
 
             // But merely close-to-90 rotations should not be excessively clamped.
             float delta = MathHelper.ToRadians(0.01f);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi + delta);
-            Assert.False(MathHelper.Equal(new Matrix3x2(-1, 0, 0, -1, 0, 0), actual));
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi + delta);
+            Assert.False(MathHelper.Equal(new Matrix3x2D(-1, 0, 0, -1, 0, 0), actual));
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi - delta);
-            Assert.False(MathHelper.Equal(new Matrix3x2(-1, 0, 0, -1, 0, 0), actual));
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi - delta);
+            Assert.False(MathHelper.Equal(new Matrix3x2D(-1, 0, 0, -1, 0, 0), actual));
         }
 
-        // A test for CreateRotation (float, Vector2f)
+        // A test for CreateRotation (float, Vector2D)
         [Fact]
-        public void Matrix3x2CreateRotationRightAngleCenterTest()
+        public void Matrix3x2DCreateRotationRightAngleCenterTest()
         {
-            Vector2 center = new Vector2(3, 7);
+            Vector2D center = new Vector2D(3, 7);
 
             // 90 degree rotations must be exact!
-            Matrix3x2 actual = Matrix3x2.CreateRotation(0, center);
-            Assert.Equal(new Matrix3x2(1, 0, 0, 1, 0, 0), actual);
+            Matrix3x2D actual = Matrix3x2D.CreateRotation(0, center);
+            Assert.Equal(new Matrix3x2D(1, 0, 0, 1, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi / 2, center);
-            Assert.Equal(new Matrix3x2(0, 1, -1, 0, 10, 4), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi / 2, center);
+            Assert.Equal(new Matrix3x2D(0, 1, -1, 0, 10, 4), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi, center);
-            Assert.Equal(new Matrix3x2(-1, 0, 0, -1, 6, 14), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi, center);
+            Assert.Equal(new Matrix3x2D(-1, 0, 0, -1, 6, 14), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi * 3 / 2, center);
-            Assert.Equal(new Matrix3x2(0, -1, 1, 0, -4, 10), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi * 3 / 2, center);
+            Assert.Equal(new Matrix3x2D(0, -1, 1, 0, -4, 10), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi * 2, center);
-            Assert.Equal(new Matrix3x2(1, 0, 0, 1, 0, 0), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi * 2, center);
+            Assert.Equal(new Matrix3x2D(1, 0, 0, 1, 0, 0), actual);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi * 5 / 2, center);
-            Assert.Equal(new Matrix3x2(0, 1, -1, 0, 10, 4), actual);
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi * 5 / 2, center);
+            Assert.Equal(new Matrix3x2D(0, 1, -1, 0, 10, 4), actual);
 
-            actual = Matrix3x2.CreateRotation(-MathHelper.Pi / 2, center);
-            Assert.Equal(new Matrix3x2(0, -1, 1, 0, -4, 10), actual);
+            actual = Matrix3x2D.CreateRotation(-MathHelper.Pi / 2, center);
+            Assert.Equal(new Matrix3x2D(0, -1, 1, 0, -4, 10), actual);
 
             // But merely close-to-90 rotations should not be excessively clamped.
             float delta = MathHelper.ToRadians(0.01f);
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi + delta, center);
-            Assert.False(MathHelper.Equal(new Matrix3x2(-1, 0, 0, -1, 6, 14), actual));
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi + delta, center);
+            Assert.False(MathHelper.Equal(new Matrix3x2D(-1, 0, 0, -1, 6, 14), actual));
 
-            actual = Matrix3x2.CreateRotation(MathHelper.Pi - delta, center);
-            Assert.False(MathHelper.Equal(new Matrix3x2(-1, 0, 0, -1, 6, 14), actual));
+            actual = Matrix3x2D.CreateRotation(MathHelper.Pi - delta, center);
+            Assert.False(MathHelper.Equal(new Matrix3x2D(-1, 0, 0, -1, 6, 14), actual));
         }
 
-        // A test for Invert (Matrix3x2)
+        // A test for Invert (Matrix3x2D)
         // Non invertible matrix - determinant is zero - singular matrix
         [Fact]
-        public void Matrix3x2InvertTest1()
+        public void Matrix3x2DInvertTest1()
         {
-            Matrix3x2 a = new Matrix3x2();
+            Matrix3x2D a = new Matrix3x2D();
             a.M11 = 0.0f;
             a.M12 = 2.0f;
             a.M21 = 0.0f;
@@ -331,24 +331,24 @@ namespace Invicta.Numerics.Tests
             a.M32 = 6.0f;
 
             float detA = a.GetDeterminant();
-            Assert.True(MathHelper.Equal(detA, 0.0f), "Matrix3x2.Invert did not return the expected value.");
+            Assert.True(MathHelper.Equal(detA, 0.0f), "Matrix3x2D.Invert did not return the expected value.");
 
-            Matrix3x2 actual;
-            Assert.False(Matrix3x2.Invert(a, out actual));
+            Matrix3x2D actual;
+            Assert.False(Matrix3x2D.Invert(a, out actual));
 
             // all the elements in Actual is NaN
             Assert.True(
                 float.IsNaN(actual.M11) && float.IsNaN(actual.M12) &&
                 float.IsNaN(actual.M21) && float.IsNaN(actual.M22) &&
                 float.IsNaN(actual.M31) && float.IsNaN(actual.M32)
-                , "Matrix3x2.Invert did not return the expected value.");
+                , "Matrix3x2D.Invert did not return the expected value.");
         }
 
-        // A test for Lerp (Matrix3x2, Matrix3x2, float)
+        // A test for Lerp (Matrix3x2D, Matrix3x2D, float)
         [Fact]
-        public void Matrix3x2LerpTest()
+        public void Matrix3x2DLerpTest()
         {
-            Matrix3x2 a = new Matrix3x2();
+            Matrix3x2D a = new Matrix3x2D();
             a.M11 = 11.0f;
             a.M12 = 12.0f;
             a.M21 = 21.0f;
@@ -356,11 +356,11 @@ namespace Invicta.Numerics.Tests
             a.M31 = 31.0f;
             a.M32 = 32.0f;
 
-            Matrix3x2 b = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber();
 
             float t = 0.5f;
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 + (b.M11 - a.M11) * t;
             expected.M12 = a.M12 + (b.M12 - a.M12) * t;
 
@@ -370,18 +370,18 @@ namespace Invicta.Numerics.Tests
             expected.M31 = a.M31 + (b.M31 - a.M31) * t;
             expected.M32 = a.M32 + (b.M32 - a.M32) * t;
 
-            Matrix3x2 actual;
-            actual = Matrix3x2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.Lerp did not return the expected value.");
+            Matrix3x2D actual;
+            actual = Matrix3x2D.Lerp(a, b, t);
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.Lerp did not return the expected value.");
         }
 
-        // A test for operator - (Matrix3x2)
+        // A test for operator - (Matrix3x2D)
         [Fact]
-        public void Matrix3x2UnaryNegationTest()
+        public void Matrix3x2DUnaryNegationTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = -1.0f;
             expected.M12 = -2.0f;
             expected.M21 = -3.0f;
@@ -389,17 +389,17 @@ namespace Invicta.Numerics.Tests
             expected.M31 = -5.0f;
             expected.M32 = -6.0f;
 
-            Matrix3x2 actual = -a;
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator - did not return the expected value.");
+            Matrix3x2D actual = -a;
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.operator - did not return the expected value.");
         }
 
-        // A test for operator - (Matrix3x2, Matrix3x2)
+        // A test for operator - (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2SubtractionTest()
+        public void Matrix3x2DSubtractionTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber(-3.0f);
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber(-3.0f);
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 - b.M11;
             expected.M12 = a.M12 - b.M12;
             expected.M21 = a.M21 - b.M21;
@@ -407,18 +407,18 @@ namespace Invicta.Numerics.Tests
             expected.M31 = a.M31 - b.M31;
             expected.M32 = a.M32 - b.M32;
 
-            Matrix3x2 actual = a - b;
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator - did not return the expected value.");
+            Matrix3x2D actual = a - b;
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.operator - did not return the expected value.");
         }
 
-        // A test for operator * (Matrix3x2, Matrix3x2)
+        // A test for operator * (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2MultiplyTest1()
+        public void Matrix3x2DMultiplyTest1()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber(-3.0f);
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber(-3.0f);
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 * b.M11 + a.M12 * b.M21;
             expected.M12 = a.M11 * b.M12 + a.M12 * b.M22;
 
@@ -428,29 +428,29 @@ namespace Invicta.Numerics.Tests
             expected.M31 = a.M31 * b.M11 + a.M32 * b.M21 + b.M31;
             expected.M32 = a.M31 * b.M12 + a.M32 * b.M22 + b.M32;
 
-            Matrix3x2 actual = a * b;
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator * did not return the expected value.");
+            Matrix3x2D actual = a * b;
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.operator * did not return the expected value.");
 
             // Sanity check by comparison with 4x4 multiply.
-            a = Matrix3x2.CreateRotation(MathHelper.ToRadians(30)) * Matrix3x2.CreateTranslation(23, 42);
-            b = Matrix3x2.CreateScale(3, 7) * Matrix3x2.CreateTranslation(666, -1);
+            a = Matrix3x2D.CreateRotation(MathHelper.ToRadians(30)) * Matrix3x2D.CreateTranslation(23, 42);
+            b = Matrix3x2D.CreateScale(3, 7) * Matrix3x2D.CreateTranslation(666, -1);
 
             actual = a * b;
 
-            Matrix4x4 a44 = new Matrix4x4(a);
-            Matrix4x4 b44 = new Matrix4x4(b);
-            Matrix4x4 expected44 = a44 * b44;
-            Matrix4x4 actual44 = new Matrix4x4(actual);
+            Matrix4x4D a44 = new Matrix4x4D(a);
+            Matrix4x4D b44 = new Matrix4x4D(b);
+            Matrix4x4D expected44 = a44 * b44;
+            Matrix4x4D actual44 = new Matrix4x4D(actual);
 
-            Assert.True(MathHelper.Equal(expected44, actual44), "Matrix3x2.operator * did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected44, actual44), "Matrix3x2D.operator * did not return the expected value.");
         }
 
-        // A test for operator * (Matrix3x2, Matrix3x2)
+        // A test for operator * (Matrix3x2D, Matrix3x2D)
         // Multiply with identity matrix
         [Fact]
-        public void Matrix3x2MultiplyTest4()
+        public void Matrix3x2DMultiplyTest4()
         {
-            Matrix3x2 a = new Matrix3x2();
+            Matrix3x2D a = new Matrix3x2D();
             a.M11 = 1.0f;
             a.M12 = 2.0f;
             a.M21 = 5.0f;
@@ -458,23 +458,23 @@ namespace Invicta.Numerics.Tests
             a.M31 = 9.0f;
             a.M32 = 10.0f;
 
-            Matrix3x2 b = new Matrix3x2();
-            b = Matrix3x2.Identity;
+            Matrix3x2D b = new Matrix3x2D();
+            b = Matrix3x2D.Identity;
 
-            Matrix3x2 expected = a;
-            Matrix3x2 actual = a * b;
+            Matrix3x2D expected = a;
+            Matrix3x2D actual = a * b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator * did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.operator * did not return the expected value.");
         }
 
-        // A test for operator + (Matrix3x2, Matrix3x2)
+        // A test for operator + (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2AdditionTest()
+        public void Matrix3x2DAdditionTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber(-3.0f);
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber(-3.0f);
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 + b.M11;
             expected.M12 = a.M12 + b.M12;
             expected.M21 = a.M21 + b.M21;
@@ -482,18 +482,18 @@ namespace Invicta.Numerics.Tests
             expected.M31 = a.M31 + b.M31;
             expected.M32 = a.M32 + b.M32;
 
-            Matrix3x2 actual;
+            Matrix3x2D actual;
 
             actual = a + b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator + did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2D.operator + did not return the expected value.");
         }
 
         // A test for ToString ()
         [Fact]
-        public void Matrix3x2ToStringTest()
+        public void Matrix3x2DToStringTest()
         {
-            Matrix3x2 a = new Matrix3x2();
+            Matrix3x2D a = new Matrix3x2D();
             a.M11 = 11.0f;
             a.M12 = -12.0f;
             a.M21 = 21.0f;
@@ -510,14 +510,14 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Add (Matrix3x2, Matrix3x2)
+        // A test for Add (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2AddTest()
+        public void Matrix3x2DAddTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber(-3.0f);
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber(-3.0f);
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 + b.M11;
             expected.M12 = a.M12 + b.M12;
             expected.M21 = a.M21 + b.M21;
@@ -525,18 +525,18 @@ namespace Invicta.Numerics.Tests
             expected.M31 = a.M31 + b.M31;
             expected.M32 = a.M32 + b.M32;
 
-            Matrix3x2 actual;
+            Matrix3x2D actual;
 
-            actual = Matrix3x2.Add(a, b);
+            actual = Matrix3x2D.Add(a, b);
             Assert.Equal(expected, actual);
         }
 
         // A test for Equals (object)
         [Fact]
-        public void Matrix3x2EqualsTest()
+        public void Matrix3x2DEqualsTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber();
 
             // case 1: compare between same values
             object obj = b;
@@ -553,7 +553,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 3: compare between different types.
-            obj = new Vector4();
+            obj = new Vector4D();
             expected = false;
             actual = a.Equals(obj);
             Assert.Equal(expected, actual);
@@ -567,14 +567,14 @@ namespace Invicta.Numerics.Tests
 
         // A test for GetHashCode ()
         [Fact]
-        public void Matrix3x2GetHashCodeTest()
+        public void Matrix3x2DGetHashCodeTest()
         {
-            Matrix3x2 target = GenerateIncrementalMatrixNumber();
+            Matrix3x2D target = GenerateIncrementalMatrixNumber();
 
             int expected = HashCode.Combine(
-                new Vector2(target.M11, target.M12),
-                new Vector2(target.M21, target.M22),
-                new Vector2(target.M31, target.M32)
+                new Vector2D(target.M11, target.M12),
+                new Vector2D(target.M21, target.M22),
+                new Vector2D(target.M31, target.M32)
             );
 
             int actual = target.GetHashCode();
@@ -582,14 +582,14 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Matrix3x2, Matrix3x2)
+        // A test for Multiply (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2MultiplyTest3()
+        public void Matrix3x2DMultiplyTest3()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber(-3.0f);
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber(-3.0f);
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 * b.M11 + a.M12 * b.M21;
             expected.M12 = a.M11 * b.M12 + a.M12 * b.M22;
 
@@ -598,72 +598,72 @@ namespace Invicta.Numerics.Tests
 
             expected.M31 = a.M31 * b.M11 + a.M32 * b.M21 + b.M31;
             expected.M32 = a.M31 * b.M12 + a.M32 * b.M22 + b.M32;
-            Matrix3x2 actual;
-            actual = Matrix3x2.Multiply(a, b);
+            Matrix3x2D actual;
+            actual = Matrix3x2D.Multiply(a, b);
 
             Assert.Equal(expected, actual);
 
             // Sanity check by comparison with 4x4 multiply.
-            a = Matrix3x2.CreateRotation(MathHelper.ToRadians(30)) * Matrix3x2.CreateTranslation(23, 42);
-            b = Matrix3x2.CreateScale(3, 7) * Matrix3x2.CreateTranslation(666, -1);
+            a = Matrix3x2D.CreateRotation(MathHelper.ToRadians(30)) * Matrix3x2D.CreateTranslation(23, 42);
+            b = Matrix3x2D.CreateScale(3, 7) * Matrix3x2D.CreateTranslation(666, -1);
 
-            actual = Matrix3x2.Multiply(a, b);
+            actual = Matrix3x2D.Multiply(a, b);
 
-            Matrix4x4 a44 = new Matrix4x4(a);
-            Matrix4x4 b44 = new Matrix4x4(b);
-            Matrix4x4 expected44 = Matrix4x4.Multiply(a44, b44);
-            Matrix4x4 actual44 = new Matrix4x4(actual);
+            Matrix4x4D a44 = new Matrix4x4D(a);
+            Matrix4x4D b44 = new Matrix4x4D(b);
+            Matrix4x4D expected44 = Matrix4x4D.Multiply(a44, b44);
+            Matrix4x4D actual44 = new Matrix4x4D(actual);
 
-            Assert.True(MathHelper.Equal(expected44, actual44), "Matrix3x2.Multiply did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected44, actual44), "Matrix3x2D.Multiply did not return the expected value.");
         }
 
-        // A test for Multiply (Matrix3x2, float)
+        // A test for Multiply (Matrix3x2D, float)
         [Fact]
-        public void Matrix3x2MultiplyTest5()
+        public void Matrix3x2DMultiplyTest5()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 expected = new Matrix3x2(3, 6, 9, 12, 15, 18);
-            Matrix3x2 actual = Matrix3x2.Multiply(a, 3);
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D expected = new Matrix3x2D(3, 6, 9, 12, 15, 18);
+            Matrix3x2D actual = Matrix3x2D.Multiply(a, 3);
 
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Matrix3x2, float)
+        // A test for Multiply (Matrix3x2D, float)
         [Fact]
-        public void Matrix3x2MultiplyTest6()
+        public void Matrix3x2DMultiplyTest6()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 expected = new Matrix3x2(3, 6, 9, 12, 15, 18);
-            Matrix3x2 actual = a * 3;
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D expected = new Matrix3x2D(3, 6, 9, 12, 15, 18);
+            Matrix3x2D actual = a * 3;
 
             Assert.Equal(expected, actual);
         }
 
-        // A test for Negate (Matrix3x2)
+        // A test for Negate (Matrix3x2D)
         [Fact]
-        public void Matrix3x2NegateTest()
+        public void Matrix3x2DNegateTest()
         {
-            Matrix3x2 m = GenerateIncrementalMatrixNumber();
+            Matrix3x2D m = GenerateIncrementalMatrixNumber();
 
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = -1.0f;
             expected.M12 = -2.0f;
             expected.M21 = -3.0f;
             expected.M22 = -4.0f;
             expected.M31 = -5.0f;
             expected.M32 = -6.0f;
-            Matrix3x2 actual;
+            Matrix3x2D actual;
 
-            actual = Matrix3x2.Negate(m);
+            actual = Matrix3x2D.Negate(m);
             Assert.Equal(expected, actual);
         }
 
-        // A test for operator != (Matrix3x2, Matrix3x2)
+        // A test for operator != (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2InequalityTest()
+        public void Matrix3x2DInequalityTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber();
 
             // case 1: compare between same values
             bool expected = false;
@@ -677,12 +677,12 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for operator == (Matrix3x2, Matrix3x2)
+        // A test for operator == (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2EqualityTest()
+        public void Matrix3x2DEqualityTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber();
 
             // case 1: compare between same values
             bool expected = true;
@@ -696,13 +696,13 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Subtract (Matrix3x2, Matrix3x2)
+        // A test for Subtract (Matrix3x2D, Matrix3x2D)
         [Fact]
-        public void Matrix3x2SubtractTest()
+        public void Matrix3x2DSubtractTest()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber(-3.0f);
-            Matrix3x2 expected = new Matrix3x2();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber(-3.0f);
+            Matrix3x2D expected = new Matrix3x2D();
             expected.M11 = a.M11 - b.M11;
             expected.M12 = a.M12 - b.M12;
             expected.M21 = a.M21 - b.M21;
@@ -710,142 +710,142 @@ namespace Invicta.Numerics.Tests
             expected.M31 = a.M31 - b.M31;
             expected.M32 = a.M32 - b.M32;
 
-            Matrix3x2 actual;
-            actual = Matrix3x2.Subtract(a, b);
+            Matrix3x2D actual;
+            actual = Matrix3x2D.Subtract(a, b);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (Vector2f)
+        // A test for CreateScale (Vector2D)
         [Fact]
-        public void Matrix3x2CreateScaleTest1()
+        public void Matrix3x2DCreateScaleTest1()
         {
-            Vector2 scales = new Vector2(2.0f, 3.0f);
-            Matrix3x2 expected = new Matrix3x2(
+            Vector2D scales = new Vector2D(2.0f, 3.0f);
+            Matrix3x2D expected = new Matrix3x2D(
                 2.0f, 0.0f,
                 0.0f, 3.0f,
                 0.0f, 0.0f);
-            Matrix3x2 actual = Matrix3x2.CreateScale(scales);
+            Matrix3x2D actual = Matrix3x2D.CreateScale(scales);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (Vector2f, Vector2f)
+        // A test for CreateScale (Vector2D, Vector2D)
         [Fact]
-        public void Matrix3x2CreateScaleCenterTest1()
+        public void Matrix3x2DCreateScaleCenterTest1()
         {
-            Vector2 scale = new Vector2(3, 4);
-            Vector2 center = new Vector2(23, 42);
+            Vector2D scale = new Vector2D(3, 4);
+            Vector2D center = new Vector2D(23, 42);
 
-            Matrix3x2 scaleAroundZero = Matrix3x2.CreateScale(scale, Vector2.Zero);
-            Matrix3x2 scaleAroundZeroExpected = Matrix3x2.CreateScale(scale);
+            Matrix3x2D scaleAroundZero = Matrix3x2D.CreateScale(scale, Vector2D.Zero);
+            Matrix3x2D scaleAroundZeroExpected = Matrix3x2D.CreateScale(scale);
             Assert.True(MathHelper.Equal(scaleAroundZero, scaleAroundZeroExpected));
 
-            Matrix3x2 scaleAroundCenter = Matrix3x2.CreateScale(scale, center);
-            Matrix3x2 scaleAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateScale(scale) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2D scaleAroundCenter = Matrix3x2D.CreateScale(scale, center);
+            Matrix3x2D scaleAroundCenterExpected = Matrix3x2D.CreateTranslation(-center) * Matrix3x2D.CreateScale(scale) * Matrix3x2D.CreateTranslation(center);
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
         // A test for CreateScale (float)
         [Fact]
-        public void Matrix3x2CreateScaleTest2()
+        public void Matrix3x2DCreateScaleTest2()
         {
             float scale = 2.0f;
-            Matrix3x2 expected = new Matrix3x2(
+            Matrix3x2D expected = new Matrix3x2D(
                 2.0f, 0.0f,
                 0.0f, 2.0f,
                 0.0f, 0.0f);
-            Matrix3x2 actual = Matrix3x2.CreateScale(scale);
+            Matrix3x2D actual = Matrix3x2D.CreateScale(scale);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (float, Vector2f)
+        // A test for CreateScale (float, Vector2D)
         [Fact]
-        public void Matrix3x2CreateScaleCenterTest2()
+        public void Matrix3x2DCreateScaleCenterTest2()
         {
             float scale = 5;
-            Vector2 center = new Vector2(23, 42);
+            Vector2D center = new Vector2D(23, 42);
 
-            Matrix3x2 scaleAroundZero = Matrix3x2.CreateScale(scale, Vector2.Zero);
-            Matrix3x2 scaleAroundZeroExpected = Matrix3x2.CreateScale(scale);
+            Matrix3x2D scaleAroundZero = Matrix3x2D.CreateScale(scale, Vector2D.Zero);
+            Matrix3x2D scaleAroundZeroExpected = Matrix3x2D.CreateScale(scale);
             Assert.True(MathHelper.Equal(scaleAroundZero, scaleAroundZeroExpected));
 
-            Matrix3x2 scaleAroundCenter = Matrix3x2.CreateScale(scale, center);
-            Matrix3x2 scaleAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateScale(scale) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2D scaleAroundCenter = Matrix3x2D.CreateScale(scale, center);
+            Matrix3x2D scaleAroundCenterExpected = Matrix3x2D.CreateTranslation(-center) * Matrix3x2D.CreateScale(scale) * Matrix3x2D.CreateTranslation(center);
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
         // A test for CreateScale (float, float)
         [Fact]
-        public void Matrix3x2CreateScaleTest3()
+        public void Matrix3x2DCreateScaleTest3()
         {
             float xScale = 2.0f;
             float yScale = 3.0f;
-            Matrix3x2 expected = new Matrix3x2(
+            Matrix3x2D expected = new Matrix3x2D(
                 2.0f, 0.0f,
                 0.0f, 3.0f,
                 0.0f, 0.0f);
-            Matrix3x2 actual = Matrix3x2.CreateScale(xScale, yScale);
+            Matrix3x2D actual = Matrix3x2D.CreateScale(xScale, yScale);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (float, float, Vector2f)
+        // A test for CreateScale (float, float, Vector2D)
         [Fact]
-        public void Matrix3x2CreateScaleCenterTest3()
+        public void Matrix3x2DCreateScaleCenterTest3()
         {
-            Vector2 scale = new Vector2(3, 4);
-            Vector2 center = new Vector2(23, 42);
+            Vector2D scale = new Vector2D(3, 4);
+            Vector2D center = new Vector2D(23, 42);
 
-            Matrix3x2 scaleAroundZero = Matrix3x2.CreateScale(scale.X, scale.Y, Vector2.Zero);
-            Matrix3x2 scaleAroundZeroExpected = Matrix3x2.CreateScale(scale.X, scale.Y);
+            Matrix3x2D scaleAroundZero = Matrix3x2D.CreateScale(scale.X, scale.Y, Vector2D.Zero);
+            Matrix3x2D scaleAroundZeroExpected = Matrix3x2D.CreateScale(scale.X, scale.Y);
             Assert.True(MathHelper.Equal(scaleAroundZero, scaleAroundZeroExpected));
 
-            Matrix3x2 scaleAroundCenter = Matrix3x2.CreateScale(scale.X, scale.Y, center);
-            Matrix3x2 scaleAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateScale(scale.X, scale.Y) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2D scaleAroundCenter = Matrix3x2D.CreateScale(scale.X, scale.Y, center);
+            Matrix3x2D scaleAroundCenterExpected = Matrix3x2D.CreateTranslation(-center) * Matrix3x2D.CreateScale(scale.X, scale.Y) * Matrix3x2D.CreateTranslation(center);
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
-        // A test for CreateTranslation (Vector2f)
+        // A test for CreateTranslation (Vector2D)
         [Fact]
-        public void Matrix3x2CreateTranslationTest1()
+        public void Matrix3x2DCreateTranslationTest1()
         {
-            Vector2 position = new Vector2(2.0f, 3.0f);
-            Matrix3x2 expected = new Matrix3x2(
+            Vector2D position = new Vector2D(2.0f, 3.0f);
+            Matrix3x2D expected = new Matrix3x2D(
                 1.0f, 0.0f,
                 0.0f, 1.0f,
                 2.0f, 3.0f);
 
-            Matrix3x2 actual = Matrix3x2.CreateTranslation(position);
+            Matrix3x2D actual = Matrix3x2D.CreateTranslation(position);
             Assert.Equal(expected, actual);
         }
 
         // A test for CreateTranslation (float, float)
         [Fact]
-        public void Matrix3x2CreateTranslationTest2()
+        public void Matrix3x2DCreateTranslationTest2()
         {
             float xPosition = 2.0f;
             float yPosition = 3.0f;
 
-            Matrix3x2 expected = new Matrix3x2(
+            Matrix3x2D expected = new Matrix3x2D(
                 1.0f, 0.0f,
                 0.0f, 1.0f,
                 2.0f, 3.0f);
 
-            Matrix3x2 actual = Matrix3x2.CreateTranslation(xPosition, yPosition);
+            Matrix3x2D actual = Matrix3x2D.CreateTranslation(xPosition, yPosition);
             Assert.Equal(expected, actual);
         }
 
         // A test for Translation
         [Fact]
-        public void Matrix3x2TranslationTest()
+        public void Matrix3x2DTranslationTest()
         {
-            Matrix3x2 a = GenerateTestMatrix();
-            Matrix3x2 b = a;
+            Matrix3x2D a = GenerateTestMatrix();
+            Matrix3x2D b = a;
 
             // Transformed vector that has same semantics of property must be same.
-            Vector2 val = new Vector2(a.M31, a.M32);
+            Vector2D val = new Vector2D(a.M31, a.M32);
             Assert.Equal(val, a.Translation);
 
             // Set value and get value must be same.
-            val = new Vector2(1.0f, 2.0f);
+            val = new Vector2D(1.0f, 2.0f);
             a.Translation = val;
             Assert.Equal(val, a.Translation);
 
@@ -854,15 +854,15 @@ namespace Invicta.Numerics.Tests
                 a.M11 == b.M11 && a.M12 == b.M12 &&
                 a.M21 == b.M21 && a.M22 == b.M22 &&
                 a.M31 != b.M31 && a.M32 != b.M32,
-                "Matrix3x2.Translation modified unexpected value of matrix.");
+                "Matrix3x2D.Translation modified unexpected value of matrix.");
         }
 
-        // A test for Equals (Matrix3x2)
+        // A test for Equals (Matrix3x2D)
         [Fact]
-        public void Matrix3x2EqualsTest1()
+        public void Matrix3x2DEqualsTest1()
         {
-            Matrix3x2 a = GenerateIncrementalMatrixNumber();
-            Matrix3x2 b = GenerateIncrementalMatrixNumber();
+            Matrix3x2D a = GenerateIncrementalMatrixNumber();
+            Matrix3x2D b = GenerateIncrementalMatrixNumber();
 
             // case 1: compare between same values
             bool expected = true;
@@ -878,145 +878,145 @@ namespace Invicta.Numerics.Tests
 
         // A test for CreateSkew (float, float)
         [Fact]
-        public void Matrix3x2CreateSkewIdentityTest()
+        public void Matrix3x2DCreateSkewIdentityTest()
         {
-            Matrix3x2 expected = Matrix3x2.Identity;
-            Matrix3x2 actual = Matrix3x2.CreateSkew(0, 0);
+            Matrix3x2D expected = Matrix3x2D.Identity;
+            Matrix3x2D actual = Matrix3x2D.CreateSkew(0, 0);
             Assert.Equal(expected, actual);
         }
 
         // A test for CreateSkew (float, float)
         [Fact]
-        public void Matrix3x2CreateSkewXTest()
+        public void Matrix3x2DCreateSkewXTest()
         {
-            Matrix3x2 expected = new Matrix3x2(1, 0, -0.414213562373095f, 1, 0, 0);
-            Matrix3x2 actual = Matrix3x2.CreateSkew(-MathHelper.Pi / 8, 0);
+            Matrix3x2D expected = new Matrix3x2D(1, 0, -0.414213562373095f, 1, 0, 0);
+            Matrix3x2D actual = Matrix3x2D.CreateSkew(-MathHelper.Pi / 8, 0);
             Assert.True(MathHelper.Equal(expected, actual));
 
-            expected = new Matrix3x2(1, 0, 0.414213562373095f, 1, 0, 0);
-            actual = Matrix3x2.CreateSkew(MathHelper.Pi / 8, 0);
+            expected = new Matrix3x2D(1, 0, 0.414213562373095f, 1, 0, 0);
+            actual = Matrix3x2D.CreateSkew(MathHelper.Pi / 8, 0);
             Assert.True(MathHelper.Equal(expected, actual));
 
-            Vector2 result = Vector2.Transform(new Vector2(0, 0), actual);
-            Assert.True(MathHelper.Equal(new Vector2(0, 0), result));
+            Vector2D result = Vector2D.Transform(new Vector2D(0, 0), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(0, 0), result));
 
-            result = Vector2.Transform(new Vector2(0, 1), actual);
-            Assert.True(MathHelper.Equal(new Vector2(0.414213568f, 1), result));
+            result = Vector2D.Transform(new Vector2D(0, 1), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(0.414213568f, 1), result));
 
-            result = Vector2.Transform(new Vector2(0, -1), actual);
-            Assert.True(MathHelper.Equal(new Vector2(-0.414213568f, -1), result));
+            result = Vector2D.Transform(new Vector2D(0, -1), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(-0.414213568f, -1), result));
 
-            result = Vector2.Transform(new Vector2(3, 10), actual);
-            Assert.True(MathHelper.Equal(new Vector2(7.14213568f, 10), result));
+            result = Vector2D.Transform(new Vector2D(3, 10), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(7.14213568f, 10), result));
         }
 
         // A test for CreateSkew (float, float)
         [Fact]
-        public void Matrix3x2CreateSkewYTest()
+        public void Matrix3x2DCreateSkewYTest()
         {
-            Matrix3x2 expected = new Matrix3x2(1, -0.414213562373095f, 0, 1, 0, 0);
-            Matrix3x2 actual = Matrix3x2.CreateSkew(0, -MathHelper.Pi / 8);
+            Matrix3x2D expected = new Matrix3x2D(1, -0.414213562373095f, 0, 1, 0, 0);
+            Matrix3x2D actual = Matrix3x2D.CreateSkew(0, -MathHelper.Pi / 8);
             Assert.True(MathHelper.Equal(expected, actual));
 
-            expected = new Matrix3x2(1, 0.414213562373095f, 0, 1, 0, 0);
-            actual = Matrix3x2.CreateSkew(0, MathHelper.Pi / 8);
+            expected = new Matrix3x2D(1, 0.414213562373095f, 0, 1, 0, 0);
+            actual = Matrix3x2D.CreateSkew(0, MathHelper.Pi / 8);
             Assert.True(MathHelper.Equal(expected, actual));
 
-            Vector2 result = Vector2.Transform(new Vector2(0, 0), actual);
-            Assert.True(MathHelper.Equal(new Vector2(0, 0), result));
+            Vector2D result = Vector2D.Transform(new Vector2D(0, 0), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(0, 0), result));
 
-            result = Vector2.Transform(new Vector2(1, 0), actual);
-            Assert.True(MathHelper.Equal(new Vector2(1, 0.414213568f), result));
+            result = Vector2D.Transform(new Vector2D(1, 0), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(1, 0.414213568f), result));
 
-            result = Vector2.Transform(new Vector2(-1, 0), actual);
-            Assert.True(MathHelper.Equal(new Vector2(-1, -0.414213568f), result));
+            result = Vector2D.Transform(new Vector2D(-1, 0), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(-1, -0.414213568f), result));
 
-            result = Vector2.Transform(new Vector2(10, 3), actual);
-            Assert.True(MathHelper.Equal(new Vector2(10, 7.14213568f), result));
+            result = Vector2D.Transform(new Vector2D(10, 3), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(10, 7.14213568f), result));
         }
 
         // A test for CreateSkew (float, float)
         [Fact]
-        public void Matrix3x2CreateSkewXYTest()
+        public void Matrix3x2DCreateSkewXYTest()
         {
-            Matrix3x2 expected = new Matrix3x2(1, -0.414213562373095f, 1, 1, 0, 0);
-            Matrix3x2 actual = Matrix3x2.CreateSkew(MathHelper.Pi / 4, -MathHelper.Pi / 8);
+            Matrix3x2D expected = new Matrix3x2D(1, -0.414213562373095f, 1, 1, 0, 0);
+            Matrix3x2D actual = Matrix3x2D.CreateSkew(MathHelper.Pi / 4, -MathHelper.Pi / 8);
             Assert.True(MathHelper.Equal(expected, actual));
 
-            Vector2 result = Vector2.Transform(new Vector2(0, 0), actual);
-            Assert.True(MathHelper.Equal(new Vector2(0, 0), result));
+            Vector2D result = Vector2D.Transform(new Vector2D(0, 0), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(0, 0), result));
 
-            result = Vector2.Transform(new Vector2(1, 0), actual);
-            Assert.True(MathHelper.Equal(new Vector2(1, -0.414213562373095f), result));
+            result = Vector2D.Transform(new Vector2D(1, 0), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(1, -0.414213562373095f), result));
 
-            result = Vector2.Transform(new Vector2(0, 1), actual);
-            Assert.True(MathHelper.Equal(new Vector2(1, 1), result));
+            result = Vector2D.Transform(new Vector2D(0, 1), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(1, 1), result));
 
-            result = Vector2.Transform(new Vector2(1, 1), actual);
-            Assert.True(MathHelper.Equal(new Vector2(2, 0.585786437626905f), result));
+            result = Vector2D.Transform(new Vector2D(1, 1), actual);
+            Assert.True(MathHelper.Equal(new Vector2D(2, 0.585786437626905f), result));
         }
 
-        // A test for CreateSkew (float, float, Vector2f)
+        // A test for CreateSkew (float, float, Vector2D)
         [Fact]
-        public void Matrix3x2CreateSkewCenterTest()
+        public void Matrix3x2DCreateSkewCenterTest()
         {
             float skewX = 1, skewY = 2;
-            Vector2 center = new Vector2(23, 42);
+            Vector2D center = new Vector2D(23, 42);
 
-            Matrix3x2 skewAroundZero = Matrix3x2.CreateSkew(skewX, skewY, Vector2.Zero);
-            Matrix3x2 skewAroundZeroExpected = Matrix3x2.CreateSkew(skewX, skewY);
+            Matrix3x2D skewAroundZero = Matrix3x2D.CreateSkew(skewX, skewY, Vector2D.Zero);
+            Matrix3x2D skewAroundZeroExpected = Matrix3x2D.CreateSkew(skewX, skewY);
             Assert.True(MathHelper.Equal(skewAroundZero, skewAroundZeroExpected));
 
-            Matrix3x2 skewAroundCenter = Matrix3x2.CreateSkew(skewX, skewY, center);
-            Matrix3x2 skewAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateSkew(skewX, skewY) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2D skewAroundCenter = Matrix3x2D.CreateSkew(skewX, skewY, center);
+            Matrix3x2D skewAroundCenterExpected = Matrix3x2D.CreateTranslation(-center) * Matrix3x2D.CreateSkew(skewX, skewY) * Matrix3x2D.CreateTranslation(center);
             Assert.True(MathHelper.Equal(skewAroundCenter, skewAroundCenterExpected));
         }
 
         // A test for IsIdentity
         [Fact]
-        public void Matrix3x2IsIdentityTest()
+        public void Matrix3x2DIsIdentityTest()
         {
-            Assert.True(Matrix3x2.Identity.IsIdentity);
-            Assert.True(new Matrix3x2(1, 0, 0, 1, 0, 0).IsIdentity);
-            Assert.False(new Matrix3x2(0, 0, 0, 1, 0, 0).IsIdentity);
-            Assert.False(new Matrix3x2(1, 1, 0, 1, 0, 0).IsIdentity);
-            Assert.False(new Matrix3x2(1, 0, 1, 1, 0, 0).IsIdentity);
-            Assert.False(new Matrix3x2(1, 0, 0, 0, 0, 0).IsIdentity);
-            Assert.False(new Matrix3x2(1, 0, 0, 1, 1, 0).IsIdentity);
-            Assert.False(new Matrix3x2(1, 0, 0, 1, 0, 1).IsIdentity);
+            Assert.True(Matrix3x2D.Identity.IsIdentity);
+            Assert.True(new Matrix3x2D(1, 0, 0, 1, 0, 0).IsIdentity);
+            Assert.False(new Matrix3x2D(0, 0, 0, 1, 0, 0).IsIdentity);
+            Assert.False(new Matrix3x2D(1, 1, 0, 1, 0, 0).IsIdentity);
+            Assert.False(new Matrix3x2D(1, 0, 1, 1, 0, 0).IsIdentity);
+            Assert.False(new Matrix3x2D(1, 0, 0, 0, 0, 0).IsIdentity);
+            Assert.False(new Matrix3x2D(1, 0, 0, 1, 1, 0).IsIdentity);
+            Assert.False(new Matrix3x2D(1, 0, 0, 1, 0, 1).IsIdentity);
         }
 
-        // A test for Matrix3x2 comparison involving NaN values
+        // A test for Matrix3x2D comparison involving NaN values
         [Fact]
-        public void Matrix3x2EqualsNaNTest()
+        public void Matrix3x2DEqualsNaNTest()
         {
-            Matrix3x2 a = new Matrix3x2(float.NaN, 0, 0, 0, 0, 0);
-            Matrix3x2 b = new Matrix3x2(0, float.NaN, 0, 0, 0, 0);
-            Matrix3x2 c = new Matrix3x2(0, 0, float.NaN, 0, 0, 0);
-            Matrix3x2 d = new Matrix3x2(0, 0, 0, float.NaN, 0, 0);
-            Matrix3x2 e = new Matrix3x2(0, 0, 0, 0, float.NaN, 0);
-            Matrix3x2 f = new Matrix3x2(0, 0, 0, 0, 0, float.NaN);
+            Matrix3x2D a = new Matrix3x2D(float.NaN, 0, 0, 0, 0, 0);
+            Matrix3x2D b = new Matrix3x2D(0, float.NaN, 0, 0, 0, 0);
+            Matrix3x2D c = new Matrix3x2D(0, 0, float.NaN, 0, 0, 0);
+            Matrix3x2D d = new Matrix3x2D(0, 0, 0, float.NaN, 0, 0);
+            Matrix3x2D e = new Matrix3x2D(0, 0, 0, 0, float.NaN, 0);
+            Matrix3x2D f = new Matrix3x2D(0, 0, 0, 0, 0, float.NaN);
 
-            Assert.False(a == new Matrix3x2());
-            Assert.False(b == new Matrix3x2());
-            Assert.False(c == new Matrix3x2());
-            Assert.False(d == new Matrix3x2());
-            Assert.False(e == new Matrix3x2());
-            Assert.False(f == new Matrix3x2());
+            Assert.False(a == new Matrix3x2D());
+            Assert.False(b == new Matrix3x2D());
+            Assert.False(c == new Matrix3x2D());
+            Assert.False(d == new Matrix3x2D());
+            Assert.False(e == new Matrix3x2D());
+            Assert.False(f == new Matrix3x2D());
 
-            Assert.True(a != new Matrix3x2());
-            Assert.True(b != new Matrix3x2());
-            Assert.True(c != new Matrix3x2());
-            Assert.True(d != new Matrix3x2());
-            Assert.True(e != new Matrix3x2());
-            Assert.True(f != new Matrix3x2());
+            Assert.True(a != new Matrix3x2D());
+            Assert.True(b != new Matrix3x2D());
+            Assert.True(c != new Matrix3x2D());
+            Assert.True(d != new Matrix3x2D());
+            Assert.True(e != new Matrix3x2D());
+            Assert.True(f != new Matrix3x2D());
 
-            Assert.False(a.Equals(new Matrix3x2()));
-            Assert.False(b.Equals(new Matrix3x2()));
-            Assert.False(c.Equals(new Matrix3x2()));
-            Assert.False(d.Equals(new Matrix3x2()));
-            Assert.False(e.Equals(new Matrix3x2()));
-            Assert.False(f.Equals(new Matrix3x2()));
+            Assert.False(a.Equals(new Matrix3x2D()));
+            Assert.False(b.Equals(new Matrix3x2D()));
+            Assert.False(c.Equals(new Matrix3x2D()));
+            Assert.False(d.Equals(new Matrix3x2D()));
+            Assert.False(e.Equals(new Matrix3x2D()));
+            Assert.False(f.Equals(new Matrix3x2D()));
 
             Assert.False(a.IsIdentity);
             Assert.False(b.IsIdentity);
@@ -1035,42 +1035,42 @@ namespace Invicta.Numerics.Tests
 
         // A test to make sure these types are blittable directly into GPU buffer memory layouts
         [Fact]
-        public unsafe void Matrix3x2SizeofTest()
+        public unsafe void Matrix3x2DSizeofTest()
         {
-            Assert.Equal(24, sizeof(Matrix3x2));
-            Assert.Equal(48, sizeof(Matrix3x2_2x));
-            Assert.Equal(28, sizeof(Matrix3x2PlusFloat));
-            Assert.Equal(56, sizeof(Matrix3x2PlusFloat_2x));
+            Assert.Equal(24, sizeof(Matrix3x2D));
+            Assert.Equal(48, sizeof(Matrix3x2D_2x));
+            Assert.Equal(28, sizeof(Matrix3x2DPlusFloat));
+            Assert.Equal(56, sizeof(Matrix3x2DPlusFloat_2x));
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Matrix3x2_2x
+        struct Matrix3x2D_2x
         {
-            private Matrix3x2 _a;
-            private Matrix3x2 _b;
+            private Matrix3x2D _a;
+            private Matrix3x2D _b;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Matrix3x2PlusFloat
+        struct Matrix3x2DPlusFloat
         {
-            private Matrix3x2 _v;
+            private Matrix3x2D _v;
             private float _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Matrix3x2PlusFloat_2x
+        struct Matrix3x2DPlusFloat_2x
         {
-            private Matrix3x2PlusFloat _a;
-            private Matrix3x2PlusFloat _b;
+            private Matrix3x2DPlusFloat _a;
+            private Matrix3x2DPlusFloat _b;
         }
 
         // A test to make sure the fields are laid out how we expect
         [Fact]
-        public unsafe void Matrix3x2FieldOffsetTest()
+        public unsafe void Matrix3x2DFieldOffsetTest()
         {
-            Matrix3x2 mat = new Matrix3x2();
+            Matrix3x2D mat = new Matrix3x2D();
             float* basePtr = &mat.M11; // Take address of first element
-            Matrix3x2* matPtr = &mat; // Take address of whole matrix
+            Matrix3x2D* matPtr = &mat; // Take address of whole matrix
 
             Assert.Equal(new IntPtr(basePtr), new IntPtr(matPtr));
 
@@ -1085,43 +1085,43 @@ namespace Invicta.Numerics.Tests
         }
 
         [Fact]
-        public void Matrix3x2CreateBroadcastScalarTest()
+        public void Matrix3x2DCreateBroadcastScalarTest()
         {
-            Matrix3x2 a = Matrix3x2.Create(float.Pi);
+            Matrix3x2D a = Matrix3x2D.Create(float.Pi);
 
-            Assert.Equal(Vector2.Create(float.Pi), a.X);
-            Assert.Equal(Vector2.Create(float.Pi), a.Y);
-            Assert.Equal(Vector2.Create(float.Pi), a.Z);
+            Assert.Equal(Vector2D.Create(float.Pi), a.X);
+            Assert.Equal(Vector2D.Create(float.Pi), a.Y);
+            Assert.Equal(Vector2D.Create(float.Pi), a.Z);
         }
 
         [Fact]
-        public void Matrix3x2CreateBroadcastVectorTest()
+        public void Matrix3x2DCreateBroadcastVectorTest()
         {
-            Matrix3x2 a = Matrix3x2.Create(Vector2.Create(float.Pi, float.E));
+            Matrix3x2D a = Matrix3x2D.Create(Vector2D.Create(float.Pi, float.E));
 
-            Assert.Equal(Vector2.Create(float.Pi, float.E), a.X);
-            Assert.Equal(Vector2.Create(float.Pi, float.E), a.Y);
-            Assert.Equal(Vector2.Create(float.Pi, float.E), a.Z);
+            Assert.Equal(Vector2D.Create(float.Pi, float.E), a.X);
+            Assert.Equal(Vector2D.Create(float.Pi, float.E), a.Y);
+            Assert.Equal(Vector2D.Create(float.Pi, float.E), a.Z);
         }
 
         [Fact]
-        public void Matrix3x2CreateVectorsTest()
+        public void Matrix3x2DCreateVectorsTest()
         {
-            Matrix3x2 a = Matrix3x2.Create(
-                Vector2.Create(11.0f, 12.0f),
-                Vector2.Create(21.0f, 22.0f),
-                Vector2.Create(31.0f, 32.0f)
+            Matrix3x2D a = Matrix3x2D.Create(
+                Vector2D.Create(11.0f, 12.0f),
+                Vector2D.Create(21.0f, 22.0f),
+                Vector2D.Create(31.0f, 32.0f)
             );
 
-            Assert.Equal(Vector2.Create(11.0f, 12.0f), a.X);
-            Assert.Equal(Vector2.Create(21.0f, 22.0f), a.Y);
-            Assert.Equal(Vector2.Create(31.0f, 32.0f), a.Z);
+            Assert.Equal(Vector2D.Create(11.0f, 12.0f), a.X);
+            Assert.Equal(Vector2D.Create(21.0f, 22.0f), a.Y);
+            Assert.Equal(Vector2D.Create(31.0f, 32.0f), a.Z);
         }
 
         [Fact]
-        public void Matrix3x2GetElementTest()
+        public void Matrix3x2DGetElementTest()
         {
-            Matrix3x2 a = GenerateTestMatrix();
+            Matrix3x2D a = GenerateTestMatrix();
 
             Assert.Equal(a.M11, a.X.X);
             Assert.Equal(a.M11, a[0, 0]);
@@ -1149,30 +1149,30 @@ namespace Invicta.Numerics.Tests
         }
 
         [Fact]
-        public void Matrix3x2GetRowTest()
+        public void Matrix3x2DGetRowTest()
         {
-            Matrix3x2 a = GenerateTestMatrix();
+            Matrix3x2D a = GenerateTestMatrix();
 
-            Vector2 vx = new Vector2(a.M11, a.M12);
+            Vector2D vx = new Vector2D(a.M11, a.M12);
             Assert.Equal(vx, a.X);
             Assert.Equal(vx, a[0]);
             Assert.Equal(vx, a.GetRow(0));
 
-            Vector2 vy = new Vector2(a.M21, a.M22);
+            Vector2D vy = new Vector2D(a.M21, a.M22);
             Assert.Equal(vy, a.Y);
             Assert.Equal(vy, a[1]);
             Assert.Equal(vy, a.GetRow(1));
 
-            Vector2 vz = new Vector2(a.M31, a.M32);
+            Vector2D vz = new Vector2D(a.M31, a.M32);
             Assert.Equal(vz, a.Z);
             Assert.Equal(vz, a[2]);
             Assert.Equal(vz, a.GetRow(2));
         }
 
         [Fact]
-        public void Matrix3x2WithElementTest()
+        public void Matrix3x2DWithElementTest()
         {
-            Matrix3x2 a = Matrix3x2.Identity;
+            Matrix3x2D a = Matrix3x2D.Identity;
 
             a[0, 0] = 11.0f;
             Assert.Equal(11.5f, a.WithElement(0, 0, 11.5f).M11);
@@ -1200,21 +1200,21 @@ namespace Invicta.Numerics.Tests
         }
 
         [Fact]
-        public void Matrix3x2WithRowTest()
+        public void Matrix3x2DWithRowTest()
         {
-            Matrix3x2 a = Matrix3x2.Identity;
+            Matrix3x2D a = Matrix3x2D.Identity;
 
-            a[0] = Vector2.Create(11.0f, 12.0f);
-            Assert.Equal(Vector2.Create(11.5f, 12.5f), a.WithRow(0, Vector2.Create(11.5f, 12.5f)).X);
-            Assert.Equal(Vector2.Create(11.0f, 12.0f), a.X);
+            a[0] = Vector2D.Create(11.0f, 12.0f);
+            Assert.Equal(Vector2D.Create(11.5f, 12.5f), a.WithRow(0, Vector2D.Create(11.5f, 12.5f)).X);
+            Assert.Equal(Vector2D.Create(11.0f, 12.0f), a.X);
 
-            a[1] = Vector2.Create(21.0f, 22.0f);
-            Assert.Equal(Vector2.Create(21.5f, 22.5f), a.WithRow(1, Vector2.Create(21.5f, 22.5f)).Y);
-            Assert.Equal(Vector2.Create(21.0f, 22.0f), a.Y);
+            a[1] = Vector2D.Create(21.0f, 22.0f);
+            Assert.Equal(Vector2D.Create(21.5f, 22.5f), a.WithRow(1, Vector2D.Create(21.5f, 22.5f)).Y);
+            Assert.Equal(Vector2D.Create(21.0f, 22.0f), a.Y);
 
-            a[2] = Vector2.Create(31.0f, 32.0f);
-            Assert.Equal(Vector2.Create(31.5f, 32.5f), a.WithRow(2, Vector2.Create(31.5f, 32.5f)).Z);
-            Assert.Equal(Vector2.Create(31.0f, 32.0f), a.Z);
+            a[2] = Vector2D.Create(31.0f, 32.0f);
+            Assert.Equal(Vector2D.Create(31.5f, 32.5f), a.WithRow(2, Vector2D.Create(31.5f, 32.5f)).Z);
+            Assert.Equal(Vector2D.Create(31.0f, 32.0f), a.Z);
         }
     }
 }
