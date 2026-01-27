@@ -2201,7 +2201,7 @@ namespace Invicta.Numerics.Tests
         {
             Test(Vector4D.Create(1, 2, 3, 4), Vector4D.AllBitsSet, Vector4D.Create(1, 2, 3, 4), Vector4D.Create(5, 6, 7, 8));
             Test(Vector4D.Create(5, 6, 7, 8), Vector4D.Zero, Vector4D.Create(1, 2, 3, 4), Vector4D.Create(5, 6, 7, 8));
-            Test(Vector4D.Create(1, 6, 3, 8), Vector256.Create(-1, 0, -1, 0).AsSingle().AsVector4D(), Vector4D.Create(1, 2, 3, 4), Vector4D.Create(5, 6, 7, 8));
+            Test(Vector4D.Create(1, 6, 3, 8), Vector256.Create(-1, 0, -1, 0).AsDouble().AsVector4D(), Vector4D.Create(1, 2, 3, 4), Vector4D.Create(5, 6, 7, 8));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(Vector4D expectedResult, Vector4D condition, Vector4D left, Vector4D right)

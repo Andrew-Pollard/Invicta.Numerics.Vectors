@@ -1777,7 +1777,7 @@ namespace Invicta.Numerics.Tests
         {
             Test(Vector2D.Create(1, 2), Vector2D.AllBitsSet, Vector2D.Create(1, 2), Vector2D.Create(5, 6));
             Test(Vector2D.Create(5, 6), Vector2D.Zero, Vector2D.Create(1, 2), Vector2D.Create(5, 6));
-            Test(Vector2D.Create(1, 6), Vector256.Create(-1, 0, -1, 0).AsSingle().AsVector2D(), Vector2D.Create(1, 2), Vector2D.Create(5, 6));
+            Test(Vector2D.Create(1, 6), Vector256.Create(-1, 0, -1, 0).AsDouble().AsVector2D(), Vector2D.Create(1, 2), Vector2D.Create(5, 6));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(Vector2D expectedResult, Vector2D condition, Vector2D left, Vector2D right)
