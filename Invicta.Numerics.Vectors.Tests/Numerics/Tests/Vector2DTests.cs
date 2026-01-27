@@ -1338,72 +1338,72 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.CosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CosSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.CosDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void CosDoubleTest(double value, double expectedResult, double variance)
         {
             Vector2D actualResult = Vector2D.Cos(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.ExpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ExpSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.ExpDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void ExpDoubleTest(double value, double expectedResult, double variance)
         {
             Vector2D actualResult = Vector2D.Exp(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.LogSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LogSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.LogDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void LogDoubleTest(double value, double expectedResult, double variance)
         {
             Vector2D actualResult = Vector2D.Log(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.Log2Single), MemberType = typeof(GenericMathTestMemberData))]
-        public void Log2SingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.Log2Double), MemberType = typeof(GenericMathTestMemberData))]
+        public void Log2DoubleTest(double value, double expectedResult, double variance)
         {
             Vector2D actualResult = Vector2D.Log2(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.FusedMultiplyAddSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void FusedMultiplyAddSingleTest(double left, double right, double addend, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.FusedMultiplyAddDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void FusedMultiplyAddDoubleTest(double left, double right, double addend, double expectedResult)
         {
             AssertEqual(Vector2D.Create(expectedResult), Vector2D.FusedMultiplyAdd(Vector2D.Create(left), Vector2D.Create(right), Vector2D.Create(addend)), Vector2D.Zero);
             AssertEqual(Vector2D.Create(double.MultiplyAddEstimate(left, right, addend)), Vector2D.MultiplyAddEstimate(Vector2D.Create(left), Vector2D.Create(right), Vector2D.Create(addend)), Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.ClampSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ClampSingleTest(double x, double min, double max, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.ClampDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void ClampDoubleTest(double x, double min, double max, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Clamp(Vector2D.Create(x), Vector2D.Create(min), Vector2D.Create(max));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.CopySignSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CopySignSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.CopySignDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void CopySignDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.CopySign(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.DegreesToRadiansSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void DegreesToRadiansSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.DegreesToRadiansDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void DegreesToRadiansDoubleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector2D.Create(-expectedResult), Vector2D.DegreesToRadians(Vector2D.Create(-value)), Vector2D.Create(variance));
             AssertEqual(Vector2D.Create(+expectedResult), Vector2D.DegreesToRadians(Vector2D.Create(+value)), Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.HypotSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void HypotSingleTest(double x, double y, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.HypotDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void HypotDoubleTest(double x, double y, double expectedResult, double variance)
         {
             AssertEqual(Vector2D.Create(expectedResult), Vector2D.Hypot(Vector2D.Create(-x), Vector2D.Create(-y)), Vector2D.Create(variance));
             AssertEqual(Vector2D.Create(expectedResult), Vector2D.Hypot(Vector2D.Create(-x), Vector2D.Create(+y)), Vector2D.Create(variance));
@@ -1417,120 +1417,120 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.LerpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LerpSingleTest(double x, double y, double amount, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.LerpDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void LerpDoubleTest(double x, double y, double amount, double expectedResult)
         {
             AssertEqual(Vector2D.Create(+expectedResult), Vector2D.Lerp(Vector2D.Create(+x), Vector2D.Create(+y), Vector2D.Create(amount)), Vector2D.Zero);
             AssertEqual(Vector2D.Create((expectedResult == 0.0d) ? expectedResult : -expectedResult), Vector2D.Lerp(Vector2D.Create(-x), Vector2D.Create(-y), Vector2D.Create(amount)), Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Max(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxMagnitudeDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.MaxMagnitude(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxMagnitudeNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.MaxMagnitudeNumber(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.MaxNumber(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Min(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinMagnitudeDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.MinMagnitude(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinMagnitudeNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.MinMagnitudeNumber(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector2D actualResult = Vector2D.MinNumber(Vector2D.Create(x), Vector2D.Create(y));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RadiansToDegreesSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RadiansToDegreesSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.RadiansToDegreesDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RadiansToDegreesDoubleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector2D.Create(-expectedResult), Vector2D.RadiansToDegrees(Vector2D.Create(-value)), Vector2D.Create(variance));
             AssertEqual(Vector2D.Create(+expectedResult), Vector2D.RadiansToDegrees(Vector2D.Create(+value)), Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RoundSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.RoundDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RoundDoubleTest(double value, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Round(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RoundAwayFromZeroSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundAwayFromZeroSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.RoundAwayFromZeroDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RoundAwayFromZeroDoubleTest(double value, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Round(Vector2D.Create(value), MidpointRounding.AwayFromZero);
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RoundToEvenSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundToEvenSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.RoundToEvenDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RoundToEvenDoubleTest(double value, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Round(Vector2D.Create(value), MidpointRounding.ToEven);
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.SinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.SinDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void SinDoubleTest(double value, double expectedResult, double variance)
         {
             Vector2D actualResult = Vector2D.Sin(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.SinCosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinCosSingleTest(double value, double expectedResultSin, double expectedResultCos, double allowedVarianceSin, double allowedVarianceCos)
+        [MemberData(nameof(GenericMathTestMemberData.SinCosDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void SinCosDoubleTest(double value, double expectedResultSin, double expectedResultCos, double allowedVarianceSin, double allowedVarianceCos)
         {
             (Vector2D resultSin, Vector2D resultCos) = Vector2D.SinCos(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResultSin), resultSin, Vector2D.Create(allowedVarianceSin));
@@ -1538,8 +1538,8 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.TruncateSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void TruncateSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.TruncateDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void TruncateDoubleTest(double value, double expectedResult)
         {
             Vector2D actualResult = Vector2D.Truncate(Vector2D.Create(value));
             AssertEqual(Vector2D.Create(expectedResult), actualResult, Vector2D.Zero);
@@ -1714,55 +1714,55 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsEvenIntegerTest(double value) => Assert.Equal(double.IsEvenInteger(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsEvenInteger(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsFiniteTest(double value) => Assert.Equal(double.IsFinite(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsFinite(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsInfinityTest(double value) => Assert.Equal(double.IsInfinity(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsInfinity(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsIntegerTest(double value) => Assert.Equal(double.IsInteger(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsInteger(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNaNTest(double value) => Assert.Equal(double.IsNaN(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsNaN(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNegativeTest(double value) => Assert.Equal(double.IsNegative(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsNegative(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNegativeInfinityTest(double value) => Assert.Equal(double.IsNegativeInfinity(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsNegativeInfinity(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNormalTest(double value) => Assert.Equal(double.IsNormal(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsNormal(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsOddIntegerTest(double value) => Assert.Equal(double.IsOddInteger(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsOddInteger(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsPositiveTest(double value) => Assert.Equal(double.IsPositive(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsPositive(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsPositiveInfinityTest(double value) => Assert.Equal(double.IsPositiveInfinity(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsPositiveInfinity(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsSubnormalTest(double value) => Assert.Equal(double.IsSubnormal(value) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsSubnormal(Vector2D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsZeroSingleTest(double value) => Assert.Equal((value == 0) ? Vector2D.AllBitsSet : Vector2D.Zero, Vector2D.IsZero(Vector2D.Create(value)));
 
         [Fact]

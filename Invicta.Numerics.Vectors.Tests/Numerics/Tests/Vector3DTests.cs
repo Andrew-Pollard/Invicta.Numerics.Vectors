@@ -1365,72 +1365,72 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.CosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CosSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.CosDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void CosDoubleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Cos(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.ExpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ExpSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.ExpDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void ExpDoubleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Exp(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.LogSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LogSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.LogDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void LogDoubleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Log(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.Log2Single), MemberType = typeof(GenericMathTestMemberData))]
-        public void Log2SingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.Log2Double), MemberType = typeof(GenericMathTestMemberData))]
+        public void Log2DoubleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Log2(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.FusedMultiplyAddSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void FusedMultiplyAddSingleTest(double left, double right, double addend, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.FusedMultiplyAddDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void FusedMultiplyAddDoubleTest(double left, double right, double addend, double expectedResult)
         {
             AssertEqual(Vector3D.Create(expectedResult), Vector3D.FusedMultiplyAdd(Vector3D.Create(left), Vector3D.Create(right), Vector3D.Create(addend)), Vector3D.Zero);
             AssertEqual(Vector3D.Create(double.MultiplyAddEstimate(left, right, addend)), Vector3D.MultiplyAddEstimate(Vector3D.Create(left), Vector3D.Create(right), Vector3D.Create(addend)), Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.ClampSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ClampSingleTest(double x, double min, double max, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.ClampDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void ClampDoubleTest(double x, double min, double max, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Clamp(Vector3D.Create(x), Vector3D.Create(min), Vector3D.Create(max));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.CopySignSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CopySignSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.CopySignDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void CopySignDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.CopySign(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.DegreesToRadiansSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void DegreesToRadiansSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.DegreesToRadiansDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void DegreesToRadiansDoubleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector3D.Create(-expectedResult), Vector3D.DegreesToRadians(Vector3D.Create(-value)), Vector3D.Create(variance));
             AssertEqual(Vector3D.Create(+expectedResult), Vector3D.DegreesToRadians(Vector3D.Create(+value)), Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.HypotSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void HypotSingleTest(double x, double y, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.HypotDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void HypotDoubleTest(double x, double y, double expectedResult, double variance)
         {
             AssertEqual(Vector3D.Create(expectedResult), Vector3D.Hypot(Vector3D.Create(-x), Vector3D.Create(-y)), Vector3D.Create(variance));
             AssertEqual(Vector3D.Create(expectedResult), Vector3D.Hypot(Vector3D.Create(-x), Vector3D.Create(+y)), Vector3D.Create(variance));
@@ -1444,120 +1444,120 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.LerpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LerpSingleTest(double x, double y, double amount, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.LerpDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void LerpDoubleTest(double x, double y, double amount, double expectedResult)
         {
             AssertEqual(Vector3D.Create(+expectedResult), Vector3D.Lerp(Vector3D.Create(+x), Vector3D.Create(+y), Vector3D.Create(amount)), Vector3D.Zero);
             AssertEqual(Vector3D.Create((expectedResult == 0.0d) ? expectedResult : -expectedResult), Vector3D.Lerp(Vector3D.Create(-x), Vector3D.Create(-y), Vector3D.Create(amount)), Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Max(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxMagnitudeDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MaxMagnitude(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxMagnitudeNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MaxMagnitudeNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MaxNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MaxNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MaxNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MaxNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Min(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinMagnitudeDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MinMagnitude(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinMagnitudeNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MinMagnitudeNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.MinNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinNumberSingleTest(double x, double y, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.MinNumberDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void MinNumberDoubleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MinNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RadiansToDegreesSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RadiansToDegreesSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.RadiansToDegreesDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RadiansToDegreesDoubleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector3D.Create(-expectedResult), Vector3D.RadiansToDegrees(Vector3D.Create(-value)), Vector3D.Create(variance));
             AssertEqual(Vector3D.Create(+expectedResult), Vector3D.RadiansToDegrees(Vector3D.Create(+value)), Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RoundSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.RoundDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RoundDoubleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Round(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RoundAwayFromZeroSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundAwayFromZeroSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.RoundAwayFromZeroDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RoundAwayFromZeroDoubleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Round(Vector3D.Create(value), MidpointRounding.AwayFromZero);
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.RoundToEvenSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundToEvenSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.RoundToEvenDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void RoundToEvenDoubleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Round(Vector3D.Create(value), MidpointRounding.ToEven);
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.SinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinSingleTest(double value, double expectedResult, double variance)
+        [MemberData(nameof(GenericMathTestMemberData.SinDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void SinDoubleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Sin(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.SinCosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinCosSingleTest(double value, double expectedResultSin, double expectedResultCos, double allowedVarianceSin, double allowedVarianceCos)
+        [MemberData(nameof(GenericMathTestMemberData.SinCosDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void SinCosDoubleTest(double value, double expectedResultSin, double expectedResultCos, double allowedVarianceSin, double allowedVarianceCos)
         {
             (Vector3D resultSin, Vector3D resultCos) = Vector3D.SinCos(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResultSin), resultSin, Vector3D.Create(allowedVarianceSin));
@@ -1565,8 +1565,8 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.TruncateSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void TruncateSingleTest(double value, double expectedResult)
+        [MemberData(nameof(GenericMathTestMemberData.TruncateDouble), MemberType = typeof(GenericMathTestMemberData))]
+        public void TruncateDoubleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Truncate(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1741,55 +1741,55 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsEvenIntegerTest(double value) => Assert.Equal(double.IsEvenInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsEvenInteger(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsFiniteTest(double value) => Assert.Equal(double.IsFinite(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsFinite(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsInfinityTest(double value) => Assert.Equal(double.IsInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsInfinity(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsIntegerTest(double value) => Assert.Equal(double.IsInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsInteger(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNaNTest(double value) => Assert.Equal(double.IsNaN(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNaN(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNegativeTest(double value) => Assert.Equal(double.IsNegative(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNegative(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNegativeInfinityTest(double value) => Assert.Equal(double.IsNegativeInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNegativeInfinity(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsNormalTest(double value) => Assert.Equal(double.IsNormal(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNormal(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsOddIntegerTest(double value) => Assert.Equal(double.IsOddInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsOddInteger(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsPositiveTest(double value) => Assert.Equal(double.IsPositive(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsPositive(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsPositiveInfinityTest(double value) => Assert.Equal(double.IsPositiveInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsPositiveInfinity(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsSubnormalTest(double value) => Assert.Equal(double.IsSubnormal(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsSubnormal(Vector3D.Create(value)));
 
         [Theory]
-        [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
+        [MemberData(nameof(GenericMathTestMemberData.IsTestDouble), MemberType = typeof(GenericMathTestMemberData))]
         public void IsZeroSingleTest(double value) => Assert.Equal((value == 0) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsZero(Vector3D.Create(value)));
 
         [Fact]
