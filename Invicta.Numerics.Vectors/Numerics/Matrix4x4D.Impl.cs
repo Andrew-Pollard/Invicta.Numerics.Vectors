@@ -32,9 +32,9 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public ref Matrix4x4D AsM4x4() => ref Unsafe.As<Impl, Matrix4x4D>(ref this);
 
-            private const float BillboardEpsilon = 1e-4f;
-            private const float BillboardMinAngle = 1.0f - (0.1f * (float.Pi / 180.0f)); // 0.1 degrees
-            private const float DecomposeEpsilon = 0.0001f;
+            private const double BillboardEpsilon = 1e-4d;
+            private const double BillboardMinAngle = 1.0d - (0.1d * (double.Pi / 180.0d)); // 0.1 degrees
+            private const double DecomposeEpsilon = 0.0001d;
 
             public Vector4D X;
             public Vector4D Y;
@@ -73,7 +73,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl operator *(in Impl left, float right)
+            public static Impl operator *(in Impl left, double right)
             {
                 Impl result;
 
@@ -193,7 +193,7 @@ namespace Invicta.Numerics
 
                 Vector3D axisY = rotateAxis;
 
-                float dot = Vector3D.Dot(axisY, faceDir);
+                double dot = Vector3D.Dot(axisY, faceDir);
 
                 // Generally the approximation for small angles is cos theta = 1 - theta^2 / 2,
                 // but it seems that here we are using cos theta = 1 - theta. Letting theta be the angle
@@ -203,7 +203,7 @@ namespace Invicta.Numerics
                 //
                 // So this condition checks if the faceDir is approximately the same as the rotate axis
                 // by checking if the angle between them is less than .1 degree.
-                if (float.Abs(dot) > BillboardMinAngle)
+                if (double.Abs(dot) > BillboardMinAngle)
                 {
                     // If the faceDir is approximately the same as the rotate axis, then fallback to using object forward vector
                     // as the faceDir.
@@ -213,11 +213,11 @@ namespace Invicta.Numerics
 
                     // Similar to before, check if the faceDir is still is approximately the rotate axis.
                     // If so, then use either -UnitZ or UnitX as the fallback faceDir.
-                    if (float.Abs(dot) > BillboardMinAngle)
+                    if (double.Abs(dot) > BillboardMinAngle)
                     {
                         // |axisY.Z| = |dot(axisY, -UnitZ)|, so this is checking if the rotate axis is approximately the same as -UnitZ.
                         // If is, then use UnitX as the fallback.
-                        faceDir = (float.Abs(axisY.Z) > BillboardMinAngle) ? Vector3D.UnitX : Vector3D.Create(0, 0, -1);
+                        faceDir = (double.Abs(axisY.Z) > BillboardMinAngle) ? Vector3D.UnitX : Vector3D.Create(0, 0, -1);
                     }
                 }
 
@@ -253,7 +253,7 @@ namespace Invicta.Numerics
 
                 Vector3D axisY = rotateAxis;
 
-                float dot = Vector3D.Dot(axisY, faceDir);
+                double dot = Vector3D.Dot(axisY, faceDir);
 
                 // Generally the approximation for small angles is cos theta = 1 - theta^2 / 2,
                 // but it seems that here we are using cos theta = 1 - theta. Letting theta be the angle
@@ -263,7 +263,7 @@ namespace Invicta.Numerics
                 //
                 // So this condition checks if the faceDir is approximately the same as the rotate axis
                 // by checking if the angle between them is less than .1 degree.
-                if (float.Abs(dot) > BillboardMinAngle)
+                if (double.Abs(dot) > BillboardMinAngle)
                 {
                     // If the faceDir is approximately the same as the rotate axis, then fallback to using object forward vector
                     // as the faceDir.
@@ -273,11 +273,11 @@ namespace Invicta.Numerics
 
                     // Similar to before, check if the faceDir is still is approximately the rotate axis.
                     // If so, then use either -UnitZ or -UnitX as the fallback faceDir.
-                    if (float.Abs(dot) > BillboardMinAngle)
+                    if (double.Abs(dot) > BillboardMinAngle)
                     {
                         // |axisY.Z| = |dot(axisY, -UnitZ)|, so this is checking if the rotate axis is approximately the same as -UnitZ.
                         // If is, then use -UnitX as the fallback.
-                        faceDir = (float.Abs(axisY.Z) > BillboardMinAngle) ? Vector3D.Create(-1, 0, 0) : Vector3D.Create(0, 0, -1);
+                        faceDir = (double.Abs(axisY.Z) > BillboardMinAngle) ? Vector3D.Create(-1, 0, 0) : Vector3D.Create(0, 0, -1);
                     }
                 }
 
@@ -295,7 +295,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateFromAxisAngle(in Vector3D axis, float angle)
+            public static Impl CreateFromAxisAngle(in Vector3D axis, double angle)
             {
                 QuaternionD q = QuaternionD.CreateFromAxisAngle(axis, angle);
                 return CreateFromQuaternion(q);
@@ -304,35 +304,35 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl CreateFromQuaternion(in QuaternionD quaternion)
             {
-                float xx = quaternion.X * quaternion.X;
-                float yy = quaternion.Y * quaternion.Y;
-                float zz = quaternion.Z * quaternion.Z;
+                double xx = quaternion.X * quaternion.X;
+                double yy = quaternion.Y * quaternion.Y;
+                double zz = quaternion.Z * quaternion.Z;
 
-                float xy = quaternion.X * quaternion.Y;
-                float wz = quaternion.Z * quaternion.W;
-                float xz = quaternion.Z * quaternion.X;
-                float wy = quaternion.Y * quaternion.W;
-                float yz = quaternion.Y * quaternion.Z;
-                float wx = quaternion.X * quaternion.W;
+                double xy = quaternion.X * quaternion.Y;
+                double wz = quaternion.Z * quaternion.W;
+                double xz = quaternion.Z * quaternion.X;
+                double wy = quaternion.Y * quaternion.W;
+                double yz = quaternion.Y * quaternion.Z;
+                double wx = quaternion.X * quaternion.W;
 
                 Impl result;
 
                 result.X = Vector4D.Create(
-                    1.0f - 2.0f * (yy + zz),
-                    2.0f * (xy + wz),
-                    2.0f * (xz - wy),
+                    1.0d - 2.0d * (yy + zz),
+                    2.0d * (xy + wz),
+                    2.0d * (xz - wy),
                     0
                 );
                 result.Y = Vector4D.Create(
-                    2.0f * (xy - wz),
-                    1.0f - 2.0f * (zz + xx),
-                    2.0f * (yz + wx),
+                    2.0d * (xy - wz),
+                    1.0d - 2.0d * (zz + xx),
+                    2.0d * (yz + wx),
                     0
                 );
                 result.Z = Vector4D.Create(
-                    2.0f * (xz + wy),
-                    2.0f * (yz - wx),
-                    1.0f - 2.0f * (yy + xx),
+                    2.0d * (xz + wy),
+                    2.0d * (yz - wx),
+                    1.0d - 2.0d * (yy + xx),
                     0
                 );
                 result.W = Vector4D.UnitW;
@@ -341,7 +341,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateFromYawPitchRoll(float yaw, float pitch, float roll)
+            public static Impl CreateFromYawPitchRoll(double yaw, double pitch, double roll)
             {
                 QuaternionD q = QuaternionD.CreateFromYawPitchRoll(yaw, pitch, roll);
                 return CreateFromQuaternion(q);
@@ -378,17 +378,17 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographic(double width, double height, double zNearPlane, double zFarPlane)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixOrthographicRH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                float range = 1.0f / (zNearPlane - zFarPlane);
+                double range = 1.0d / (zNearPlane - zFarPlane);
 
                 Impl result;
 
-                result.X = Vector4D.Create(2.0f / width, 0, 0, 0);
-                result.Y = Vector4D.Create(0, 2.0f / height, 0, 0);
+                result.X = Vector4D.Create(2.0d / width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, 2.0d / height, 0, 0);
                 result.Z = Vector4D.Create(0, 0, range, 0);
                 result.W = Vector4D.Create(0, 0, range * zNearPlane, 1);
 
@@ -396,17 +396,17 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographicLeftHanded(float width, float height, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographicLeftHanded(double width, double height, double zNearPlane, double zFarPlane)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixOrthographicLH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                float range = 1.0f / (zFarPlane - zNearPlane);
+                double range = 1.0d / (zFarPlane - zNearPlane);
 
                 Impl result;
 
-                result.X = Vector4D.Create(2.0f / width, 0, 0, 0);
-                result.Y = Vector4D.Create(0, 2.0f / height, 0, 0);
+                result.X = Vector4D.Create(2.0d / width, 0, 0, 0);
+                result.Y = Vector4D.Create(0, 2.0d / height, 0, 0);
                 result.Z = Vector4D.Create(0, 0, range, 0);
                 result.W = Vector4D.Create(0, 0, -range * zNearPlane, 1);
 
@@ -414,14 +414,14 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographicOffCenter(double left, double right, double bottom, double top, double zNearPlane, double zFarPlane)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixOrthographicOffCenterRH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                float reciprocalWidth = 1.0f / (right - left);
-                float reciprocalHeight = 1.0f / (top - bottom);
-                float range = 1.0f / (zNearPlane - zFarPlane);
+                double reciprocalWidth = 1.0d / (right - left);
+                double reciprocalHeight = 1.0d / (top - bottom);
+                double range = 1.0d / (zNearPlane - zFarPlane);
 
                 Impl result;
 
@@ -439,14 +439,14 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographicOffCenterLeftHanded(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographicOffCenterLeftHanded(double left, double right, double bottom, double top, double zNearPlane, double zFarPlane)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixOrthographicOffCenterLH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                float reciprocalWidth = 1.0f / (right - left);
-                float reciprocalHeight = 1.0f / (top - bottom);
-                float range = 1.0f / (zFarPlane - zNearPlane);
+                double reciprocalWidth = 1.0d / (right - left);
+                double reciprocalHeight = 1.0d / (top - bottom);
+                double range = 1.0d / (zFarPlane - zNearPlane);
 
                 Impl result;
 
@@ -464,119 +464,119 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspective(double width, double height, double nearPlaneDistance, double farPlaneDistance)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixPerspectiveRH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0d);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
 
-                float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? -1.0f : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                double dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
+                double range = double.IsPositiveInfinity(farPlaneDistance) ? -1.0d : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
                 Impl result;
 
                 result.X = Vector4D.Create(dblNearPlaneDistance / width, 0, 0, 0);
                 result.Y = Vector4D.Create(0, dblNearPlaneDistance / height, 0, 0);
-                result.Z = Vector4D.Create(0, 0, range, -1.0f);
+                result.Z = Vector4D.Create(0, 0, range, -1.0d);
                 result.W = Vector4D.Create(0, 0, range * nearPlaneDistance, 0);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveLeftHanded(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveLeftHanded(double width, double height, double nearPlaneDistance, double farPlaneDistance)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixPerspectiveLH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0d);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
 
-                float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? 1.0f : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
+                double dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
+                double range = double.IsPositiveInfinity(farPlaneDistance) ? 1.0d : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
 
                 Impl result;
 
                 result.X = Vector4D.Create(dblNearPlaneDistance / width, 0, 0, 0);
                 result.Y = Vector4D.Create(0, dblNearPlaneDistance / height, 0, 0);
-                result.Z = Vector4D.Create(0, 0, range, 1.0f);
+                result.Z = Vector4D.Create(0, 0, range, 1.0d);
                 result.W = Vector4D.Create(0, 0, -range * nearPlaneDistance, 0);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveFieldOfView(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixPerspectiveFovRH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fieldOfView, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fieldOfView, float.Pi);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fieldOfView, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fieldOfView, double.Pi);
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0d);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
 
-                float height = 1.0f / float.Tan(fieldOfView * 0.5f);
-                float width = height / aspectRatio;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? -1.0f : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                double height = 1.0d / double.Tan(fieldOfView * 0.5d);
+                double width = height / aspectRatio;
+                double range = double.IsPositiveInfinity(farPlaneDistance) ? -1.0d : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
                 Impl result;
 
                 result.X = Vector4D.Create(width, 0, 0, 0);
                 result.Y = Vector4D.Create(0, height, 0, 0);
-                result.Z = Vector4D.Create(0, 0, range, -1.0f);
+                result.Z = Vector4D.Create(0, 0, range, -1.0d);
                 result.W = Vector4D.Create(0, 0, range * nearPlaneDistance, 0);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveFieldOfViewLeftHanded(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveFieldOfViewLeftHanded(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixPerspectiveFovLH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fieldOfView, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fieldOfView, float.Pi);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fieldOfView, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fieldOfView, double.Pi);
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0d);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
 
-                float height = 1.0f / float.Tan(fieldOfView * 0.5f);
-                float width = height / aspectRatio;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? 1.0f : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
+                double height = 1.0d / double.Tan(fieldOfView * 0.5d);
+                double width = height / aspectRatio;
+                double range = double.IsPositiveInfinity(farPlaneDistance) ? 1.0d : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
 
                 Impl result;
 
                 result.X = Vector4D.Create(width, 0, 0, 0);
                 result.Y = Vector4D.Create(0, height, 0, 0);
-                result.Z = Vector4D.Create(0, 0, range, 1.0f);
+                result.Z = Vector4D.Create(0, 0, range, 1.0d);
                 result.W = Vector4D.Create(0, 0, -range * nearPlaneDistance, 0);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveOffCenter(double left, double right, double bottom, double top, double nearPlaneDistance, double farPlaneDistance)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixPerspectiveOffCenterRH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0d);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
 
-                float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
-                float reciprocalWidth = 1.0f / (right - left);
-                float reciprocalHeight = 1.0f / (top - bottom);
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? -1.0f : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                double dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
+                double reciprocalWidth = 1.0d / (right - left);
+                double reciprocalHeight = 1.0d / (top - bottom);
+                double range = double.IsPositiveInfinity(farPlaneDistance) ? -1.0d : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
                 Impl result;
 
@@ -586,7 +586,7 @@ namespace Invicta.Numerics
                     (left + right) * reciprocalWidth,
                     (top + bottom) * reciprocalHeight,
                     range,
-                    -1.0f
+                    -1.0d
                 );
                 result.W = Vector4D.Create(0, 0, range * nearPlaneDistance, 0);
 
@@ -594,19 +594,19 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveOffCenterLeftHanded(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveOffCenterLeftHanded(double left, double right, double bottom, double top, double nearPlaneDistance, double farPlaneDistance)
             {
                 // This implementation is based on the DirectX Math Library XMMatrixPerspectiveOffCenterLH method
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0d);
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0d);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
 
-                float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
-                float reciprocalWidth = 1.0f / (right - left);
-                float reciprocalHeight = 1.0f / (top - bottom);
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? 1.0f : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
+                double dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
+                double reciprocalWidth = 1.0d / (right - left);
+                double reciprocalHeight = 1.0d / (top - bottom);
+                double range = double.IsPositiveInfinity(farPlaneDistance) ? 1.0d : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
 
                 Impl result;
 
@@ -616,7 +616,7 @@ namespace Invicta.Numerics
                     -(left + right) * reciprocalWidth,
                     -(top + bottom) * reciprocalHeight,
                     range,
-                    1.0f
+                    1.0d
                 );
                 result.W = Vector4D.Create(0, 0, -range * nearPlaneDistance, 0);
 
@@ -630,7 +630,7 @@ namespace Invicta.Numerics
                 // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMatrix.inl
 
                 Vector4D p = PlaneD.Normalize(value).AsVector4D();
-                Vector4D s = p * Vector4D.Create(-2.0f, -2.0f, -2.0f, 0.0f);
+                Vector4D s = p * Vector4D.Create(-2.0d, -2.0d, -2.0d, 0.0d);
 
                 Impl result;
 
@@ -643,9 +643,9 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationX(float radians)
+            public static Impl CreateRotationX(double radians)
             {
-                (float s, float c) = float.SinCos(radians);
+                (double s, double c) = double.SinCos(radians);
 
                 // [  1  0  0  0 ]
                 // [  0  c  s  0 ]
@@ -663,12 +663,12 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationX(float radians, in Vector3D centerPoint)
+            public static Impl CreateRotationX(double radians, in Vector3D centerPoint)
             {
-                (float s, float c) = float.SinCos(radians);
+                (double s, double c) = double.SinCos(radians);
 
-                float y = float.MultiplyAddEstimate(centerPoint.Y, 1 - c, +centerPoint.Z * s);
-                float z = float.MultiplyAddEstimate(centerPoint.Z, 1 - c, -centerPoint.Y * s);
+                double y = double.MultiplyAddEstimate(centerPoint.Y, 1 - c, +centerPoint.Z * s);
+                double z = double.MultiplyAddEstimate(centerPoint.Z, 1 - c, -centerPoint.Y * s);
 
                 // [  1  0  0  0 ]
                 // [  0  c  s  0 ]
@@ -686,9 +686,9 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationY(float radians)
+            public static Impl CreateRotationY(double radians)
             {
-                (float s, float c) = float.SinCos(radians);
+                (double s, double c) = double.SinCos(radians);
 
                 // [  c  0 -s  0 ]
                 // [  0  1  0  0 ]
@@ -706,12 +706,12 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationY(float radians, in Vector3D centerPoint)
+            public static Impl CreateRotationY(double radians, in Vector3D centerPoint)
             {
-                (float s, float c) = float.SinCos(radians);
+                (double s, double c) = double.SinCos(radians);
 
-                float x = float.MultiplyAddEstimate(centerPoint.X, 1 - c, -centerPoint.Z * s);
-                float z = float.MultiplyAddEstimate(centerPoint.Z, 1 - c, +centerPoint.X * s);
+                double x = double.MultiplyAddEstimate(centerPoint.X, 1 - c, -centerPoint.Z * s);
+                double z = double.MultiplyAddEstimate(centerPoint.Z, 1 - c, +centerPoint.X * s);
 
                 // [  c  0 -s  0 ]
                 // [  0  1  0  0 ]
@@ -729,9 +729,9 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationZ(float radians)
+            public static Impl CreateRotationZ(double radians)
             {
-                (float s, float c) = float.SinCos(radians);
+                (double s, double c) = double.SinCos(radians);
 
                 // [  c  s  0  0 ]
                 // [ -s  c  0  0 ]
@@ -749,12 +749,12 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotationZ(float radians, in Vector3D centerPoint)
+            public static Impl CreateRotationZ(double radians, in Vector3D centerPoint)
             {
-                (float s, float c) = float.SinCos(radians);
+                (double s, double c) = double.SinCos(radians);
 
-                float x = float.MultiplyAddEstimate(centerPoint.X, 1 - c, +centerPoint.Y * s);
-                float y = float.MultiplyAddEstimate(centerPoint.Y, 1 - c, -centerPoint.X * s);
+                double x = double.MultiplyAddEstimate(centerPoint.X, 1 - c, +centerPoint.Y * s);
+                double y = double.MultiplyAddEstimate(centerPoint.Y, 1 - c, -centerPoint.X * s);
 
                 // [  c  s  0  0 ]
                 // [ -s  c  0  0 ]
@@ -772,7 +772,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY, float scaleZ)
+            public static Impl CreateScale(double scaleX, double scaleY, double scaleZ)
             {
                 Impl result;
 
@@ -785,7 +785,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY, float scaleZ, in Vector3D centerPoint)
+            public static Impl CreateScale(double scaleX, double scaleY, double scaleZ, in Vector3D centerPoint)
             {
                 Impl result;
 
@@ -824,7 +824,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scale)
+            public static Impl CreateScale(double scale)
             {
                 Impl result;
 
@@ -837,7 +837,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scale, in Vector3D centerPoint)
+            public static Impl CreateScale(double scale, in Vector3D centerPoint)
             {
                 Impl result;
 
@@ -854,7 +854,7 @@ namespace Invicta.Numerics
             {
                 Vector4D p = PlaneD.Normalize(plane).AsVector4D();
                 Vector4D l = lightDirection.AsVector4D();
-                float dot = Vector4D.Dot(p, l);
+                double dot = Vector4D.Dot(p, l);
 
                 p = -p;
 
@@ -882,7 +882,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateTranslation(float positionX, float positionY, float positionZ)
+            public static Impl CreateTranslation(double positionX, double positionY, double positionZ)
             {
                 Impl result;
 
@@ -896,35 +896,35 @@ namespace Invicta.Numerics
 
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateViewport(float x, float y, float width, float height, float minDepth, float maxDepth)
+            public static Impl CreateViewport(double x, double y, double width, double height, double minDepth, double maxDepth)
             {
                 Impl result;
 
                 // 4x SIMD fields to get a lot better codegen
-                result.W = Vector4D.Create(width, height, 0f, 0f);
-                result.W *= Vector4D.Create(0.5f, 0.5f, 0f, 0f);
+                result.W = Vector4D.Create(width, height, 0d, 0d);
+                result.W *= Vector4D.Create(0.5d, 0.5d, 0d, 0d);
 
-                result.X = Vector4D.Create(result.W.X, 0f, 0f, 0f);
-                result.Y = Vector4D.Create(0f, -result.W.Y, 0f, 0f);
-                result.Z = Vector4D.Create(0f, 0f, minDepth - maxDepth, 0f);
-                result.W += Vector4D.Create(x, y, minDepth, 1f);
+                result.X = Vector4D.Create(result.W.X, 0d, 0d, 0d);
+                result.Y = Vector4D.Create(0d, -result.W.Y, 0d, 0d);
+                result.Z = Vector4D.Create(0d, 0d, minDepth - maxDepth, 0d);
+                result.W += Vector4D.Create(x, y, minDepth, 1d);
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateViewportLeftHanded(float x, float y, float width, float height, float minDepth, float maxDepth)
+            public static Impl CreateViewportLeftHanded(double x, double y, double width, double height, double minDepth, double maxDepth)
             {
                 Impl result;
 
                 // 4x SIMD fields to get a lot better codegen
-                result.W = Vector4D.Create(width, height, 0f, 0f);
-                result.W *= Vector4D.Create(0.5f, 0.5f, 0f, 0f);
+                result.W = Vector4D.Create(width, height, 0d, 0d);
+                result.W *= Vector4D.Create(0.5d, 0.5d, 0d, 0d);
 
-                result.X = Vector4D.Create(result.W.X, 0f, 0f, 0f);
-                result.Y = Vector4D.Create(0f, -result.W.Y, 0f, 0f);
-                result.Z = Vector4D.Create(0f, 0f, maxDepth - minDepth, 0f);
-                result.W += Vector4D.Create(x, y, minDepth, 1f);
+                result.X = Vector4D.Create(result.W.X, 0d, 0d, 0d);
+                result.Y = Vector4D.Create(0d, -result.W.Y, 0d, 0d);
+                result.Z = Vector4D.Create(0d, 0d, maxDepth - minDepth, 0d);
+                result.W += Vector4D.Create(x, y, minDepth, 1d);
 
                 return result;
             }
@@ -969,7 +969,7 @@ namespace Invicta.Numerics
                 *(vectorBasis[1]) = matrix.Y.AsVector3D();
                 *(vectorBasis[2]) = matrix.Z.AsVector3D();
 
-                float* scales = stackalloc float[3] {
+                double* scales = stackalloc double[3] {
                     vectorBasis[0]->Length(),
                     vectorBasis[1]->Length(),
                     vectorBasis[2]->Length(),
@@ -978,9 +978,9 @@ namespace Invicta.Numerics
                 uint a, b, c;
 
                 #region Ranking
-                float x = scales[0];
-                float y = scales[1];
-                float z = scales[2];
+                double x = scales[0];
+                double y = scales[1];
+                double z = scales[2];
 
                 if (x < y)
                 {
@@ -1042,11 +1042,11 @@ namespace Invicta.Numerics
                 if (scales[b] < DecomposeEpsilon)
                 {
                     uint cc;
-                    float fAbsX, fAbsY, fAbsZ;
+                    double fAbsX, fAbsY, fAbsZ;
 
-                    fAbsX = float.Abs(vectorBasis[a]->X);
-                    fAbsY = float.Abs(vectorBasis[a]->Y);
-                    fAbsZ = float.Abs(vectorBasis[a]->Z);
+                    fAbsX = double.Abs(vectorBasis[a]->X);
+                    fAbsY = double.Abs(vectorBasis[a]->Y);
+                    fAbsZ = double.Abs(vectorBasis[a]->Z);
 
                     #region Ranking
                     if (fAbsX < fAbsY)
@@ -1099,10 +1099,10 @@ namespace Invicta.Numerics
 
                 *vectorBasis[c] = Vector3D.Normalize(*vectorBasis[c]);
 
-                float det = matTemp.GetDeterminant();
+                double det = matTemp.GetDeterminant();
 
                 // use Kramer's rule to check for handedness of coordinate system
-                if (det < 0.0f)
+                if (det < 0.0d)
                 {
                     // switch coordinate system by negating the scale and inverting the basis vector on the x-axis
                     scales[a] = -scales[a];
@@ -1111,7 +1111,7 @@ namespace Invicta.Numerics
                     det = -det;
                 }
 
-                det -= 1.0f;
+                det -= 1.0d;
                 det *= det;
 
                 bool result;
@@ -1403,28 +1403,28 @@ namespace Invicta.Numerics
                     // Cost of operation
                     // 53 adds, 104 muls, and 1 div.
 
-                    float a = matrix.X.X, b = matrix.X.Y, c = matrix.X.Z, d = matrix.X.W;
-                    float e = matrix.Y.X, f = matrix.Y.Y, g = matrix.Y.Z, h = matrix.Y.W;
-                    float i = matrix.Z.X, j = matrix.Z.Y, k = matrix.Z.Z, l = matrix.Z.W;
-                    float m = matrix.W.X, n = matrix.W.Y, o = matrix.W.Z, p = matrix.W.W;
+                    double a = matrix.X.X, b = matrix.X.Y, c = matrix.X.Z, d = matrix.X.W;
+                    double e = matrix.Y.X, f = matrix.Y.Y, g = matrix.Y.Z, h = matrix.Y.W;
+                    double i = matrix.Z.X, j = matrix.Z.Y, k = matrix.Z.Z, l = matrix.Z.W;
+                    double m = matrix.W.X, n = matrix.W.Y, o = matrix.W.Z, p = matrix.W.W;
 
-                    float kp_lo = k * p - l * o;
-                    float jp_ln = j * p - l * n;
-                    float jo_kn = j * o - k * n;
-                    float ip_lm = i * p - l * m;
-                    float io_km = i * o - k * m;
-                    float in_jm = i * n - j * m;
+                    double kp_lo = k * p - l * o;
+                    double jp_ln = j * p - l * n;
+                    double jo_kn = j * o - k * n;
+                    double ip_lm = i * p - l * m;
+                    double io_km = i * o - k * m;
+                    double in_jm = i * n - j * m;
 
-                    float a11 = +(f * kp_lo - g * jp_ln + h * jo_kn);
-                    float a12 = -(e * kp_lo - g * ip_lm + h * io_km);
-                    float a13 = +(e * jp_ln - f * ip_lm + h * in_jm);
-                    float a14 = -(e * jo_kn - f * io_km + g * in_jm);
+                    double a11 = +(f * kp_lo - g * jp_ln + h * jo_kn);
+                    double a12 = -(e * kp_lo - g * ip_lm + h * io_km);
+                    double a13 = +(e * jp_ln - f * ip_lm + h * in_jm);
+                    double a14 = -(e * jo_kn - f * io_km + g * in_jm);
 
-                    float det = a * a11 + b * a12 + c * a13 + d * a14;
+                    double det = a * a11 + b * a12 + c * a13 + d * a14;
 
-                    if (float.Abs(det) < float.Epsilon)
+                    if (double.Abs(det) < double.Epsilon)
                     {
-                        Vector4D vNaN = Vector4D.Create(float.NaN);
+                        Vector4D vNaN = Vector4D.Create(double.NaN);
 
                         result.X = vNaN;
                         result.Y = vNaN;
@@ -1434,7 +1434,7 @@ namespace Invicta.Numerics
                         return false;
                     }
 
-                    float invDet = 1.0f / det;
+                    double invDet = 1.0d / det;
 
                     result.X.X = a11 * invDet;
                     result.Y.X = a12 * invDet;
@@ -1446,24 +1446,24 @@ namespace Invicta.Numerics
                     result.Z.Y = -(a * jp_ln - b * ip_lm + d * in_jm) * invDet;
                     result.W.Y = +(a * jo_kn - b * io_km + c * in_jm) * invDet;
 
-                    float gp_ho = g * p - h * o;
-                    float fp_hn = f * p - h * n;
-                    float fo_gn = f * o - g * n;
-                    float ep_hm = e * p - h * m;
-                    float eo_gm = e * o - g * m;
-                    float en_fm = e * n - f * m;
+                    double gp_ho = g * p - h * o;
+                    double fp_hn = f * p - h * n;
+                    double fo_gn = f * o - g * n;
+                    double ep_hm = e * p - h * m;
+                    double eo_gm = e * o - g * m;
+                    double en_fm = e * n - f * m;
 
                     result.X.Z = +(b * gp_ho - c * fp_hn + d * fo_gn) * invDet;
                     result.Y.Z = -(a * gp_ho - c * ep_hm + d * eo_gm) * invDet;
                     result.Z.Z = +(a * fp_hn - b * ep_hm + d * en_fm) * invDet;
                     result.W.Z = -(a * fo_gn - b * eo_gm + c * en_fm) * invDet;
 
-                    float gl_hk = g * l - h * k;
-                    float fl_hj = f * l - h * j;
-                    float fk_gj = f * k - g * j;
-                    float el_hi = e * l - h * i;
-                    float ek_gi = e * k - g * i;
-                    float ej_fi = e * j - f * i;
+                    double gl_hk = g * l - h * k;
+                    double fl_hj = f * l - h * j;
+                    double fk_gj = f * k - g * j;
+                    double el_hi = e * l - h * i;
+                    double ek_gi = e * k - g * i;
+                    double ej_fi = e * j - f * i;
 
                     result.X.W = -(b * gl_hk - c * fl_hj + d * fk_gj) * invDet;
                     result.Y.W = +(a * gl_hk - c * el_hi + d * ek_gi) * invDet;
@@ -1475,7 +1475,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl Lerp(in Impl left, in Impl right, float amount)
+            public static Impl Lerp(in Impl left, in Impl right, double amount)
             {
                 Impl result;
 
@@ -1491,33 +1491,33 @@ namespace Invicta.Numerics
             public static Impl Transform(in Impl value, in QuaternionD rotation)
             {
                 // Compute rotation matrix.
-                float x2 = rotation.X + rotation.X;
-                float y2 = rotation.Y + rotation.Y;
-                float z2 = rotation.Z + rotation.Z;
+                double x2 = rotation.X + rotation.X;
+                double y2 = rotation.Y + rotation.Y;
+                double z2 = rotation.Z + rotation.Z;
 
-                float wx2 = rotation.W * x2;
-                float wy2 = rotation.W * y2;
-                float wz2 = rotation.W * z2;
+                double wx2 = rotation.W * x2;
+                double wy2 = rotation.W * y2;
+                double wz2 = rotation.W * z2;
 
-                float xx2 = rotation.X * x2;
-                float xy2 = rotation.X * y2;
-                float xz2 = rotation.X * z2;
+                double xx2 = rotation.X * x2;
+                double xy2 = rotation.X * y2;
+                double xz2 = rotation.X * z2;
 
-                float yy2 = rotation.Y * y2;
-                float yz2 = rotation.Y * z2;
-                float zz2 = rotation.Z * z2;
+                double yy2 = rotation.Y * y2;
+                double yz2 = rotation.Y * z2;
+                double zz2 = rotation.Z * z2;
 
-                float q11 = 1.0f - yy2 - zz2;
-                float q21 = xy2 - wz2;
-                float q31 = xz2 + wy2;
+                double q11 = 1.0d - yy2 - zz2;
+                double q21 = xy2 - wz2;
+                double q31 = xz2 + wy2;
 
-                float q12 = xy2 + wz2;
-                float q22 = 1.0f - xx2 - zz2;
-                float q32 = yz2 - wx2;
+                double q12 = xy2 + wz2;
+                double q22 = 1.0d - xx2 - zz2;
+                double q32 = yz2 - wx2;
 
-                float q13 = xz2 - wy2;
-                float q23 = yz2 + wx2;
-                float q33 = 1.0f - xx2 - yy2;
+                double q13 = xz2 - wy2;
+                double q23 = yz2 + wx2;
+                double q33 = 1.0d - xx2 - yy2;
 
                 Impl result;
 
@@ -1559,15 +1559,15 @@ namespace Invicta.Numerics
 
                 if (AdvSimd.Arm64.IsSupported)
                 {
-                    Vector128<float> x = matrix.X.AsVector128();
-                    Vector128<float> y = matrix.Y.AsVector128();
-                    Vector128<float> z = matrix.Z.AsVector128();
-                    Vector128<float> w = matrix.W.AsVector128();
+                    Vector128<double> x = matrix.X.AsVector128();
+                    Vector128<double> y = matrix.Y.AsVector128();
+                    Vector128<double> z = matrix.Z.AsVector128();
+                    Vector128<double> w = matrix.W.AsVector128();
 
-                    Vector128<float> lowerXZ = AdvSimd.Arm64.ZipLow(x, z);          // x[0], z[0], x[1], z[1]
-                    Vector128<float> lowerYW = AdvSimd.Arm64.ZipLow(y, w);          // y[0], w[0], y[1], w[1]
-                    Vector128<float> upperXZ = AdvSimd.Arm64.ZipHigh(x, z);         // x[2], z[2], x[3], z[3]
-                    Vector128<float> upperYW = AdvSimd.Arm64.ZipHigh(y, w);         // y[2], w[2], y[3], z[3]
+                    Vector128<double> lowerXZ = AdvSimd.Arm64.ZipLow(x, z);          // x[0], z[0], x[1], z[1]
+                    Vector128<double> lowerYW = AdvSimd.Arm64.ZipLow(y, w);          // y[0], w[0], y[1], w[1]
+                    Vector128<double> upperXZ = AdvSimd.Arm64.ZipHigh(x, z);         // x[2], z[2], x[3], z[3]
+                    Vector128<double> upperYW = AdvSimd.Arm64.ZipHigh(y, w);         // y[2], w[2], y[3], z[3]
 
                     result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4D();  // x[0], y[0], z[0], w[0]
                     result.Y = AdvSimd.Arm64.ZipHigh(lowerXZ, lowerYW).AsVector4D(); // x[1], y[1], z[1], w[1]
@@ -1576,15 +1576,15 @@ namespace Invicta.Numerics
                 }
                 else if (Sse.IsSupported)
                 {
-                    Vector128<float> x = matrix.X.AsVector128();
-                    Vector128<float> y = matrix.Y.AsVector128();
-                    Vector128<float> z = matrix.Z.AsVector128();
-                    Vector128<float> w = matrix.W.AsVector128();
+                    Vector128<double> x = matrix.X.AsVector128();
+                    Vector128<double> y = matrix.Y.AsVector128();
+                    Vector128<double> z = matrix.Z.AsVector128();
+                    Vector128<double> w = matrix.W.AsVector128();
 
-                    Vector128<float> lowerXZ = Sse.UnpackLow(x, z);                 // x[0], z[0], x[1], z[1]
-                    Vector128<float> lowerYW = Sse.UnpackLow(y, w);                 // y[0], w[0], y[1], w[1]
-                    Vector128<float> upperXZ = Sse.UnpackHigh(x, z);                // x[2], z[2], x[3], z[3]
-                    Vector128<float> upperYW = Sse.UnpackHigh(y, w);                // y[2], w[2], y[3], z[3]
+                    Vector128<double> lowerXZ = Sse.UnpackLow(x, z);                 // x[0], z[0], x[1], z[1]
+                    Vector128<double> lowerYW = Sse.UnpackLow(y, w);                 // y[0], w[0], y[1], w[1]
+                    Vector128<double> upperXZ = Sse.UnpackHigh(x, z);                // x[2], z[2], x[3], z[3]
+                    Vector128<double> upperYW = Sse.UnpackHigh(y, w);                // y[2], w[2], y[3], z[3]
 
                     result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4D();         // x[0], y[0], z[0], w[0]
                     result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4D();        // x[1], y[1], z[1], w[1]
@@ -1619,7 +1619,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public readonly float GetDeterminant()
+            public readonly double GetDeterminant()
             {
                 // | a b c d |     | f g h |     | e g h |     | e f h |     | e f g |
                 // | e f g h | = a | j k l | - b | i k l | + c | i j l | - d | i j k |
@@ -1648,17 +1648,17 @@ namespace Invicta.Numerics
                 // add: 6 + 8 + 3 = 17
                 // mul: 12 + 16 = 28
 
-                float a = X.X, b = X.Y, c = X.Z, d = X.W;
-                float e = Y.X, f = Y.Y, g = Y.Z, h = Y.W;
-                float i = Z.X, j = Z.Y, k = Z.Z, l = Z.W;
-                float m = W.X, n = W.Y, o = W.Z, p = W.W;
+                double a = X.X, b = X.Y, c = X.Z, d = X.W;
+                double e = Y.X, f = Y.Y, g = Y.Z, h = Y.W;
+                double i = Z.X, j = Z.Y, k = Z.Z, l = Z.W;
+                double m = W.X, n = W.Y, o = W.Z, p = W.W;
 
-                float kp_lo = k * p - l * o;
-                float jp_ln = j * p - l * n;
-                float jo_kn = j * o - k * n;
-                float ip_lm = i * p - l * m;
-                float io_km = i * o - k * m;
-                float in_jm = i * n - j * m;
+                double kp_lo = k * p - l * o;
+                double jp_ln = j * p - l * n;
+                double jo_kn = j * o - k * n;
+                double ip_lm = i * p - l * m;
+                double io_km = i * o - k * m;
+                double in_jm = i * n - j * m;
 
                 return a * (f * kp_lo - g * jp_ln + h * jo_kn) -
                        b * (e * kp_lo - g * ip_lm + h * io_km) +
