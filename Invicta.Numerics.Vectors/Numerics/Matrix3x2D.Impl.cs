@@ -29,7 +29,7 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public ref Matrix3x2D AsM3x2() => ref Unsafe.As<Impl, Matrix3x2D>(ref this);
 
-            private const float RotationEpsilon = 0.001f * float.Pi / 180f;     // 0.1% of a degree
+            private const double RotationEpsilon = 0.001d * double.Pi / 180d;     // 0.1% of a degree
 
             public Vector2D X;
             public Vector2D Y;
@@ -85,7 +85,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl operator *(in Impl left, float right)
+            public static Impl operator *(in Impl left, double right)
             {
                 Impl result;
 
@@ -121,12 +121,12 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotation(float radians)
+            public static Impl CreateRotation(double radians)
             {
-                radians = float.Ieee754Remainder(radians, float.Tau);
+                radians = double.Ieee754Remainder(radians, double.Tau);
 
-                float c;
-                float s;
+                double c;
+                double s;
 
                 if (radians > -RotationEpsilon && radians < RotationEpsilon)
                 {
@@ -134,19 +134,19 @@ namespace Invicta.Numerics
                     c = 1;
                     s = 0;
                 }
-                else if (radians > float.Pi / 2 - RotationEpsilon && radians < float.Pi / 2 + RotationEpsilon)
+                else if (radians > double.Pi / 2 - RotationEpsilon && radians < double.Pi / 2 + RotationEpsilon)
                 {
                     // Exact case for 90 degree rotation.
                     c = 0;
                     s = 1;
                 }
-                else if (radians < -float.Pi + RotationEpsilon || radians > float.Pi - RotationEpsilon)
+                else if (radians < -double.Pi + RotationEpsilon || radians > double.Pi - RotationEpsilon)
                 {
                     // Exact case for 180 degree rotation.
                     c = -1;
                     s = 0;
                 }
-                else if (radians > -float.Pi / 2 - RotationEpsilon && radians < -float.Pi / 2 + RotationEpsilon)
+                else if (radians > -double.Pi / 2 - RotationEpsilon && radians < -double.Pi / 2 + RotationEpsilon)
                 {
                     // Exact case for 270 degree rotation.
                     c = 0;
@@ -155,7 +155,7 @@ namespace Invicta.Numerics
                 else
                 {
                     // Arbitrary rotation.
-                    (s, c) = float.SinCos(radians);
+                    (s, c) = double.SinCos(radians);
                 }
 
                 // [  c  s ]
@@ -172,11 +172,11 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateRotation(float radians, Vector2D centerPoint)
+            public static Impl CreateRotation(double radians, Vector2D centerPoint)
             {
-                radians = float.Ieee754Remainder(radians, float.Tau);
+                radians = double.Ieee754Remainder(radians, double.Tau);
 
-                float c, s;
+                double c, s;
 
                 if (radians > -RotationEpsilon && radians < RotationEpsilon)
                 {
@@ -184,19 +184,19 @@ namespace Invicta.Numerics
                     c = 1;
                     s = 0;
                 }
-                else if (radians > float.Pi / 2 - RotationEpsilon && radians < float.Pi / 2 + RotationEpsilon)
+                else if (radians > double.Pi / 2 - RotationEpsilon && radians < double.Pi / 2 + RotationEpsilon)
                 {
                     // Exact case for 90 degree rotation.
                     c = 0;
                     s = 1;
                 }
-                else if (radians < -float.Pi + RotationEpsilon || radians > float.Pi - RotationEpsilon)
+                else if (radians < -double.Pi + RotationEpsilon || radians > double.Pi - RotationEpsilon)
                 {
                     // Exact case for 180 degree rotation.
                     c = -1;
                     s = 0;
                 }
-                else if (radians > -float.Pi / 2 - RotationEpsilon && radians < -float.Pi / 2 + RotationEpsilon)
+                else if (radians > -double.Pi / 2 - RotationEpsilon && radians < -double.Pi / 2 + RotationEpsilon)
                 {
                     // Exact case for 270 degree rotation.
                     c = 0;
@@ -205,11 +205,11 @@ namespace Invicta.Numerics
                 else
                 {
                     // Arbitrary rotation.
-                    (s, c) = float.SinCos(radians);
+                    (s, c) = double.SinCos(radians);
                 }
 
-                float x = centerPoint.X * (1 - c) + centerPoint.Y * s;
-                float y = centerPoint.Y * (1 - c) - centerPoint.X * s;
+                double x = centerPoint.X * (1 - c) + centerPoint.Y * s;
+                double y = centerPoint.Y * (1 - c) - centerPoint.X * s;
 
                 // [  c  s ]
                 // [ -s  c ]
@@ -237,7 +237,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY)
+            public static Impl CreateScale(double scaleX, double scaleY)
             {
                 Impl result;
 
@@ -249,7 +249,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY, Vector2D centerPoint)
+            public static Impl CreateScale(double scaleX, double scaleY, Vector2D centerPoint)
             {
                 Impl result;
 
@@ -273,7 +273,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scale)
+            public static Impl CreateScale(double scale)
             {
                 Impl result;
 
@@ -285,7 +285,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scale, Vector2D centerPoint)
+            public static Impl CreateScale(double scale, Vector2D centerPoint)
             {
                 Impl result;
 
@@ -297,25 +297,25 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateSkew(float radiansX, float radiansY)
+            public static Impl CreateSkew(double radiansX, double radiansY)
             {
                 Impl result;
 
-                result.X = Vector2D.Create(1, float.Tan(radiansY));
-                result.Y = Vector2D.Create(float.Tan(radiansX), 1);
+                result.X = Vector2D.Create(1, double.Tan(radiansY));
+                result.Y = Vector2D.Create(double.Tan(radiansX), 1);
                 result.Z = Vector2D.Zero;
 
                 return result;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateSkew(float radiansX, float radiansY, Vector2D centerPoint)
+            public static Impl CreateSkew(double radiansX, double radiansY, Vector2D centerPoint)
             {
-                float xTan = float.Tan(radiansX);
-                float yTan = float.Tan(radiansY);
+                double xTan = double.Tan(radiansX);
+                double yTan = double.Tan(radiansY);
 
-                float tx = -centerPoint.Y * xTan;
-                float ty = -centerPoint.X * yTan;
+                double tx = -centerPoint.Y * xTan;
+                double ty = -centerPoint.X * yTan;
 
                 Impl result;
 
@@ -339,7 +339,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateTranslation(float positionX, float positionY)
+            public static Impl CreateTranslation(double positionX, double positionY)
             {
                 Impl result;
 
@@ -353,11 +353,11 @@ namespace Invicta.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Invert(in Impl matrix, out Impl result)
             {
-                float det = (matrix.X.X * matrix.Y.Y) - (matrix.Y.X * matrix.X.Y);
+                double det = (matrix.X.X * matrix.Y.Y) - (matrix.Y.X * matrix.X.Y);
 
-                if (float.Abs(det) < float.Epsilon)
+                if (double.Abs(det) < double.Epsilon)
                 {
-                    Vector2D vNaN = Vector2D.Create(float.NaN);
+                    Vector2D vNaN = Vector2D.Create(double.NaN);
 
                     result.X = vNaN;
                     result.Y = vNaN;
@@ -366,7 +366,7 @@ namespace Invicta.Numerics
                     return false;
                 }
 
-                float invDet = 1.0f / det;
+                double invDet = 1.0d / det;
 
                 result.X = Vector2D.Create(
                     +matrix.Y.Y * invDet,
@@ -385,7 +385,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl Lerp(in Impl left, in Impl right, float amount)
+            public static Impl Lerp(in Impl left, in Impl right, double amount)
             {
                 Impl result;
 
@@ -412,7 +412,7 @@ namespace Invicta.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public readonly float GetDeterminant()
+            public readonly double GetDeterminant()
             {
                 // There isn't actually any such thing as a determinant for a non-square matrix,
                 // but this 3x2 type is really just an optimization of a 3x3 where we happen to
