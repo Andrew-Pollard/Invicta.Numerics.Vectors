@@ -36,7 +36,7 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="GetElement(Vector4D, int)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float GetElement(this Vector2D vector, int index)
+        public static double GetElement(this Vector2D vector, int index)
         {
             if ((uint)index >= Vector2D.ElementCount)
             {
@@ -49,7 +49,7 @@ namespace Invicta.Numerics
         /// <param name="source">The vector that will be stored.</param>
         /// <param name="destination">The destination at which <paramref name="source" /> will be stored.</param>
         [CLSCompliant(false)]
-        public static void Store(this Vector2D source, float* destination) => source.StoreUnsafe(ref *destination);
+        public static void Store(this Vector2D source, double* destination) => source.StoreUnsafe(ref *destination);
 
         /// <summary>Stores a vector at the given 8-byte aligned destination.</summary>
         /// <param name="source">The vector that will be stored.</param>
@@ -57,7 +57,7 @@ namespace Invicta.Numerics
         /// <exception cref="AccessViolationException"><paramref name="destination" /> is not 8-byte aligned.</exception>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void StoreAligned(this Vector2D source, float* destination)
+        public static void StoreAligned(this Vector2D source, double* destination)
         {
             if (((nuint)destination % (uint)(Vector2D.Alignment)) != 0)
             {
@@ -73,15 +73,15 @@ namespace Invicta.Numerics
         /// <exception cref="AccessViolationException"><paramref name="destination" /> is not 8-byte aligned.</exception>
         /// <remarks>This method may bypass the cache on certain platforms.</remarks>
         [CLSCompliant(false)]
-        public static void StoreAlignedNonTemporal(this Vector2D source, float* destination) => source.StoreAligned(destination);
+        public static void StoreAlignedNonTemporal(this Vector2D source, double* destination) => source.StoreAligned(destination);
 
         /// <summary>Stores a vector at the given destination.</summary>
         /// <param name="source">The vector that will be stored.</param>
         /// <param name="destination">The destination at which <paramref name="source" /> will be stored.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void StoreUnsafe(this Vector2D source, ref float destination)
+        public static void StoreUnsafe(this Vector2D source, ref double destination)
         {
-            ref byte address = ref Unsafe.As<float, byte>(ref destination);
+            ref byte address = ref Unsafe.As<double, byte>(ref destination);
             Unsafe.WriteUnaligned(ref address, source);
         }
 
@@ -91,19 +91,19 @@ namespace Invicta.Numerics
         /// <param name="elementOffset">The element offset from <paramref name="destination" /> from which the vector will be stored.</param>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void StoreUnsafe(this Vector2D source, ref float destination, nuint elementOffset)
+        public static void StoreUnsafe(this Vector2D source, ref double destination, nuint elementOffset)
         {
             destination = ref Unsafe.Add(ref destination, (nint)elementOffset);
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref destination), source);
+            Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref destination), source);
         }
 
         /// <inheritdoc cref="ToScalar(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float ToScalar(this Vector2D vector) => vector.AsVector128Unsafe().ToScalar();
+        public static double ToScalar(this Vector2D vector) => vector.AsVector128Unsafe().ToScalar();
 
-        /// <inheritdoc cref="WithElement(Vector4D, int, float)" />
+        /// <inheritdoc cref="WithElement(Vector4D, int, double)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D WithElement(this Vector2D vector, int index, float value)
+        public static Vector2D WithElement(this Vector2D vector, int index, double value)
         {
             if ((uint)index >= Vector2D.ElementCount)
             {
