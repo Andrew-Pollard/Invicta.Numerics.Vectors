@@ -1557,47 +1557,47 @@ namespace Invicta.Numerics
 
                 Impl result;
 
-                if (AdvSimd.Arm64.IsSupported)
-                {
-                    Vector128<double> x = matrix.X.AsVector128();
-                    Vector128<double> y = matrix.Y.AsVector128();
-                    Vector128<double> z = matrix.Z.AsVector128();
-                    Vector128<double> w = matrix.W.AsVector128();
+                //if (AdvSimd.Arm64.IsSupported)
+                //{
+                //    Vector128<float> x = matrix.X.AsVector128();
+                //    Vector128<float> y = matrix.Y.AsVector128();
+                //    Vector128<float> z = matrix.Z.AsVector128();
+                //    Vector128<float> w = matrix.W.AsVector128();
 
-                    Vector128<double> lowerXZ = AdvSimd.Arm64.ZipLow(x, z);          // x[0], z[0], x[1], z[1]
-                    Vector128<double> lowerYW = AdvSimd.Arm64.ZipLow(y, w);          // y[0], w[0], y[1], w[1]
-                    Vector128<double> upperXZ = AdvSimd.Arm64.ZipHigh(x, z);         // x[2], z[2], x[3], z[3]
-                    Vector128<double> upperYW = AdvSimd.Arm64.ZipHigh(y, w);         // y[2], w[2], y[3], z[3]
+                //    Vector128<float> lowerXZ = AdvSimd.Arm64.ZipLow(x, z);          // x[0], z[0], x[1], z[1]
+                //    Vector128<float> lowerYW = AdvSimd.Arm64.ZipLow(y, w);          // y[0], w[0], y[1], w[1]
+                //    Vector128<float> upperXZ = AdvSimd.Arm64.ZipHigh(x, z);         // x[2], z[2], x[3], z[3]
+                //    Vector128<float> upperYW = AdvSimd.Arm64.ZipHigh(y, w);         // y[2], w[2], y[3], z[3]
 
-                    result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4D();  // x[0], y[0], z[0], w[0]
-                    result.Y = AdvSimd.Arm64.ZipHigh(lowerXZ, lowerYW).AsVector4D(); // x[1], y[1], z[1], w[1]
-                    result.Z = AdvSimd.Arm64.ZipLow(upperXZ, upperYW).AsVector4D();  // x[2], y[2], z[2], w[2]
-                    result.W = AdvSimd.Arm64.ZipHigh(upperXZ, upperYW).AsVector4D(); // x[3], y[3], z[3], w[3]
-                }
-                else if (Sse.IsSupported)
-                {
-                    Vector128<double> x = matrix.X.AsVector128();
-                    Vector128<double> y = matrix.Y.AsVector128();
-                    Vector128<double> z = matrix.Z.AsVector128();
-                    Vector128<double> w = matrix.W.AsVector128();
+                //    result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4D();  // x[0], y[0], z[0], w[0]
+                //    result.Y = AdvSimd.Arm64.ZipHigh(lowerXZ, lowerYW).AsVector4D(); // x[1], y[1], z[1], w[1]
+                //    result.Z = AdvSimd.Arm64.ZipLow(upperXZ, upperYW).AsVector4D();  // x[2], y[2], z[2], w[2]
+                //    result.W = AdvSimd.Arm64.ZipHigh(upperXZ, upperYW).AsVector4D(); // x[3], y[3], z[3], w[3]
+                //}
+                //else if (Sse.IsSupported)
+                //{
+                //    Vector128<float> x = matrix.X.AsVector128();
+                //    Vector128<float> y = matrix.Y.AsVector128();
+                //    Vector128<float> z = matrix.Z.AsVector128();
+                //    Vector128<float> w = matrix.W.AsVector128();
 
-                    Vector128<double> lowerXZ = Sse.UnpackLow(x, z);                 // x[0], z[0], x[1], z[1]
-                    Vector128<double> lowerYW = Sse.UnpackLow(y, w);                 // y[0], w[0], y[1], w[1]
-                    Vector128<double> upperXZ = Sse.UnpackHigh(x, z);                // x[2], z[2], x[3], z[3]
-                    Vector128<double> upperYW = Sse.UnpackHigh(y, w);                // y[2], w[2], y[3], z[3]
+                //    Vector128<float> lowerXZ = Sse.UnpackLow(x, z);                 // x[0], z[0], x[1], z[1]
+                //    Vector128<float> lowerYW = Sse.UnpackLow(y, w);                 // y[0], w[0], y[1], w[1]
+                //    Vector128<float> upperXZ = Sse.UnpackHigh(x, z);                // x[2], z[2], x[3], z[3]
+                //    Vector128<float> upperYW = Sse.UnpackHigh(y, w);                // y[2], w[2], y[3], z[3]
 
-                    result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4D();         // x[0], y[0], z[0], w[0]
-                    result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4D();        // x[1], y[1], z[1], w[1]
-                    result.Z = Sse.UnpackLow(upperXZ, upperYW).AsVector4D();         // x[2], y[2], z[2], w[2]
-                    result.W = Sse.UnpackHigh(upperXZ, upperYW).AsVector4D();        // x[3], y[3], z[3], w[3]
-                }
-                else
-                {
-                    result.X = Vector4D.Create(matrix.X.X, matrix.Y.X, matrix.Z.X, matrix.W.X);
+                //    result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4D();         // x[0], y[0], z[0], w[0]
+                //    result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4D();        // x[1], y[1], z[1], w[1]
+                //    result.Z = Sse.UnpackLow(upperXZ, upperYW).AsVector4D();         // x[2], y[2], z[2], w[2]
+                //    result.W = Sse.UnpackHigh(upperXZ, upperYW).AsVector4D();        // x[3], y[3], z[3], w[3]
+                //}
+                //else
+                //{
+                result.X = Vector4D.Create(matrix.X.X, matrix.Y.X, matrix.Z.X, matrix.W.X);
                     result.Y = Vector4D.Create(matrix.X.Y, matrix.Y.Y, matrix.Z.Y, matrix.W.Y);
                     result.Z = Vector4D.Create(matrix.X.Z, matrix.Y.Z, matrix.Z.Z, matrix.W.Z);
                     result.W = Vector4D.Create(matrix.X.W, matrix.Y.W, matrix.Z.W, matrix.W.W);
-                }
+                //}
 
                 return result;
             }
