@@ -1805,7 +1805,7 @@ namespace Invicta.Numerics.Tests
         {
             Test(Vector3D.Create(1, 2, 3), Vector3D.AllBitsSet, Vector3D.Create(1, 2, 3), Vector3D.Create(5, 6, 7));
             Test(Vector3D.Create(5, 6, 7), Vector3D.Zero, Vector3D.Create(1, 2, 3), Vector3D.Create(5, 6, 7));
-            Test(Vector3D.Create(1, 6, 3), Vector128.Create(-1, 0, -1, 0).AsSingle().AsVector3D(), Vector3D.Create(1, 2, 3), Vector3D.Create(5, 6, 7));
+            Test(Vector3D.Create(1, 6, 3), Vector256.Create(-1, 0, -1, 0).AsSingle().AsVector3D(), Vector3D.Create(1, 2, 3), Vector3D.Create(5, 6, 7));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(Vector3D expectedResult, Vector3D condition, Vector3D left, Vector3D right)
