@@ -13,22 +13,22 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDDotTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            float expected = 70.0f;
-            float actual;
+            double expected = 70.0d;
+            double actual;
 
             actual = QuaternionD.Dot(a, b);
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Dot did not return the expected value: expected {expected} actual {actual}");
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f, 1.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f, 0.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f)]
-        public void QuaternionDIndexerGetTest(float x, float y, float z, float w)
+        [InlineData(0.0d, 1.0d, 0.0d, 1.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d, 0.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d)]
+        public void QuaternionDIndexerGetTest(double x, double y, double z, double w)
         {
             var quaternion = new QuaternionD(x, y, z, w);
 
@@ -39,13 +39,13 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f, 1.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f, 0.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f)]
-        public void QuaternionDIndexerSetTest(float x, float y, float z, float w)
+        [InlineData(0.0d, 1.0d, 0.0d, 1.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d, 0.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d)]
+        public void QuaternionDIndexerSetTest(double x, double y, double z, double w)
         {
-            var quaternion = new QuaternionD(0.0f, 0.0f, 0.0f, 0.0f);
+            var quaternion = new QuaternionD(0.0d, 0.0d, 0.0d, 0.0d);
 
             quaternion[0] = x;
             quaternion[1] = y;
@@ -62,14 +62,14 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDLengthTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            float w = 4.0f;
+            double w = 4.0d;
 
             QuaternionD target = new QuaternionD(v, w);
 
-            float expected = 5.477226f;
-            float actual;
+            double expected = 5.477226d;
+            double actual;
 
             actual = target.Length();
 
@@ -80,30 +80,30 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDLengthSquaredTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
-            float w = 4.0f;
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
+            double w = 4.0d;
 
             QuaternionD target = new QuaternionD(v, w);
 
-            float expected = 30.0f;
-            float actual;
+            double expected = 30.0d;
+            double actual;
 
             actual = target.LengthSquared();
 
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.LengthSquared did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Lerp (QuaternionD, QuaternionD, float)
+        // A test for Lerp (QuaternionD, QuaternionD, double)
         [Fact]
         public void QuaternionDLerpTest()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 0.5f;
+            double t = 0.5d;
 
-            QuaternionD expected = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(20.0f));
+            QuaternionD expected = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(20.0d));
             QuaternionD actual;
 
             actual = QuaternionD.Lerp(a, b, t);
@@ -115,48 +115,48 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Lerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Lerp (QuaternionD, QuaternionD, float)
+        // A test for Lerp (QuaternionD, QuaternionD, double)
         // Lerp test when t = 0
         [Fact]
         public void QuaternionDLerpTest1()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 0.0f;
+            double t = 0.0d;
 
             QuaternionD expected = new QuaternionD(a.X, a.Y, a.Z, a.W);
             QuaternionD actual = QuaternionD.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Lerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Lerp (QuaternionD, QuaternionD, float)
+        // A test for Lerp (QuaternionD, QuaternionD, double)
         // Lerp test when t = 1
         [Fact]
         public void QuaternionDLerpTest2()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 1.0f;
+            double t = 1.0d;
 
             QuaternionD expected = new QuaternionD(b.X, b.Y, b.Z, b.W);
             QuaternionD actual = QuaternionD.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Lerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Lerp (QuaternionD, QuaternionD, float)
+        // A test for Lerp (QuaternionD, QuaternionD, double)
         // Lerp test when the two quaternions are more than 90 degree (dot product <0)
         [Fact]
         public void QuaternionDLerpTest3()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
             QuaternionD b = QuaternionD.Negate(a);
 
-            float t = 1.0f;
+            double t = 1.0d;
 
             QuaternionD actual = QuaternionD.Lerp(a, b, t);
             // Note that in quaternion world, Q == -Q. In the case of quaternions dot product is zero,
@@ -182,9 +182,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDNormalizeTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
-            QuaternionD expected = new QuaternionD(0.182574168f, 0.365148336f, 0.5477225f, 0.7302967f);
+            QuaternionD expected = new QuaternionD(0.182574168d, 0.365148336d, 0.5477225d, 0.7302967d);
             QuaternionD actual;
 
             actual = QuaternionD.Normalize(a);
@@ -196,21 +196,21 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDNormalizeTest1()
         {
-            QuaternionD a = new QuaternionD(0.0f, 0.0f, -0.0f, 0.0f);
+            QuaternionD a = new QuaternionD(0.0d, 0.0d, -0.0d, 0.0d);
 
             QuaternionD actual = QuaternionD.Normalize(a);
-            Assert.True(float.IsNaN(actual.X) && float.IsNaN(actual.Y) && float.IsNaN(actual.Z) && float.IsNaN(actual.W)
-                , $"QuaternionD.Normalize did not return the expected value: expected {new QuaternionD(float.NaN, float.NaN, float.NaN, float.NaN)} actual {actual}");
+            Assert.True(double.IsNaN(actual.X) && double.IsNaN(actual.Y) && double.IsNaN(actual.Z) && double.IsNaN(actual.W)
+                , $"QuaternionD.Normalize did not return the expected value: expected {new QuaternionD(double.NaN, double.NaN, double.NaN, double.NaN)} actual {actual}");
         }
 
         // A test for Concatenate(QuaternionD, QuaternionD)
         [Fact]
         public void QuaternionDConcatenateTest1()
         {
-            QuaternionD b = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD a = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD b = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD a = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(24.0f, 48.0f, 48.0f, -6.0f);
+            QuaternionD expected = new QuaternionD(24.0d, 48.0d, 48.0d, -6.0d);
             QuaternionD actual;
 
             actual = QuaternionD.Concatenate(a, b);
@@ -221,10 +221,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDSubtractionTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 6.0f, 7.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 2.0f, 3.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 6.0d, 7.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 2.0d, 3.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(-4.0f, 4.0f, 4.0f, -4.0f);
+            QuaternionD expected = new QuaternionD(-4.0d, 4.0d, 4.0d, -4.0d);
             QuaternionD actual;
 
             actual = a - b;
@@ -232,14 +232,14 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.operator - did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for operator * (QuaternionD, float)
+        // A test for operator * (QuaternionD, double)
         [Fact]
         public void QuaternionDMultiplyTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            float factor = 0.5f;
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            double factor = 0.5d;
 
-            QuaternionD expected = new QuaternionD(0.5f, 1.0f, 1.5f, 2.0f);
+            QuaternionD expected = new QuaternionD(0.5d, 1.0d, 1.5d, 2.0d);
             QuaternionD actual;
 
             actual = a * factor;
@@ -251,10 +251,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDMultiplyTest1()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(24.0f, 48.0f, 48.0f, -6.0f);
+            QuaternionD expected = new QuaternionD(24.0d, 48.0d, 48.0d, -6.0d);
             QuaternionD actual;
 
             actual = a * b;
@@ -266,10 +266,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDDivisionTest1()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(-0.045977015f, -0.09195402f, -7.450581E-9f, 0.402298868f);
+            QuaternionD expected = new QuaternionD(-0.045977015d, -0.09195402d, -7.450581E-9d, 0.402298868d);
             QuaternionD actual;
 
             actual = a / b;
@@ -281,10 +281,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDAdditionTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(6.0f, 8.0f, 10.0f, 12.0f);
+            QuaternionD expected = new QuaternionD(6.0d, 8.0d, 10.0d, 12.0d);
             QuaternionD actual;
 
             actual = a + b;
@@ -292,14 +292,14 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.operator + did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for QuaternionD (float, float, float, float)
+        // A test for QuaternionD (double, double, double, double)
         [Fact]
         public void QuaternionDConstructorTest()
         {
-            float x = 1.0f;
-            float y = 2.0f;
-            float z = 3.0f;
-            float w = 4.0f;
+            double x = 1.0d;
+            double y = 2.0d;
+            double z = 3.0d;
+            double w = 4.0d;
 
             QuaternionD target = new QuaternionD(x, y, z, w);
 
@@ -307,69 +307,69 @@ namespace Invicta.Numerics.Tests
                 "QuaternionD.constructor (x,y,z,w) did not return the expected value.");
         }
 
-        // A test for QuaternionD (Vector3Df, float)
+        // A test for QuaternionD (Vector3Df, double)
         [Fact]
         public void QuaternionDConstructorTest1()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
-            float w = 4.0f;
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
+            double w = 4.0d;
 
             QuaternionD target = new QuaternionD(v, w);
             Assert.True(MathHelper.Equal(target.X, v.X) && MathHelper.Equal(target.Y, v.Y) && MathHelper.Equal(target.Z, v.Z) && MathHelper.Equal(target.W, w),
                 "QuaternionD.constructor (Vector3Df,w) did not return the expected value.");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, float)
+        // A test for CreateFromAxisAngle (Vector3Df, double)
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            float angle = MathHelper.ToRadians(30.0f);
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            double angle = MathHelper.ToRadians(30.0d);
 
-            QuaternionD expected = new QuaternionD(0.06917231f, 0.13834462f, 0.2075169f, 0.9659258f);
+            QuaternionD expected = new QuaternionD(0.06917231d, 0.13834462d, 0.2075169d, 0.9659258d);
             QuaternionD actual;
 
             actual = QuaternionD.CreateFromAxisAngle(axis, angle);
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.CreateFromAxisAngle did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, float)
+        // A test for CreateFromAxisAngle (Vector3Df, double)
         // CreateFromAxisAngle of zero vector
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest1()
         {
             Vector3D axis = new Vector3D();
-            float angle = MathHelper.ToRadians(-30.0f);
+            double angle = MathHelper.ToRadians(-30.0d);
 
-            float cos = (float)System.Math.Cos(angle / 2.0f);
+            double cos = (double)System.Math.Cos(angle / 2.0d);
             QuaternionD actual = QuaternionD.CreateFromAxisAngle(axis, angle);
 
-            Assert.True(actual.X == 0.0f && actual.Y == 0.0f && actual.Z == 0.0f && MathHelper.Equal(cos, actual.W)
+            Assert.True(actual.X == 0.0d && actual.Y == 0.0d && actual.Z == 0.0d && MathHelper.Equal(cos, actual.W)
                 , "QuaternionD.CreateFromAxisAngle did not return the expected value.");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, float)
+        // A test for CreateFromAxisAngle (Vector3Df, double)
         // CreateFromAxisAngle of angle = 30 && 750
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest2()
         {
             Vector3D axis = new Vector3D(1, 0, 0);
-            float angle1 = MathHelper.ToRadians(30.0f);
-            float angle2 = MathHelper.ToRadians(750.0f);
+            double angle1 = MathHelper.ToRadians(30.0d);
+            double angle2 = MathHelper.ToRadians(750.0d);
 
             QuaternionD actual1 = QuaternionD.CreateFromAxisAngle(axis, angle1);
             QuaternionD actual2 = QuaternionD.CreateFromAxisAngle(axis, angle2);
             Assert.True(MathHelper.Equal(actual1, actual2), $"QuaternionD.CreateFromAxisAngle did not return the expected value: actual1 {actual1} actual2 {actual2}");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, float)
+        // A test for CreateFromAxisAngle (Vector3Df, double)
         // CreateFromAxisAngle of angle = 30 && 390
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest3()
         {
             Vector3D axis = new Vector3D(1, 0, 0);
-            float angle1 = MathHelper.ToRadians(30.0f);
-            float angle2 = MathHelper.ToRadians(390.0f);
+            double angle1 = MathHelper.ToRadians(30.0d);
+            double angle2 = MathHelper.ToRadians(390.0d);
 
             QuaternionD actual1 = QuaternionD.CreateFromAxisAngle(axis, angle1);
             QuaternionD actual2 = QuaternionD.CreateFromAxisAngle(axis, angle2);
@@ -382,9 +382,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDCreateFromYawPitchRollTest1()
         {
-            float yawAngle = MathHelper.ToRadians(30.0f);
-            float pitchAngle = MathHelper.ToRadians(40.0f);
-            float rollAngle = MathHelper.ToRadians(50.0f);
+            double yawAngle = MathHelper.ToRadians(30.0d);
+            double pitchAngle = MathHelper.ToRadians(40.0d);
+            double rollAngle = MathHelper.ToRadians(50.0d);
 
             QuaternionD yaw = QuaternionD.CreateFromAxisAngle(Vector3D.UnitY, yawAngle);
             QuaternionD pitch = QuaternionD.CreateFromAxisAngle(Vector3D.UnitX, pitchAngle);
@@ -399,17 +399,17 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDCreateFromYawPitchRollTest2()
         {
-            const float step = 35.0f;
+            const double step = 35.0d;
 
-            for (float yawAngle = -720.0f; yawAngle <= 720.0f; yawAngle += step)
+            for (double yawAngle = -720.0d; yawAngle <= 720.0d; yawAngle += step)
             {
-                for (float pitchAngle = -720.0f; pitchAngle <= 720.0f; pitchAngle += step)
+                for (double pitchAngle = -720.0d; pitchAngle <= 720.0d; pitchAngle += step)
                 {
-                    for (float rollAngle = -720.0f; rollAngle <= 720.0f; rollAngle += step)
+                    for (double rollAngle = -720.0d; rollAngle <= 720.0d; rollAngle += step)
                     {
-                        float yawRad = MathHelper.ToRadians(yawAngle);
-                        float pitchRad = MathHelper.ToRadians(pitchAngle);
-                        float rollRad = MathHelper.ToRadians(rollAngle);
+                        double yawRad = MathHelper.ToRadians(yawAngle);
+                        double pitchRad = MathHelper.ToRadians(pitchAngle);
+                        double rollRad = MathHelper.ToRadians(rollAngle);
 
                         QuaternionD yaw = QuaternionD.CreateFromAxisAngle(Vector3D.UnitY, yawRad);
                         QuaternionD pitch = QuaternionD.CreateFromAxisAngle(Vector3D.UnitX, pitchRad);
@@ -423,17 +423,17 @@ namespace Invicta.Numerics.Tests
             }
         }
 
-        // A test for Slerp (QuaternionD, QuaternionD, float)
+        // A test for Slerp (QuaternionD, QuaternionD, double)
         [Fact]
         public void QuaternionDSlerpTest()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 0.5f;
+            double t = 0.5d;
 
-            QuaternionD expected = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(20.0f));
+            QuaternionD expected = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(20.0d));
             QuaternionD actual;
 
             actual = QuaternionD.Slerp(a, b, t);
@@ -445,48 +445,48 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Slerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Slerp (QuaternionD, QuaternionD, float)
+        // A test for Slerp (QuaternionD, QuaternionD, double)
         // Slerp test where t = 0
         [Fact]
         public void QuaternionDSlerpTest1()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 0.0f;
+            double t = 0.0d;
 
             QuaternionD expected = new QuaternionD(a.X, a.Y, a.Z, a.W);
             QuaternionD actual = QuaternionD.Slerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Slerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Slerp (QuaternionD, QuaternionD, float)
+        // A test for Slerp (QuaternionD, QuaternionD, double)
         // Slerp test where t = 1
         [Fact]
         public void QuaternionDSlerpTest2()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 1.0f;
+            double t = 1.0d;
 
             QuaternionD expected = new QuaternionD(b.X, b.Y, b.Z, b.W);
             QuaternionD actual = QuaternionD.Slerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.Slerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Slerp (QuaternionD, QuaternionD, float)
+        // A test for Slerp (QuaternionD, QuaternionD, double)
         // Slerp test where dot product is < 0
         [Fact]
         public void QuaternionDSlerpTest3()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
             QuaternionD b = -a;
 
-            float t = 1.0f;
+            double t = 1.0d;
 
             QuaternionD expected = a;
             QuaternionD actual = QuaternionD.Slerp(a, b, t);
@@ -496,16 +496,16 @@ namespace Invicta.Numerics.Tests
             Assert.True(actual == expected, $"QuaternionD.Slerp did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for Slerp (QuaternionD, QuaternionD, float)
+        // A test for Slerp (QuaternionD, QuaternionD, double)
         // Slerp test where the quaternion is flipped
         [Fact]
         public void QuaternionDSlerpTest4()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0f));
-            QuaternionD b = -QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD a = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(10.0d));
+            QuaternionD b = -QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
-            float t = 0.0f;
+            double t = 0.0d;
 
             QuaternionD expected = new QuaternionD(a.X, a.Y, a.Z, a.W);
             QuaternionD actual = QuaternionD.Slerp(a, b, t);
@@ -516,9 +516,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDUnaryNegationTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
-            QuaternionD expected = new QuaternionD(-1.0f, -2.0f, -3.0f, -4.0f);
+            QuaternionD expected = new QuaternionD(-1.0d, -2.0d, -3.0d, -4.0d);
             QuaternionD actual;
 
             actual = -a;
@@ -530,9 +530,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDInverseTest()
         {
-            QuaternionD a = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(-0.0287356321f, -0.03448276f, -0.0402298868f, 0.04597701f);
+            QuaternionD expected = new QuaternionD(-0.0287356321d, -0.03448276d, -0.0402298868d, 0.04597701d);
             QuaternionD actual;
 
             actual = QuaternionD.Inverse(a);
@@ -556,11 +556,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDToStringTest()
         {
-            QuaternionD target = new QuaternionD(-1.0f, 2.2f, 3.3f, -4.4f);
+            QuaternionD target = new QuaternionD(-1.0d, 2.2d, 3.3d, -4.4d);
 
             string expected = string.Format(CultureInfo.CurrentCulture
                 , "{{X:{0} Y:{1} Z:{2} W:{3}}}"
-                , -1.0f, 2.2f, 3.3f, -4.4f);
+                , -1.0d, 2.2d, 3.3d, -4.4d);
 
             string actual = target.ToString();
             Assert.Equal(expected, actual);
@@ -570,10 +570,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDAddTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(6.0f, 8.0f, 10.0f, 12.0f);
+            QuaternionD expected = new QuaternionD(6.0d, 8.0d, 10.0d, 12.0d);
             QuaternionD actual;
 
             actual = QuaternionD.Add(a, b);
@@ -584,10 +584,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDDivideTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(-0.045977015f, -0.09195402f, -7.450581E-9f, 0.402298868f);
+            QuaternionD expected = new QuaternionD(-0.045977015d, -0.09195402d, -7.450581E-9d, 0.402298868d);
             QuaternionD actual;
 
             actual = QuaternionD.Divide(a, b);
@@ -598,8 +598,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDEqualsTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             object obj = b;
@@ -609,7 +609,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             obj = b;
             expected = false;
             actual = a.Equals(obj);
@@ -632,21 +632,21 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDGetHashCodeTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
             int expected = HashCode.Combine(a.X, a.Y, a.Z, a.W);
             int actual = a.GetHashCode();
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (QuaternionD, float)
+        // A test for Multiply (QuaternionD, double)
         [Fact]
         public void QuaternionDMultiplyTest2()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            float factor = 0.5f;
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            double factor = 0.5d;
 
-            QuaternionD expected = new QuaternionD(0.5f, 1.0f, 1.5f, 2.0f);
+            QuaternionD expected = new QuaternionD(0.5d, 1.0d, 1.5d, 2.0d);
             QuaternionD actual;
 
             actual = QuaternionD.Multiply(a, factor);
@@ -657,10 +657,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDMultiplyTest3()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 6.0f, 7.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 6.0d, 7.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(24.0f, 48.0f, 48.0f, -6.0f);
+            QuaternionD expected = new QuaternionD(24.0d, 48.0d, 48.0d, -6.0d);
             QuaternionD actual;
 
             actual = QuaternionD.Multiply(a, b);
@@ -671,9 +671,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDNegateTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
-            QuaternionD expected = new QuaternionD(-1.0f, -2.0f, -3.0f, -4.0f);
+            QuaternionD expected = new QuaternionD(-1.0d, -2.0d, -3.0d, -4.0d);
             QuaternionD actual;
 
             actual = QuaternionD.Negate(a);
@@ -684,10 +684,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDSubtractTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 6.0f, 7.0f, 4.0f);
-            QuaternionD b = new QuaternionD(5.0f, 2.0f, 3.0f, 8.0f);
+            QuaternionD a = new QuaternionD(1.0d, 6.0d, 7.0d, 4.0d);
+            QuaternionD b = new QuaternionD(5.0d, 2.0d, 3.0d, 8.0d);
 
-            QuaternionD expected = new QuaternionD(-4.0f, 4.0f, 4.0f, -4.0f);
+            QuaternionD expected = new QuaternionD(-4.0d, 4.0d, 4.0d, -4.0d);
             QuaternionD actual;
 
             actual = QuaternionD.Subtract(a, b);
@@ -698,8 +698,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDInequalityTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             bool expected = false;
@@ -707,7 +707,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = true;
             actual = a != b;
             Assert.Equal(expected, actual);
@@ -717,8 +717,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDEqualityTest()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             bool expected = true;
@@ -726,7 +726,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = false;
             actual = a == b;
             Assert.Equal(expected, actual);
@@ -739,7 +739,7 @@ namespace Invicta.Numerics.Tests
         {
             Matrix4x4D matrix = Matrix4x4D.Identity;
 
-            QuaternionD expected = new QuaternionD(0.0f, 0.0f, 0.0f, 1.0f);
+            QuaternionD expected = new QuaternionD(0.0d, 0.0d, 0.0d, 1.0d);
             QuaternionD actual = QuaternionD.CreateFromRotationMatrix(matrix);
             Assert.True(MathHelper.Equal(expected, actual),
                 $"QuaternionD.CreateFromRotationMatrix did not return the expected value: expected {expected} actual {actual}");
@@ -755,7 +755,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixTest2()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 Matrix4x4D matrix = Matrix4x4D.CreateRotationX(angle);
 
@@ -776,7 +776,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixTest3()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 Matrix4x4D matrix = Matrix4x4D.CreateRotationY(angle);
 
@@ -797,7 +797,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixTest4()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 Matrix4x4D matrix = Matrix4x4D.CreateRotationZ(angle);
 
@@ -818,7 +818,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixTest5()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 Matrix4x4D matrix = Matrix4x4D.CreateRotationX(angle) * Matrix4x4D.CreateRotationY(angle) * Matrix4x4D.CreateRotationZ(angle);
 
@@ -843,7 +843,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixWithScaledMatrixTest1()
         {
-            float angle = MathHelper.ToRadians(180.0f);
+            double angle = MathHelper.ToRadians(180.0d);
             Matrix4x4D matrix = Matrix4x4D.CreateRotationY(angle) * Matrix4x4D.CreateRotationZ(angle);
 
             QuaternionD expected = QuaternionD.CreateFromAxisAngle(Vector3D.UnitZ, angle) * QuaternionD.CreateFromAxisAngle(Vector3D.UnitY, angle);
@@ -862,7 +862,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixWithScaledMatrixTest2()
         {
-            float angle = MathHelper.ToRadians(180.0f);
+            double angle = MathHelper.ToRadians(180.0d);
             Matrix4x4D matrix = Matrix4x4D.CreateRotationX(angle) * Matrix4x4D.CreateRotationZ(angle);
 
             QuaternionD expected = QuaternionD.CreateFromAxisAngle(Vector3D.UnitZ, angle) * QuaternionD.CreateFromAxisAngle(Vector3D.UnitX, angle);
@@ -881,7 +881,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDFromRotationMatrixWithScaledMatrixTest3()
         {
-            float angle = MathHelper.ToRadians(180.0f);
+            double angle = MathHelper.ToRadians(180.0d);
             Matrix4x4D matrix = Matrix4x4D.CreateRotationX(angle) * Matrix4x4D.CreateRotationY(angle);
 
             QuaternionD expected = QuaternionD.CreateFromAxisAngle(Vector3D.UnitY, angle) * QuaternionD.CreateFromAxisAngle(Vector3D.UnitX, angle);
@@ -899,8 +899,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDEqualsTest1()
         {
-            QuaternionD a = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
-            QuaternionD b = new QuaternionD(1.0f, 2.0f, 3.0f, 4.0f);
+            QuaternionD a = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
+            QuaternionD b = new QuaternionD(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             bool expected = true;
@@ -908,7 +908,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = false;
             actual = a.Equals(b);
             Assert.Equal(expected, actual);
@@ -952,10 +952,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void QuaternionDEqualsNaNTest()
         {
-            QuaternionD a = new QuaternionD(float.NaN, 0, 0, 0);
-            QuaternionD b = new QuaternionD(0, float.NaN, 0, 0);
-            QuaternionD c = new QuaternionD(0, 0, float.NaN, 0);
-            QuaternionD d = new QuaternionD(0, 0, 0, float.NaN);
+            QuaternionD a = new QuaternionD(double.NaN, 0, 0, 0);
+            QuaternionD b = new QuaternionD(0, double.NaN, 0, 0);
+            QuaternionD c = new QuaternionD(0, 0, double.NaN, 0);
+            QuaternionD d = new QuaternionD(0, 0, 0, double.NaN);
 
             Assert.False(a == new QuaternionD(0, 0, 0, 0));
             Assert.False(b == new QuaternionD(0, 0, 0, 0));
@@ -1004,7 +1004,7 @@ namespace Invicta.Numerics.Tests
         struct QuaternionDPlusFloat
         {
             private QuaternionD _v;
-            private float _f;
+            private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1020,7 +1020,7 @@ namespace Invicta.Numerics.Tests
         {
             QuaternionD quat = new QuaternionD();
 
-            float* basePtr = &quat.X; // Take address of first element
+            double* basePtr = &quat.X; // Take address of first element
             QuaternionD* quatPtr = &quat; // Take address of whole QuaternionD
 
             Assert.Equal(new IntPtr(basePtr), new IntPtr(quatPtr));

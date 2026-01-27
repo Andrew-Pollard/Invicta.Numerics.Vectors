@@ -10,41 +10,41 @@ namespace Invicta.Numerics.Tests
 {
     public sealed class Matrix4x4DDTests
     {
-        private static Matrix4x4D GenerateIncrementalMatrixNumber(float value = 0.0f)
+        private static Matrix4x4D GenerateIncrementalMatrixNumber(double value = 0.0d)
         {
             Matrix4x4D a = new Matrix4x4D();
-            a.M11 = value + 1.0f;
-            a.M12 = value + 2.0f;
-            a.M13 = value + 3.0f;
-            a.M14 = value + 4.0f;
-            a.M21 = value + 5.0f;
-            a.M22 = value + 6.0f;
-            a.M23 = value + 7.0f;
-            a.M24 = value + 8.0f;
-            a.M31 = value + 9.0f;
-            a.M32 = value + 10.0f;
-            a.M33 = value + 11.0f;
-            a.M34 = value + 12.0f;
-            a.M41 = value + 13.0f;
-            a.M42 = value + 14.0f;
-            a.M43 = value + 15.0f;
-            a.M44 = value + 16.0f;
+            a.M11 = value + 1.0d;
+            a.M12 = value + 2.0d;
+            a.M13 = value + 3.0d;
+            a.M14 = value + 4.0d;
+            a.M21 = value + 5.0d;
+            a.M22 = value + 6.0d;
+            a.M23 = value + 7.0d;
+            a.M24 = value + 8.0d;
+            a.M31 = value + 9.0d;
+            a.M32 = value + 10.0d;
+            a.M33 = value + 11.0d;
+            a.M34 = value + 12.0d;
+            a.M41 = value + 13.0d;
+            a.M42 = value + 14.0d;
+            a.M43 = value + 15.0d;
+            a.M44 = value + 16.0d;
             return a;
         }
 
         private static Matrix4x4D GenerateTestMatrix()
         {
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.Translation = new Vector3D(111.0f, 222.0f, 333.0f);
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.Translation = new Vector3D(111.0d, 222.0d, 333.0d);
             return m;
         }
 
-        private static Matrix4x4D DefaultVarianceMatrix = GenerateFilledMatrix(1e-5f);
+        private static Matrix4x4D DefaultVarianceMatrix = GenerateFilledMatrix(1e-5d);
 
-        private static Matrix4x4D GenerateFilledMatrix(float value) => new Matrix4x4D
+        private static Matrix4x4D GenerateFilledMatrix(double value) => new Matrix4x4D
         {
             M11 = value,
             M12 = value,
@@ -94,11 +94,11 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f, 3.1434343f, 1.1234123f, 3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f, 3.1434343f, 1.1234123f, 3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f, 1.0000001f, 0.0000001f, 1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f, 1.0000001f, 0.0000001f, 1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f)]
-        public void Matrix4x4DIndexerGetTest(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44)
+        [InlineData(0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d, 3.1434343d, 1.1234123d, 3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d, 3.1434343d, 1.1234123d, 3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d, 1.0000001d, 0.0000001d, 1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d, 1.0000001d, 0.0000001d, 1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d)]
+        public void Matrix4x4DIndexerGetTest(double m11, double m12, double m13, double m14, double m21, double m22, double m23, double m24, double m31, double m32, double m33, double m34, double m41, double m42, double m43, double m44)
         {
             var matrix = new Matrix4x4D(m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44);
 
@@ -124,14 +124,14 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f, 3.1434343f, 1.1234123f, 3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f, 3.1434343f, 1.1234123f, 3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f, 1.0000001f, 0.0000001f, 1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f, 1.0000001f, 0.0000001f, 1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f)]
+        [InlineData(0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d, 1.0d, 0.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d, 3.1434343d, 1.1234123d, 3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d, 3.1434343d, 1.1234123d, 3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d, 1.0000001d, 0.0000001d, 1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d, 1.0000001d, 0.0000001d, 1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d)]
         //[ActiveIssue("https://github.com/dotnet/runtime/issues/80876", TestPlatforms.iOS | TestPlatforms.tvOS)]
-        public void Matrix4x4DIndexerSetTest(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31, float m32, float m33, float m34, float m41, float m42, float m43, float m44)
+        public void Matrix4x4DIndexerSetTest(double m11, double m12, double m13, double m14, double m21, double m22, double m23, double m24, double m31, double m32, double m33, double m34, double m41, double m42, double m43, double m44)
         {
-            var matrix = new Matrix4x4D(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+            var matrix = new Matrix4x4D(0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d);
 
             matrix[0, 0] = m11;
             matrix[0, 1] = m12;
@@ -179,7 +179,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DIdentityTest()
         {
             Matrix4x4D val = new Matrix4x4D();
-            val.M11 = val.M22 = val.M33 = val.M44 = 1.0f;
+            val.M11 = val.M22 = val.M33 = val.M44 = 1.0d;
 
             Assert.True(MathHelper.Equal(val, Matrix4x4D.Identity), "Matrix4x4D.Indentity was not set correctly.");
         }
@@ -189,12 +189,12 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DDeterminantTest()
         {
             Matrix4x4D target =
-                    Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                    Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                    Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                    Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                    Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                    Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
 
-            float val = 1.0f;
-            float det = target.GetDeterminant();
+            double val = 1.0d;
+            double det = target.GetDeterminant();
 
             Assert.True(MathHelper.Equal(val, det), "Matrix4x4D.Determinant was not set correctly.");
         }
@@ -205,28 +205,28 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DDeterminantTest1()
         {
             Matrix4x4D a = new Matrix4x4D();
-            a.M11 = 5.0f;
-            a.M12 = 2.0f;
-            a.M13 = 8.25f;
-            a.M14 = 1.0f;
-            a.M21 = 12.0f;
-            a.M22 = 6.8f;
-            a.M23 = 2.14f;
-            a.M24 = 9.6f;
-            a.M31 = 6.5f;
-            a.M32 = 1.0f;
-            a.M33 = 3.14f;
-            a.M34 = 2.22f;
-            a.M41 = 0f;
-            a.M42 = 0.86f;
-            a.M43 = 4.0f;
-            a.M44 = 1.0f;
+            a.M11 = 5.0d;
+            a.M12 = 2.0d;
+            a.M13 = 8.25d;
+            a.M14 = 1.0d;
+            a.M21 = 12.0d;
+            a.M22 = 6.8d;
+            a.M23 = 2.14d;
+            a.M24 = 9.6d;
+            a.M31 = 6.5d;
+            a.M32 = 1.0d;
+            a.M33 = 3.14d;
+            a.M34 = 2.22d;
+            a.M41 = 0d;
+            a.M42 = 0.86d;
+            a.M43 = 4.0d;
+            a.M44 = 1.0d;
             Matrix4x4D i;
             Assert.True(Matrix4x4D.Invert(a, out i));
 
-            float detA = a.GetDeterminant();
-            float detI = i.GetDeterminant();
-            float t = 1.0f / detI;
+            double detA = a.GetDeterminant();
+            double detI = i.GetDeterminant();
+            double t = 1.0d / detI;
 
             // only accurate to 3 precision
             Assert.True(System.Math.Abs(detA - t) < 1e-3, "Matrix4x4D.Determinant was not set correctly.");
@@ -237,30 +237,30 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DInvertTest()
         {
             Matrix4x4D mtx =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = 0.74999994f;
-            expected.M12 = -0.216506317f;
-            expected.M13 = 0.62499994f;
-            expected.M14 = 0.0f;
+            expected.M11 = 0.74999994d;
+            expected.M12 = -0.216506317d;
+            expected.M13 = 0.62499994d;
+            expected.M14 = 0.0d;
 
-            expected.M21 = 0.433012635f;
-            expected.M22 = 0.87499994f;
-            expected.M23 = -0.216506317f;
-            expected.M24 = 0.0f;
+            expected.M21 = 0.433012635d;
+            expected.M22 = 0.87499994d;
+            expected.M23 = -0.216506317d;
+            expected.M24 = 0.0d;
 
-            expected.M31 = -0.49999997f;
-            expected.M32 = 0.433012635f;
-            expected.M33 = 0.74999994f;
-            expected.M34 = 0.0f;
+            expected.M31 = -0.49999997d;
+            expected.M32 = 0.433012635d;
+            expected.M33 = 0.74999994d;
+            expected.M34 = 0.0d;
 
-            expected.M41 = 0.0f;
-            expected.M42 = 0.0f;
-            expected.M43 = 0.0f;
-            expected.M44 = 0.99999994f;
+            expected.M41 = 0.0d;
+            expected.M42 = 0.0d;
+            expected.M43 = 0.0d;
+            expected.M44 = 0.99999994d;
 
             Matrix4x4D actual;
 
@@ -327,7 +327,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DInvertProjectionTest()
         {
-            Matrix4x4D mtx = Matrix4x4D.CreatePerspectiveFieldOfView(1, 1.333f, 0.1f, 666);
+            Matrix4x4D mtx = Matrix4x4D.CreatePerspectiveFieldOfView(1, 1.333d, 0.1d, 666);
 
             Matrix4x4D actual;
             Assert.True(Matrix4x4D.Invert(mtx, out actual));
@@ -356,10 +356,10 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DInvertRank3()
         {
             // A 4x4 Matrix having a rank of 3
-            Matrix4x4D mtx = new Matrix4x4D(1.0f, 2.0f, 3.0f, 0.0f,
-                                          5.0f, 1.0f, 6.0f, 0.0f,
-                                          8.0f, 9.0f, 1.0f, 0.0f,
-                                          4.0f, 7.0f, 3.0f, 0.0f);
+            Matrix4x4D mtx = new Matrix4x4D(1.0d, 2.0d, 3.0d, 0.0d,
+                                          5.0d, 1.0d, 6.0d, 0.0d,
+                                          8.0d, 9.0d, 1.0d, 0.0d,
+                                          4.0d, 7.0d, 3.0d, 0.0d);
 
             Matrix4x4D actual;
             Assert.False(Matrix4x4D.Invert(mtx, out actual));
@@ -368,7 +368,7 @@ namespace Invicta.Numerics.Tests
             Assert.False(MathHelper.Equal(i, Matrix4x4D.Identity));
         }
 
-        void DecomposeTest(float yaw, float pitch, float roll, Vector3D expectedTranslation, Vector3D expectedScales)
+        void DecomposeTest(double yaw, double pitch, double roll, Vector3D expectedTranslation, Vector3D expectedScales)
         {
             QuaternionD expectedRotation = QuaternionD.CreateFromYawPitchRoll(MathHelper.ToRadians(yaw),
                                                                             MathHelper.ToRadians(pitch),
@@ -408,15 +408,15 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DDecomposeTest01()
         {
-            DecomposeTest(10.0f, 20.0f, 30.0f, new Vector3D(10, 20, 30), new Vector3D(2, 3, 4));
+            DecomposeTest(10.0d, 20.0d, 30.0d, new Vector3D(10, 20, 30), new Vector3D(2, 3, 4));
 
-            const float step = 35.0f;
+            const double step = 35.0d;
 
-            for (float yawAngle = -720.0f; yawAngle <= 720.0f; yawAngle += step)
+            for (double yawAngle = -720.0d; yawAngle <= 720.0d; yawAngle += step)
             {
-                for (float pitchAngle = -720.0f; pitchAngle <= 720.0f; pitchAngle += step)
+                for (double pitchAngle = -720.0d; pitchAngle <= 720.0d; pitchAngle += step)
                 {
-                    for (float rollAngle = -720.0f; rollAngle <= 720.0f; rollAngle += step)
+                    for (double rollAngle = -720.0d; rollAngle <= 720.0d; rollAngle += step)
                     {
                         DecomposeTest(yawAngle, pitchAngle, rollAngle, new Vector3D(10, 20, 30), new Vector3D(2, 3, 4));
                     }
@@ -428,7 +428,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DDecomposeTest02()
         {
-            DecomposeTest(10.0f, 20.0f, 30.0f, new Vector3D(10, 20, 30), new Vector3D(2, 3, 4));
+            DecomposeTest(10.0d, 20.0d, 30.0d, new Vector3D(10, 20, 30), new Vector3D(2, 3, 4));
 
             // Various scales.
             DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(1, 2, 3));
@@ -441,12 +441,12 @@ namespace Invicta.Numerics.Tests
             DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(-2, 1, 1));
 
             // Small scales.
-            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(1e-4f, 2e-4f, 3e-4f));
-            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(1e-4f, 3e-4f, 2e-4f));
-            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(2e-4f, 1e-4f, 3e-4f));
-            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(2e-4f, 3e-4f, 1e-4f));
-            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(3e-4f, 1e-4f, 2e-4f));
-            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(3e-4f, 2e-4f, 1e-4f));
+            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(1e-4d, 2e-4d, 3e-4d));
+            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(1e-4d, 3e-4d, 2e-4d));
+            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(2e-4d, 1e-4d, 3e-4d));
+            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(2e-4d, 3e-4d, 1e-4d));
+            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(3e-4d, 1e-4d, 2e-4d));
+            DecomposeTest(0, 0, 0, Vector3D.Zero, new Vector3D(3e-4d, 2e-4d, 1e-4d));
 
             // Zero scales.
             DecomposeTest(0, 0, 0, new Vector3D(10, 20, 30), new Vector3D(0, 0, 0));
@@ -467,7 +467,7 @@ namespace Invicta.Numerics.Tests
             DecomposeTest(0, 0, 0, new Vector3D(10, 20, 30), new Vector3D(1, 1, -1));
         }
 
-        void DecomposeScaleTest(float sx, float sy, float sz)
+        void DecomposeScaleTest(double sx, double sy, double sz)
         {
             Matrix4x4D m = Matrix4x4D.CreateScale(sx, sy, sz);
 
@@ -487,12 +487,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DDecomposeTest03()
         {
-            DecomposeScaleTest(1, 2e-4f, 3e-4f);
-            DecomposeScaleTest(1, 3e-4f, 2e-4f);
-            DecomposeScaleTest(2e-4f, 1, 3e-4f);
-            DecomposeScaleTest(2e-4f, 3e-4f, 1);
-            DecomposeScaleTest(3e-4f, 1, 2e-4f);
-            DecomposeScaleTest(3e-4f, 2e-4f, 1);
+            DecomposeScaleTest(1, 2e-4d, 3e-4d);
+            DecomposeScaleTest(1, 3e-4d, 2e-4d);
+            DecomposeScaleTest(2e-4d, 1, 3e-4d);
+            DecomposeScaleTest(2e-4d, 3e-4d, 1);
+            DecomposeScaleTest(3e-4d, 1, 2e-4d);
+            DecomposeScaleTest(3e-4d, 2e-4d, 1);
         }
 
         [Fact]
@@ -513,9 +513,9 @@ namespace Invicta.Numerics.Tests
             Matrix4x4D target = GenerateIncrementalMatrixNumber();
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
 
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
@@ -525,20 +525,20 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.Transform did not return the expected value.");
         }
 
-        // A test for CreateRotationX (float)
+        // A test for CreateRotationX (double)
         [Fact]
         public void Matrix4x4DCreateRotationXTest()
         {
-            float radians = MathHelper.ToRadians(30.0f);
+            double radians = MathHelper.ToRadians(30.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
 
-            expected.M11 = 1.0f;
-            expected.M22 = 0.8660254f;
-            expected.M23 = 0.5f;
-            expected.M32 = -0.5f;
-            expected.M33 = 0.8660254f;
-            expected.M44 = 1.0f;
+            expected.M11 = 1.0d;
+            expected.M22 = 0.8660254d;
+            expected.M23 = 0.5d;
+            expected.M32 = -0.5d;
+            expected.M33 = 0.8660254d;
+            expected.M44 = 1.0d;
 
             Matrix4x4D actual;
 
@@ -546,23 +546,23 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationX did not return the expected value.");
         }
 
-        // A test for CreateRotationX (float)
+        // A test for CreateRotationX (double)
         // CreateRotationX of zero degree
         [Fact]
         public void Matrix4x4DCreateRotationXTest1()
         {
-            float radians = 0;
+            double radians = 0;
 
             Matrix4x4D expected = Matrix4x4D.Identity;
             Matrix4x4D actual = Matrix4x4D.CreateRotationX(radians);
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationX did not return the expected value.");
         }
 
-        // A test for CreateRotationX (float, Vector3Df)
+        // A test for CreateRotationX (double, Vector3Df)
         [Fact]
         public void Matrix4x4DCreateRotationXCenterTest()
         {
-            float radians = MathHelper.ToRadians(30.0f);
+            double radians = MathHelper.ToRadians(30.0d);
             Vector3D center = new Vector3D(23, 42, 66);
 
             Matrix4x4D rotateAroundZero = Matrix4x4D.CreateRotationX(radians, Vector3D.Zero);
@@ -574,51 +574,51 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(rotateAroundCenter, rotateAroundCenterExpected));
         }
 
-        // A test for CreateRotationY (float)
+        // A test for CreateRotationY (double)
         [Fact]
         public void Matrix4x4DCreateRotationYTest()
         {
-            float radians = MathHelper.ToRadians(60.0f);
+            double radians = MathHelper.ToRadians(60.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
 
-            expected.M11 = 0.49999997f;
-            expected.M13 = -0.866025448f;
-            expected.M22 = 1.0f;
-            expected.M31 = 0.866025448f;
-            expected.M33 = 0.49999997f;
-            expected.M44 = 1.0f;
+            expected.M11 = 0.49999997d;
+            expected.M13 = -0.866025448d;
+            expected.M22 = 1.0d;
+            expected.M31 = 0.866025448d;
+            expected.M33 = 0.49999997d;
+            expected.M44 = 1.0d;
 
             Matrix4x4D actual;
             actual = Matrix4x4D.CreateRotationY(radians);
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationY did not return the expected value.");
         }
 
-        // A test for RotationY (float)
+        // A test for RotationY (double)
         // CreateRotationY test for negative angle
         [Fact]
         public void Matrix4x4DCreateRotationYTest1()
         {
-            float radians = MathHelper.ToRadians(-300.0f);
+            double radians = MathHelper.ToRadians(-300.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
 
-            expected.M11 = 0.49999997f;
-            expected.M13 = -0.866025448f;
-            expected.M22 = 1.0f;
-            expected.M31 = 0.866025448f;
-            expected.M33 = 0.49999997f;
-            expected.M44 = 1.0f;
+            expected.M11 = 0.49999997d;
+            expected.M13 = -0.866025448d;
+            expected.M22 = 1.0d;
+            expected.M31 = 0.866025448d;
+            expected.M33 = 0.49999997d;
+            expected.M44 = 1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateRotationY(radians);
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationY did not return the expected value.");
         }
 
-        // A test for CreateRotationY (float, Vector3Df)
+        // A test for CreateRotationY (double, Vector3Df)
         [Fact]
         public void Matrix4x4DCreateRotationYCenterTest()
         {
-            float radians = MathHelper.ToRadians(30.0f);
+            double radians = MathHelper.ToRadians(30.0d);
             Vector3D center = new Vector3D(23, 42, 66);
 
             Matrix4x4D rotateAroundZero = Matrix4x4D.CreateRotationY(radians, Vector3D.Zero);
@@ -630,11 +630,11 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(rotateAroundCenter, rotateAroundCenterExpected));
         }
 
-        // A test for CreateFromAxisAngle(Vector3Df,float)
+        // A test for CreateFromAxisAngle(Vector3Df,double)
         [Fact]
         public void Matrix4x4DCreateFromAxisAngleTest()
         {
-            float radians = MathHelper.ToRadians(-30.0f);
+            double radians = MathHelper.ToRadians(-30.0d);
 
             Matrix4x4D expected = Matrix4x4D.CreateRotationX(radians);
             Matrix4x4D actual = Matrix4x4D.CreateFromAxisAngle(Vector3D.UnitX, radians);
@@ -655,16 +655,16 @@ namespace Invicta.Numerics.Tests
             const int rotCount = 16;
             for (int i = 0; i < rotCount; ++i)
             {
-                float latitude = (2.0f * MathHelper.Pi) * ((float)i / (float)rotCount);
+                double latitude = (2.0d * MathHelper.Pi) * ((double)i / (double)rotCount);
                 for (int j = 0; j < rotCount; ++j)
                 {
-                    float longitude = -MathHelper.PiOver2 + MathHelper.Pi * ((float)j / (float)rotCount);
+                    double longitude = -MathHelper.PiOver2 + MathHelper.Pi * ((double)j / (double)rotCount);
 
                     Matrix4x4D m = Matrix4x4D.CreateRotationZ(longitude) * Matrix4x4D.CreateRotationY(latitude);
                     Vector3D axis = new Vector3D(m.M11, m.M12, m.M13);
                     for (int k = 0; k < rotCount; ++k)
                     {
-                        float rot = (2.0f * MathHelper.Pi) * ((float)k / (float)rotCount);
+                        double rot = (2.0d * MathHelper.Pi) * ((double)k / (double)rotCount);
                         expected = Matrix4x4D.CreateFromQuaternion(QuaternionD.CreateFromAxisAngle(axis, rot));
                         actual = Matrix4x4D.CreateFromAxisAngle(axis, rot);
                         Assert.True(MathHelper.Equal(expected, actual));
@@ -676,9 +676,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateFromYawPitchRollTest1()
         {
-            float yawAngle = MathHelper.ToRadians(30.0f);
-            float pitchAngle = MathHelper.ToRadians(40.0f);
-            float rollAngle = MathHelper.ToRadians(50.0f);
+            double yawAngle = MathHelper.ToRadians(30.0d);
+            double pitchAngle = MathHelper.ToRadians(40.0d);
+            double rollAngle = MathHelper.ToRadians(50.0d);
 
             Matrix4x4D yaw = Matrix4x4D.CreateFromAxisAngle(Vector3D.UnitY, yawAngle);
             Matrix4x4D pitch = Matrix4x4D.CreateFromAxisAngle(Vector3D.UnitX, pitchAngle);
@@ -693,17 +693,17 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateFromYawPitchRollTest2()
         {
-            const float step = 35.0f;
+            const double step = 35.0d;
 
-            for (float yawAngle = -720.0f; yawAngle <= 720.0f; yawAngle += step)
+            for (double yawAngle = -720.0d; yawAngle <= 720.0d; yawAngle += step)
             {
-                for (float pitchAngle = -720.0f; pitchAngle <= 720.0f; pitchAngle += step)
+                for (double pitchAngle = -720.0d; pitchAngle <= 720.0d; pitchAngle += step)
                 {
-                    for (float rollAngle = -720.0f; rollAngle <= 720.0f; rollAngle += step)
+                    for (double rollAngle = -720.0d; rollAngle <= 720.0d; rollAngle += step)
                     {
-                        float yawRad = MathHelper.ToRadians(yawAngle);
-                        float pitchRad = MathHelper.ToRadians(pitchAngle);
-                        float rollRad = MathHelper.ToRadians(rollAngle);
+                        double yawRad = MathHelper.ToRadians(yawAngle);
+                        double pitchRad = MathHelper.ToRadians(pitchAngle);
+                        double rollRad = MathHelper.ToRadians(rollAngle);
                         Matrix4x4D yaw = Matrix4x4D.CreateFromAxisAngle(Vector3D.UnitY, yawRad);
                         Matrix4x4D pitch = Matrix4x4D.CreateFromAxisAngle(Vector3D.UnitX, pitchRad);
                         Matrix4x4D roll = Matrix4x4D.CreateFromAxisAngle(Vector3D.UnitZ, rollRad);
@@ -758,44 +758,44 @@ namespace Invicta.Numerics.Tests
                 // Try various direction of light directions.
                 var testDirections = new Vector3D[]
                 {
-                    new Vector3D( -1.0f, 1.0f, 1.0f ),
-                    new Vector3D(  0.0f, 1.0f, 1.0f ),
-                    new Vector3D(  1.0f, 1.0f, 1.0f ),
-                    new Vector3D( -1.0f, 0.0f, 1.0f ),
-                    new Vector3D(  0.0f, 0.0f, 1.0f ),
-                    new Vector3D(  1.0f, 0.0f, 1.0f ),
-                    new Vector3D( -1.0f,-1.0f, 1.0f ),
-                    new Vector3D(  0.0f,-1.0f, 1.0f ),
-                    new Vector3D(  1.0f,-1.0f, 1.0f ),
+                    new Vector3D( -1.0d, 1.0d, 1.0d ),
+                    new Vector3D(  0.0d, 1.0d, 1.0d ),
+                    new Vector3D(  1.0d, 1.0d, 1.0d ),
+                    new Vector3D( -1.0d, 0.0d, 1.0d ),
+                    new Vector3D(  0.0d, 0.0d, 1.0d ),
+                    new Vector3D(  1.0d, 0.0d, 1.0d ),
+                    new Vector3D( -1.0d,-1.0d, 1.0d ),
+                    new Vector3D(  0.0d,-1.0d, 1.0d ),
+                    new Vector3D(  1.0d,-1.0d, 1.0d ),
 
-                    new Vector3D( -1.0f, 1.0f, 0.0f ),
-                    new Vector3D(  0.0f, 1.0f, 0.0f ),
-                    new Vector3D(  1.0f, 1.0f, 0.0f ),
-                    new Vector3D( -1.0f, 0.0f, 0.0f ),
-                    new Vector3D(  0.0f, 0.0f, 0.0f ),
-                    new Vector3D(  1.0f, 0.0f, 0.0f ),
-                    new Vector3D( -1.0f,-1.0f, 0.0f ),
-                    new Vector3D(  0.0f,-1.0f, 0.0f ),
-                    new Vector3D(  1.0f,-1.0f, 0.0f ),
+                    new Vector3D( -1.0d, 1.0d, 0.0d ),
+                    new Vector3D(  0.0d, 1.0d, 0.0d ),
+                    new Vector3D(  1.0d, 1.0d, 0.0d ),
+                    new Vector3D( -1.0d, 0.0d, 0.0d ),
+                    new Vector3D(  0.0d, 0.0d, 0.0d ),
+                    new Vector3D(  1.0d, 0.0d, 0.0d ),
+                    new Vector3D( -1.0d,-1.0d, 0.0d ),
+                    new Vector3D(  0.0d,-1.0d, 0.0d ),
+                    new Vector3D(  1.0d,-1.0d, 0.0d ),
 
-                    new Vector3D( -1.0f, 1.0f,-1.0f ),
-                    new Vector3D(  0.0f, 1.0f,-1.0f ),
-                    new Vector3D(  1.0f, 1.0f,-1.0f ),
-                    new Vector3D( -1.0f, 0.0f,-1.0f ),
-                    new Vector3D(  0.0f, 0.0f,-1.0f ),
-                    new Vector3D(  1.0f, 0.0f,-1.0f ),
-                    new Vector3D( -1.0f,-1.0f,-1.0f ),
-                    new Vector3D(  0.0f,-1.0f,-1.0f ),
-                    new Vector3D(  1.0f,-1.0f,-1.0f ),
+                    new Vector3D( -1.0d, 1.0d,-1.0d ),
+                    new Vector3D(  0.0d, 1.0d,-1.0d ),
+                    new Vector3D(  1.0d, 1.0d,-1.0d ),
+                    new Vector3D( -1.0d, 0.0d,-1.0d ),
+                    new Vector3D(  0.0d, 0.0d,-1.0d ),
+                    new Vector3D(  1.0d, 0.0d,-1.0d ),
+                    new Vector3D( -1.0d,-1.0d,-1.0d ),
+                    new Vector3D(  0.0d,-1.0d,-1.0d ),
+                    new Vector3D(  1.0d,-1.0d,-1.0d ),
                 };
 
                 foreach (Vector3D lightDirInfo in testDirections)
                 {
-                    if (lightDirInfo.Length() < 0.1f)
+                    if (lightDirInfo.Length() < 0.1d)
                         continue;
                     Vector3D lightDir = Vector3D.Normalize(lightDirInfo);
 
-                    if (PlaneD.DotNormal(plane, lightDir) < 0.1f)
+                    if (PlaneD.DotNormal(plane, lightDir) < 0.1d)
                         continue;
 
                     Matrix4x4D m = Matrix4x4D.CreateShadow(lightDir, plane);
@@ -810,11 +810,11 @@ namespace Invicta.Numerics.Tests
 
                         // Make sure transformed position is on the plane.
                         Vector3D v = sp - pp;
-                        float d = Vector3D.Dot(v, plane.Normal);
+                        double d = Vector3D.Dot(v, plane.Normal);
                         Assert.True(MathHelper.Equal(d, 0), "Matrix4x4D.CreateShadow did not provide expected value.");
 
                         // make sure direction between transformed position and original position are same as light direction.
-                        if (Vector3D.Dot(point - pp, plane.Normal) > 0.0001f)
+                        if (Vector3D.Dot(point - pp, plane.Normal) > 0.0001d)
                         {
                             Vector3D dir = Vector3D.Normalize(point - sp);
                             Assert.True(MathHelper.Equal(dir, lightDir), "Matrix4x4D.CreateShadow did not provide expected value.");
@@ -869,8 +869,8 @@ namespace Invicta.Numerics.Tests
 
                     // Manually compute reflection point and compare results.
                     Vector3D v = point - pp;
-                    float d = Vector3D.Dot(v, plane.Normal);
-                    Vector3D vp = point - 2.0f * d * plane.Normal;
+                    double d = Vector3D.Dot(v, plane.Normal);
+                    Vector3D vp = point - 2.0d * d * plane.Normal;
                     Assert.True(MathHelper.Equal(rp, vp), "Matrix4x4D.CreateReflection did not provide expected value.");
                 }
             }
@@ -882,51 +882,51 @@ namespace Invicta.Numerics.Tests
             PlaneD plane = new PlaneD(0, 1, 0, 60);
             Matrix4x4D actual = Matrix4x4D.CreateReflection(plane);
 
-            AssertExtensions.Equal(1.0f, actual.M11, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M12, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M13, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M14, 0.0f);
+            AssertExtensions.Equal(1.0d, actual.M11, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M12, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M13, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M14, 0.0d);
 
-            AssertExtensions.Equal(0.0f, actual.M21, 0.0f);
-            AssertExtensions.Equal(-1.0f, actual.M22, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M23, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M24, 0.0f);
+            AssertExtensions.Equal(0.0d, actual.M21, 0.0d);
+            AssertExtensions.Equal(-1.0d, actual.M22, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M23, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M24, 0.0d);
 
-            AssertExtensions.Equal(0.0f, actual.M31, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M32, 0.0f);
-            AssertExtensions.Equal(1.0f, actual.M33, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M34, 0.0f);
+            AssertExtensions.Equal(0.0d, actual.M31, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M32, 0.0d);
+            AssertExtensions.Equal(1.0d, actual.M33, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M34, 0.0d);
 
-            AssertExtensions.Equal(0.0f, actual.M41, 0.0f);
-            AssertExtensions.Equal(-120.0f, actual.M42, 0.0f);
-            AssertExtensions.Equal(0.0f, actual.M43, 0.0f);
-            AssertExtensions.Equal(1.0f, actual.M44, 0.0f);
+            AssertExtensions.Equal(0.0d, actual.M41, 0.0d);
+            AssertExtensions.Equal(-120.0d, actual.M42, 0.0d);
+            AssertExtensions.Equal(0.0d, actual.M43, 0.0d);
+            AssertExtensions.Equal(1.0d, actual.M44, 0.0d);
         }
 
-        // A test for CreateRotationZ (float)
+        // A test for CreateRotationZ (double)
         [Fact]
         public void Matrix4x4DCreateRotationZTest()
         {
-            float radians = MathHelper.ToRadians(50.0f);
+            double radians = MathHelper.ToRadians(50.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = 0.642787635f;
-            expected.M12 = 0.766044438f;
-            expected.M21 = -0.766044438f;
-            expected.M22 = 0.642787635f;
-            expected.M33 = 1.0f;
-            expected.M44 = 1.0f;
+            expected.M11 = 0.642787635d;
+            expected.M12 = 0.766044438d;
+            expected.M21 = -0.766044438d;
+            expected.M22 = 0.642787635d;
+            expected.M33 = 1.0d;
+            expected.M44 = 1.0d;
 
             Matrix4x4D actual;
             actual = Matrix4x4D.CreateRotationZ(radians);
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationZ did not return the expected value.");
         }
 
-        // A test for CreateRotationZ (float, Vector3Df)
+        // A test for CreateRotationZ (double, Vector3Df)
         [Fact]
         public void Matrix4x4DCreateRotationZCenterTest()
         {
-            float radians = MathHelper.ToRadians(30.0f);
+            double radians = MathHelper.ToRadians(30.0d);
             Vector3D center = new Vector3D(23, 42, 66);
 
             Matrix4x4D rotateAroundZero = Matrix4x4D.CreateRotationZ(radians, Vector3D.Zero);
@@ -941,27 +941,27 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateLookAtTest()
         {
-            Vector3D cameraPosition = new Vector3D(10.0f, 20.0f, 30.0f);
-            Vector3D cameraTarget = new Vector3D(3.0f, 2.0f, -4.0f);
-            Vector3D cameraUpVector = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D cameraPosition = new Vector3D(10.0d, 20.0d, 30.0d);
+            Vector3D cameraTarget = new Vector3D(3.0d, 2.0d, -4.0d);
+            Vector3D cameraUpVector = new Vector3D(0.0d, 1.0d, 0.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.979457f;
-            expected.M12 = -0.0928268f;
-            expected.M13 = +0.179017f;
+            expected.M11 = +0.979457d;
+            expected.M12 = -0.0928268d;
+            expected.M13 = +0.179017d;
 
-            expected.M21 = +0.0f;
-            expected.M22 = +0.887748f;
-            expected.M23 = +0.460329f;
+            expected.M21 = +0.0d;
+            expected.M22 = +0.887748d;
+            expected.M23 = +0.460329d;
 
-            expected.M31 = -0.201653f;
-            expected.M32 = -0.450873f;
-            expected.M33 = +0.869511f;
+            expected.M31 = -0.201653d;
+            expected.M32 = -0.450873d;
+            expected.M33 = +0.869511d;
 
-            expected.M41 = -3.74498f;
-            expected.M42 = -3.30051f;
-            expected.M43 = -37.0821f;
-            expected.M44 = +1.0f;
+            expected.M41 = -3.74498d;
+            expected.M42 = -3.30051d;
+            expected.M43 = -37.0821d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateLookAt(cameraPosition, cameraTarget, cameraUpVector);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateLookAt)} did not return the expected value.");
@@ -970,27 +970,27 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateLookAtLeftHandedTest()
         {
-            Vector3D cameraPosition = new Vector3D(10.0f, 20.0f, 30.0f);
-            Vector3D cameraTarget = new Vector3D(3.0f, 2.0f, -4.0f);
-            Vector3D cameraUpVector = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D cameraPosition = new Vector3D(10.0d, 20.0d, 30.0d);
+            Vector3D cameraTarget = new Vector3D(3.0d, 2.0d, -4.0d);
+            Vector3D cameraUpVector = new Vector3D(0.0d, 1.0d, 0.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = -0.979457f;
-            expected.M12 = -0.0928268f;
-            expected.M13 = -0.179017f;
+            expected.M11 = -0.979457d;
+            expected.M12 = -0.0928268d;
+            expected.M13 = -0.179017d;
 
-            expected.M21 = +0.0f;
-            expected.M22 = +0.887748f;
-            expected.M23 = -0.460329f;
+            expected.M21 = +0.0d;
+            expected.M22 = +0.887748d;
+            expected.M23 = -0.460329d;
 
-            expected.M31 = +0.201653f;
-            expected.M32 = -0.450873f;
-            expected.M33 = -0.869511f;
+            expected.M31 = +0.201653d;
+            expected.M32 = -0.450873d;
+            expected.M33 = -0.869511d;
 
-            expected.M41 = +3.74498f;
-            expected.M42 = -3.30051f;
-            expected.M43 = +37.0821f;
-            expected.M44 = +1.0f;
+            expected.M41 = +3.74498d;
+            expected.M42 = -3.30051d;
+            expected.M43 = +37.0821d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateLookAtLeftHanded(cameraPosition, cameraTarget, cameraUpVector);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateLookAtLeftHanded)} did not return the expected value.");
@@ -999,27 +999,27 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateLookToTest()
         {
-            Vector3D cameraPosition = new Vector3D(10.0f, 20.0f, 30.0f);
-            Vector3D cameraDirection = new Vector3D(-7.0f, -18.0f, -34.0f);
-            Vector3D cameraUpVector = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D cameraPosition = new Vector3D(10.0d, 20.0d, 30.0d);
+            Vector3D cameraDirection = new Vector3D(-7.0d, -18.0d, -34.0d);
+            Vector3D cameraUpVector = new Vector3D(0.0d, 1.0d, 0.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.979457f;
-            expected.M12 = -0.0928268f;
-            expected.M13 = +0.179017f;
+            expected.M11 = +0.979457d;
+            expected.M12 = -0.0928268d;
+            expected.M13 = +0.179017d;
 
-            expected.M21 = +0.0f;
-            expected.M22 = +0.887748f;
-            expected.M23 = +0.460329f;
+            expected.M21 = +0.0d;
+            expected.M22 = +0.887748d;
+            expected.M23 = +0.460329d;
 
-            expected.M31 = -0.201653f;
-            expected.M32 = -0.450873f;
-            expected.M33 = +0.869511f;
+            expected.M31 = -0.201653d;
+            expected.M32 = -0.450873d;
+            expected.M33 = +0.869511d;
 
-            expected.M41 = -3.74498f;
-            expected.M42 = -3.30051f;
-            expected.M43 = -37.0821f;
-            expected.M44 = +1.0f;
+            expected.M41 = -3.74498d;
+            expected.M42 = -3.30051d;
+            expected.M43 = -37.0821d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateLookTo(cameraPosition, cameraDirection, cameraUpVector);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateLookTo)} did not return the expected value.");
@@ -1028,27 +1028,27 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateLookToLeftHandedTest()
         {
-            Vector3D cameraPosition = new Vector3D(10.0f, 20.0f, 30.0f);
-            Vector3D cameraDirection = new Vector3D(-7.0f, -18.0f, -34.0f);
-            Vector3D cameraUpVector = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D cameraPosition = new Vector3D(10.0d, 20.0d, 30.0d);
+            Vector3D cameraDirection = new Vector3D(-7.0d, -18.0d, -34.0d);
+            Vector3D cameraUpVector = new Vector3D(0.0d, 1.0d, 0.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = -0.979457f;
-            expected.M12 = -0.0928268f;
-            expected.M13 = -0.179017f;
+            expected.M11 = -0.979457d;
+            expected.M12 = -0.0928268d;
+            expected.M13 = -0.179017d;
 
-            expected.M21 = +0.0f;
-            expected.M22 = +0.887748f;
-            expected.M23 = -0.460329f;
+            expected.M21 = +0.0d;
+            expected.M22 = +0.887748d;
+            expected.M23 = -0.460329d;
 
-            expected.M31 = +0.201653f;
-            expected.M32 = -0.450873f;
-            expected.M33 = -0.869511f;
+            expected.M31 = +0.201653d;
+            expected.M32 = -0.450873d;
+            expected.M33 = -0.869511d;
 
-            expected.M41 = +3.74498f;
-            expected.M42 = -3.30051f;
-            expected.M43 = +37.0821f;
-            expected.M44 = +1.0f;
+            expected.M41 = +3.74498d;
+            expected.M42 = -3.30051d;
+            expected.M43 = +37.0821d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateLookToLeftHanded(cameraPosition, cameraDirection, cameraUpVector);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateLookToLeftHanded)} did not return the expected value.");
@@ -1057,24 +1057,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateViewportTest()
         {
-            float x = 10.0f;
-            float y = 20.0f;
-            float width = 80.0f;
-            float height = 160.0f;
-            float minDepth = 1.5f;
-            float maxDepth = 1000.0f;
+            double x = 10.0d;
+            double y = 20.0d;
+            double width = 80.0d;
+            double height = 160.0d;
+            double minDepth = 1.5d;
+            double maxDepth = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +40.0f;
+            expected.M11 = +40.0d;
 
-            expected.M22 = -80.0f;
+            expected.M22 = -80.0d;
 
-            expected.M33 = -998.5f;
+            expected.M33 = -998.5d;
 
-            expected.M41 = +50.0f;
-            expected.M42 = +100.0f;
-            expected.M43 = +1.5f;
-            expected.M44 = +1.0f;
+            expected.M41 = +50.0d;
+            expected.M42 = +100.0d;
+            expected.M43 = +1.5d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateViewport(x, y, width, height, minDepth, maxDepth);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateViewport)} did not return the expected value.");
@@ -1083,13 +1083,13 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateViewportLeftHandedTest()
         {
-            float x = 10.0f, y = 20.0f;
-            float width = 3.0f, height = 4.0f;
-            float minDepth = 100.0f, maxDepth = 200.0f;
+            double x = 10.0d, y = 20.0d;
+            double width = 3.0d, height = 4.0d;
+            double minDepth = 100.0d, maxDepth = 200.0d;
 
             Matrix4x4D expected = Matrix4x4D.Identity;
-            expected.M11 = width * 0.5f;
-            expected.M22 = -height * 0.5f;
+            expected.M11 = width * 0.5d;
+            expected.M22 = -height * 0.5d;
             expected.M33 = maxDepth - minDepth;
             expected.M41 = x + expected.M11;
             expected.M42 = y - expected.M22;
@@ -1103,56 +1103,56 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateWorldTest()
         {
-            Vector3D objectPosition = new Vector3D(10.0f, 20.0f, 30.0f);
-            Vector3D objectForwardDirection = new Vector3D(3.0f, 2.0f, -4.0f);
-            Vector3D objectUpVector = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D objectPosition = new Vector3D(10.0d, 20.0d, 30.0d);
+            Vector3D objectForwardDirection = new Vector3D(3.0d, 2.0d, -4.0d);
+            Vector3D objectUpVector = new Vector3D(0.0d, 1.0d, 0.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = 0.799999952f;
+            expected.M11 = 0.799999952d;
             expected.M12 = 0;
-            expected.M13 = 0.599999964f;
+            expected.M13 = 0.599999964d;
             expected.M14 = 0;
 
-            expected.M21 = -0.2228344f;
-            expected.M22 = 0.928476632f;
-            expected.M23 = 0.297112525f;
+            expected.M21 = -0.2228344d;
+            expected.M22 = 0.928476632d;
+            expected.M23 = 0.297112525d;
             expected.M24 = 0;
 
-            expected.M31 = -0.557086f;
-            expected.M32 = -0.371390671f;
-            expected.M33 = 0.742781341f;
+            expected.M31 = -0.557086d;
+            expected.M32 = -0.371390671d;
+            expected.M33 = 0.742781341d;
             expected.M34 = 0;
 
             expected.M41 = 10;
             expected.M42 = 20;
             expected.M43 = 30;
-            expected.M44 = 1.0f;
+            expected.M44 = 1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateWorld(objectPosition, objectForwardDirection, objectUpVector);
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateWorld did not return the expected value.");
 
             Assert.Equal(objectPosition, actual.Translation);
             Assert.True(Vector3D.Dot(Vector3D.Normalize(objectUpVector), new Vector3D(actual.M21, actual.M22, actual.M23)) > 0);
-            Assert.True(Vector3D.Dot(Vector3D.Normalize(objectForwardDirection), new Vector3D(-actual.M31, -actual.M32, -actual.M33)) > 0.999f);
+            Assert.True(Vector3D.Dot(Vector3D.Normalize(objectForwardDirection), new Vector3D(-actual.M31, -actual.M32, -actual.M33)) > 0.999d);
         }
 
         [Fact]
         public void Matrix4x4DCreateOrthoTest()
         {
-            float width = 100.0f;
-            float height = 200.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double width = 100.0d;
+            double height = 200.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.02f;
+            expected.M11 = +0.02d;
 
-            expected.M22 = +0.01f;
+            expected.M22 = +0.01d;
 
-            expected.M33 = -0.0010015f;
+            expected.M33 = -0.0010015d;
 
-            expected.M43 = -0.00150225f;
-            expected.M44 = +1.0f;
+            expected.M43 = -0.00150225d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual;
             actual = Matrix4x4D.CreateOrthographic(width, height, zNearPlaneD, zFarPlaneD);
@@ -1162,20 +1162,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateOrthoLeftHandedTest()
         {
-            float width = 100.0f;
-            float height = 200.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double width = 100.0d;
+            double height = 200.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.02f;
+            expected.M11 = +0.02d;
 
-            expected.M22 = +0.01f;
+            expected.M22 = +0.01d;
 
-            expected.M33 = +0.0010015f;
+            expected.M33 = +0.0010015d;
 
-            expected.M43 = -0.00150225f;
-            expected.M44 = +1.0f;
+            expected.M43 = -0.00150225d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateOrthographicLeftHanded(width, height, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateOrthographicLeftHanded)} did not return the expected value.");
@@ -1184,24 +1184,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateOrthoOffCenterTest()
         {
-            float left = 10.0f;
-            float right = 90.0f;
-            float bottom = 20.0f;
-            float top = 180.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double left = 10.0d;
+            double right = 90.0d;
+            double bottom = 20.0d;
+            double top = 180.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.025f;
+            expected.M11 = +0.025d;
 
-            expected.M22 = +0.0125f;
+            expected.M22 = +0.0125d;
 
-            expected.M33 = -0.0010015f;
+            expected.M33 = -0.0010015d;
 
-            expected.M41 = -1.25f;
-            expected.M42 = -1.25f;
-            expected.M43 = -0.00150225f;
-            expected.M44 = +1.0f;
+            expected.M41 = -1.25d;
+            expected.M42 = -1.25d;
+            expected.M43 = -0.00150225d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateOrthographicOffCenter(left, right, bottom, top, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateOrthographicOffCenter)} did not return the expected value.");
@@ -1210,24 +1210,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateOrthoOffCenterLeftHandedTest()
         {
-            float left = 10.0f;
-            float right = 90.0f;
-            float bottom = 20.0f;
-            float top = 180.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double left = 10.0d;
+            double right = 90.0d;
+            double bottom = 20.0d;
+            double top = 180.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.025f;
+            expected.M11 = +0.025d;
 
-            expected.M22 = +0.0125f;
+            expected.M22 = +0.0125d;
 
-            expected.M33 = +0.0010015f;
+            expected.M33 = +0.0010015d;
 
-            expected.M41 = -1.25f;
-            expected.M42 = -1.25f;
-            expected.M43 = -0.00150225f;
-            expected.M44 = +1.0f;
+            expected.M41 = -1.25d;
+            expected.M42 = -1.25d;
+            expected.M43 = -0.00150225d;
+            expected.M44 = +1.0d;
 
             Matrix4x4D actual = Matrix4x4D.CreateOrthographicOffCenterLeftHanded(left, right, bottom, top, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateOrthographicOffCenterLeftHanded)} did not return the expected value.");
@@ -1236,20 +1236,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreatePerspectiveTest()
         {
-            float width = 100.0f;
-            float height = 200.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double width = 100.0d;
+            double height = 200.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.03f;
+            expected.M11 = +0.03d;
 
-            expected.M22 = +0.015f;
+            expected.M22 = +0.015d;
 
-            expected.M33 = -1.0015f;
-            expected.M34 = -1.0f;
+            expected.M33 = -1.0015d;
+            expected.M34 = -1.0d;
 
-            expected.M43 = -1.50225f;
+            expected.M43 = -1.50225d;
 
             Matrix4x4D actual = Matrix4x4D.CreatePerspective(width, height, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreatePerspective)} did not return the expected value.");
@@ -1258,42 +1258,42 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreatePerspectiveLeftHandedTest()
         {
-            float width = 100.0f;
-            float height = 200.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double width = 100.0d;
+            double height = 200.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.03f;
+            expected.M11 = +0.03d;
 
-            expected.M22 = +0.015f;
+            expected.M22 = +0.015d;
 
-            expected.M33 = +1.0015f;
-            expected.M34 = +1.0f;
+            expected.M33 = +1.0015d;
+            expected.M34 = +1.0d;
 
-            expected.M43 = -1.50225f;
+            expected.M43 = -1.50225d;
 
             Matrix4x4D actual = Matrix4x4D.CreatePerspectiveLeftHanded(width, height, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreatePerspectiveLeftHanded)} did not return the expected value.");
         }
 
-        // A test for CreatePerspective (float, float, float, float)
+        // A test for CreatePerspective (double, double, double, double)
         // CreatePerspective test where znear = zfar
         [Fact]
         public void Matrix4x4DCreatePerspectiveTest1()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                float width = 100.0f;
-                float height = 200.0f;
-                float zNearPlaneD = 0.0f;
-                float zFarPlaneD = 0.0f;
+                double width = 100.0d;
+                double height = 200.0d;
+                double zNearPlaneD = 0.0d;
+                double zFarPlaneD = 0.0d;
 
                 Matrix4x4D actual = Matrix4x4D.CreatePerspective(width, height, zNearPlaneD, zFarPlaneD);
             });
         }
 
-        // A test for CreatePerspective (float, float, float, float)
+        // A test for CreatePerspective (double, double, double, double)
         // CreatePerspective test where near plane is negative value
         [Fact]
         public void Matrix4x4DCreatePerspectiveTest2()
@@ -1304,7 +1304,7 @@ namespace Invicta.Numerics.Tests
             });
         }
 
-        // A test for CreatePerspective (float, float, float, float)
+        // A test for CreatePerspective (double, double, double, double)
         // CreatePerspective test where far plane is negative value
         [Fact]
         public void Matrix4x4DCreatePerspectiveTest3()
@@ -1315,7 +1315,7 @@ namespace Invicta.Numerics.Tests
             });
         }
 
-        // A test for CreatePerspective (float, float, float, float)
+        // A test for CreatePerspective (double, double, double, double)
         // CreatePerspective test where near plane is beyond far plane
         [Fact]
         public void Matrix4x4DCreatePerspectiveTest4()
@@ -1329,20 +1329,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewTest()
         {
-            float fieldOfView = MathHelper.ToRadians(30.0f);
-            float aspectRatio = 1280.0f / 720.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double fieldOfView = MathHelper.ToRadians(30.0d);
+            double aspectRatio = 1280.0d / 720.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +2.09928f;
+            expected.M11 = +2.09928d;
 
-            expected.M22 = +3.73205f;
+            expected.M22 = +3.73205d;
 
-            expected.M33 = -1.0015f;
-            expected.M34 = -1.0f;
+            expected.M33 = -1.0015d;
+            expected.M34 = -1.0d;
 
-            expected.M43 = -1.50225f;
+            expected.M43 = -1.50225d;
 
             Matrix4x4D actual = Matrix4x4D.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreatePerspectiveFieldOfView)} did not return the expected value.");
@@ -1351,26 +1351,26 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewLeftHandedTest()
         {
-            float fieldOfView = MathHelper.ToRadians(30.0f);
-            float aspectRatio = 1280.0f / 720.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double fieldOfView = MathHelper.ToRadians(30.0d);
+            double aspectRatio = 1280.0d / 720.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +2.09928f;
+            expected.M11 = +2.09928d;
 
-            expected.M22 = +3.73205f;
+            expected.M22 = +3.73205d;
 
-            expected.M33 = +1.0015f;
-            expected.M34 = +1.0f;
+            expected.M33 = +1.0015d;
+            expected.M34 = +1.0d;
 
-            expected.M43 = -1.50225f;
+            expected.M43 = -1.50225d;
 
             Matrix4x4D actual = Matrix4x4D.CreatePerspectiveFieldOfViewLeftHanded(fieldOfView, aspectRatio, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreatePerspectiveFieldOfViewLeftHanded)} did not return the expected value.");
         }
 
-        // A test for CreatePerspectiveFieldOfView (float, float, float, float)
+        // A test for CreatePerspectiveFieldOfView (double, double, double, double)
         // CreatePerspectiveFieldOfView test where filedOfView is negative value.
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewTest1()
@@ -1381,18 +1381,18 @@ namespace Invicta.Numerics.Tests
             });
         }
 
-        // A test for CreatePerspectiveFieldOfView (float, float, float, float)
+        // A test for CreatePerspectiveFieldOfView (double, double, double, double)
         // CreatePerspectiveFieldOfView test where filedOfView is more than pi.
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewTest2()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                Matrix4x4D mtx = Matrix4x4D.CreatePerspectiveFieldOfView(MathHelper.Pi + 0.01f, 1, 1, 10);
+                Matrix4x4D mtx = Matrix4x4D.CreatePerspectiveFieldOfView(MathHelper.Pi + 0.01d, 1, 1, 10);
             });
         }
 
-        // A test for CreatePerspectiveFieldOfView (float, float, float, float)
+        // A test for CreatePerspectiveFieldOfView (double, double, double, double)
         // CreatePerspectiveFieldOfView test where nearPlaneDDistance is negative value.
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewTest3()
@@ -1403,7 +1403,7 @@ namespace Invicta.Numerics.Tests
             });
         }
 
-        // A test for CreatePerspectiveFieldOfView (float, float, float, float)
+        // A test for CreatePerspectiveFieldOfView (double, double, double, double)
         // CreatePerspectiveFieldOfView test where farPlaneDDistance is negative value.
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewTest4()
@@ -1414,7 +1414,7 @@ namespace Invicta.Numerics.Tests
             });
         }
 
-        // A test for CreatePerspectiveFieldOfView (float, float, float, float)
+        // A test for CreatePerspectiveFieldOfView (double, double, double, double)
         // CreatePerspectiveFieldOfView test where nearPlaneDDistance is larger than farPlaneDDistance.
         [Fact]
         public void Matrix4x4DCreatePerspectiveFieldOfViewTest5()
@@ -1428,24 +1428,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreatePerspectiveOffCenterTest()
         {
-            float left = 10.0f;
-            float right = 90.0f;
-            float bottom = 20.0f;
-            float top = 180.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double left = 10.0d;
+            double right = 90.0d;
+            double bottom = 20.0d;
+            double top = 180.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.0375f;
+            expected.M11 = +0.0375d;
 
-            expected.M22 = +0.01875f;
+            expected.M22 = +0.01875d;
 
-            expected.M31 = +1.25f;
-            expected.M32 = +1.25f;
-            expected.M33 = -1.0015f;
-            expected.M34 = -1.0f;
+            expected.M31 = +1.25d;
+            expected.M32 = +1.25d;
+            expected.M33 = -1.0015d;
+            expected.M34 = -1.0d;
 
-            expected.M43 = -1.50225f;
+            expected.M43 = -1.50225d;
 
             Matrix4x4D actual = Matrix4x4D.CreatePerspectiveOffCenter(left, right, bottom, top, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreatePerspectiveOffCenter)} did not return the expected value.");
@@ -1454,62 +1454,62 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreatePerspectiveOffCenterLeftHandedTest()
         {
-            float left = 10.0f;
-            float right = 90.0f;
-            float bottom = 20.0f;
-            float top = 180.0f;
-            float zNearPlaneD = 1.5f;
-            float zFarPlaneD = 1000.0f;
+            double left = 10.0d;
+            double right = 90.0d;
+            double bottom = 20.0d;
+            double top = 180.0d;
+            double zNearPlaneD = 1.5d;
+            double zFarPlaneD = 1000.0d;
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = +0.0375f;
+            expected.M11 = +0.0375d;
 
-            expected.M22 = +0.01875f;
+            expected.M22 = +0.01875d;
 
-            expected.M31 = -1.25f;
-            expected.M32 = -1.25f;
-            expected.M33 = +1.0015f;
-            expected.M34 = +1.0f;
+            expected.M31 = -1.25d;
+            expected.M32 = -1.25d;
+            expected.M33 = +1.0015d;
+            expected.M34 = +1.0d;
 
-            expected.M43 = -1.50225f;
+            expected.M43 = -1.50225d;
 
 
             Matrix4x4D actual = Matrix4x4D.CreatePerspectiveOffCenterLeftHanded(left, right, bottom, top, zNearPlaneD, zFarPlaneD);
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreatePerspectiveOffCenterLeftHanded)} did not return the expected value.");
         }
 
-        // A test for CreatePerspectiveOffCenter (float, float, float, float, float, float)
+        // A test for CreatePerspectiveOffCenter (double, double, double, double, double, double)
         // CreatePerspectiveOffCenter test where nearPlaneDDistance is negative.
         [Fact]
         public void Matrix4x4DCreatePerspectiveOffCenterTest1()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                float left = 10.0f, right = 90.0f, bottom = 20.0f, top = 180.0f;
+                double left = 10.0d, right = 90.0d, bottom = 20.0d, top = 180.0d;
                 Matrix4x4D actual = Matrix4x4D.CreatePerspectiveOffCenter(left, right, bottom, top, -1, 10);
             });
         }
 
-        // A test for CreatePerspectiveOffCenter (float, float, float, float, float, float)
+        // A test for CreatePerspectiveOffCenter (double, double, double, double, double, double)
         // CreatePerspectiveOffCenter test where farPlaneDDistance is negative.
         [Fact]
         public void Matrix4x4DCreatePerspectiveOffCenterTest2()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                float left = 10.0f, right = 90.0f, bottom = 20.0f, top = 180.0f;
+                double left = 10.0d, right = 90.0d, bottom = 20.0d, top = 180.0d;
                 Matrix4x4D actual = Matrix4x4D.CreatePerspectiveOffCenter(left, right, bottom, top, 1, -10);
             });
         }
 
-        // A test for CreatePerspectiveOffCenter (float, float, float, float, float, float)
+        // A test for CreatePerspectiveOffCenter (double, double, double, double, double, double)
         // CreatePerspectiveOffCenter test where test where nearPlaneDDistance is larger than farPlaneDDistance.
         [Fact]
         public void Matrix4x4DCreatePerspectiveOffCenterTest3()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                float left = 10.0f, right = 90.0f, bottom = 20.0f, top = 180.0f;
+                double left = 10.0d, right = 90.0d, bottom = 20.0d, top = 180.0d;
                 Matrix4x4D actual = Matrix4x4D.CreatePerspectiveOffCenter(left, right, bottom, top, 10, 1);
             });
         }
@@ -1520,63 +1520,63 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DInvertTest1()
         {
             Matrix4x4D a = new Matrix4x4D();
-            a.M11 = 1.0f;
-            a.M12 = 2.0f;
-            a.M13 = 3.0f;
-            a.M14 = 4.0f;
-            a.M21 = 5.0f;
-            a.M22 = 6.0f;
-            a.M23 = 7.0f;
-            a.M24 = 8.0f;
-            a.M31 = 9.0f;
-            a.M32 = 10.0f;
-            a.M33 = 11.0f;
-            a.M34 = 12.0f;
-            a.M41 = 13.0f;
-            a.M42 = 14.0f;
-            a.M43 = 15.0f;
-            a.M44 = 16.0f;
+            a.M11 = 1.0d;
+            a.M12 = 2.0d;
+            a.M13 = 3.0d;
+            a.M14 = 4.0d;
+            a.M21 = 5.0d;
+            a.M22 = 6.0d;
+            a.M23 = 7.0d;
+            a.M24 = 8.0d;
+            a.M31 = 9.0d;
+            a.M32 = 10.0d;
+            a.M33 = 11.0d;
+            a.M34 = 12.0d;
+            a.M41 = 13.0d;
+            a.M42 = 14.0d;
+            a.M43 = 15.0d;
+            a.M44 = 16.0d;
 
-            float detA = a.GetDeterminant();
-            Assert.True(MathHelper.Equal(detA, 0.0f), "Matrix4x4D.Invert did not return the expected value.");
+            double detA = a.GetDeterminant();
+            Assert.True(MathHelper.Equal(detA, 0.0d), "Matrix4x4D.Invert did not return the expected value.");
 
             Matrix4x4D actual;
             Assert.False(Matrix4x4D.Invert(a, out actual));
 
             // all the elements in Actual is NaN
             Assert.True(
-                float.IsNaN(actual.M11) && float.IsNaN(actual.M12) && float.IsNaN(actual.M13) && float.IsNaN(actual.M14) &&
-                float.IsNaN(actual.M21) && float.IsNaN(actual.M22) && float.IsNaN(actual.M23) && float.IsNaN(actual.M24) &&
-                float.IsNaN(actual.M31) && float.IsNaN(actual.M32) && float.IsNaN(actual.M33) && float.IsNaN(actual.M34) &&
-                float.IsNaN(actual.M41) && float.IsNaN(actual.M42) && float.IsNaN(actual.M43) && float.IsNaN(actual.M44)
+                double.IsNaN(actual.M11) && double.IsNaN(actual.M12) && double.IsNaN(actual.M13) && double.IsNaN(actual.M14) &&
+                double.IsNaN(actual.M21) && double.IsNaN(actual.M22) && double.IsNaN(actual.M23) && double.IsNaN(actual.M24) &&
+                double.IsNaN(actual.M31) && double.IsNaN(actual.M32) && double.IsNaN(actual.M33) && double.IsNaN(actual.M34) &&
+                double.IsNaN(actual.M41) && double.IsNaN(actual.M42) && double.IsNaN(actual.M43) && double.IsNaN(actual.M44)
                 , "Matrix4x4D.Invert did not return the expected value.");
         }
 
-        // A test for Lerp (Matrix4x4D, Matrix4x4D, float)
+        // A test for Lerp (Matrix4x4D, Matrix4x4D, double)
         [Fact]
         public void Matrix4x4DLerpTest()
         {
             Matrix4x4D a = new Matrix4x4D();
-            a.M11 = 11.0f;
-            a.M12 = 12.0f;
-            a.M13 = 13.0f;
-            a.M14 = 14.0f;
-            a.M21 = 21.0f;
-            a.M22 = 22.0f;
-            a.M23 = 23.0f;
-            a.M24 = 24.0f;
-            a.M31 = 31.0f;
-            a.M32 = 32.0f;
-            a.M33 = 33.0f;
-            a.M34 = 34.0f;
-            a.M41 = 41.0f;
-            a.M42 = 42.0f;
-            a.M43 = 43.0f;
-            a.M44 = 44.0f;
+            a.M11 = 11.0d;
+            a.M12 = 12.0d;
+            a.M13 = 13.0d;
+            a.M14 = 14.0d;
+            a.M21 = 21.0d;
+            a.M22 = 22.0d;
+            a.M23 = 23.0d;
+            a.M24 = 24.0d;
+            a.M31 = 31.0d;
+            a.M32 = 32.0d;
+            a.M33 = 33.0d;
+            a.M34 = 34.0d;
+            a.M41 = 41.0d;
+            a.M42 = 42.0d;
+            a.M43 = 43.0d;
+            a.M44 = 44.0d;
 
             Matrix4x4D b = GenerateIncrementalMatrixNumber();
 
-            float t = 0.5f;
+            double t = 0.5d;
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 + (b.M11 - a.M11) * t;
@@ -1611,22 +1611,22 @@ namespace Invicta.Numerics.Tests
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = -1.0f;
-            expected.M12 = -2.0f;
-            expected.M13 = -3.0f;
-            expected.M14 = -4.0f;
-            expected.M21 = -5.0f;
-            expected.M22 = -6.0f;
-            expected.M23 = -7.0f;
-            expected.M24 = -8.0f;
-            expected.M31 = -9.0f;
-            expected.M32 = -10.0f;
-            expected.M33 = -11.0f;
-            expected.M34 = -12.0f;
-            expected.M41 = -13.0f;
-            expected.M42 = -14.0f;
-            expected.M43 = -15.0f;
-            expected.M44 = -16.0f;
+            expected.M11 = -1.0d;
+            expected.M12 = -2.0d;
+            expected.M13 = -3.0d;
+            expected.M14 = -4.0d;
+            expected.M21 = -5.0d;
+            expected.M22 = -6.0d;
+            expected.M23 = -7.0d;
+            expected.M24 = -8.0d;
+            expected.M31 = -9.0d;
+            expected.M32 = -10.0d;
+            expected.M33 = -11.0d;
+            expected.M34 = -12.0d;
+            expected.M41 = -13.0d;
+            expected.M42 = -14.0d;
+            expected.M43 = -15.0d;
+            expected.M44 = -16.0d;
 
             Matrix4x4D actual = -a;
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.operator - did not return the expected value.");
@@ -1637,7 +1637,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DSubtractionTest()
         {
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
-            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0f);
+            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 - b.M11;
@@ -1666,7 +1666,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DMultiplyTest1()
         {
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
-            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0f);
+            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 * b.M11 + a.M12 * b.M21 + a.M13 * b.M31 + a.M14 * b.M41;
@@ -1699,22 +1699,22 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DMultiplyTest4()
         {
             Matrix4x4D a = new Matrix4x4D();
-            a.M11 = 1.0f;
-            a.M12 = 2.0f;
-            a.M13 = 3.0f;
-            a.M14 = 4.0f;
-            a.M21 = 5.0f;
-            a.M22 = -6.0f;
-            a.M23 = 7.0f;
-            a.M24 = -8.0f;
-            a.M31 = 9.0f;
-            a.M32 = 10.0f;
-            a.M33 = 11.0f;
-            a.M34 = 12.0f;
-            a.M41 = 13.0f;
-            a.M42 = -14.0f;
-            a.M43 = 15.0f;
-            a.M44 = -16.0f;
+            a.M11 = 1.0d;
+            a.M12 = 2.0d;
+            a.M13 = 3.0d;
+            a.M14 = 4.0d;
+            a.M21 = 5.0d;
+            a.M22 = -6.0d;
+            a.M23 = 7.0d;
+            a.M24 = -8.0d;
+            a.M31 = 9.0d;
+            a.M32 = 10.0d;
+            a.M33 = 11.0d;
+            a.M34 = 12.0d;
+            a.M41 = 13.0d;
+            a.M42 = -14.0d;
+            a.M43 = 15.0d;
+            a.M44 = -16.0d;
 
             Matrix4x4D b = new Matrix4x4D();
             b = Matrix4x4D.Identity;
@@ -1730,7 +1730,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DAdditionTest()
         {
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
-            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0f);
+            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 + b.M11;
@@ -1798,29 +1798,29 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DFromQuaternionDTest1()
         {
-            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0f, 2.0f, 3.0f));
-            QuaternionD q = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0f));
+            Vector3D axis = Vector3D.Normalize(new Vector3D(1.0d, 2.0d, 3.0d));
+            QuaternionD q = QuaternionD.CreateFromAxisAngle(axis, MathHelper.ToRadians(30.0d));
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = 0.875595033f;
-            expected.M12 = 0.420031041f;
-            expected.M13 = -0.2385524f;
-            expected.M14 = 0.0f;
+            expected.M11 = 0.875595033d;
+            expected.M12 = 0.420031041d;
+            expected.M13 = -0.2385524d;
+            expected.M14 = 0.0d;
 
-            expected.M21 = -0.38175258f;
-            expected.M22 = 0.904303849f;
-            expected.M23 = 0.1910483f;
-            expected.M24 = 0.0f;
+            expected.M21 = -0.38175258d;
+            expected.M22 = 0.904303849d;
+            expected.M23 = 0.1910483d;
+            expected.M24 = 0.0d;
 
-            expected.M31 = 0.295970082f;
-            expected.M32 = -0.07621294f;
-            expected.M33 = 0.952151954f;
-            expected.M34 = 0.0f;
+            expected.M31 = 0.295970082d;
+            expected.M32 = -0.07621294d;
+            expected.M33 = 0.952151954d;
+            expected.M34 = 0.0d;
 
-            expected.M41 = 0.0f;
-            expected.M42 = 0.0f;
-            expected.M43 = 0.0f;
-            expected.M44 = 1.0f;
+            expected.M41 = 0.0d;
+            expected.M42 = 0.0d;
+            expected.M43 = 0.0d;
+            expected.M44 = 1.0d;
 
             Matrix4x4D target = Matrix4x4D.CreateFromQuaternion(q);
             Assert.True(MathHelper.Equal(expected, target), "Matrix4x4D.Matrix4x4D(QuaternionD) did not return the expected value.");
@@ -1831,7 +1831,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DFromQuaternionDTest2()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 QuaternionD quat = QuaternionD.CreateFromAxisAngle(Vector3D.UnitX, angle);
 
@@ -1854,7 +1854,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DFromQuaternionDTest3()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 QuaternionD quat = QuaternionD.CreateFromAxisAngle(Vector3D.UnitY, angle);
 
@@ -1877,7 +1877,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DFromQuaternionDTest4()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 QuaternionD quat = QuaternionD.CreateFromAxisAngle(Vector3D.UnitZ, angle);
 
@@ -1900,7 +1900,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DFromQuaternionDTest5()
         {
-            for (float angle = 0.0f; angle < 720.0f; angle += 10.0f)
+            for (double angle = 0.0d; angle < 720.0d; angle += 10.0d)
             {
                 QuaternionD quat =
                     QuaternionD.CreateFromAxisAngle(Vector3D.UnitZ, angle) *
@@ -1929,29 +1929,29 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DToStringTest()
         {
             Matrix4x4D a = new Matrix4x4D();
-            a.M11 = 11.0f;
-            a.M12 = -12.0f;
-            a.M13 = -13.3f;
-            a.M14 = 14.4f;
-            a.M21 = 21.0f;
-            a.M22 = 22.0f;
-            a.M23 = 23.0f;
-            a.M24 = 24.0f;
-            a.M31 = 31.0f;
-            a.M32 = 32.0f;
-            a.M33 = 33.0f;
-            a.M34 = 34.0f;
-            a.M41 = 41.0f;
-            a.M42 = 42.0f;
-            a.M43 = 43.0f;
-            a.M44 = 44.0f;
+            a.M11 = 11.0d;
+            a.M12 = -12.0d;
+            a.M13 = -13.3d;
+            a.M14 = 14.4d;
+            a.M21 = 21.0d;
+            a.M22 = 22.0d;
+            a.M23 = 23.0d;
+            a.M24 = 24.0d;
+            a.M31 = 31.0d;
+            a.M32 = 32.0d;
+            a.M33 = 33.0d;
+            a.M34 = 34.0d;
+            a.M41 = 41.0d;
+            a.M42 = 42.0d;
+            a.M43 = 43.0d;
+            a.M44 = 44.0d;
 
             string expected = string.Format(CultureInfo.CurrentCulture,
                 "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
-                    11.0f, -12.0f, -13.3f, 14.4f,
-                    21.0f, 22.0f, 23.0f, 24.0f,
-                    31.0f, 32.0f, 33.0f, 34.0f,
-                    41.0f, 42.0f, 43.0f, 44.0f);
+                    11.0d, -12.0d, -13.3d, 14.4d,
+                    21.0d, 22.0d, 23.0d, 24.0d,
+                    31.0d, 32.0d, 33.0d, 34.0d,
+                    41.0d, 42.0d, 43.0d, 44.0d);
 
             string actual = a.ToString();
             Assert.Equal(expected, actual);
@@ -1962,7 +1962,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DAddTest()
         {
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
-            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0f);
+            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 + b.M11;
@@ -2001,7 +2001,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.M11 = 11.0f;
+            b.M11 = 11.0d;
             obj = b;
             expected = false;
             actual = a.Equals(obj);
@@ -2043,7 +2043,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DMultiplyTest3()
         {
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
-            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0f);
+            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 * b.M11 + a.M12 * b.M21 + a.M13 * b.M31 + a.M14 * b.M41;
@@ -2071,7 +2071,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Matrix4x4D, float)
+        // A test for Multiply (Matrix4x4D, double)
         [Fact]
         public void Matrix4x4DMultiplyTest5()
         {
@@ -2082,7 +2082,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Matrix4x4D, float)
+        // A test for Multiply (Matrix4x4D, double)
         [Fact]
         public void Matrix4x4DMultiplyTest6()
         {
@@ -2100,22 +2100,22 @@ namespace Invicta.Numerics.Tests
             Matrix4x4D m = GenerateIncrementalMatrixNumber();
 
             Matrix4x4D expected = new Matrix4x4D();
-            expected.M11 = -1.0f;
-            expected.M12 = -2.0f;
-            expected.M13 = -3.0f;
-            expected.M14 = -4.0f;
-            expected.M21 = -5.0f;
-            expected.M22 = -6.0f;
-            expected.M23 = -7.0f;
-            expected.M24 = -8.0f;
-            expected.M31 = -9.0f;
-            expected.M32 = -10.0f;
-            expected.M33 = -11.0f;
-            expected.M34 = -12.0f;
-            expected.M41 = -13.0f;
-            expected.M42 = -14.0f;
-            expected.M43 = -15.0f;
-            expected.M44 = -16.0f;
+            expected.M11 = -1.0d;
+            expected.M12 = -2.0d;
+            expected.M13 = -3.0d;
+            expected.M14 = -4.0d;
+            expected.M21 = -5.0d;
+            expected.M22 = -6.0d;
+            expected.M23 = -7.0d;
+            expected.M24 = -8.0d;
+            expected.M31 = -9.0d;
+            expected.M32 = -10.0d;
+            expected.M33 = -11.0d;
+            expected.M34 = -12.0d;
+            expected.M41 = -13.0d;
+            expected.M42 = -14.0d;
+            expected.M43 = -15.0d;
+            expected.M44 = -16.0d;
             Matrix4x4D actual;
 
             actual = Matrix4x4D.Negate(m);
@@ -2135,7 +2135,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.M11 = 11.0f;
+            b.M11 = 11.0d;
             expected = true;
             actual = a != b;
             Assert.Equal(expected, actual);
@@ -2154,7 +2154,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.M11 = 11.0f;
+            b.M11 = 11.0d;
             expected = false;
             actual = a == b;
             Assert.Equal(expected, actual);
@@ -2165,7 +2165,7 @@ namespace Invicta.Numerics.Tests
         public void Matrix4x4DSubtractTest()
         {
             Matrix4x4D a = GenerateIncrementalMatrixNumber();
-            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0f);
+            Matrix4x4D b = GenerateIncrementalMatrixNumber(-8.0d);
 
             Matrix4x4D expected = new Matrix4x4D();
             expected.M11 = a.M11 - b.M11;
@@ -2191,8 +2191,8 @@ namespace Invicta.Numerics.Tests
 
         private void CreateBillboardFact(Vector3D placeDirection, Vector3D cameraUpVector, Matrix4x4D expectedRotationRightHanded, Matrix4x4D expectedRotationLeftHanded)
         {
-            Vector3D cameraPosition = new Vector3D(3.0f, 4.0f, 5.0f);
-            Vector3D objectPosition = cameraPosition + placeDirection * 10.0f;
+            Vector3D cameraPosition = new Vector3D(3.0d, 4.0d, 5.0d);
+            Vector3D objectPosition = cameraPosition + placeDirection * 10.0d;
             Matrix4x4D expected = expectedRotationRightHanded * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateBillboard(objectPosition, cameraPosition, cameraUpVector, new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualRH), "Matrix4x4D.CreateBillboard did not return the expected value.");
@@ -2200,8 +2200,8 @@ namespace Invicta.Numerics.Tests
             placeDirection = InverseHandedness(placeDirection);
             cameraUpVector = InverseHandedness(cameraUpVector);
 
-            cameraPosition = new Vector3D(3.0f, 4.0f, -5.0f);
-            objectPosition = cameraPosition + placeDirection * 10.0f;
+            cameraPosition = new Vector3D(3.0d, 4.0d, -5.0d);
+            objectPosition = cameraPosition + placeDirection * 10.0d;
             expected = expectedRotationLeftHanded * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateBillboardLeftHanded(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualLH), "Matrix4x4D.CreateBillboardLeftHanded did not return the expected value.");
@@ -2219,8 +2219,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 new Vector3D(0, 0, -1),
                 Vector3D.UnitY,
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2271,8 +2271,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 Vector3D.UnitY,
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2284,8 +2284,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 new Vector3D(0, -1, 0),
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2297,8 +2297,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 Vector3D.UnitX,
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2310,8 +2310,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 new Vector3D(-1, 0, 0),
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2323,8 +2323,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 Vector3D.UnitY,
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2336,8 +2336,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 new Vector3D(0, -1, 0),
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2349,8 +2349,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 new Vector3D(0, 0, -1),
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2362,8 +2362,8 @@ namespace Invicta.Numerics.Tests
             CreateBillboardFact(
                 Vector3D.UnitZ,
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0d)));
         }
 
         // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2371,20 +2371,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateBillboardTooCloseTest1()
         {
-            Vector3D objectPosition = new Vector3D(3.0f, 4.0f, 5.0f);
+            Vector3D objectPosition = new Vector3D(3.0d, 4.0d, 5.0d);
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
             // Doesn't pass camera face direction. CreateBillboard uses new Vector3Df(0, 0, -1) direction. Result must be same as 180 degrees rotate along y-axis.
-            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualRH), "Matrix4x4D.CreateBillboard did not return the expected value.");
 
-            objectPosition = new Vector3D(3.0f, 4.0f, -5.0f);
+            objectPosition = new Vector3D(3.0d, 4.0d, -5.0d);
             cameraPosition = objectPosition;
             cameraUpVector = Vector3D.UnitY;
 
-            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateBillboardLeftHanded(objectPosition, cameraPosition, cameraUpVector, new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualLH), "Matrix4x4D.CreateBillboardLeftHanded did not return the expected value.");
 
@@ -2397,56 +2397,56 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateBillboardTooCloseTest2()
         {
-            Vector3D objectPosition = new Vector3D(3.0f, 4.0f, 5.0f);
+            Vector3D objectPosition = new Vector3D(3.0d, 4.0d, 5.0d);
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
             // Passes Vector3Df.Right as camera face direction. Result must be same as -90 degrees rotate along y-axis.
-            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitX);
             Assert.True(MathHelper.Equal(expected, actualRH), "Matrix4x4D.CreateBillboard did not return the expected value.");
 
-            objectPosition = new Vector3D(3.0f, 4.0f, -5.0f);
+            objectPosition = new Vector3D(3.0d, 4.0d, -5.0d);
             cameraPosition = objectPosition;
             cameraUpVector = Vector3D.UnitY;
 
-            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateBillboardLeftHanded(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitX);
             Assert.True(MathHelper.Equal(expected, actualLH), "Matrix4x4D.CreateBillboardLeftHanded did not return the expected value.");
         }
 
         private void CreateConstrainedBillboardFact(Vector3D placeDirection, Vector3D rotateAxis, Matrix4x4D expectedRotationRightHanded, Matrix4x4D expectedRotationLeftHanded)
         {
-            Vector3D cameraPosition = new Vector3D(3.0f, 4.0f, 5.0f);
-            Vector3D objectPosition = cameraPosition + placeDirection * 10.0f;
+            Vector3D cameraPosition = new Vector3D(3.0d, 4.0d, 5.0d);
+            Vector3D objectPosition = cameraPosition + placeDirection * 10.0d;
             Matrix4x4D expected = expectedRotationRightHanded * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, rotateAxis, new Vector3D(0, 0, -1), new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
 
             // When you move camera along rotateAxis, result must be same.
-            cameraPosition += rotateAxis * 10.0f;
+            cameraPosition += rotateAxis * 10.0d;
             Matrix4x4D actualTranslatedUpRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, rotateAxis, new Vector3D(0, 0, -1), new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualTranslatedUpRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
 
-            cameraPosition -= rotateAxis * 30.0f;
+            cameraPosition -= rotateAxis * 30.0d;
             Matrix4x4D actualTranslatedDownRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, rotateAxis, new Vector3D(0, 0, -1), new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualTranslatedDownRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
 
             placeDirection = InverseHandedness(placeDirection);
             rotateAxis = InverseHandedness(rotateAxis);
 
-            cameraPosition = new Vector3D(3.0f, 4.0f, -5.0f);
-            objectPosition = cameraPosition + placeDirection * 10.0f;
+            cameraPosition = new Vector3D(3.0d, 4.0d, -5.0d);
+            objectPosition = cameraPosition + placeDirection * 10.0d;
             expected = expectedRotationLeftHanded * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateConstrainedBillboardLeftHanded(objectPosition, cameraPosition, rotateAxis, new Vector3D(0, 0, -1), Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualLH), $"{nameof(Matrix4x4D.CreateConstrainedBillboardLeftHanded)} did not return the expected value.");
 
             // When you move camera along rotateAxis, result must be same.
-            cameraPosition += rotateAxis * 10.0f;
+            cameraPosition += rotateAxis * 10.0d;
             Matrix4x4D actualTranslatedUpLH = Matrix4x4D.CreateConstrainedBillboardLeftHanded(objectPosition, cameraPosition, rotateAxis, new Vector3D(0, 0, -1), Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualTranslatedUpLH), $"{nameof(Matrix4x4D.CreateConstrainedBillboardLeftHanded)} did not return the expected value.");
 
-            cameraPosition -= rotateAxis * 30.0f;
+            cameraPosition -= rotateAxis * 30.0d;
             Matrix4x4D actualTranslatedDownLH = Matrix4x4D.CreateConstrainedBillboardLeftHanded(objectPosition, cameraPosition, rotateAxis, new Vector3D(0, 0, -1), Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualTranslatedDownLH), $"{nameof(Matrix4x4D.CreateConstrainedBillboardLeftHanded)} did not return the expected value.");
 
@@ -2469,8 +2469,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 new Vector3D(0, 0, -1),
                 Vector3D.UnitY,
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2521,8 +2521,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 Vector3D.UnitY,
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2534,8 +2534,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 new Vector3D(0, -1, 0),
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2547,8 +2547,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 Vector3D.UnitX,
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2560,8 +2560,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 new Vector3D(-1, 0, 0),
                 Vector3D.UnitZ,
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2573,8 +2573,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 Vector3D.UnitY,
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2586,8 +2586,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 new Vector3D(0, -1, 0),
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2599,8 +2599,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 new Vector3D(0, 0, -1),
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2612,8 +2612,8 @@ namespace Invicta.Numerics.Tests
             CreateConstrainedBillboardFact(
                 Vector3D.UnitZ,
                 new Vector3D(-1, 0, 0),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0f)),
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0f)));
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0d)),
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2621,20 +2621,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTooCloseTest1()
         {
-            Vector3D objectPosition = new Vector3D(3.0f, 4.0f, 5.0f);
+            Vector3D objectPosition = new Vector3D(3.0d, 4.0d, 5.0d);
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
             // Doesn't pass camera face direction. CreateConstrainedBillboard uses new Vector3Df(0, 0, -1) direction. Result must be same as 180 degrees rotate along y-axis.
-            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitZ, new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
 
-            objectPosition = new Vector3D(3.0f, 4.0f, -5.0f);
+            objectPosition = new Vector3D(3.0d, 4.0d, -5.0d);
             cameraPosition = objectPosition;
             cameraUpVector = Vector3D.UnitY;
 
-            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateConstrainedBillboardLeftHanded(objectPosition, cameraPosition, cameraUpVector, new Vector3D(0, 0, -1), Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualLH), $"{nameof(Matrix4x4D.CreateConstrainedBillboardLeftHanded)} did not return the expected value.");
 
@@ -2647,20 +2647,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTooCloseTest2()
         {
-            Vector3D objectPosition = new Vector3D(3.0f, 4.0f, 5.0f);
+            Vector3D objectPosition = new Vector3D(3.0d, 4.0d, 5.0d);
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
             // Passes Vector3Df.Right as camera face direction. Result must be same as -90 degrees rotate along y-axis.
-            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitX, new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
 
-            objectPosition = new Vector3D(3.0f, 4.0f, -5.0f);
+            objectPosition = new Vector3D(3.0d, 4.0d, -5.0d);
             cameraPosition = objectPosition;
             cameraUpVector = Vector3D.UnitY;
 
-            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateTranslation(objectPosition);
+            expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateConstrainedBillboardLeftHanded(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitX, Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualLH), $"{nameof(Matrix4x4D.CreateConstrainedBillboardLeftHanded)} did not return the expected value.");
 
@@ -2671,8 +2671,8 @@ namespace Invicta.Numerics.Tests
         private static void Matrix4x4DCreateConstrainedBillboardAlongAxisFact(Vector3D rotateAxis, Vector3D cameraForward, Vector3D objectForward, Matrix4x4D expectedRotationRightHanded, Matrix4x4D expectedRotationLeftHanded)
         {
             // Place camera at up side of object.
-            Vector3D objectPosition = new Vector3D(3.0f, 4.0f, 5.0f);
-            Vector3D cameraPosition = objectPosition + rotateAxis * 10.0f;
+            Vector3D objectPosition = new Vector3D(3.0d, 4.0d, 5.0d);
+            Vector3D cameraPosition = objectPosition + rotateAxis * 10.0d;
 
             Matrix4x4D expected = expectedRotationRightHanded * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualLH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, rotateAxis, cameraForward, objectForward);
@@ -2682,8 +2682,8 @@ namespace Invicta.Numerics.Tests
             cameraForward = InverseHandedness(cameraForward);
             objectForward = InverseHandedness(objectForward);
 
-            objectPosition = new Vector3D(3.0f, 4.0f, -5.0f);
-            cameraPosition = objectPosition + rotateAxis * 10.0f;
+            objectPosition = new Vector3D(3.0d, 4.0d, -5.0d);
+            cameraPosition = objectPosition + rotateAxis * 10.0d;
 
             expected = expectedRotationLeftHanded * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateConstrainedBillboardLeftHanded(objectPosition, cameraPosition, rotateAxis, cameraForward, objectForward);
@@ -2701,8 +2701,8 @@ namespace Invicta.Numerics.Tests
             // In this case, CreateConstrainedBillboard picks new Vector3Df(0, 0, -1) as object forward vector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 Vector3D.UnitY, new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2713,8 +2713,8 @@ namespace Invicta.Numerics.Tests
             // In this case, CreateConstrainedBillboard picks new Vector3Df(1, 0, 0) as object forward vector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 new Vector3D(0, 0, -1), new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2725,8 +2725,8 @@ namespace Invicta.Numerics.Tests
             // User passes correct objectForwardVector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 Vector3D.UnitY, new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2737,8 +2737,8 @@ namespace Invicta.Numerics.Tests
             // User passes correct objectForwardVector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 Vector3D.UnitY, new Vector3D(0, 0, -1), Vector3D.UnitY,
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)),
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0f)));
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)),
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
         // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
@@ -2749,20 +2749,20 @@ namespace Invicta.Numerics.Tests
             // In this case, CreateConstrainedBillboard picks Vector3Df.Right as object forward vector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 new Vector3D(0, 0, -1), new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)),
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0f)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0f)));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)),
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
         // A test for CreateScale (Vector3Df)
         [Fact]
         public void Matrix4x4DCreateScaleTest1()
         {
-            Vector3D scales = new Vector3D(2.0f, 3.0f, 4.0f);
+            Vector3D scales = new Vector3D(2.0d, 3.0d, 4.0d);
             Matrix4x4D expected = new Matrix4x4D(
-                2.0f, 0.0f, 0.0f, 0.0f,
-                0.0f, 3.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 4.0f, 0.0f,
-                0.0f, 0.0f, 0.0f, 1.0f);
+                2.0d, 0.0d, 0.0d, 0.0d,
+                0.0d, 3.0d, 0.0d, 0.0d,
+                0.0d, 0.0d, 4.0d, 0.0d,
+                0.0d, 0.0d, 0.0d, 1.0d);
             Matrix4x4D actual = Matrix4x4D.CreateScale(scales);
             Assert.Equal(expected, actual);
         }
@@ -2783,25 +2783,25 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
-        // A test for CreateScale (float)
+        // A test for CreateScale (double)
         [Fact]
         public void Matrix4x4DCreateScaleTest2()
         {
-            float scale = 2.0f;
+            double scale = 2.0d;
             Matrix4x4D expected = new Matrix4x4D(
-                2.0f, 0.0f, 0.0f, 0.0f,
-                0.0f, 2.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 2.0f, 0.0f,
-                0.0f, 0.0f, 0.0f, 1.0f);
+                2.0d, 0.0d, 0.0d, 0.0d,
+                0.0d, 2.0d, 0.0d, 0.0d,
+                0.0d, 0.0d, 2.0d, 0.0d,
+                0.0d, 0.0d, 0.0d, 1.0d);
             Matrix4x4D actual = Matrix4x4D.CreateScale(scale);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (float, Vector3Df)
+        // A test for CreateScale (double, Vector3Df)
         [Fact]
         public void Matrix4x4DCreateScaleCenterTest2()
         {
-            float scale = 5;
+            double scale = 5;
             Vector3D center = new Vector3D(23, 42, 666);
 
             Matrix4x4D scaleAroundZero = Matrix4x4D.CreateScale(scale, Vector3D.Zero);
@@ -2813,23 +2813,23 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
-        // A test for CreateScale (float, float, float)
+        // A test for CreateScale (double, double, double)
         [Fact]
         public void Matrix4x4DCreateScaleTest3()
         {
-            float xScale = 2.0f;
-            float yScale = 3.0f;
-            float zScale = 4.0f;
+            double xScale = 2.0d;
+            double yScale = 3.0d;
+            double zScale = 4.0d;
             Matrix4x4D expected = new Matrix4x4D(
-                2.0f, 0.0f, 0.0f, 0.0f,
-                0.0f, 3.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 4.0f, 0.0f,
-                0.0f, 0.0f, 0.0f, 1.0f);
+                2.0d, 0.0d, 0.0d, 0.0d,
+                0.0d, 3.0d, 0.0d, 0.0d,
+                0.0d, 0.0d, 4.0d, 0.0d,
+                0.0d, 0.0d, 0.0d, 1.0d);
             Matrix4x4D actual = Matrix4x4D.CreateScale(xScale, yScale, zScale);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (float, float, float, Vector3Df)
+        // A test for CreateScale (double, double, double, Vector3Df)
         [Fact]
         public void Matrix4x4DCreateScaleCenterTest3()
         {
@@ -2849,30 +2849,30 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Matrix4x4DCreateTranslationTest1()
         {
-            Vector3D position = new Vector3D(2.0f, 3.0f, 4.0f);
+            Vector3D position = new Vector3D(2.0d, 3.0d, 4.0d);
             Matrix4x4D expected = new Matrix4x4D(
-                1.0f, 0.0f, 0.0f, 0.0f,
-                0.0f, 1.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 1.0f, 0.0f,
-                2.0f, 3.0f, 4.0f, 1.0f);
+                1.0d, 0.0d, 0.0d, 0.0d,
+                0.0d, 1.0d, 0.0d, 0.0d,
+                0.0d, 0.0d, 1.0d, 0.0d,
+                2.0d, 3.0d, 4.0d, 1.0d);
 
             Matrix4x4D actual = Matrix4x4D.CreateTranslation(position);
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateTranslation (float, float, float)
+        // A test for CreateTranslation (double, double, double)
         [Fact]
         public void Matrix4x4DCreateTranslationTest2()
         {
-            float xPosition = 2.0f;
-            float yPosition = 3.0f;
-            float zPosition = 4.0f;
+            double xPosition = 2.0d;
+            double yPosition = 3.0d;
+            double zPosition = 4.0d;
 
             Matrix4x4D expected = new Matrix4x4D(
-                1.0f, 0.0f, 0.0f, 0.0f,
-                0.0f, 1.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 1.0f, 0.0f,
-                2.0f, 3.0f, 4.0f, 1.0f);
+                1.0d, 0.0d, 0.0d, 0.0d,
+                0.0d, 1.0d, 0.0d, 0.0d,
+                0.0d, 0.0d, 1.0d, 0.0d,
+                2.0d, 3.0d, 4.0d, 1.0d);
 
             Matrix4x4D actual = Matrix4x4D.CreateTranslation(xPosition, yPosition, zPosition);
             Assert.Equal(expected, actual);
@@ -2890,7 +2890,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(val, a.Translation);
 
             // Set value and get value must be same.
-            val = new Vector3D(1.0f, 2.0f, 3.0f);
+            val = new Vector3D(1.0d, 2.0d, 3.0d);
             a.Translation = val;
             Assert.Equal(val, a.Translation);
 
@@ -2915,7 +2915,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.M11 = 11.0f;
+            b.M11 = 11.0d;
             expected = false;
             actual = a.Equals(b);
             Assert.Equal(expected, actual);
@@ -2954,45 +2954,45 @@ namespace Invicta.Numerics.Tests
 
             Assert.Equal(source.M11, result.M11);
             Assert.Equal(source.M12, result.M12);
-            Assert.Equal(0f, result.M13);
-            Assert.Equal(0f, result.M14);
+            Assert.Equal(0d, result.M13);
+            Assert.Equal(0d, result.M14);
 
             Assert.Equal(source.M21, result.M21);
             Assert.Equal(source.M22, result.M22);
-            Assert.Equal(0f, result.M23);
-            Assert.Equal(0f, result.M24);
+            Assert.Equal(0d, result.M23);
+            Assert.Equal(0d, result.M24);
 
-            Assert.Equal(0f, result.M31);
-            Assert.Equal(0f, result.M32);
-            Assert.Equal(1f, result.M33);
-            Assert.Equal(0f, result.M34);
+            Assert.Equal(0d, result.M31);
+            Assert.Equal(0d, result.M32);
+            Assert.Equal(1d, result.M33);
+            Assert.Equal(0d, result.M34);
 
             Assert.Equal(source.M31, result.M41);
             Assert.Equal(source.M32, result.M42);
-            Assert.Equal(0f, result.M43);
-            Assert.Equal(1f, result.M44);
+            Assert.Equal(0d, result.M43);
+            Assert.Equal(1d, result.M44);
         }
 
         // A test for Matrix4x4D comparison involving NaN values
         [Fact]
         public void Matrix4x4DEqualsNaNTest()
         {
-            Matrix4x4D a = new Matrix4x4D(float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D b = new Matrix4x4D(0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D c = new Matrix4x4D(0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D d = new Matrix4x4D(0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D e = new Matrix4x4D(0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D f = new Matrix4x4D(0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D g = new Matrix4x4D(0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D h = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D i = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D j = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0, 0);
-            Matrix4x4D k = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0, 0);
-            Matrix4x4D l = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0, 0);
-            Matrix4x4D m = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0, 0);
-            Matrix4x4D n = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0, 0);
-            Matrix4x4D o = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN, 0);
-            Matrix4x4D p = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, float.NaN);
+            Matrix4x4D a = new Matrix4x4D(double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D b = new Matrix4x4D(0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D c = new Matrix4x4D(0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D d = new Matrix4x4D(0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D e = new Matrix4x4D(0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D f = new Matrix4x4D(0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D g = new Matrix4x4D(0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D h = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D i = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D j = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0, 0);
+            Matrix4x4D k = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0, 0);
+            Matrix4x4D l = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0, 0);
+            Matrix4x4D m = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0, 0);
+            Matrix4x4D n = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0, 0);
+            Matrix4x4D o = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN, 0);
+            Matrix4x4D p = new Matrix4x4D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, double.NaN);
 
             Assert.False(a == new Matrix4x4D());
             Assert.False(b == new Matrix4x4D());
@@ -3101,7 +3101,7 @@ namespace Invicta.Numerics.Tests
         struct Matrix4x4DPlusFloat
         {
             private Matrix4x4D _v;
-            private float _f;
+            private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -3117,7 +3117,7 @@ namespace Invicta.Numerics.Tests
         {
             Matrix4x4D mat = new Matrix4x4D();
 
-            float* basePtr = &mat.M11; // Take address of first element
+            double* basePtr = &mat.M11; // Take address of first element
             Matrix4x4D* matPtr = &mat; // Take address of whole matrix
 
             Assert.Equal(new IntPtr(basePtr), new IntPtr(matPtr));
@@ -3146,66 +3146,66 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void PerspectiveFarPlaneDAtInfinityTest()
         {
-            var nearPlaneDDistance = 0.125f;
-            var m = Matrix4x4D.CreatePerspective(1.0f, 1.0f, nearPlaneDDistance, float.PositiveInfinity);
-            Assert.Equal(-1.0f, m.M33);
+            var nearPlaneDDistance = 0.125d;
+            var m = Matrix4x4D.CreatePerspective(1.0d, 1.0d, nearPlaneDDistance, double.PositiveInfinity);
+            Assert.Equal(-1.0d, m.M33);
             Assert.Equal(-nearPlaneDDistance, m.M43);
         }
 
         [Fact]
         public void PerspectiveFieldOfViewFarPlaneDAtInfinityTest()
         {
-            var nearPlaneDDistance = 0.125f;
-            var m = Matrix4x4D.CreatePerspectiveFieldOfView(MathHelper.ToRadians(60.0f), 1.5f, nearPlaneDDistance, float.PositiveInfinity);
-            Assert.Equal(-1.0f, m.M33);
+            var nearPlaneDDistance = 0.125d;
+            var m = Matrix4x4D.CreatePerspectiveFieldOfView(MathHelper.ToRadians(60.0d), 1.5d, nearPlaneDDistance, double.PositiveInfinity);
+            Assert.Equal(-1.0d, m.M33);
             Assert.Equal(-nearPlaneDDistance, m.M43);
         }
 
         [Fact]
         public void PerspectiveOffCenterFarPlaneDAtInfinityTest()
         {
-            var nearPlaneDDistance = 0.125f;
-            var m = Matrix4x4D.CreatePerspectiveOffCenter(0.0f, 0.0f, 1.0f, 1.0f, nearPlaneDDistance, float.PositiveInfinity);
-            Assert.Equal(-1.0f, m.M33);
+            var nearPlaneDDistance = 0.125d;
+            var m = Matrix4x4D.CreatePerspectiveOffCenter(0.0d, 0.0d, 1.0d, 1.0d, nearPlaneDDistance, double.PositiveInfinity);
+            Assert.Equal(-1.0d, m.M33);
             Assert.Equal(-nearPlaneDDistance, m.M43);
         }
 
         [Fact]
         public void Matrix4x4DCreateBroadcastScalarTest()
         {
-            Matrix4x4D a = Matrix4x4D.Create(float.Pi);
+            Matrix4x4D a = Matrix4x4D.Create(double.Pi);
 
-            Assert.Equal(Vector4D.Create(float.Pi), a.X);
-            Assert.Equal(Vector4D.Create(float.Pi), a.Y);
-            Assert.Equal(Vector4D.Create(float.Pi), a.Z);
-            Assert.Equal(Vector4D.Create(float.Pi), a.W);
+            Assert.Equal(Vector4D.Create(double.Pi), a.X);
+            Assert.Equal(Vector4D.Create(double.Pi), a.Y);
+            Assert.Equal(Vector4D.Create(double.Pi), a.Z);
+            Assert.Equal(Vector4D.Create(double.Pi), a.W);
         }
 
         [Fact]
         public void Matrix4x4DCreateBroadcastVectorTest()
         {
-            Matrix4x4D a = Matrix4x4D.Create(Vector4D.Create(float.Pi, float.E, float.PositiveInfinity, float.NegativeInfinity));
+            Matrix4x4D a = Matrix4x4D.Create(Vector4D.Create(double.Pi, double.E, double.PositiveInfinity, double.NegativeInfinity));
 
-            Assert.Equal(Vector4D.Create(float.Pi, float.E, float.PositiveInfinity, float.NegativeInfinity), a.X);
-            Assert.Equal(Vector4D.Create(float.Pi, float.E, float.PositiveInfinity, float.NegativeInfinity), a.Y);
-            Assert.Equal(Vector4D.Create(float.Pi, float.E, float.PositiveInfinity, float.NegativeInfinity), a.Z);
-            Assert.Equal(Vector4D.Create(float.Pi, float.E, float.PositiveInfinity, float.NegativeInfinity), a.W);
+            Assert.Equal(Vector4D.Create(double.Pi, double.E, double.PositiveInfinity, double.NegativeInfinity), a.X);
+            Assert.Equal(Vector4D.Create(double.Pi, double.E, double.PositiveInfinity, double.NegativeInfinity), a.Y);
+            Assert.Equal(Vector4D.Create(double.Pi, double.E, double.PositiveInfinity, double.NegativeInfinity), a.Z);
+            Assert.Equal(Vector4D.Create(double.Pi, double.E, double.PositiveInfinity, double.NegativeInfinity), a.W);
         }
 
         [Fact]
         public void Matrix4x4DCreateVectorsTest()
         {
             Matrix4x4D a = Matrix4x4D.Create(
-                Vector4D.Create(11.0f, 12.0f, 13.0f, 14.0f),
-                Vector4D.Create(21.0f, 22.0f, 23.0f, 24.0f),
-                Vector4D.Create(31.0f, 32.0f, 33.0f, 34.0f),
-                Vector4D.Create(41.0f, 42.0f, 43.0f, 44.0f)
+                Vector4D.Create(11.0d, 12.0d, 13.0d, 14.0d),
+                Vector4D.Create(21.0d, 22.0d, 23.0d, 24.0d),
+                Vector4D.Create(31.0d, 32.0d, 33.0d, 34.0d),
+                Vector4D.Create(41.0d, 42.0d, 43.0d, 44.0d)
             );
 
-            Assert.Equal(Vector4D.Create(11.0f, 12.0f, 13.0f, 14.0f), a.X);
-            Assert.Equal(Vector4D.Create(21.0f, 22.0f, 23.0f, 24.0f), a.Y);
-            Assert.Equal(Vector4D.Create(31.0f, 32.0f, 33.0f, 34.0f), a.Z);
-            Assert.Equal(Vector4D.Create(41.0f, 42.0f, 43.0f, 44.0f), a.W);
+            Assert.Equal(Vector4D.Create(11.0d, 12.0d, 13.0d, 14.0d), a.X);
+            Assert.Equal(Vector4D.Create(21.0d, 22.0d, 23.0d, 24.0d), a.Y);
+            Assert.Equal(Vector4D.Create(31.0d, 32.0d, 33.0d, 34.0d), a.Z);
+            Assert.Equal(Vector4D.Create(41.0d, 42.0d, 43.0d, 44.0d), a.W);
         }
 
         [Fact]
@@ -3309,69 +3309,69 @@ namespace Invicta.Numerics.Tests
         {
             Matrix4x4D a = Matrix4x4D.Identity;
 
-            a[0, 0] = 11.0f;
-            Assert.Equal(11.5f, a.WithElement(0, 0, 11.5f).M11);
-            Assert.Equal(11.0f, a.M11);
+            a[0, 0] = 11.0d;
+            Assert.Equal(11.5d, a.WithElement(0, 0, 11.5d).M11);
+            Assert.Equal(11.0d, a.M11);
 
-            a[0, 1] = 12.0f;
-            Assert.Equal(12.5f, a.WithElement(0, 1, 12.5f).M12);
-            Assert.Equal(12.0f, a.M12);
+            a[0, 1] = 12.0d;
+            Assert.Equal(12.5d, a.WithElement(0, 1, 12.5d).M12);
+            Assert.Equal(12.0d, a.M12);
 
-            a[0, 2] = 13.0f;
-            Assert.Equal(13.5f, a.WithElement(0, 2, 13.5f).M13);
-            Assert.Equal(13.0f, a.M13);
+            a[0, 2] = 13.0d;
+            Assert.Equal(13.5d, a.WithElement(0, 2, 13.5d).M13);
+            Assert.Equal(13.0d, a.M13);
 
-            a[0, 3] = 14.0f;
-            Assert.Equal(14.5f, a.WithElement(0, 3, 14.5f).M14);
-            Assert.Equal(14.0f, a.M14);
+            a[0, 3] = 14.0d;
+            Assert.Equal(14.5d, a.WithElement(0, 3, 14.5d).M14);
+            Assert.Equal(14.0d, a.M14);
 
-            a[1, 0] = 21.0f;
-            Assert.Equal(21.5f, a.WithElement(1, 0, 21.5f).M21);
-            Assert.Equal(21.0f, a.M21);
+            a[1, 0] = 21.0d;
+            Assert.Equal(21.5d, a.WithElement(1, 0, 21.5d).M21);
+            Assert.Equal(21.0d, a.M21);
 
-            a[1, 1] = 22.0f;
-            Assert.Equal(22.5f, a.WithElement(1, 1, 22.5f).M22);
-            Assert.Equal(22.0f, a.M22);
+            a[1, 1] = 22.0d;
+            Assert.Equal(22.5d, a.WithElement(1, 1, 22.5d).M22);
+            Assert.Equal(22.0d, a.M22);
 
-            a[1, 2] = 23.0f;
-            Assert.Equal(23.5f, a.WithElement(1, 2, 23.5f).M23);
-            Assert.Equal(23.0f, a.M23);
+            a[1, 2] = 23.0d;
+            Assert.Equal(23.5d, a.WithElement(1, 2, 23.5d).M23);
+            Assert.Equal(23.0d, a.M23);
 
-            a[1, 3] = 24.0f;
-            Assert.Equal(24.5f, a.WithElement(1, 3, 24.5f).M24);
-            Assert.Equal(24.0f, a.M24);
+            a[1, 3] = 24.0d;
+            Assert.Equal(24.5d, a.WithElement(1, 3, 24.5d).M24);
+            Assert.Equal(24.0d, a.M24);
 
-            a[2, 0] = 31.0f;
-            Assert.Equal(31.5f, a.WithElement(2, 0, 31.5f).M31);
-            Assert.Equal(31.0f, a.M31);
+            a[2, 0] = 31.0d;
+            Assert.Equal(31.5d, a.WithElement(2, 0, 31.5d).M31);
+            Assert.Equal(31.0d, a.M31);
 
-            a[2, 1] = 32.0f;
-            Assert.Equal(32.5f, a.WithElement(2, 1, 32.5f).M32);
-            Assert.Equal(32.0f, a.M32);
+            a[2, 1] = 32.0d;
+            Assert.Equal(32.5d, a.WithElement(2, 1, 32.5d).M32);
+            Assert.Equal(32.0d, a.M32);
 
-            a[2, 2] = 33.0f;
-            Assert.Equal(33.5f, a.WithElement(2, 2, 33.5f).M33);
-            Assert.Equal(33.0f, a.M33);
+            a[2, 2] = 33.0d;
+            Assert.Equal(33.5d, a.WithElement(2, 2, 33.5d).M33);
+            Assert.Equal(33.0d, a.M33);
 
-            a[2, 3] = 34.0f;
-            Assert.Equal(34.5f, a.WithElement(2, 3, 34.5f).M34);
-            Assert.Equal(34.0f, a.M34);
+            a[2, 3] = 34.0d;
+            Assert.Equal(34.5d, a.WithElement(2, 3, 34.5d).M34);
+            Assert.Equal(34.0d, a.M34);
 
-            a[3, 0] = 41.0f;
-            Assert.Equal(41.5f, a.WithElement(3, 0, 41.5f).M41);
-            Assert.Equal(41.0f, a.M41);
+            a[3, 0] = 41.0d;
+            Assert.Equal(41.5d, a.WithElement(3, 0, 41.5d).M41);
+            Assert.Equal(41.0d, a.M41);
 
-            a[3, 1] = 42.0f;
-            Assert.Equal(42.5f, a.WithElement(3, 1, 42.5f).M42);
-            Assert.Equal(42.0f, a.M42);
+            a[3, 1] = 42.0d;
+            Assert.Equal(42.5d, a.WithElement(3, 1, 42.5d).M42);
+            Assert.Equal(42.0d, a.M42);
 
-            a[3, 2] = 43.0f;
-            Assert.Equal(43.5f, a.WithElement(3, 2, 43.5f).M43);
-            Assert.Equal(43.0f, a.M43);
+            a[3, 2] = 43.0d;
+            Assert.Equal(43.5d, a.WithElement(3, 2, 43.5d).M43);
+            Assert.Equal(43.0d, a.M43);
 
-            a[3, 3] = 44.0f;
-            Assert.Equal(44.5f, a.WithElement(3, 3, 44.5f).M44);
-            Assert.Equal(44.0f, a.M44);
+            a[3, 3] = 44.0d;
+            Assert.Equal(44.5d, a.WithElement(3, 3, 44.5d).M44);
+            Assert.Equal(44.0d, a.M44);
         }
 
         [Fact]
@@ -3379,21 +3379,21 @@ namespace Invicta.Numerics.Tests
         {
             Matrix4x4D a = Matrix4x4D.Identity;
 
-            a[0] = Vector4D.Create(11.0f, 12.0f, 13.0f, 14.0f);
-            Assert.Equal(Vector4D.Create(11.5f, 12.5f, 13.5f, 14.5f), a.WithRow(0, Vector4D.Create(11.5f, 12.5f, 13.5f, 14.5f)).X);
-            Assert.Equal(Vector4D.Create(11.0f, 12.0f, 13.0f, 14.0f), a.X);
+            a[0] = Vector4D.Create(11.0d, 12.0d, 13.0d, 14.0d);
+            Assert.Equal(Vector4D.Create(11.5d, 12.5d, 13.5d, 14.5d), a.WithRow(0, Vector4D.Create(11.5d, 12.5d, 13.5d, 14.5d)).X);
+            Assert.Equal(Vector4D.Create(11.0d, 12.0d, 13.0d, 14.0d), a.X);
 
-            a[1] = Vector4D.Create(21.0f, 22.0f, 23.0f, 24.0f);
-            Assert.Equal(Vector4D.Create(21.5f, 22.5f, 23.5f, 24.5f), a.WithRow(1, Vector4D.Create(21.5f, 22.5f, 23.5f, 24.5f)).Y);
-            Assert.Equal(Vector4D.Create(21.0f, 22.0f, 23.0f, 24.0f), a.Y);
+            a[1] = Vector4D.Create(21.0d, 22.0d, 23.0d, 24.0d);
+            Assert.Equal(Vector4D.Create(21.5d, 22.5d, 23.5d, 24.5d), a.WithRow(1, Vector4D.Create(21.5d, 22.5d, 23.5d, 24.5d)).Y);
+            Assert.Equal(Vector4D.Create(21.0d, 22.0d, 23.0d, 24.0d), a.Y);
 
-            a[2] = Vector4D.Create(31.0f, 32.0f, 33.0f, 34.0f);
-            Assert.Equal(Vector4D.Create(31.5f, 32.5f, 33.5f, 34.5f), a.WithRow(2, Vector4D.Create(31.5f, 32.5f, 33.5f, 34.5f)).Z);
-            Assert.Equal(Vector4D.Create(31.0f, 32.0f, 33.0f, 34.0f), a.Z);
+            a[2] = Vector4D.Create(31.0d, 32.0d, 33.0d, 34.0d);
+            Assert.Equal(Vector4D.Create(31.5d, 32.5d, 33.5d, 34.5d), a.WithRow(2, Vector4D.Create(31.5d, 32.5d, 33.5d, 34.5d)).Z);
+            Assert.Equal(Vector4D.Create(31.0d, 32.0d, 33.0d, 34.0d), a.Z);
 
-            a[3] = Vector4D.Create(41.0f, 42.0f, 43.0f, 44.0f);
-            Assert.Equal(Vector4D.Create(41.5f, 42.5f, 43.5f, 44.5f), a.WithRow(3, Vector4D.Create(41.5f, 42.5f, 43.5f, 44.5f)).W);
-            Assert.Equal(Vector4D.Create(41.0f, 42.0f, 43.0f, 44.0f), a.W);
+            a[3] = Vector4D.Create(41.0d, 42.0d, 43.0d, 44.0d);
+            Assert.Equal(Vector4D.Create(41.5d, 42.5d, 43.5d, 44.5d), a.WithRow(3, Vector4D.Create(41.5d, 42.5d, 43.5d, 44.5d)).W);
+            Assert.Equal(Vector4D.Create(41.0d, 42.0d, 43.0d, 44.0d), a.W);
         }
     }
 }

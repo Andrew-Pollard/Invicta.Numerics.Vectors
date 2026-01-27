@@ -35,11 +35,11 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f, 1.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f, 0.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f)]
-        public void Vector4DIndexerGetTest(float x, float y, float z, float w)
+        [InlineData(0.0d, 1.0d, 0.0d, 1.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d, 0.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d)]
+        public void Vector4DIndexerGetTest(double x, double y, double z, double w)
         {
             var vector = new Vector4D(x, y, z, w);
 
@@ -50,13 +50,13 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f, 1.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f, 0.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f, -0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f, 0.0000002f)]
-        public void Vector4DIndexerSetTest(float x, float y, float z, float w)
+        [InlineData(0.0d, 1.0d, 0.0d, 1.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d, 0.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d, -0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d, 0.0000002d)]
+        public void Vector4DIndexerSetTest(double x, double y, double z, double w)
         {
-            var vector = new Vector4D(0.0f, 0.0f, 0.0f, 0.0f);
+            var vector = new Vector4D(0.0d, 0.0d, 0.0d, 0.0d);
 
             vector[0] = x;
             vector[1] = y;
@@ -72,10 +72,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DCopyToTest()
         {
-            Vector4D v1 = new Vector4D(2.5f, 2.0f, 3.0f, 3.3f);
+            Vector4D v1 = new Vector4D(2.5d, 2.0d, 3.0d, 3.3d);
 
-            float[] a = new float[5];
-            float[] b = new float[4];
+            double[] a = new double[5];
+            double[] b = new double[4];
 
             Assert.Throws<NullReferenceException>(() => v1.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => v1.CopyTo(a, -1));
@@ -84,30 +84,30 @@ namespace Invicta.Numerics.Tests
 
             v1.CopyTo(a, 1);
             v1.CopyTo(b);
-            Assert.Equal(0.0f, a[0]);
-            Assert.Equal(2.5f, a[1]);
-            Assert.Equal(2.0f, a[2]);
-            Assert.Equal(3.0f, a[3]);
-            Assert.Equal(3.3f, a[4]);
-            Assert.Equal(2.5f, b[0]);
-            Assert.Equal(2.0f, b[1]);
-            Assert.Equal(3.0f, b[2]);
-            Assert.Equal(3.3f, b[3]);
+            Assert.Equal(0.0d, a[0]);
+            Assert.Equal(2.5d, a[1]);
+            Assert.Equal(2.0d, a[2]);
+            Assert.Equal(3.0d, a[3]);
+            Assert.Equal(3.3d, a[4]);
+            Assert.Equal(2.5d, b[0]);
+            Assert.Equal(2.0d, b[1]);
+            Assert.Equal(3.0d, b[2]);
+            Assert.Equal(3.3d, b[3]);
         }
 
         [Fact]
         public void Vector4DCopyToSpanTest()
         {
-            Vector4D vector = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Span<float> destination = new float[4];
+            Vector4D vector = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Span<double> destination = new double[4];
 
-            Assert.Throws<ArgumentException>(() => vector.CopyTo(new Span<float>(new float[3])));
+            Assert.Throws<ArgumentException>(() => vector.CopyTo(new Span<double>(new double[3])));
             vector.CopyTo(destination);
 
-            Assert.Equal(1.0f, vector.X);
-            Assert.Equal(2.0f, vector.Y);
-            Assert.Equal(3.0f, vector.Z);
-            Assert.Equal(4.0f, vector.W);
+            Assert.Equal(1.0d, vector.X);
+            Assert.Equal(2.0d, vector.Y);
+            Assert.Equal(3.0d, vector.Z);
+            Assert.Equal(4.0d, vector.W);
             Assert.Equal(vector.X, destination[0]);
             Assert.Equal(vector.Y, destination[1]);
             Assert.Equal(vector.Z, destination[2]);
@@ -117,16 +117,16 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTryCopyToTest()
         {
-            Vector4D vector = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Span<float> destination = new float[4];
+            Vector4D vector = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Span<double> destination = new double[4];
 
-            Assert.False(vector.TryCopyTo(new Span<float>(new float[3])));
+            Assert.False(vector.TryCopyTo(new Span<double>(new double[3])));
             Assert.True(vector.TryCopyTo(destination));
 
-            Assert.Equal(1.0f, vector.X);
-            Assert.Equal(2.0f, vector.Y);
-            Assert.Equal(3.0f, vector.Z);
-            Assert.Equal(4.0f, vector.W);
+            Assert.Equal(1.0d, vector.X);
+            Assert.Equal(2.0d, vector.Y);
+            Assert.Equal(3.0d, vector.Z);
+            Assert.Equal(4.0d, vector.W);
             Assert.Equal(vector.X, destination[0]);
             Assert.Equal(vector.Y, destination[1]);
             Assert.Equal(vector.Z, destination[2]);
@@ -136,19 +136,19 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DGetHashCodeTest()
         {
-            Vector4D v1 = new Vector4D(2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4D v2 = new Vector4D(2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4D v3 = new Vector4D(2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4D v5 = new Vector4D(3.3f, 3.0f, 2.0f, 2.5f);
+            Vector4D v1 = new Vector4D(2.5d, 2.0d, 3.0d, 3.3d);
+            Vector4D v2 = new Vector4D(2.5d, 2.0d, 3.0d, 3.3d);
+            Vector4D v3 = new Vector4D(2.5d, 2.0d, 3.0d, 3.3d);
+            Vector4D v5 = new Vector4D(3.3d, 3.0d, 2.0d, 2.5d);
             Assert.Equal(v1.GetHashCode(), v1.GetHashCode());
             Assert.Equal(v1.GetHashCode(), v2.GetHashCode());
             Assert.NotEqual(v1.GetHashCode(), v5.GetHashCode());
             Assert.Equal(v1.GetHashCode(), v3.GetHashCode());
-            Vector4D v4 = new Vector4D(0.0f, 0.0f, 0.0f, 0.0f);
-            Vector4D v6 = new Vector4D(1.0f, 0.0f, 0.0f, 0.0f);
-            Vector4D v7 = new Vector4D(0.0f, 1.0f, 0.0f, 0.0f);
-            Vector4D v8 = new Vector4D(1.0f, 1.0f, 1.0f, 1.0f);
-            Vector4D v9 = new Vector4D(1.0f, 1.0f, 0.0f, 0.0f);
+            Vector4D v4 = new Vector4D(0.0d, 0.0d, 0.0d, 0.0d);
+            Vector4D v6 = new Vector4D(1.0d, 0.0d, 0.0d, 0.0d);
+            Vector4D v7 = new Vector4D(0.0d, 1.0d, 0.0d, 0.0d);
+            Vector4D v8 = new Vector4D(1.0d, 1.0d, 1.0d, 1.0d);
+            Vector4D v9 = new Vector4D(1.0d, 1.0d, 0.0d, 0.0d);
             Assert.NotEqual(v4.GetHashCode(), v6.GetHashCode());
             Assert.NotEqual(v4.GetHashCode(), v7.GetHashCode());
             Assert.NotEqual(v4.GetHashCode(), v8.GetHashCode());
@@ -164,7 +164,7 @@ namespace Invicta.Numerics.Tests
             string separator = CultureInfo.CurrentCulture.NumberFormat.NumberGroupSeparator;
             CultureInfo enUsCultureInfo = new CultureInfo("en-US");
 
-            Vector4D v1 = new Vector4D(2.5f, 2.0f, 3.0f, 3.3f);
+            Vector4D v1 = new Vector4D(2.5d, 2.0d, 3.0d, 3.3d);
 
             string v1str = v1.ToString();
             string expectedv1 = string.Format(CultureInfo.CurrentCulture
@@ -173,33 +173,33 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expectedv1, v1str);
 
             string v1strformatted = v1.ToString("c", CultureInfo.CurrentCulture);
-            string expectedv1formatted = string.Format(CultureInfo.CurrentCulture
+            string expectedv1dormatted = string.Format(CultureInfo.CurrentCulture
                 , "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>"
                 , separator, 2.5, 2, 3, 3.3);
-            Assert.Equal(expectedv1formatted, v1strformatted);
+            Assert.Equal(expectedv1dormatted, v1strformatted);
 
             string v2strformatted = v1.ToString("c", enUsCultureInfo);
-            string expectedv2formatted = string.Format(enUsCultureInfo
+            string expectedv2dormatted = string.Format(enUsCultureInfo
                 , "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>"
                 , enUsCultureInfo.NumberFormat.NumberGroupSeparator, 2.5, 2, 3, 3.3);
-            Assert.Equal(expectedv2formatted, v2strformatted);
+            Assert.Equal(expectedv2dormatted, v2strformatted);
 
             string v3strformatted = v1.ToString("c");
-            string expectedv3formatted = string.Format(CultureInfo.CurrentCulture
+            string expectedv3dormatted = string.Format(CultureInfo.CurrentCulture
                 , "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>"
                 , separator, 2.5, 2, 3, 3.3);
-            Assert.Equal(expectedv3formatted, v3strformatted);
+            Assert.Equal(expectedv3dormatted, v3strformatted);
         }
 
         // A test for DistanceSquared (Vector4Df, Vector4Df)
         [Fact]
         public void Vector4DDistanceSquaredTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            float expected = 64.0f;
-            float actual;
+            double expected = 64.0d;
+            double actual;
 
             actual = Vector4D.DistanceSquared(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.DistanceSquared did not return the expected value.");
@@ -209,11 +209,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDistanceTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            float expected = 8.0f;
-            float actual;
+            double expected = 8.0d;
+            double actual;
 
             actual = Vector4D.Distance(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Distance did not return the expected value.");
@@ -224,23 +224,23 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDistanceTest1()
         {
-            Vector4D a = new Vector4D(new Vector2D(1.051f, 2.05f), 3.478f, 1.0f);
-            Vector4D b = new Vector4D(new Vector3D(1.051f, 2.05f, 3.478f), 0.0f);
-            b.W = 1.0f;
+            Vector4D a = new Vector4D(new Vector2D(1.051d, 2.05d), 3.478d, 1.0d);
+            Vector4D b = new Vector4D(new Vector3D(1.051d, 2.05d, 3.478d), 0.0d);
+            b.W = 1.0d;
 
-            float actual = Vector4D.Distance(a, b);
-            Assert.Equal(0.0f, actual);
+            double actual = Vector4D.Distance(a, b);
+            Assert.Equal(0.0d, actual);
         }
 
         // A test for Dot (Vector4Df, Vector4Df)
         [Fact]
         public void Vector4DDotTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            float expected = 70.0f;
-            float actual;
+            double expected = 70.0d;
+            double actual;
 
             actual = Vector4D.Dot(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Dot did not return the expected value.");
@@ -251,26 +251,26 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDotTest1()
         {
-            Vector3D a = new Vector3D(1.55f, 1.55f, 1);
-            Vector3D b = new Vector3D(2.5f, 3, 1.5f);
+            Vector3D a = new Vector3D(1.55d, 1.55d, 1);
+            Vector3D b = new Vector3D(2.5d, 3, 1.5d);
             Vector3D c = Vector3D.Cross(a, b);
 
             Vector4D d = new Vector4D(a, 0);
             Vector4D e = new Vector4D(c, 0);
 
-            float actual = Vector4D.Dot(d, e);
-            Assert.True(MathHelper.Equal(0.0f, actual), "Vector4Df.Dot did not return the expected value.");
+            double actual = Vector4D.Dot(d, e);
+            Assert.True(MathHelper.Equal(0.0d, actual), "Vector4Df.Dot did not return the expected value.");
         }
 
         [Fact]
         public void Vector4DCrossTest()
         {
-            Vector3D a3 = new Vector3D(1.0f, 0.0f, 0.0f);
-            Vector3D b3 = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D a3 = new Vector3D(1.0d, 0.0d, 0.0d);
+            Vector3D b3 = new Vector3D(0.0d, 1.0d, 0.0d);
             Vector3D e3 = Vector3D.Cross(a3, b3);
 
-            Vector4D a4 = new Vector4D(a3, 2.0f);
-            Vector4D b4 = new Vector4D(b3, 3.0f);
+            Vector4D a4 = new Vector4D(a3, 2.0d);
+            Vector4D b4 = new Vector4D(b3, 3.0d);
             Vector4D e4 = new Vector4D(e3, a4.W * b4.W);
 
             Vector4D actual = Vector4D.Cross(a4, b4);
@@ -281,12 +281,12 @@ namespace Invicta.Numerics.Tests
         public void Vector4DCrossTest1()
         {
             // Cross test of the same vector
-            Vector3D a3 = new Vector3D(0.0f, 1.0f, 0.0f);
-            Vector3D b3 = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D a3 = new Vector3D(0.0d, 1.0d, 0.0d);
+            Vector3D b3 = new Vector3D(0.0d, 1.0d, 0.0d);
             Vector3D e3 = Vector3D.Cross(a3, b3);
 
-            Vector4D a4 = new Vector4D(a3, 3.0f);
-            Vector4D b4 = new Vector4D(b3, 3.0f);
+            Vector4D a4 = new Vector4D(a3, 3.0d);
+            Vector4D b4 = new Vector4D(b3, 3.0d);
             Vector4D e4 = new Vector4D(e3, a4.W * b4.W);
 
             Vector4D actual = Vector4D.Cross(a4, b4);
@@ -297,13 +297,13 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DLengthTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            float w = 4.0f;
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            double w = 4.0d;
 
             Vector4D target = new Vector4D(a, w);
 
-            float expected = (float)System.Math.Sqrt(30.0f);
-            float actual;
+            double expected = (double)System.Math.Sqrt(30.0d);
+            double actual;
 
             actual = target.Length();
 
@@ -317,8 +317,8 @@ namespace Invicta.Numerics.Tests
         {
             Vector4D target = new Vector4D();
 
-            float expected = 0.0f;
-            float actual = target.Length();
+            double expected = 0.0d;
+            double actual = target.Length();
 
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Length did not return the expected value.");
         }
@@ -327,13 +327,13 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DLengthSquaredTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            float w = 4.0f;
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            double w = 4.0d;
 
             Vector4D target = new Vector4D(a, w);
 
-            float expected = 30;
-            float actual;
+            double expected = 30;
+            double actual;
 
             actual = target.LengthSquared();
 
@@ -344,10 +344,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DMinTest()
         {
-            Vector4D a = new Vector4D(-1.0f, 4.0f, -3.0f, 1000.0f);
-            Vector4D b = new Vector4D(2.0f, 1.0f, -1.0f, 0.0f);
+            Vector4D a = new Vector4D(-1.0d, 4.0d, -3.0d, 1000.0d);
+            Vector4D b = new Vector4D(2.0d, 1.0d, -1.0d, 0.0d);
 
-            Vector4D expected = new Vector4D(-1.0f, 1.0f, -3.0f, 0.0f);
+            Vector4D expected = new Vector4D(-1.0d, 1.0d, -3.0d, 0.0d);
             Vector4D actual;
             actual = Vector4D.Min(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Min did not return the expected value.");
@@ -357,10 +357,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DMaxTest()
         {
-            Vector4D a = new Vector4D(-1.0f, 4.0f, -3.0f, 1000.0f);
-            Vector4D b = new Vector4D(2.0f, 1.0f, -1.0f, 0.0f);
+            Vector4D a = new Vector4D(-1.0d, 4.0d, -3.0d, 1000.0d);
+            Vector4D b = new Vector4D(2.0d, 1.0d, -1.0d, 0.0d);
 
-            Vector4D expected = new Vector4D(2.0f, 4.0f, -1.0f, 1000.0f);
+            Vector4D expected = new Vector4D(2.0d, 4.0d, -1.0d, 1000.0d);
             Vector4D actual;
             actual = Vector4D.Max(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Max did not return the expected value.");
@@ -392,186 +392,186 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DClampTest()
         {
-            Vector4D a = new Vector4D(0.5f, 0.3f, 0.33f, 0.44f);
-            Vector4D min = new Vector4D(0.0f, 0.1f, 0.13f, 0.14f);
-            Vector4D max = new Vector4D(1.0f, 1.1f, 1.13f, 1.14f);
+            Vector4D a = new Vector4D(0.5d, 0.3d, 0.33d, 0.44d);
+            Vector4D min = new Vector4D(0.0d, 0.1d, 0.13d, 0.14d);
+            Vector4D max = new Vector4D(1.0d, 1.1d, 1.13d, 1.14d);
 
             // Normal case.
             // Case N1: specified value is in the range.
-            Vector4D expected = new Vector4D(0.5f, 0.3f, 0.33f, 0.44f);
+            Vector4D expected = new Vector4D(0.5d, 0.3d, 0.33d, 0.44d);
             Vector4D actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
 
             // Normal case.
             // Case N2: specified value is bigger than max value.
-            a = new Vector4D(2.0f, 3.0f, 4.0f, 5.0f);
+            a = new Vector4D(2.0d, 3.0d, 4.0d, 5.0d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
 
             // Case N3: specified value is smaller than max value.
-            a = new Vector4D(-2.0f, -3.0f, -4.0f, -5.0f);
+            a = new Vector4D(-2.0d, -3.0d, -4.0d, -5.0d);
             expected = min;
             actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
 
             // Case N4: combination case.
-            a = new Vector4D(-2.0f, 0.5f, 4.0f, -5.0f);
+            a = new Vector4D(-2.0d, 0.5d, 4.0d, -5.0d);
             expected = new Vector4D(min.X, a.Y, max.Z, min.W);
             actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
 
             // User specified min value is bigger than max value.
-            max = new Vector4D(0.0f, 0.1f, 0.13f, 0.14f);
-            min = new Vector4D(1.0f, 1.1f, 1.13f, 1.14f);
+            max = new Vector4D(0.0d, 0.1d, 0.13d, 0.14d);
+            min = new Vector4D(1.0d, 1.1d, 1.13d, 1.14d);
 
             // Case W1: specified value is in the range.
-            a = new Vector4D(0.5f, 0.3f, 0.33f, 0.44f);
+            a = new Vector4D(0.5d, 0.3d, 0.33d, 0.44d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
 
             // Normal case.
             // Case W2: specified value is bigger than max and min value.
-            a = new Vector4D(2.0f, 3.0f, 4.0f, 5.0f);
+            a = new Vector4D(2.0d, 3.0d, 4.0d, 5.0d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
 
             // Case W3: specified value is smaller than min and max value.
-            a = new Vector4D(-2.0f, -3.0f, -4.0f, -5.0f);
+            a = new Vector4D(-2.0d, -3.0d, -4.0d, -5.0d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         [Fact]
         public void Vector4DLerpTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            float t = 0.5f;
+            double t = 0.5d;
 
-            Vector4D expected = new Vector4D(3.0f, 4.0f, 5.0f, 6.0f);
+            Vector4D expected = new Vector4D(3.0d, 4.0d, 5.0d, 6.0d);
             Vector4D actual;
 
             actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test with factor zero
         [Fact]
         public void Vector4DLerpTest1()
         {
-            Vector4D a = new Vector4D(new Vector3D(1.0f, 2.0f, 3.0f), 4.0f);
-            Vector4D b = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
+            Vector4D a = new Vector4D(new Vector3D(1.0d, 2.0d, 3.0d), 4.0d);
+            Vector4D b = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
 
-            float t = 0.0f;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            double t = 0.0d;
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test with factor one
         [Fact]
         public void Vector4DLerpTest2()
         {
-            Vector4D a = new Vector4D(new Vector3D(1.0f, 2.0f, 3.0f), 4.0f);
-            Vector4D b = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
+            Vector4D a = new Vector4D(new Vector3D(1.0d, 2.0d, 3.0d), 4.0d);
+            Vector4D b = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
 
-            float t = 1.0f;
-            Vector4D expected = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
+            double t = 1.0d;
+            Vector4D expected = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test with factor > 1
         [Fact]
         public void Vector4DLerpTest3()
         {
-            Vector4D a = new Vector4D(new Vector3D(0.0f, 0.0f, 0.0f), 0.0f);
-            Vector4D b = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
+            Vector4D a = new Vector4D(new Vector3D(0.0d, 0.0d, 0.0d), 0.0d);
+            Vector4D b = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
 
-            float t = 2.0f;
-            Vector4D expected = new Vector4D(8.0f, 10.0f, 12.0f, 14.0f);
+            double t = 2.0d;
+            Vector4D expected = new Vector4D(8.0d, 10.0d, 12.0d, 14.0d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test with factor < 0
         [Fact]
         public void Vector4DLerpTest4()
         {
-            Vector4D a = new Vector4D(new Vector3D(0.0f, 0.0f, 0.0f), 0.0f);
-            Vector4D b = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
+            Vector4D a = new Vector4D(new Vector3D(0.0d, 0.0d, 0.0d), 0.0d);
+            Vector4D b = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
 
-            float t = -2.0f;
+            double t = -2.0d;
             Vector4D expected = -(b * 2);
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
-        // Lerp test with special float value
+        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // Lerp test with special double value
         [Fact]
         public void Vector4DLerpTest5()
         {
-            Vector4D a = new Vector4D(45.67f, 90.0f, 0, 0);
-            Vector4D b = new Vector4D(float.PositiveInfinity, float.NegativeInfinity, 0, 0);
+            Vector4D a = new Vector4D(45.67d, 90.0d, 0, 0);
+            Vector4D b = new Vector4D(double.PositiveInfinity, double.NegativeInfinity, 0, 0);
 
-            float t = 0.408f;
+            double t = 0.408d;
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector4Df.Lerp did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.X), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test from the same point
         [Fact]
         public void Vector4DLerpTest6()
         {
-            Vector4D a = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
-            Vector4D b = new Vector4D(4.0f, 5.0f, 6.0f, 7.0f);
+            Vector4D a = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
+            Vector4D b = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
 
-            float t = 0.85f;
+            double t = 0.85d;
             Vector4D expected = a;
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test with values known to be inaccurate with the old lerp impl
         [Fact]
         public void Vector4DLerpTest7()
         {
-            Vector4D a = new Vector4D(0.44728136f);
-            Vector4D b = new Vector4D(0.46345946f);
+            Vector4D a = new Vector4D(0.44728136d);
+            Vector4D b = new Vector4D(0.46345946d);
 
-            float t = 0.26402435f;
+            double t = 0.26402435d;
 
-            Vector4D expected = new Vector4D(0.45155275f);
+            Vector4D expected = new Vector4D(0.45155275d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, float)
+        // A test for Lerp (Vector4Df, Vector4Df, double)
         // Lerp test with values known to be inaccurate with the old lerp impl
         // (Old code incorrectly gets 0.33333588)
         [Fact]
         public void Vector4DLerpTest8()
         {
             Vector4D a = new Vector4D(-100);
-            Vector4D b = new Vector4D(0.33333334f);
+            Vector4D b = new Vector4D(0.33333334d);
 
-            float t = 1f;
+            double t = 1d;
 
-            Vector4D expected = new Vector4D(0.33333334f);
+            Vector4D expected = new Vector4D(0.33333334d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
         }
@@ -580,17 +580,17 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformTest1()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector4D expected = new Vector4D(10.316987f, 22.183012f, 30.3660259f, 1.0f);
+            Vector4D expected = new Vector4D(10.316987d, 22.183012d, 30.3660259d, 1.0d);
             Vector4D actual;
 
             actual = Vector4D.Transform(v, m);
@@ -601,17 +601,17 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformTest2()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector4D expected = new Vector4D(12.19198728f, 21.53349376f, 32.61602545f, 1.0f);
+            Vector4D expected = new Vector4D(12.19198728d, 21.53349376d, 32.61602545d, 1.0d);
             Vector4D actual;
 
             actual = Vector4D.Transform(v, m);
@@ -622,26 +622,26 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector4DTest()
         {
-            Vector4D v = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D v = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector4D expected = new Vector4D(2.19198728f, 1.53349376f, 2.61602545f, 0.0f);
+            Vector4D expected = new Vector4D(2.19198728d, 1.53349376d, 2.61602545d, 0.0d);
             Vector4D actual;
 
             actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
 
             //
-            v.W = 1.0f;
+            v.W = 1.0d;
 
-            expected = new Vector4D(12.19198728f, 21.53349376f, 32.61602545f, 1.0f);
+            expected = new Vector4D(12.19198728d, 21.53349376d, 32.61602545d, 1.0d);
             actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
         }
@@ -651,7 +651,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector4DTest1()
         {
-            Vector4D v = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D v = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
             Matrix4x4D m = new Matrix4x4D();
             Vector4D expected = new Vector4D(0, 0, 0, 0);
 
@@ -664,9 +664,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector4DTest2()
         {
-            Vector4D v = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D v = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
             Matrix4x4D m = Matrix4x4D.Identity;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
 
             Vector4D actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
@@ -677,17 +677,17 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector4D expected = Vector4D.Transform(new Vector4D(v, 1.0f), m);
+            Vector4D expected = Vector4D.Transform(new Vector4D(v, 1.0d), m);
             Vector4D actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
         }
@@ -697,7 +697,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DTest1()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             Matrix4x4D m = new Matrix4x4D();
             Vector4D expected = new Vector4D(0, 0, 0, 0);
 
@@ -710,9 +710,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DTest2()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             Matrix4x4D m = Matrix4x4D.Identity;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 3.0f, 1.0f);
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
@@ -723,17 +723,17 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DTest()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector4D expected = Vector4D.Transform(new Vector4D(v, 0.0f, 1.0f), m);
+            Vector4D expected = Vector4D.Transform(new Vector4D(v, 0.0d, 1.0d), m);
             Vector4D actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
         }
@@ -743,7 +743,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DTest1()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
             Matrix4x4D m = new Matrix4x4D();
             Vector4D expected = new Vector4D(0, 0, 0, 0);
 
@@ -756,9 +756,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DTest2()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
             Matrix4x4D m = Matrix4x4D.Identity;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 0, 1.0f);
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 0, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, m);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
@@ -768,12 +768,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DQuatanionTest()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
 
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
@@ -788,12 +788,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DQuaternionD()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
             Vector4D expected = Vector4D.Transform(v, m);
@@ -807,12 +807,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector4DQuaternionDTest()
         {
-            Vector4D v = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D v = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
             Vector4D expected = Vector4D.Transform(v, m);
@@ -822,8 +822,8 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
 
             //
-            v.W = 1.0f;
-            expected.W = 1.0f;
+            v.W = 1.0d;
+            expected.W = 1.0d;
             actual = Vector4D.Transform(v, q);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
         }
@@ -833,7 +833,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector4DQuaternionDTest1()
         {
-            Vector4D v = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D v = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
             QuaternionD q = new QuaternionD();
             Vector4D expected = Vector4D.Zero;
 
@@ -846,9 +846,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector4DQuaternionDTest2()
         {
-            Vector4D v = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D v = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
             QuaternionD q = QuaternionD.Identity;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 3.0f, 0.0f);
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
 
             Vector4D actual = Vector4D.Transform(v, q);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
@@ -859,12 +859,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DQuaternionDTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
             Vector4D expected = Vector4D.Transform(v, m);
@@ -877,7 +877,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DQuaternionDTest1()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             QuaternionD q = new QuaternionD();
             Vector4D expected = Vector4D.Zero;
 
@@ -890,9 +890,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector3DQuaternionDTest2()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             QuaternionD q = QuaternionD.Identity;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 3.0f, 1.0f);
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, q);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
@@ -903,12 +903,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DQuaternionDTest()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
             Vector4D expected = Vector4D.Transform(v, m);
@@ -921,7 +921,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DQuaternionDTest1()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
             QuaternionD q = new QuaternionD();
             Vector4D expected = Vector4D.Zero;
 
@@ -934,9 +934,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DTransformVector2DQuaternionDTest2()
         {
-            Vector2D v = new Vector2D(1.0f, 2.0f);
+            Vector2D v = new Vector2D(1.0d, 2.0d);
             QuaternionD q = QuaternionD.Identity;
-            Vector4D expected = new Vector4D(1.0f, 2.0f, 0, 1.0f);
+            Vector4D expected = new Vector4D(1.0d, 2.0d, 0, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, q);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
@@ -946,13 +946,13 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DNormalizeTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
             Vector4D expected = new Vector4D(
-                0.1825741858350553711523232609336f,
-                0.3651483716701107423046465218672f,
-                0.5477225575051661134569697828008f,
-                0.7302967433402214846092930437344f);
+                0.1825741858350553711523232609336d,
+                0.3651483716701107423046465218672d,
+                0.5477225575051661134569697828008d,
+                0.7302967433402214846092930437344d);
             Vector4D actual;
 
             actual = Vector4D.Normalize(a);
@@ -964,9 +964,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DNormalizeTest1()
         {
-            Vector4D a = new Vector4D(1.0f, 0.0f, 0.0f, 0.0f);
+            Vector4D a = new Vector4D(1.0d, 0.0d, 0.0d, 0.0d);
 
-            Vector4D expected = new Vector4D(1.0f, 0.0f, 0.0f, 0.0f);
+            Vector4D expected = new Vector4D(1.0d, 0.0d, 0.0d, 0.0d);
             Vector4D actual = Vector4D.Normalize(a);
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Normalize did not return the expected value.");
         }
@@ -976,20 +976,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DNormalizeTest2()
         {
-            Vector4D a = new Vector4D(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector4D a = new Vector4D(0.0d, 0.0d, 0.0d, 0.0d);
 
-            Vector4D expected = new Vector4D(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector4D expected = new Vector4D(0.0d, 0.0d, 0.0d, 0.0d);
             Vector4D actual = Vector4D.Normalize(a);
-            Assert.True(float.IsNaN(actual.X) && float.IsNaN(actual.Y) && float.IsNaN(actual.Z) && float.IsNaN(actual.W), "Vector4Df.Normalize did not return the expected value.");
+            Assert.True(double.IsNaN(actual.X) && double.IsNaN(actual.Y) && double.IsNaN(actual.Z) && double.IsNaN(actual.W), "Vector4Df.Normalize did not return the expected value.");
         }
 
         // A test for operator - (Vector4Df)
         [Fact]
         public void Vector4DUnaryNegationTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
-            Vector4D expected = new Vector4D(-1.0f, -2.0f, -3.0f, -4.0f);
+            Vector4D expected = new Vector4D(-1.0d, -2.0d, -3.0d, -4.0d);
             Vector4D actual;
 
             actual = -a;
@@ -1001,10 +1001,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DSubtractionTest()
         {
-            Vector4D a = new Vector4D(1.0f, 6.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 2.0f, 3.0f, 9.0f);
+            Vector4D a = new Vector4D(1.0d, 6.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 2.0d, 3.0d, 9.0d);
 
-            Vector4D expected = new Vector4D(-4.0f, 4.0f, 0.0f, -5.0f);
+            Vector4D expected = new Vector4D(-4.0d, 4.0d, 0.0d, -5.0d);
             Vector4D actual;
 
             actual = a - b;
@@ -1012,29 +1012,29 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator - did not return the expected value.");
         }
 
-        // A test for operator * (Vector4Df, float)
+        // A test for operator * (Vector4Df, double)
         [Fact]
         public void Vector4DMultiplyOperatorTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
-            const float factor = 2.0f;
+            const double factor = 2.0d;
 
-            Vector4D expected = new Vector4D(2.0f, 4.0f, 6.0f, 8.0f);
+            Vector4D expected = new Vector4D(2.0d, 4.0d, 6.0d, 8.0d);
             Vector4D actual;
 
             actual = a * factor;
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator * did not return the expected value.");
         }
 
-        // A test for operator * (float, Vector4Df)
+        // A test for operator * (double, Vector4Df)
         [Fact]
         public void Vector4DMultiplyOperatorTest2()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
-            const float factor = 2.0f;
-            Vector4D expected = new Vector4D(2.0f, 4.0f, 6.0f, 8.0f);
+            const double factor = 2.0d;
+            Vector4D expected = new Vector4D(2.0d, 4.0d, 6.0d, 8.0d);
             Vector4D actual;
 
             actual = factor * a;
@@ -1045,10 +1045,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DMultiplyOperatorTest3()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            Vector4D expected = new Vector4D(5.0f, 12.0f, 21.0f, 32.0f);
+            Vector4D expected = new Vector4D(5.0d, 12.0d, 21.0d, 32.0d);
             Vector4D actual;
 
             actual = a * b;
@@ -1056,15 +1056,15 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator * did not return the expected value.");
         }
 
-        // A test for operator / (Vector4Df, float)
+        // A test for operator / (Vector4Df, double)
         [Fact]
         public void Vector4DDivisionTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
-            float div = 2.0f;
+            double div = 2.0d;
 
-            Vector4D expected = new Vector4D(0.5f, 1.0f, 1.5f, 2.0f);
+            Vector4D expected = new Vector4D(0.5d, 1.0d, 1.5d, 2.0d);
             Vector4D actual;
 
             actual = a / div;
@@ -1076,10 +1076,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDivisionTest1()
         {
-            Vector4D a = new Vector4D(1.0f, 6.0f, 7.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 2.0f, 3.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 6.0d, 7.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 2.0d, 3.0d, 8.0d);
 
-            Vector4D expected = new Vector4D(1.0f / 5.0f, 6.0f / 2.0f, 7.0f / 3.0f, 4.0f / 8.0f);
+            Vector4D expected = new Vector4D(1.0d / 5.0d, 6.0d / 2.0d, 7.0d / 3.0d, 4.0d / 8.0d);
             Vector4D actual;
 
             actual = a / b;
@@ -1092,16 +1092,16 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDivisionTest2()
         {
-            Vector4D a = new Vector4D(-2.0f, 3.0f, float.MaxValue, float.NaN);
+            Vector4D a = new Vector4D(-2.0d, 3.0d, double.MaxValue, double.NaN);
 
-            float div = 0.0f;
+            double div = 0.0d;
 
             Vector4D actual = a / div;
 
-            Assert.True(float.IsNegativeInfinity(actual.X), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Y), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Z), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(float.IsNaN(actual.W), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.X), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.Y), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.Z), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsNaN(actual.W), "Vector4Df.operator / did not return the expected value.");
         }
 
         // A test for operator / (Vector4Df, Vector4Df)
@@ -1109,25 +1109,25 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDivisionTest3()
         {
-            Vector4D a = new Vector4D(0.047f, -3.0f, float.NegativeInfinity, float.MinValue);
+            Vector4D a = new Vector4D(0.047d, -3.0d, double.NegativeInfinity, double.MinValue);
             Vector4D b = new Vector4D();
 
             Vector4D actual = a / b;
 
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Z), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.W), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.X), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Z), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.W), "Vector4Df.operator / did not return the expected value.");
         }
 
         // A test for operator + (Vector4Df, Vector4Df)
         [Fact]
         public void Vector4DAdditionTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            Vector4D expected = new Vector4D(6.0f, 8.0f, 10.0f, 12.0f);
+            Vector4D expected = new Vector4D(6.0d, 8.0d, 10.0d, 12.0d);
             Vector4D actual;
 
             actual = a + b;
@@ -1138,30 +1138,30 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void OperatorAddTest()
         {
-            Vector4D v1 = new Vector4D(2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4D v2 = new Vector4D(5.5f, 4.5f, 6.5f, 7.5f);
+            Vector4D v1 = new Vector4D(2.5d, 2.0d, 3.0d, 3.3d);
+            Vector4D v2 = new Vector4D(5.5d, 4.5d, 6.5d, 7.5d);
 
             Vector4D v3 = v1 + v2;
-            Vector4D v5 = new Vector4D(-1.0f, 0.0f, 0.0f, float.NaN);
+            Vector4D v5 = new Vector4D(-1.0d, 0.0d, 0.0d, double.NaN);
             Vector4D v4 = v1 + v5;
-            Assert.Equal(8.0f, v3.X);
-            Assert.Equal(6.5f, v3.Y);
-            Assert.Equal(9.5f, v3.Z);
-            Assert.Equal(10.8f, v3.W);
-            Assert.Equal(1.5f, v4.X);
-            Assert.Equal(2.0f, v4.Y);
-            Assert.Equal(3.0f, v4.Z);
-            Assert.Equal(float.NaN, v4.W);
+            Assert.Equal(8.0d, v3.X);
+            Assert.Equal(6.5d, v3.Y);
+            Assert.Equal(9.5d, v3.Z);
+            Assert.Equal(10.8d, v3.W);
+            Assert.Equal(1.5d, v4.X);
+            Assert.Equal(2.0d, v4.Y);
+            Assert.Equal(3.0d, v4.Z);
+            Assert.Equal(double.NaN, v4.W);
         }
 
-        // A test for Vector4Df (float, float, float, float)
+        // A test for Vector4Df (double, double, double, double)
         [Fact]
         public void Vector4DConstructorTest()
         {
-            float x = 1.0f;
-            float y = 2.0f;
-            float z = 3.0f;
-            float w = 4.0f;
+            double x = 1.0d;
+            double y = 2.0d;
+            double z = 3.0d;
+            double w = 4.0d;
 
             Vector4D target = new Vector4D(x, y, z, w);
 
@@ -1169,25 +1169,25 @@ namespace Invicta.Numerics.Tests
                 "Vector4Df constructor(x,y,z,w) did not return the expected value.");
         }
 
-        // A test for Vector4Df (Vector2Df, float, float)
+        // A test for Vector4Df (Vector2Df, double, double)
         [Fact]
         public void Vector4DConstructorTest1()
         {
-            Vector2D a = new Vector2D(1.0f, 2.0f);
-            float z = 3.0f;
-            float w = 4.0f;
+            Vector2D a = new Vector2D(1.0d, 2.0d);
+            double z = 3.0d;
+            double w = 4.0d;
 
             Vector4D target = new Vector4D(a, z, w);
             Assert.True(MathHelper.Equal(target.X, a.X) && MathHelper.Equal(target.Y, a.Y) && MathHelper.Equal(target.Z, z) && MathHelper.Equal(target.W, w),
                 "Vector4Df constructor(Vector2Df,z,w) did not return the expected value.");
         }
 
-        // A test for Vector4Df (Vector3Df, float)
+        // A test for Vector4Df (Vector3Df, double)
         [Fact]
         public void Vector4DConstructorTest2()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            float w = 4.0f;
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            double w = 4.0d;
 
             Vector4D target = new Vector4D(a, w);
 
@@ -1202,58 +1202,58 @@ namespace Invicta.Numerics.Tests
         {
             Vector4D a = new Vector4D();
 
-            Assert.Equal(0.0f, a.X);
-            Assert.Equal(0.0f, a.Y);
-            Assert.Equal(0.0f, a.Z);
-            Assert.Equal(0.0f, a.W);
+            Assert.Equal(0.0d, a.X);
+            Assert.Equal(0.0d, a.Y);
+            Assert.Equal(0.0d, a.Z);
+            Assert.Equal(0.0d, a.W);
         }
 
         // A test for Vector4Df ()
-        // Constructor with special floating values
+        // Constructor with special doubleing values
         [Fact]
         public void Vector4DConstructorTest5()
         {
-            Vector4D target = new Vector4D(float.NaN, float.MaxValue, float.PositiveInfinity, float.Epsilon);
+            Vector4D target = new Vector4D(double.NaN, double.MaxValue, double.PositiveInfinity, double.Epsilon);
 
-            Assert.True(float.IsNaN(target.X), "Vector4Df.constructor (float, float, float, float) did not return the expected value.");
-            Assert.True(float.Equals(float.MaxValue, target.Y), "Vector4Df.constructor (float, float, float, float) did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(target.Z), "Vector4Df.constructor (float, float, float, float) did not return the expected value.");
-            Assert.True(float.Equals(float.Epsilon, target.W), "Vector4Df.constructor (float, float, float, float) did not return the expected value.");
+            Assert.True(double.IsNaN(target.X), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.Equals(double.MaxValue, target.Y), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(target.Z), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.Equals(double.Epsilon, target.W), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
         }
 
-        // A test for Vector4Df (ReadOnlySpan<float>)
+        // A test for Vector4Df (ReadOnlySpan<double>)
         [Fact]
         public void Vector4DConstructorTest7()
         {
-            float value = 1.0f;
+            double value = 1.0d;
             Vector4D target = new Vector4D(new[] { value, value, value, value });
             Vector4D expected = new Vector4D(value);
 
             Assert.Equal(expected, target);
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Vector4D(new float[3]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Vector4D(new double[3]));
         }
 
         // A test for Add (Vector4Df, Vector4Df)
         [Fact]
         public void Vector4DAddTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            Vector4D expected = new Vector4D(6.0f, 8.0f, 10.0f, 12.0f);
+            Vector4D expected = new Vector4D(6.0d, 8.0d, 10.0d, 12.0d);
             Vector4D actual;
 
             actual = Vector4D.Add(a, b);
             Assert.Equal(expected, actual);
         }
 
-        // A test for Divide (Vector4Df, float)
+        // A test for Divide (Vector4Df, double)
         [Fact]
         public void Vector4DDivideTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            float div = 2.0f;
-            Vector4D expected = new Vector4D(0.5f, 1.0f, 1.5f, 2.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            double div = 2.0d;
+            Vector4D expected = new Vector4D(0.5d, 1.0d, 1.5d, 2.0d);
             Vector4D actual;
             actual = Vector4D.Divide(a, div);
             Assert.Equal(expected, actual);
@@ -1263,10 +1263,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DDivideTest1()
         {
-            Vector4D a = new Vector4D(1.0f, 6.0f, 7.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 2.0f, 3.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 6.0d, 7.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 2.0d, 3.0d, 8.0d);
 
-            Vector4D expected = new Vector4D(1.0f / 5.0f, 6.0f / 2.0f, 7.0f / 3.0f, 4.0f / 8.0f);
+            Vector4D expected = new Vector4D(1.0d / 5.0d, 6.0d / 2.0d, 7.0d / 3.0d, 4.0d / 8.0d);
             Vector4D actual;
 
             actual = Vector4D.Divide(a, b);
@@ -1277,8 +1277,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DEqualsTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             object obj = b;
@@ -1288,7 +1288,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             obj = b;
             expected = false;
             actual = a.Equals(obj);
@@ -1307,24 +1307,24 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (float, Vector4Df)
+        // A test for Multiply (double, Vector4Df)
         [Fact]
         public void Vector4DMultiplyTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            const float factor = 2.0f;
-            Vector4D expected = new Vector4D(2.0f, 4.0f, 6.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            const double factor = 2.0d;
+            Vector4D expected = new Vector4D(2.0d, 4.0d, 6.0d, 8.0d);
             Vector4D actual = Vector4D.Multiply(factor, a);
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Vector4Df, float)
+        // A test for Multiply (Vector4Df, double)
         [Fact]
         public void Vector4DMultiplyTest2()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            const float factor = 2.0f;
-            Vector4D expected = new Vector4D(2.0f, 4.0f, 6.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            const double factor = 2.0d;
+            Vector4D expected = new Vector4D(2.0d, 4.0d, 6.0d, 8.0d);
             Vector4D actual = Vector4D.Multiply(a, factor);
             Assert.Equal(expected, actual);
         }
@@ -1333,10 +1333,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DMultiplyTest3()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 6.0f, 7.0f, 8.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 6.0d, 7.0d, 8.0d);
 
-            Vector4D expected = new Vector4D(5.0f, 12.0f, 21.0f, 32.0f);
+            Vector4D expected = new Vector4D(5.0d, 12.0d, 21.0d, 32.0d);
             Vector4D actual;
 
             actual = Vector4D.Multiply(a, b);
@@ -1347,9 +1347,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DNegateTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
-            Vector4D expected = new Vector4D(-1.0f, -2.0f, -3.0f, -4.0f);
+            Vector4D expected = new Vector4D(-1.0d, -2.0d, -3.0d, -4.0d);
             Vector4D actual;
 
             actual = Vector4D.Negate(a);
@@ -1360,8 +1360,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DInequalityTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             bool expected = false;
@@ -1369,7 +1369,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = true;
             actual = a != b;
             Assert.Equal(expected, actual);
@@ -1379,8 +1379,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DEqualityTest()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             bool expected = true;
@@ -1388,7 +1388,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = false;
             actual = a == b;
             Assert.Equal(expected, actual);
@@ -1398,10 +1398,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DSubtractTest()
         {
-            Vector4D a = new Vector4D(1.0f, 6.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(5.0f, 2.0f, 3.0f, 9.0f);
+            Vector4D a = new Vector4D(1.0d, 6.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(5.0d, 2.0d, 3.0d, 9.0d);
 
-            Vector4D expected = new Vector4D(-4.0f, 4.0f, 0.0f, -5.0f);
+            Vector4D expected = new Vector4D(-4.0d, 4.0d, 0.0d, -5.0d);
             Vector4D actual;
 
             actual = Vector4D.Subtract(a, b);
@@ -1413,7 +1413,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DUnitWTest()
         {
-            Vector4D val = new Vector4D(0.0f, 0.0f, 0.0f, 1.0f);
+            Vector4D val = new Vector4D(0.0d, 0.0d, 0.0d, 1.0d);
             Assert.Equal(val, Vector4D.UnitW);
         }
 
@@ -1421,7 +1421,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DUnitXTest()
         {
-            Vector4D val = new Vector4D(1.0f, 0.0f, 0.0f, 0.0f);
+            Vector4D val = new Vector4D(1.0d, 0.0d, 0.0d, 0.0d);
             Assert.Equal(val, Vector4D.UnitX);
         }
 
@@ -1429,7 +1429,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DUnitYTest()
         {
-            Vector4D val = new Vector4D(0.0f, 1.0f, 0.0f, 0.0f);
+            Vector4D val = new Vector4D(0.0d, 1.0d, 0.0d, 0.0d);
             Assert.Equal(val, Vector4D.UnitY);
         }
 
@@ -1437,7 +1437,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DUnitZTest()
         {
-            Vector4D val = new Vector4D(0.0f, 0.0f, 1.0f, 0.0f);
+            Vector4D val = new Vector4D(0.0d, 0.0d, 1.0d, 0.0d);
             Assert.Equal(val, Vector4D.UnitZ);
         }
 
@@ -1445,7 +1445,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DOneTest()
         {
-            Vector4D val = new Vector4D(1.0f, 1.0f, 1.0f, 1.0f);
+            Vector4D val = new Vector4D(1.0d, 1.0d, 1.0d, 1.0d);
             Assert.Equal(val, Vector4D.One);
         }
 
@@ -1453,7 +1453,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DZeroTest()
         {
-            Vector4D val = new Vector4D(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector4D val = new Vector4D(0.0d, 0.0d, 0.0d, 0.0d);
             Assert.Equal(val, Vector4D.Zero);
         }
 
@@ -1461,28 +1461,28 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DEqualsTest1()
         {
-            Vector4D a = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
-            Vector4D b = new Vector4D(1.0f, 2.0f, 3.0f, 4.0f);
+            Vector4D a = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
+            Vector4D b = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
 
             // case 1: compare between same values
             Assert.True(a.Equals(b));
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             Assert.False(a.Equals(b));
         }
 
-        // A test for Vector4Df (float)
+        // A test for Vector4Df (double)
         [Fact]
         public void Vector4DConstructorTest6()
         {
-            float value = 1.0f;
+            double value = 1.0d;
             Vector4D target = new Vector4D(value);
 
             Vector4D expected = new Vector4D(value, value, value, value);
             Assert.Equal(expected, target);
 
-            value = 2.0f;
+            value = 2.0d;
             target = new Vector4D(value);
             expected = new Vector4D(value, value, value, value);
             Assert.Equal(expected, target);
@@ -1492,10 +1492,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DEqualsNaNTest()
         {
-            Vector4D a = new Vector4D(float.NaN, 0, 0, 0);
-            Vector4D b = new Vector4D(0, float.NaN, 0, 0);
-            Vector4D c = new Vector4D(0, 0, float.NaN, 0);
-            Vector4D d = new Vector4D(0, 0, 0, float.NaN);
+            Vector4D a = new Vector4D(double.NaN, 0, 0, 0);
+            Vector4D b = new Vector4D(0, double.NaN, 0, 0);
+            Vector4D c = new Vector4D(0, 0, double.NaN, 0);
+            Vector4D d = new Vector4D(0, 0, 0, double.NaN);
 
             Assert.False(a == Vector4D.Zero);
             Assert.False(b == Vector4D.Zero);
@@ -1521,29 +1521,29 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DAbsTest()
         {
-            Vector4D v1 = new Vector4D(-2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4D v3 = Vector4D.Abs(new Vector4D(float.PositiveInfinity, 0.0f, float.NegativeInfinity, float.NaN));
+            Vector4D v1 = new Vector4D(-2.5d, 2.0d, 3.0d, 3.3d);
+            Vector4D v3 = Vector4D.Abs(new Vector4D(double.PositiveInfinity, 0.0d, double.NegativeInfinity, double.NaN));
             Vector4D v = Vector4D.Abs(v1);
-            Assert.Equal(2.5f, v.X);
-            Assert.Equal(2.0f, v.Y);
-            Assert.Equal(3.0f, v.Z);
-            Assert.Equal(3.3f, v.W);
-            Assert.Equal(float.PositiveInfinity, v3.X);
-            Assert.Equal(0.0f, v3.Y);
-            Assert.Equal(float.PositiveInfinity, v3.Z);
-            Assert.Equal(float.NaN, v3.W);
+            Assert.Equal(2.5d, v.X);
+            Assert.Equal(2.0d, v.Y);
+            Assert.Equal(3.0d, v.Z);
+            Assert.Equal(3.3d, v.W);
+            Assert.Equal(double.PositiveInfinity, v3.X);
+            Assert.Equal(0.0d, v3.Y);
+            Assert.Equal(double.PositiveInfinity, v3.Z);
+            Assert.Equal(double.NaN, v3.W);
         }
 
         [Fact]
         public void Vector4DSqrtTest()
         {
-            Vector4D v1 = new Vector4D(-2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4D v2 = new Vector4D(5.5f, 4.5f, 6.5f, 7.5f);
+            Vector4D v1 = new Vector4D(-2.5d, 2.0d, 3.0d, 3.3d);
+            Vector4D v2 = new Vector4D(5.5d, 4.5d, 6.5d, 7.5d);
             Assert.Equal(2, (int)Vector4D.SquareRoot(v2).X);
             Assert.Equal(2, (int)Vector4D.SquareRoot(v2).Y);
             Assert.Equal(2, (int)Vector4D.SquareRoot(v2).Z);
             Assert.Equal(2, (int)Vector4D.SquareRoot(v2).W);
-            Assert.Equal(float.NaN, Vector4D.SquareRoot(v1).X);
+            Assert.Equal(double.NaN, Vector4D.SquareRoot(v1).X);
         }
 
         // A test to make sure these types are blittable directly into GPU buffer memory layouts
@@ -1567,7 +1567,7 @@ namespace Invicta.Numerics.Tests
         struct Vector4DPlusFloat
         {
             private Vector4D _v;
-            private float _f;
+            private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1580,70 +1580,70 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void SetFieldsTest()
         {
-            Vector4D v3 = new Vector4D(4f, 5f, 6f, 7f);
-            v3.X = 1.0f;
-            v3.Y = 2.0f;
-            v3.Z = 3.0f;
-            v3.W = 4.0f;
-            Assert.Equal(1.0f, v3.X);
-            Assert.Equal(2.0f, v3.Y);
-            Assert.Equal(3.0f, v3.Z);
-            Assert.Equal(4.0f, v3.W);
+            Vector4D v3 = new Vector4D(4d, 5d, 6d, 7d);
+            v3.X = 1.0d;
+            v3.Y = 2.0d;
+            v3.Z = 3.0d;
+            v3.W = 4.0d;
+            Assert.Equal(1.0d, v3.X);
+            Assert.Equal(2.0d, v3.Y);
+            Assert.Equal(3.0d, v3.Z);
+            Assert.Equal(4.0d, v3.W);
             Vector4D v4 = v3;
-            v4.Y = 0.5f;
-            v4.Z = 2.2f;
-            v4.W = 3.5f;
-            Assert.Equal(1.0f, v4.X);
-            Assert.Equal(0.5f, v4.Y);
-            Assert.Equal(2.2f, v4.Z);
-            Assert.Equal(3.5f, v4.W);
-            Assert.Equal(2.0f, v3.Y);
+            v4.Y = 0.5d;
+            v4.Z = 2.2d;
+            v4.W = 3.5d;
+            Assert.Equal(1.0d, v4.X);
+            Assert.Equal(0.5d, v4.Y);
+            Assert.Equal(2.2d, v4.Z);
+            Assert.Equal(3.5d, v4.W);
+            Assert.Equal(2.0d, v3.Y);
         }
 
         [Fact]
         public void EmbeddedVectorSetFields()
         {
             EmbeddedVectorObject evo = new EmbeddedVectorObject();
-            evo.FieldVector.X = 5.0f;
-            evo.FieldVector.Y = 5.0f;
-            evo.FieldVector.Z = 5.0f;
-            evo.FieldVector.W = 5.0f;
-            Assert.Equal(5.0f, evo.FieldVector.X);
-            Assert.Equal(5.0f, evo.FieldVector.Y);
-            Assert.Equal(5.0f, evo.FieldVector.Z);
-            Assert.Equal(5.0f, evo.FieldVector.W);
+            evo.FieldVector.X = 5.0d;
+            evo.FieldVector.Y = 5.0d;
+            evo.FieldVector.Z = 5.0d;
+            evo.FieldVector.W = 5.0d;
+            Assert.Equal(5.0d, evo.FieldVector.X);
+            Assert.Equal(5.0d, evo.FieldVector.Y);
+            Assert.Equal(5.0d, evo.FieldVector.Z);
+            Assert.Equal(5.0d, evo.FieldVector.W);
         }
 
         [Fact]
         public void DeeplyEmbeddedObjectTest()
         {
             DeeplyEmbeddedClass obj = new DeeplyEmbeddedClass();
-            obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector.X = 5f;
-            Assert.Equal(5f, obj.RootEmbeddedObject.X);
-            Assert.Equal(5f, obj.RootEmbeddedObject.Y);
-            Assert.Equal(1f, obj.RootEmbeddedObject.Z);
-            Assert.Equal(-5f, obj.RootEmbeddedObject.W);
+            obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector.X = 5d;
+            Assert.Equal(5d, obj.RootEmbeddedObject.X);
+            Assert.Equal(5d, obj.RootEmbeddedObject.Y);
+            Assert.Equal(1d, obj.RootEmbeddedObject.Z);
+            Assert.Equal(-5d, obj.RootEmbeddedObject.W);
             obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector = new Vector4D(1, 2, 3, 4);
-            Assert.Equal(1f, obj.RootEmbeddedObject.X);
-            Assert.Equal(2f, obj.RootEmbeddedObject.Y);
-            Assert.Equal(3f, obj.RootEmbeddedObject.Z);
-            Assert.Equal(4f, obj.RootEmbeddedObject.W);
+            Assert.Equal(1d, obj.RootEmbeddedObject.X);
+            Assert.Equal(2d, obj.RootEmbeddedObject.Y);
+            Assert.Equal(3d, obj.RootEmbeddedObject.Z);
+            Assert.Equal(4d, obj.RootEmbeddedObject.W);
         }
 
         [Fact]
         public void DeeplyEmbeddedStructTest()
         {
             DeeplyEmbeddedStruct obj = DeeplyEmbeddedStruct.Create();
-            obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector.X = 5f;
-            Assert.Equal(5f, obj.RootEmbeddedObject.X);
-            Assert.Equal(5f, obj.RootEmbeddedObject.Y);
-            Assert.Equal(1f, obj.RootEmbeddedObject.Z);
-            Assert.Equal(-5f, obj.RootEmbeddedObject.W);
+            obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector.X = 5d;
+            Assert.Equal(5d, obj.RootEmbeddedObject.X);
+            Assert.Equal(5d, obj.RootEmbeddedObject.Y);
+            Assert.Equal(1d, obj.RootEmbeddedObject.Z);
+            Assert.Equal(-5d, obj.RootEmbeddedObject.W);
             obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector = new Vector4D(1, 2, 3, 4);
-            Assert.Equal(1f, obj.RootEmbeddedObject.X);
-            Assert.Equal(2f, obj.RootEmbeddedObject.Y);
-            Assert.Equal(3f, obj.RootEmbeddedObject.Z);
-            Assert.Equal(4f, obj.RootEmbeddedObject.W);
+            Assert.Equal(1d, obj.RootEmbeddedObject.X);
+            Assert.Equal(2d, obj.RootEmbeddedObject.Y);
+            Assert.Equal(3d, obj.RootEmbeddedObject.Z);
+            Assert.Equal(4d, obj.RootEmbeddedObject.W);
         }
 
         private class EmbeddedVectorObject
@@ -1713,25 +1713,25 @@ namespace Invicta.Numerics.Tests
             public Vector4D RootEmbeddedObject { get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; } }
             public struct Level0
             {
-                private float _buffer0, _buffer1;
+                private double _buffer0, _buffer1;
                 public Level1 L1;
-                private float _buffer2;
+                private double _buffer2;
                 public struct Level1
                 {
-                    private float _buffer0, _buffer1;
+                    private double _buffer0, _buffer1;
                     public Level2 L2;
                     private byte _buffer2;
                     public struct Level2
                     {
                         public Level3 L3;
-                        private float _buffer0;
+                        private double _buffer0;
                         private byte _buffer1;
                         public struct Level3
                         {
                             public Level4 L4;
                             public struct Level4
                             {
-                                private float _buffer0;
+                                private double _buffer0;
                                 public Level5 L5;
                                 private long _buffer1;
                                 private byte _buffer2;
@@ -1761,7 +1761,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.CosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CosSingleTest(float value, float expectedResult, float variance)
+        public void CosSingleTest(double value, double expectedResult, double variance)
         {
             Vector4D actualResult = Vector4D.Cos(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Create(variance));
@@ -1769,7 +1769,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.ExpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ExpSingleTest(float value, float expectedResult, float variance)
+        public void ExpSingleTest(double value, double expectedResult, double variance)
         {
             Vector4D actualResult = Vector4D.Exp(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Create(variance));
@@ -1777,7 +1777,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.LogSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LogSingleTest(float value, float expectedResult, float variance)
+        public void LogSingleTest(double value, double expectedResult, double variance)
         {
             Vector4D actualResult = Vector4D.Log(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Create(variance));
@@ -1785,7 +1785,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.Log2Single), MemberType = typeof(GenericMathTestMemberData))]
-        public void Log2SingleTest(float value, float expectedResult, float variance)
+        public void Log2SingleTest(double value, double expectedResult, double variance)
         {
             Vector4D actualResult = Vector4D.Log2(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Create(variance));
@@ -1793,15 +1793,15 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.FusedMultiplyAddSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void FusedMultiplyAddSingleTest(float left, float right, float addend, float expectedResult)
+        public void FusedMultiplyAddSingleTest(double left, double right, double addend, double expectedResult)
         {
             AssertEqual(Vector4D.Create(expectedResult), Vector4D.FusedMultiplyAdd(Vector4D.Create(left), Vector4D.Create(right), Vector4D.Create(addend)), Vector4D.Zero);
-            AssertEqual(Vector4D.Create(float.MultiplyAddEstimate(left, right, addend)), Vector4D.MultiplyAddEstimate(Vector4D.Create(left), Vector4D.Create(right), Vector4D.Create(addend)), Vector4D.Zero);
+            AssertEqual(Vector4D.Create(double.MultiplyAddEstimate(left, right, addend)), Vector4D.MultiplyAddEstimate(Vector4D.Create(left), Vector4D.Create(right), Vector4D.Create(addend)), Vector4D.Zero);
         }
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.ClampSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ClampSingleTest(float x, float min, float max, float expectedResult)
+        public void ClampSingleTest(double x, double min, double max, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Clamp(Vector4D.Create(x), Vector4D.Create(min), Vector4D.Create(max));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1809,7 +1809,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.CopySignSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CopySignSingleTest(float x, float y, float expectedResult)
+        public void CopySignSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.CopySign(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1817,7 +1817,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.DegreesToRadiansSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void DegreesToRadiansSingleTest(float value, float expectedResult, float variance)
+        public void DegreesToRadiansSingleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector4D.Create(-expectedResult), Vector4D.DegreesToRadians(Vector4D.Create(-value)), Vector4D.Create(variance));
             AssertEqual(Vector4D.Create(+expectedResult), Vector4D.DegreesToRadians(Vector4D.Create(+value)), Vector4D.Create(variance));
@@ -1825,7 +1825,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.HypotSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void HypotSingleTest(float x, float y, float expectedResult, float variance)
+        public void HypotSingleTest(double x, double y, double expectedResult, double variance)
         {
             AssertEqual(Vector4D.Create(expectedResult), Vector4D.Hypot(Vector4D.Create(-x), Vector4D.Create(-y)), Vector4D.Create(variance));
             AssertEqual(Vector4D.Create(expectedResult), Vector4D.Hypot(Vector4D.Create(-x), Vector4D.Create(+y)), Vector4D.Create(variance));
@@ -1840,15 +1840,15 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.LerpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LerpSingleTest(float x, float y, float amount, float expectedResult)
+        public void LerpSingleTest(double x, double y, double amount, double expectedResult)
         {
             AssertEqual(Vector4D.Create(+expectedResult), Vector4D.Lerp(Vector4D.Create(+x), Vector4D.Create(+y), Vector4D.Create(amount)), Vector4D.Zero);
-            AssertEqual(Vector4D.Create((expectedResult == 0.0f) ? expectedResult : -expectedResult), Vector4D.Lerp(Vector4D.Create(-x), Vector4D.Create(-y), Vector4D.Create(amount)), Vector4D.Zero);
+            AssertEqual(Vector4D.Create((expectedResult == 0.0d) ? expectedResult : -expectedResult), Vector4D.Lerp(Vector4D.Create(-x), Vector4D.Create(-y), Vector4D.Create(amount)), Vector4D.Zero);
         }
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxSingleTest(float x, float y, float expectedResult)
+        public void MaxSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Max(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1856,7 +1856,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeSingleTest(float x, float y, float expectedResult)
+        public void MaxMagnitudeSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.MaxMagnitude(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1864,7 +1864,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeNumberSingleTest(float x, float y, float expectedResult)
+        public void MaxMagnitudeNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.MaxMagnitudeNumber(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1872,7 +1872,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxNumberSingleTest(float x, float y, float expectedResult)
+        public void MaxNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.MaxNumber(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1880,7 +1880,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinSingleTest(float x, float y, float expectedResult)
+        public void MinSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Min(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1888,7 +1888,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeSingleTest(float x, float y, float expectedResult)
+        public void MinMagnitudeSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.MinMagnitude(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1896,7 +1896,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeNumberSingleTest(float x, float y, float expectedResult)
+        public void MinMagnitudeNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.MinMagnitudeNumber(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1904,7 +1904,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinNumberSingleTest(float x, float y, float expectedResult)
+        public void MinNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector4D actualResult = Vector4D.MinNumber(Vector4D.Create(x), Vector4D.Create(y));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1912,7 +1912,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RadiansToDegreesSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RadiansToDegreesSingleTest(float value, float expectedResult, float variance)
+        public void RadiansToDegreesSingleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector4D.Create(-expectedResult), Vector4D.RadiansToDegrees(Vector4D.Create(-value)), Vector4D.Create(variance));
             AssertEqual(Vector4D.Create(+expectedResult), Vector4D.RadiansToDegrees(Vector4D.Create(+value)), Vector4D.Create(variance));
@@ -1920,7 +1920,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RoundSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundSingleTest(float value, float expectedResult)
+        public void RoundSingleTest(double value, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Round(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1928,7 +1928,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RoundAwayFromZeroSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundAwayFromZeroSingleTest(float value, float expectedResult)
+        public void RoundAwayFromZeroSingleTest(double value, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Round(Vector4D.Create(value), MidpointRounding.AwayFromZero);
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1936,7 +1936,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RoundToEvenSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundToEvenSingleTest(float value, float expectedResult)
+        public void RoundToEvenSingleTest(double value, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Round(Vector4D.Create(value), MidpointRounding.ToEven);
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1944,7 +1944,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.SinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinSingleTest(float value, float expectedResult, float variance)
+        public void SinSingleTest(double value, double expectedResult, double variance)
         {
             Vector4D actualResult = Vector4D.Sin(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Create(variance));
@@ -1952,7 +1952,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.SinCosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinCosSingleTest(float value, float expectedResultSin, float expectedResultCos, float allowedVarianceSin, float allowedVarianceCos)
+        public void SinCosSingleTest(double value, double expectedResultSin, double expectedResultCos, double allowedVarianceSin, double allowedVarianceCos)
         {
             (Vector4D resultSin, Vector4D resultCos) = Vector4D.SinCos(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResultSin), resultSin, Vector4D.Create(allowedVarianceSin));
@@ -1961,7 +1961,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.TruncateSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void TruncateSingleTest(float value, float expectedResult)
+        public void TruncateSingleTest(double value, double expectedResult)
         {
             Vector4D actualResult = Vector4D.Truncate(Vector4D.Create(value));
             AssertEqual(Vector4D.Create(expectedResult), actualResult, Vector4D.Zero);
@@ -1973,7 +1973,7 @@ namespace Invicta.Numerics.Tests
             Test(3, 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value1, float value2)
+            void Test(double value1, double value2)
             {
                 var input1 = Vector4D.Create(value1);
                 var input2 = Vector4D.Create(value2);
@@ -2013,7 +2013,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value)
+            void Test(double value)
             {
                 var input = Vector4D.Create(value);
 
@@ -2029,7 +2029,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1), 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float allBitsSet, float value2)
+            void Test(double allBitsSet, double value2)
             {
                 var input1 = Vector4D.Create(allBitsSet);
                 var input2 = Vector4D.Create(value2);
@@ -2057,7 +2057,7 @@ namespace Invicta.Numerics.Tests
             Test(3, 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value1, float value2)
+            void Test(double value1, double value2)
             {
                 var input1 = Vector4D.Create(value1);
                 var input2 = Vector4D.Create(value2);
@@ -2097,7 +2097,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value)
+            void Test(double value)
             {
                 var input = Vector4D.Create(value);
 
@@ -2113,7 +2113,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1), 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float allBitsSet, float value2)
+            void Test(double allBitsSet, double value2)
             {
                 var input1 = Vector4D.Create(allBitsSet);
                 var input2 = Vector4D.Create(value2);
@@ -2137,55 +2137,55 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsEvenIntegerTest(float value) => Assert.Equal(float.IsEvenInteger(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsEvenInteger(Vector4D.Create(value)));
+        public void IsEvenIntegerTest(double value) => Assert.Equal(double.IsEvenInteger(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsEvenInteger(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsFiniteTest(float value) => Assert.Equal(float.IsFinite(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsFinite(Vector4D.Create(value)));
+        public void IsFiniteTest(double value) => Assert.Equal(double.IsFinite(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsFinite(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsInfinityTest(float value) => Assert.Equal(float.IsInfinity(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsInfinity(Vector4D.Create(value)));
+        public void IsInfinityTest(double value) => Assert.Equal(double.IsInfinity(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsInfinity(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsIntegerTest(float value) => Assert.Equal(float.IsInteger(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsInteger(Vector4D.Create(value)));
+        public void IsIntegerTest(double value) => Assert.Equal(double.IsInteger(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsInteger(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNaNTest(float value) => Assert.Equal(float.IsNaN(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNaN(Vector4D.Create(value)));
+        public void IsNaNTest(double value) => Assert.Equal(double.IsNaN(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNaN(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNegativeTest(float value) => Assert.Equal(float.IsNegative(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNegative(Vector4D.Create(value)));
+        public void IsNegativeTest(double value) => Assert.Equal(double.IsNegative(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNegative(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNegativeInfinityTest(float value) => Assert.Equal(float.IsNegativeInfinity(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNegativeInfinity(Vector4D.Create(value)));
+        public void IsNegativeInfinityTest(double value) => Assert.Equal(double.IsNegativeInfinity(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNegativeInfinity(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNormalTest(float value) => Assert.Equal(float.IsNormal(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNormal(Vector4D.Create(value)));
+        public void IsNormalTest(double value) => Assert.Equal(double.IsNormal(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsNormal(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsOddIntegerTest(float value) => Assert.Equal(float.IsOddInteger(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsOddInteger(Vector4D.Create(value)));
+        public void IsOddIntegerTest(double value) => Assert.Equal(double.IsOddInteger(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsOddInteger(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsPositiveTest(float value) => Assert.Equal(float.IsPositive(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsPositive(Vector4D.Create(value)));
+        public void IsPositiveTest(double value) => Assert.Equal(double.IsPositive(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsPositive(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsPositiveInfinityTest(float value) => Assert.Equal(float.IsPositiveInfinity(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsPositiveInfinity(Vector4D.Create(value)));
+        public void IsPositiveInfinityTest(double value) => Assert.Equal(double.IsPositiveInfinity(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsPositiveInfinity(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsSubnormalTest(float value) => Assert.Equal(float.IsSubnormal(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsSubnormal(Vector4D.Create(value)));
+        public void IsSubnormalTest(double value) => Assert.Equal(double.IsSubnormal(value) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsSubnormal(Vector4D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsZeroSingleTest(float value) => Assert.Equal((value == 0) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsZero(Vector4D.Create(value)));
+        public void IsZeroSingleTest(double value) => Assert.Equal((value == 0) ? Vector4D.AllBitsSet : Vector4D.Zero, Vector4D.IsZero(Vector4D.Create(value)));
 
         [Fact]
         public void AllBitsSetTest()
@@ -2211,18 +2211,18 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(+0.0f, +0.0f, +0.0f, +0.0f, 0b0000)]
-        [InlineData(-0.0f, +1.0f, -0.0f, +0.0f, 0b0101)]
-        [InlineData(-0.0f, -0.0f, -0.0f, -0.0f, 0b1111)]
-        public void ExtractMostSignificantBitsTest(float x, float y, float z, float w, uint expectedResult)
+        [InlineData(+0.0d, +0.0d, +0.0d, +0.0d, 0b0000)]
+        [InlineData(-0.0d, +1.0d, -0.0d, +0.0d, 0b0101)]
+        [InlineData(-0.0d, -0.0d, -0.0d, -0.0d, 0b1111)]
+        public void ExtractMostSignificantBitsTest(double x, double y, double z, double w, uint expectedResult)
         {
             Assert.Equal(expectedResult, Vector4D.Create(x, y, z, w).ExtractMostSignificantBits());
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f, 4.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f, 8.0f)]
-        public void GetElementTest(float x, float y, float z, float w)
+        [InlineData(1.0d, 2.0d, 3.0d, 4.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d, 8.0d)]
+        public void GetElementTest(double x, double y, double z, double w)
         {
             Assert.Equal(x, Vector4D.Create(x, y, z, w).GetElement(0));
             Assert.Equal(y, Vector4D.Create(x, y, z, w).GetElement(1));
@@ -2231,34 +2231,34 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f, 4.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f, 8.0f)]
-        public void ShuffleTest(float x, float y, float z, float w)
+        [InlineData(1.0d, 2.0d, 3.0d, 4.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d, 8.0d)]
+        public void ShuffleTest(double x, double y, double z, double w)
         {
             Assert.Equal(Vector4D.Create(w, z, y, x), Vector4D.Shuffle(Vector4D.Create(x, y, z, w), 3, 2, 1, 0));
             Assert.Equal(Vector4D.Create(y, x, w, z), Vector4D.Shuffle(Vector4D.Create(x, y, z, w), 1, 0, 3, 2));
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f, 4.0f, 10.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f, 8.0f, 26.0f)]
-        public void SumTest(float x, float y, float z, float w, float expectedResult)
+        [InlineData(1.0d, 2.0d, 3.0d, 4.0d, 10.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d, 8.0d, 26.0d)]
+        public void SumTest(double x, double y, double z, double w, double expectedResult)
         {
             Assert.Equal(expectedResult, Vector4D.Sum(Vector4D.Create(x, y, z, w)));
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f, 4.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f, 8.0f)]
-        public void ToScalarTest(float x, float y, float z, float w)
+        [InlineData(1.0d, 2.0d, 3.0d, 4.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d, 8.0d)]
+        public void ToScalarTest(double x, double y, double z, double w)
         {
             Assert.Equal(x, Vector4D.Create(x, y, z, w).ToScalar());
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f, 4.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f, 8.0f)]
-        public void WithElementTest(float x, float y, float z, float w)
+        [InlineData(1.0d, 2.0d, 3.0d, 4.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d, 8.0d)]
+        public void WithElementTest(double x, double y, double z, double w)
         {
             var vector = Vector4D.Create(10);
 
@@ -2299,16 +2299,16 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void CreateScalarTest()
         {
-            var vector = Vector4D.CreateScalar(float.Pi);
+            var vector = Vector4D.CreateScalar(double.Pi);
 
-            Assert.Equal(float.Pi, vector.X);
+            Assert.Equal(double.Pi, vector.X);
             Assert.Equal(0, vector.Y);
             Assert.Equal(0, vector.Z);
             Assert.Equal(0, vector.W);
 
-            vector = Vector4D.CreateScalar(float.E);
+            vector = Vector4D.CreateScalar(double.E);
 
-            Assert.Equal(float.E, vector.X);
+            Assert.Equal(double.E, vector.X);
             Assert.Equal(0, vector.Y);
             Assert.Equal(0, vector.Z);
             Assert.Equal(0, vector.W);
@@ -2317,11 +2317,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void CreateScalarUnsafeTest()
         {
-            var vector = Vector4D.CreateScalarUnsafe(float.Pi);
-            Assert.Equal(float.Pi, vector.X);
+            var vector = Vector4D.CreateScalarUnsafe(double.Pi);
+            Assert.Equal(double.Pi, vector.X);
 
-            vector = Vector4D.CreateScalarUnsafe(float.E);
-            Assert.Equal(float.E, vector.X);
+            vector = Vector4D.CreateScalarUnsafe(double.E);
+            Assert.Equal(double.E, vector.X);
         }
     }
 }

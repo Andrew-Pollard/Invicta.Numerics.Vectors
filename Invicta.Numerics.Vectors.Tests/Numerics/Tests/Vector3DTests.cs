@@ -34,11 +34,11 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f)]
-        public void Vector3DIndexerGetTest(float x, float y, float z)
+        [InlineData(0.0d, 1.0d, 0.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d)]
+        public void Vector3DIndexerGetTest(double x, double y, double z)
         {
             var vector = new Vector3D(x, y, z);
 
@@ -48,13 +48,13 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0.0f, 1.0f, 0.0f)]
-        [InlineData(1.0f, 0.0f, 1.0f)]
-        [InlineData(3.1434343f, 1.1234123f, 0.1234123f)]
-        [InlineData(1.0000001f, 0.0000001f, 2.0000001f)]
-        public void Vector3DIndexerSetTest(float x, float y, float z)
+        [InlineData(0.0d, 1.0d, 0.0d)]
+        [InlineData(1.0d, 0.0d, 1.0d)]
+        [InlineData(3.1434343d, 1.1234123d, 0.1234123d)]
+        [InlineData(1.0000001d, 0.0000001d, 2.0000001d)]
+        public void Vector3DIndexerSetTest(double x, double y, double z)
         {
-            var vector = new Vector3D(0.0f, 0.0f, 0.0f);
+            var vector = new Vector3D(0.0d, 0.0d, 0.0d);
 
             vector[0] = x;
             vector[1] = y;
@@ -68,10 +68,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DCopyToTest()
         {
-            Vector3D v1 = new Vector3D(2.0f, 3.0f, 3.3f);
+            Vector3D v1 = new Vector3D(2.0d, 3.0d, 3.3d);
 
-            float[] a = new float[4];
-            float[] b = new float[3];
+            double[] a = new double[4];
+            double[] b = new double[3];
 
             Assert.Throws<NullReferenceException>(() => v1.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => v1.CopyTo(a, -1));
@@ -80,27 +80,27 @@ namespace Invicta.Numerics.Tests
 
             v1.CopyTo(a, 1);
             v1.CopyTo(b);
-            Assert.Equal(0.0f, a[0]);
-            Assert.Equal(2.0f, a[1]);
-            Assert.Equal(3.0f, a[2]);
-            Assert.Equal(3.3f, a[3]);
-            Assert.Equal(2.0f, b[0]);
-            Assert.Equal(3.0f, b[1]);
-            Assert.Equal(3.3f, b[2]);
+            Assert.Equal(0.0d, a[0]);
+            Assert.Equal(2.0d, a[1]);
+            Assert.Equal(3.0d, a[2]);
+            Assert.Equal(3.3d, a[3]);
+            Assert.Equal(2.0d, b[0]);
+            Assert.Equal(3.0d, b[1]);
+            Assert.Equal(3.3d, b[2]);
         }
 
         [Fact]
         public void Vector3DCopyToSpanTest()
         {
-            Vector3D vector = new Vector3D(1.0f, 2.0f, 3.0f);
-            Span<float> destination = new float[3];
+            Vector3D vector = new Vector3D(1.0d, 2.0d, 3.0d);
+            Span<double> destination = new double[3];
 
-            Assert.Throws<ArgumentException>(() => vector.CopyTo(new Span<float>(new float[2])));
+            Assert.Throws<ArgumentException>(() => vector.CopyTo(new Span<double>(new double[2])));
             vector.CopyTo(destination);
 
-            Assert.Equal(1.0f, vector.X);
-            Assert.Equal(2.0f, vector.Y);
-            Assert.Equal(3.0f, vector.Z);
+            Assert.Equal(1.0d, vector.X);
+            Assert.Equal(2.0d, vector.Y);
+            Assert.Equal(3.0d, vector.Z);
             Assert.Equal(vector.X, destination[0]);
             Assert.Equal(vector.Y, destination[1]);
             Assert.Equal(vector.Z, destination[2]);
@@ -109,15 +109,15 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DTryCopyToTest()
         {
-            Vector3D vector = new Vector3D(1.0f, 2.0f, 3.0f);
-            Span<float> destination = new float[3];
+            Vector3D vector = new Vector3D(1.0d, 2.0d, 3.0d);
+            Span<double> destination = new double[3];
 
-            Assert.False(vector.TryCopyTo(new Span<float>(new float[2])));
+            Assert.False(vector.TryCopyTo(new Span<double>(new double[2])));
             Assert.True(vector.TryCopyTo(destination));
 
-            Assert.Equal(1.0f, vector.X);
-            Assert.Equal(2.0f, vector.Y);
-            Assert.Equal(3.0f, vector.Z);
+            Assert.Equal(1.0d, vector.X);
+            Assert.Equal(2.0d, vector.Y);
+            Assert.Equal(3.0d, vector.Z);
             Assert.Equal(vector.X, destination[0]);
             Assert.Equal(vector.Y, destination[1]);
             Assert.Equal(vector.Z, destination[2]);
@@ -126,19 +126,19 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DGetHashCodeTest()
         {
-            Vector3D v1 = new Vector3D(2.0f, 3.0f, 3.3f);
-            Vector3D v2 = new Vector3D(2.0f, 3.0f, 3.3f);
-            Vector3D v3 = new Vector3D(2.0f, 3.0f, 3.3f);
-            Vector3D v5 = new Vector3D(3.0f, 2.0f, 3.3f);
+            Vector3D v1 = new Vector3D(2.0d, 3.0d, 3.3d);
+            Vector3D v2 = new Vector3D(2.0d, 3.0d, 3.3d);
+            Vector3D v3 = new Vector3D(2.0d, 3.0d, 3.3d);
+            Vector3D v5 = new Vector3D(3.0d, 2.0d, 3.3d);
             Assert.Equal(v1.GetHashCode(), v1.GetHashCode());
             Assert.Equal(v1.GetHashCode(), v2.GetHashCode());
             Assert.NotEqual(v1.GetHashCode(), v5.GetHashCode());
             Assert.Equal(v1.GetHashCode(), v3.GetHashCode());
-            Vector3D v4 = new Vector3D(0.0f, 0.0f, 0.0f);
-            Vector3D v6 = new Vector3D(1.0f, 0.0f, 0.0f);
-            Vector3D v7 = new Vector3D(0.0f, 1.0f, 0.0f);
-            Vector3D v8 = new Vector3D(1.0f, 1.0f, 1.0f);
-            Vector3D v9 = new Vector3D(1.0f, 1.0f, 0.0f);
+            Vector3D v4 = new Vector3D(0.0d, 0.0d, 0.0d);
+            Vector3D v6 = new Vector3D(1.0d, 0.0d, 0.0d);
+            Vector3D v7 = new Vector3D(0.0d, 1.0d, 0.0d);
+            Vector3D v8 = new Vector3D(1.0d, 1.0d, 1.0d);
+            Vector3D v9 = new Vector3D(1.0d, 1.0d, 0.0d);
             Assert.NotEqual(v4.GetHashCode(), v6.GetHashCode());
             Assert.NotEqual(v4.GetHashCode(), v7.GetHashCode());
             Assert.NotEqual(v4.GetHashCode(), v8.GetHashCode());
@@ -154,7 +154,7 @@ namespace Invicta.Numerics.Tests
             string separator = CultureInfo.CurrentCulture.NumberFormat.NumberGroupSeparator;
             CultureInfo enUsCultureInfo = new CultureInfo("en-US");
 
-            Vector3D v1 = new Vector3D(2.0f, 3.0f, 3.3f);
+            Vector3D v1 = new Vector3D(2.0d, 3.0d, 3.3d);
             string v1str = v1.ToString();
             string expectedv1 = string.Format(CultureInfo.CurrentCulture
                 , "<{1:G}{0} {2:G}{0} {3:G}>"
@@ -162,32 +162,32 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expectedv1, v1str);
 
             string v1strformatted = v1.ToString("c", CultureInfo.CurrentCulture);
-            string expectedv1formatted = string.Format(CultureInfo.CurrentCulture
+            string expectedv1dormatted = string.Format(CultureInfo.CurrentCulture
                 , "<{1:c}{0} {2:c}{0} {3:c}>"
                 , separator, 2, 3, 3.3);
-            Assert.Equal(expectedv1formatted, v1strformatted);
+            Assert.Equal(expectedv1dormatted, v1strformatted);
 
             string v2strformatted = v1.ToString("c", enUsCultureInfo);
-            string expectedv2formatted = string.Format(enUsCultureInfo
+            string expectedv2dormatted = string.Format(enUsCultureInfo
                 , "<{1:c}{0} {2:c}{0} {3:c}>"
                 , enUsCultureInfo.NumberFormat.NumberGroupSeparator, 2, 3, 3.3);
-            Assert.Equal(expectedv2formatted, v2strformatted);
+            Assert.Equal(expectedv2dormatted, v2strformatted);
 
             string v3strformatted = v1.ToString("c");
-            string expectedv3formatted = string.Format(CultureInfo.CurrentCulture
+            string expectedv3dormatted = string.Format(CultureInfo.CurrentCulture
                 , "<{1:c}{0} {2:c}{0} {3:c}>"
                 , separator, 2, 3, 3.3);
-            Assert.Equal(expectedv3formatted, v3strformatted);
+            Assert.Equal(expectedv3dormatted, v3strformatted);
         }
 
         // A test for Cross (Vector3Df, Vector3Df)
         [Fact]
         public void Vector3DCrossTest()
         {
-            Vector3D a = new Vector3D(1.0f, 0.0f, 0.0f);
-            Vector3D b = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D a = new Vector3D(1.0d, 0.0d, 0.0d);
+            Vector3D b = new Vector3D(0.0d, 1.0d, 0.0d);
 
-            Vector3D expected = new Vector3D(0.0f, 0.0f, 1.0f);
+            Vector3D expected = new Vector3D(0.0d, 0.0d, 1.0d);
             Vector3D actual;
 
             actual = Vector3D.Cross(a, b);
@@ -199,10 +199,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DCrossTest1()
         {
-            Vector3D a = new Vector3D(0.0f, 1.0f, 0.0f);
-            Vector3D b = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D a = new Vector3D(0.0d, 1.0d, 0.0d);
+            Vector3D b = new Vector3D(0.0d, 1.0d, 0.0d);
 
-            Vector3D expected = new Vector3D(0.0f, 0.0f, 0.0f);
+            Vector3D expected = new Vector3D(0.0d, 0.0d, 0.0d);
             Vector3D actual = Vector3D.Cross(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Cross did not return the expected value.");
         }
@@ -222,11 +222,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDistanceTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float expected = (float)System.Math.Sqrt(27);
-            float actual;
+            double expected = (double)System.Math.Sqrt(27);
+            double actual;
 
             actual = Vector3D.Distance(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Distance did not return the expected value.");
@@ -237,24 +237,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDistanceTest1()
         {
-            Vector3D a = new Vector3D(1.051f, 2.05f, 3.478f);
-            Vector3D b = new Vector3D(new Vector2D(1.051f, 0.0f), 1);
-            b.Y = 2.05f;
-            b.Z = 3.478f;
+            Vector3D a = new Vector3D(1.051d, 2.05d, 3.478d);
+            Vector3D b = new Vector3D(new Vector2D(1.051d, 0.0d), 1);
+            b.Y = 2.05d;
+            b.Z = 3.478d;
 
-            float actual = Vector3D.Distance(a, b);
-            Assert.Equal(0.0f, actual);
+            double actual = Vector3D.Distance(a, b);
+            Assert.Equal(0.0d, actual);
         }
 
         // A test for DistanceSquared (Vector3Df, Vector3Df)
         [Fact]
         public void Vector3DDistanceSquaredTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float expected = 27.0f;
-            float actual;
+            double expected = 27.0d;
+            double actual;
 
             actual = Vector3D.DistanceSquared(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.DistanceSquared did not return the expected value.");
@@ -264,11 +264,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDotTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float expected = 32.0f;
-            float actual;
+            double expected = 32.0d;
+            double actual;
 
             actual = Vector3D.Dot(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Dot did not return the expected value.");
@@ -279,13 +279,13 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDotTest1()
         {
-            Vector3D a = new Vector3D(1.55f, 1.55f, 1);
-            Vector3D b = new Vector3D(2.5f, 3, 1.5f);
+            Vector3D a = new Vector3D(1.55d, 1.55d, 1);
+            Vector3D b = new Vector3D(2.5d, 3, 1.5d);
             Vector3D c = Vector3D.Cross(a, b);
 
-            float expected = 0.0f;
-            float actual1 = Vector3D.Dot(a, c);
-            float actual2 = Vector3D.Dot(b, c);
+            double expected = 0.0d;
+            double actual1 = Vector3D.Dot(a, c);
+            double actual2 = Vector3D.Dot(b, c);
             Assert.True(MathHelper.Equal(expected, actual1), "Vector3Df.Dot did not return the expected value.");
             Assert.True(MathHelper.Equal(expected, actual2), "Vector3Df.Dot did not return the expected value.");
         }
@@ -294,14 +294,14 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DLengthTest()
         {
-            Vector2D a = new Vector2D(1.0f, 2.0f);
+            Vector2D a = new Vector2D(1.0d, 2.0d);
 
-            float z = 3.0f;
+            double z = 3.0d;
 
             Vector3D target = new Vector3D(a, z);
 
-            float expected = (float)System.Math.Sqrt(14.0f);
-            float actual;
+            double expected = (double)System.Math.Sqrt(14.0d);
+            double actual;
 
             actual = target.Length();
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Length did not return the expected value.");
@@ -314,8 +314,8 @@ namespace Invicta.Numerics.Tests
         {
             Vector3D target = new Vector3D();
 
-            float expected = 0.0f;
-            float actual = target.Length();
+            double expected = 0.0d;
+            double actual = target.Length();
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Length did not return the expected value.");
         }
 
@@ -323,14 +323,14 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DLengthSquaredTest()
         {
-            Vector2D a = new Vector2D(1.0f, 2.0f);
+            Vector2D a = new Vector2D(1.0d, 2.0d);
 
-            float z = 3.0f;
+            double z = 3.0d;
 
             Vector3D target = new Vector3D(a, z);
 
-            float expected = 14.0f;
-            float actual;
+            double expected = 14.0d;
+            double actual;
 
             actual = target.LengthSquared();
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.LengthSquared did not return the expected value.");
@@ -340,10 +340,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DMinTest()
         {
-            Vector3D a = new Vector3D(-1.0f, 4.0f, -3.0f);
-            Vector3D b = new Vector3D(2.0f, 1.0f, -1.0f);
+            Vector3D a = new Vector3D(-1.0d, 4.0d, -3.0d);
+            Vector3D b = new Vector3D(2.0d, 1.0d, -1.0d);
 
-            Vector3D expected = new Vector3D(-1.0f, 1.0f, -3.0f);
+            Vector3D expected = new Vector3D(-1.0d, 1.0d, -3.0d);
             Vector3D actual;
             actual = Vector3D.Min(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Min did not return the expected value.");
@@ -353,10 +353,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DMaxTest()
         {
-            Vector3D a = new Vector3D(-1.0f, 4.0f, -3.0f);
-            Vector3D b = new Vector3D(2.0f, 1.0f, -1.0f);
+            Vector3D a = new Vector3D(-1.0d, 4.0d, -3.0d);
+            Vector3D b = new Vector3D(2.0d, 1.0d, -1.0d);
 
-            Vector3D expected = new Vector3D(2.0f, 4.0f, -1.0f);
+            Vector3D expected = new Vector3D(2.0d, 4.0d, -1.0d);
             Vector3D actual;
             actual = Vector3D.Max(a, b);
             Assert.True(MathHelper.Equal(expected, actual), "vector3.Max did not return the expected value.");
@@ -384,133 +384,133 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(actual, max);
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         [Fact]
         public void Vector3DLerpTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float t = 0.5f;
+            double t = 0.5d;
 
-            Vector3D expected = new Vector3D(2.5f, 3.5f, 4.5f);
+            Vector3D expected = new Vector3D(2.5d, 3.5d, 4.5d);
             Vector3D actual;
 
             actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test with factor zero
         [Fact]
         public void Vector3DLerpTest1()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float t = 0.0f;
-            Vector3D expected = new Vector3D(1.0f, 2.0f, 3.0f);
+            double t = 0.0d;
+            Vector3D expected = new Vector3D(1.0d, 2.0d, 3.0d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test with factor one
         [Fact]
         public void Vector3DLerpTest2()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float t = 1.0f;
-            Vector3D expected = new Vector3D(4.0f, 5.0f, 6.0f);
+            double t = 1.0d;
+            Vector3D expected = new Vector3D(4.0d, 5.0d, 6.0d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test with factor > 1
         [Fact]
         public void Vector3DLerpTest3()
         {
-            Vector3D a = new Vector3D(0.0f, 0.0f, 0.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(0.0d, 0.0d, 0.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float t = 2.0f;
-            Vector3D expected = new Vector3D(8.0f, 10.0f, 12.0f);
+            double t = 2.0d;
+            Vector3D expected = new Vector3D(8.0d, 10.0d, 12.0d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test with factor < 0
         [Fact]
         public void Vector3DLerpTest4()
         {
-            Vector3D a = new Vector3D(0.0f, 0.0f, 0.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(0.0d, 0.0d, 0.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            float t = -2.0f;
-            Vector3D expected = new Vector3D(-8.0f, -10.0f, -12.0f);
+            double t = -2.0d;
+            Vector3D expected = new Vector3D(-8.0d, -10.0d, -12.0d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
-        // Lerp test with special float value
+        // A test for Lerp (Vector3Df, Vector3Df, double)
+        // Lerp test with special double value
         [Fact]
         public void Vector3DLerpTest5()
         {
-            Vector3D a = new Vector3D(45.67f, 90.0f, 0f);
-            Vector3D b = new Vector3D(float.PositiveInfinity, float.NegativeInfinity, 0);
+            Vector3D a = new Vector3D(45.67d, 90.0d, 0d);
+            Vector3D b = new Vector3D(double.PositiveInfinity, double.NegativeInfinity, 0);
 
-            float t = 0.408f;
+            double t = 0.408d;
             Vector3D actual = Vector3D.Lerp(a, b, t);
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector3Df.Lerp did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector3Df.Lerp did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.X), "Vector3Df.Lerp did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test from the same point
         [Fact]
         public void Vector3DLerpTest6()
         {
-            Vector3D a = new Vector3D(1.68f, 2.34f, 5.43f);
+            Vector3D a = new Vector3D(1.68d, 2.34d, 5.43d);
             Vector3D b = a;
 
-            float t = 0.18f;
-            Vector3D expected = new Vector3D(1.68f, 2.34f, 5.43f);
+            double t = 0.18d;
+            Vector3D expected = new Vector3D(1.68d, 2.34d, 5.43d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test with values known to be inaccurate with the old lerp impl
         [Fact]
         public void Vector3DLerpTest7()
         {
-            Vector3D a = new Vector3D(0.44728136f);
-            Vector3D b = new Vector3D(0.46345946f);
+            Vector3D a = new Vector3D(0.44728136d);
+            Vector3D b = new Vector3D(0.46345946d);
 
-            float t = 0.26402435f;
+            double t = 0.26402435d;
 
-            Vector3D expected = new Vector3D(0.45155275f);
+            Vector3D expected = new Vector3D(0.45155275d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector3Df, Vector3Df, float)
+        // A test for Lerp (Vector3Df, Vector3Df, double)
         // Lerp test with values known to be inaccurate with the old lerp impl
         // (Old code incorrectly gets 0.33333588)
         [Fact]
         public void Vector3DLerpTest8()
         {
             Vector3D a = new Vector3D(-100);
-            Vector3D b = new Vector3D(0.33333334f);
+            Vector3D b = new Vector3D(0.33333334d);
 
-            float t = 1f;
+            double t = 1d;
 
-            Vector3D expected = new Vector3D(0.33333334f);
+            Vector3D expected = new Vector3D(0.33333334d);
             Vector3D actual = Vector3D.Lerp(a, b, t);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Lerp did not return the expected value.");
         }
@@ -519,22 +519,22 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DReflectTest()
         {
-            Vector3D a = Vector3D.Normalize(new Vector3D(1.0f, 1.0f, 1.0f));
+            Vector3D a = Vector3D.Normalize(new Vector3D(1.0d, 1.0d, 1.0d));
 
             // Reflect on XZ plane.
-            Vector3D n = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D n = new Vector3D(0.0d, 1.0d, 0.0d);
             Vector3D expected = new Vector3D(a.X, -a.Y, a.Z);
             Vector3D actual = Vector3D.Reflect(a, n);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Reflect did not return the expected value.");
 
             // Reflect on XY plane.
-            n = new Vector3D(0.0f, 0.0f, 1.0f);
+            n = new Vector3D(0.0d, 0.0d, 1.0d);
             expected = new Vector3D(a.X, a.Y, -a.Z);
             actual = Vector3D.Reflect(a, n);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Reflect did not return the expected value.");
 
             // Reflect on YZ plane.
-            n = new Vector3D(1.0f, 0.0f, 0.0f);
+            n = new Vector3D(1.0d, 0.0d, 0.0d);
             expected = new Vector3D(-a.X, a.Y, a.Z);
             actual = Vector3D.Reflect(a, n);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Reflect did not return the expected value.");
@@ -545,7 +545,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DReflectTest1()
         {
-            Vector3D n = new Vector3D(0.45f, 1.28f, 0.86f);
+            Vector3D n = new Vector3D(0.45d, 1.28d, 0.86d);
             n = Vector3D.Normalize(n);
             Vector3D a = n;
 
@@ -559,7 +559,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DReflectTest2()
         {
-            Vector3D n = new Vector3D(0.45f, 1.28f, 0.86f);
+            Vector3D n = new Vector3D(0.45d, 1.28d, 0.86d);
             n = Vector3D.Normalize(n);
             Vector3D a = -n;
 
@@ -573,8 +573,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DReflectTest3()
         {
-            Vector3D n = new Vector3D(0.45f, 1.28f, 0.86f);
-            Vector3D temp = new Vector3D(1.28f, 0.45f, 0.01f);
+            Vector3D n = new Vector3D(0.45d, 1.28d, 0.86d);
+            Vector3D temp = new Vector3D(1.28d, 0.45d, 0.01d);
             // find a perpendicular vector of n
             Vector3D a = Vector3D.Cross(temp, n);
 
@@ -587,16 +587,16 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DTransformTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector3D expected = new Vector3D(12.191987f, 21.533493f, 32.616024f);
+            Vector3D expected = new Vector3D(12.191987d, 21.533493d, 32.616024d);
             Vector3D actual;
 
             actual = Vector3D.Transform(v, m);
@@ -607,54 +607,54 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DClampTest()
         {
-            Vector3D a = new Vector3D(0.5f, 0.3f, 0.33f);
-            Vector3D min = new Vector3D(0.0f, 0.1f, 0.13f);
-            Vector3D max = new Vector3D(1.0f, 1.1f, 1.13f);
+            Vector3D a = new Vector3D(0.5d, 0.3d, 0.33d);
+            Vector3D min = new Vector3D(0.0d, 0.1d, 0.13d);
+            Vector3D max = new Vector3D(1.0d, 1.1d, 1.13d);
 
             // Normal case.
             // Case N1: specified value is in the range.
-            Vector3D expected = new Vector3D(0.5f, 0.3f, 0.33f);
+            Vector3D expected = new Vector3D(0.5d, 0.3d, 0.33d);
             Vector3D actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
 
             // Normal case.
             // Case N2: specified value is bigger than max value.
-            a = new Vector3D(2.0f, 3.0f, 4.0f);
+            a = new Vector3D(2.0d, 3.0d, 4.0d);
             expected = max;
             actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
 
             // Case N3: specified value is smaller than max value.
-            a = new Vector3D(-2.0f, -3.0f, -4.0f);
+            a = new Vector3D(-2.0d, -3.0d, -4.0d);
             expected = min;
             actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
 
             // Case N4: combination case.
-            a = new Vector3D(-2.0f, 0.5f, 4.0f);
+            a = new Vector3D(-2.0d, 0.5d, 4.0d);
             expected = new Vector3D(min.X, a.Y, max.Z);
             actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
 
             // User specified min value is bigger than max value.
-            max = new Vector3D(0.0f, 0.1f, 0.13f);
-            min = new Vector3D(1.0f, 1.1f, 1.13f);
+            max = new Vector3D(0.0d, 0.1d, 0.13d);
+            min = new Vector3D(1.0d, 1.1d, 1.13d);
 
             // Case W1: specified value is in the range.
-            a = new Vector3D(0.5f, 0.3f, 0.33f);
+            a = new Vector3D(0.5d, 0.3d, 0.33d);
             expected = max;
             actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
 
             // Normal case.
             // Case W2: specified value is bigger than max and min value.
-            a = new Vector3D(2.0f, 3.0f, 4.0f);
+            a = new Vector3D(2.0d, 3.0d, 4.0d);
             expected = max;
             actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
 
             // Case W3: specified value is smaller than min and max value.
-            a = new Vector3D(-2.0f, -3.0f, -4.0f);
+            a = new Vector3D(-2.0d, -3.0d, -4.0d);
             expected = max;
             actual = Vector3D.Clamp(a, min, max);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Clamp did not return the expected value.");
@@ -664,16 +664,16 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DTransformNormalTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
-            m.M41 = 10.0f;
-            m.M42 = 20.0f;
-            m.M43 = 30.0f;
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
+            m.M41 = 10.0d;
+            m.M42 = 20.0d;
+            m.M43 = 30.0d;
 
-            Vector3D expected = new Vector3D(2.19198728f, 1.53349364f, 2.61602545f);
+            Vector3D expected = new Vector3D(2.19198728d, 1.53349364d, 2.61602545d);
             Vector3D actual;
 
             actual = Vector3D.TransformNormal(v, m);
@@ -684,12 +684,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DTransformByQuaternionDTest()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
 
             Matrix4x4D m =
-                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4D.CreateRotationX(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationY(MathHelper.ToRadians(30.0d)) *
+                Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(30.0d));
             QuaternionD q = QuaternionD.CreateFromRotationMatrix(m);
 
             Vector3D expected = Vector3D.Transform(v, m);
@@ -702,7 +702,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DTransformByQuaternionDTest1()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             QuaternionD q = new QuaternionD();
             Vector3D expected = Vector3D.Zero;
 
@@ -715,7 +715,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DTransformByQuaternionDTest2()
         {
-            Vector3D v = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D v = new Vector3D(1.0d, 2.0d, 3.0d);
             QuaternionD q = QuaternionD.Identity;
             Vector3D expected = v;
 
@@ -727,12 +727,12 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DNormalizeTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
             Vector3D expected = new Vector3D(
-                0.26726124191242438468455348087975f,
-                0.53452248382484876936910696175951f,
-                0.80178372573727315405366044263926f);
+                0.26726124191242438468455348087975d,
+                0.53452248382484876936910696175951d,
+                0.80178372573727315405366044263926d);
             Vector3D actual;
 
             actual = Vector3D.Normalize(a);
@@ -744,9 +744,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DNormalizeTest1()
         {
-            Vector3D a = new Vector3D(1.0f, 0.0f, 0.0f);
+            Vector3D a = new Vector3D(1.0d, 0.0d, 0.0d);
 
-            Vector3D expected = new Vector3D(1.0f, 0.0f, 0.0f);
+            Vector3D expected = new Vector3D(1.0d, 0.0d, 0.0d);
             Vector3D actual = Vector3D.Normalize(a);
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.Normalize did not return the expected value.");
         }
@@ -756,20 +756,20 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DNormalizeTest2()
         {
-            Vector3D a = new Vector3D(0.0f, 0.0f, 0.0f);
+            Vector3D a = new Vector3D(0.0d, 0.0d, 0.0d);
 
-            Vector3D expected = new Vector3D(0.0f, 0.0f, 0.0f);
+            Vector3D expected = new Vector3D(0.0d, 0.0d, 0.0d);
             Vector3D actual = Vector3D.Normalize(a);
-            Assert.True(float.IsNaN(actual.X) && float.IsNaN(actual.Y) && float.IsNaN(actual.Z), "Vector3Df.Normalize did not return the expected value.");
+            Assert.True(double.IsNaN(actual.X) && double.IsNaN(actual.Y) && double.IsNaN(actual.Z), "Vector3Df.Normalize did not return the expected value.");
         }
 
         // A test for operator - (Vector3Df)
         [Fact]
         public void Vector3DUnaryNegationTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            Vector3D expected = new Vector3D(-1.0f, -2.0f, -3.0f);
+            Vector3D expected = new Vector3D(-1.0d, -2.0d, -3.0d);
             Vector3D actual;
 
             actual = -a;
@@ -780,25 +780,25 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DUnaryNegationTest1()
         {
-            Vector3D a = -new Vector3D(float.NaN, float.PositiveInfinity, float.NegativeInfinity);
-            Vector3D b = -new Vector3D(0.0f, 0.0f, 0.0f);
-            Assert.Equal(float.NaN, a.X);
-            Assert.Equal(float.NegativeInfinity, a.Y);
-            Assert.Equal(float.PositiveInfinity, a.Z);
-            Assert.Equal(0.0f, b.X);
-            Assert.Equal(0.0f, b.Y);
-            Assert.Equal(0.0f, b.Z);
+            Vector3D a = -new Vector3D(double.NaN, double.PositiveInfinity, double.NegativeInfinity);
+            Vector3D b = -new Vector3D(0.0d, 0.0d, 0.0d);
+            Assert.Equal(double.NaN, a.X);
+            Assert.Equal(double.NegativeInfinity, a.Y);
+            Assert.Equal(double.PositiveInfinity, a.Z);
+            Assert.Equal(0.0d, b.X);
+            Assert.Equal(0.0d, b.Y);
+            Assert.Equal(0.0d, b.Z);
         }
 
         // A test for operator - (Vector3Df, Vector3Df)
         [Fact]
         public void Vector3DSubtractionTest()
         {
-            Vector3D a = new Vector3D(4.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(4.0d, 2.0d, 3.0d);
 
-            Vector3D b = new Vector3D(1.0f, 5.0f, 7.0f);
+            Vector3D b = new Vector3D(1.0d, 5.0d, 7.0d);
 
-            Vector3D expected = new Vector3D(3.0f, -3.0f, -4.0f);
+            Vector3D expected = new Vector3D(3.0d, -3.0d, -4.0d);
             Vector3D actual;
 
             actual = a - b;
@@ -806,15 +806,15 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.operator - did not return the expected value.");
         }
 
-        // A test for operator * (Vector3Df, float)
+        // A test for operator * (Vector3Df, double)
         [Fact]
         public void Vector3DMultiplyOperatorTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            float factor = 2.0f;
+            double factor = 2.0d;
 
-            Vector3D expected = new Vector3D(2.0f, 4.0f, 6.0f);
+            Vector3D expected = new Vector3D(2.0d, 4.0d, 6.0d);
             Vector3D actual;
 
             actual = a * factor;
@@ -822,15 +822,15 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.operator * did not return the expected value.");
         }
 
-        // A test for operator * (float, Vector3Df)
+        // A test for operator * (double, Vector3Df)
         [Fact]
         public void Vector3DMultiplyOperatorTest2()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            const float factor = 2.0f;
+            const double factor = 2.0d;
 
-            Vector3D expected = new Vector3D(2.0f, 4.0f, 6.0f);
+            Vector3D expected = new Vector3D(2.0d, 4.0d, 6.0d);
             Vector3D actual;
 
             actual = factor * a;
@@ -842,11 +842,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DMultiplyOperatorTest3()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            Vector3D expected = new Vector3D(4.0f, 10.0f, 18.0f);
+            Vector3D expected = new Vector3D(4.0d, 10.0d, 18.0d);
             Vector3D actual;
 
             actual = a * b;
@@ -854,15 +854,15 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.operator * did not return the expected value.");
         }
 
-        // A test for operator / (Vector3Df, float)
+        // A test for operator / (Vector3Df, double)
         [Fact]
         public void Vector3DDivisionTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            float div = 2.0f;
+            double div = 2.0d;
 
-            Vector3D expected = new Vector3D(0.5f, 1.0f, 1.5f);
+            Vector3D expected = new Vector3D(0.5d, 1.0d, 1.5d);
             Vector3D actual;
 
             actual = a / div;
@@ -874,11 +874,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDivisionTest1()
         {
-            Vector3D a = new Vector3D(4.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(4.0d, 2.0d, 3.0d);
 
-            Vector3D b = new Vector3D(1.0f, 5.0f, 6.0f);
+            Vector3D b = new Vector3D(1.0d, 5.0d, 6.0d);
 
-            Vector3D expected = new Vector3D(4.0f, 0.4f, 0.5f);
+            Vector3D expected = new Vector3D(4.0d, 0.4d, 0.5d);
             Vector3D actual;
 
             actual = a / b;
@@ -891,15 +891,15 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDivisionTest2()
         {
-            Vector3D a = new Vector3D(-2.0f, 3.0f, float.MaxValue);
+            Vector3D a = new Vector3D(-2.0d, 3.0d, double.MaxValue);
 
-            float div = 0.0f;
+            double div = 0.0d;
 
             Vector3D actual = a / div;
 
-            Assert.True(float.IsNegativeInfinity(actual.X), "Vector3Df.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Y), "Vector3Df.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Z), "Vector3Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.X), "Vector3Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.Y), "Vector3Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.Z), "Vector3Df.operator / did not return the expected value.");
         }
 
         // A test for operator / (Vector3Df, Vector3Df)
@@ -907,24 +907,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDivisionTest3()
         {
-            Vector3D a = new Vector3D(0.047f, -3.0f, float.NegativeInfinity);
+            Vector3D a = new Vector3D(0.047d, -3.0d, double.NegativeInfinity);
             Vector3D b = new Vector3D();
 
             Vector3D actual = a / b;
 
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector3Df.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector3Df.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Z), "Vector3Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.X), "Vector3Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector3Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Z), "Vector3Df.operator / did not return the expected value.");
         }
 
         // A test for operator + (Vector3Df, Vector3Df)
         [Fact]
         public void Vector3DAdditionTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(4.0f, 5.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(4.0d, 5.0d, 6.0d);
 
-            Vector3D expected = new Vector3D(5.0f, 7.0f, 9.0f);
+            Vector3D expected = new Vector3D(5.0d, 7.0d, 9.0d);
             Vector3D actual;
 
             actual = a + b;
@@ -932,25 +932,25 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Vector3Df.operator + did not return the expected value.");
         }
 
-        // A test for Vector3Df (float, float, float)
+        // A test for Vector3Df (double, double, double)
         [Fact]
         public void Vector3DConstructorTest()
         {
-            float x = 1.0f;
-            float y = 2.0f;
-            float z = 3.0f;
+            double x = 1.0d;
+            double y = 2.0d;
+            double z = 3.0d;
 
             Vector3D target = new Vector3D(x, y, z);
             Assert.True(MathHelper.Equal(target.X, x) && MathHelper.Equal(target.Y, y) && MathHelper.Equal(target.Z, z), "Vector3Df.constructor (x,y,z) did not return the expected value.");
         }
 
-        // A test for Vector3Df (Vector2Df, float)
+        // A test for Vector3Df (Vector2Df, double)
         [Fact]
         public void Vector3DConstructorTest1()
         {
-            Vector2D a = new Vector2D(1.0f, 2.0f);
+            Vector2D a = new Vector2D(1.0d, 2.0d);
 
-            float z = 3.0f;
+            double z = 3.0d;
 
             Vector3D target = new Vector3D(a, z);
             Assert.True(MathHelper.Equal(target.X, a.X) && MathHelper.Equal(target.Y, a.Y) && MathHelper.Equal(target.Z, z), "Vector3Df.constructor (Vector2Df,z) did not return the expected value.");
@@ -963,56 +963,56 @@ namespace Invicta.Numerics.Tests
         {
             Vector3D a = new Vector3D();
 
-            Assert.Equal(0.0f, a.X);
-            Assert.Equal(0.0f, a.Y);
-            Assert.Equal(0.0f, a.Z);
+            Assert.Equal(0.0d, a.X);
+            Assert.Equal(0.0d, a.Y);
+            Assert.Equal(0.0d, a.Z);
         }
 
-        // A test for Vector2Df (float, float)
-        // Constructor with special floating values
+        // A test for Vector2Df (double, double)
+        // Constructor with special doubleing values
         [Fact]
         public void Vector3DConstructorTest4()
         {
-            Vector3D target = new Vector3D(float.NaN, float.MaxValue, float.PositiveInfinity);
+            Vector3D target = new Vector3D(double.NaN, double.MaxValue, double.PositiveInfinity);
 
-            Assert.True(float.IsNaN(target.X), "Vector3Df.constructor (Vector3Df) did not return the expected value.");
-            Assert.True(float.Equals(float.MaxValue, target.Y), "Vector3Df.constructor (Vector3Df) did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(target.Z), "Vector3Df.constructor (Vector3Df) did not return the expected value.");
+            Assert.True(double.IsNaN(target.X), "Vector3Df.constructor (Vector3Df) did not return the expected value.");
+            Assert.True(double.Equals(double.MaxValue, target.Y), "Vector3Df.constructor (Vector3Df) did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(target.Z), "Vector3Df.constructor (Vector3Df) did not return the expected value.");
         }
 
-        // A test for Vector3Df (ReadOnlySpan<float>)
+        // A test for Vector3Df (ReadOnlySpan<double>)
         [Fact]
         public void Vector3DConstructorTest6()
         {
-            float value = 1.0f;
+            double value = 1.0d;
             Vector3D target = new Vector3D(new[] { value, value, value });
             Vector3D expected = new Vector3D(value);
 
             Assert.Equal(expected, target);
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Vector3D(new float[2]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Vector3D(new double[2]));
         }
 
         // A test for Add (Vector3Df, Vector3Df)
         [Fact]
         public void Vector3DAddTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(5.0f, 6.0f, 7.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(5.0d, 6.0d, 7.0d);
 
-            Vector3D expected = new Vector3D(6.0f, 8.0f, 10.0f);
+            Vector3D expected = new Vector3D(6.0d, 8.0d, 10.0d);
             Vector3D actual;
 
             actual = Vector3D.Add(a, b);
             Assert.Equal(expected, actual);
         }
 
-        // A test for Divide (Vector3Df, float)
+        // A test for Divide (Vector3Df, double)
         [Fact]
         public void Vector3DDivideTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            float div = 2.0f;
-            Vector3D expected = new Vector3D(0.5f, 1.0f, 1.5f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            double div = 2.0d;
+            Vector3D expected = new Vector3D(0.5d, 1.0d, 1.5d);
             Vector3D actual;
             actual = Vector3D.Divide(a, div);
             Assert.Equal(expected, actual);
@@ -1022,10 +1022,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DDivideTest1()
         {
-            Vector3D a = new Vector3D(1.0f, 6.0f, 7.0f);
-            Vector3D b = new Vector3D(5.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 6.0d, 7.0d);
+            Vector3D b = new Vector3D(5.0d, 2.0d, 3.0d);
 
-            Vector3D expected = new Vector3D(1.0f / 5.0f, 6.0f / 2.0f, 7.0f / 3.0f);
+            Vector3D expected = new Vector3D(1.0d / 5.0d, 6.0d / 2.0d, 7.0d / 3.0d);
             Vector3D actual;
 
             actual = Vector3D.Divide(a, b);
@@ -1036,8 +1036,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DEqualsTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(1.0d, 2.0d, 3.0d);
 
             // case 1: compare between same values
             object obj = b;
@@ -1047,7 +1047,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             obj = b;
             expected = false;
             actual = a.Equals(obj);
@@ -1066,24 +1066,24 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Vector3Df, float)
+        // A test for Multiply (Vector3Df, double)
         [Fact]
         public void Vector3DMultiplyTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            const float factor = 2.0f;
-            Vector3D expected = new Vector3D(2.0f, 4.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            const double factor = 2.0d;
+            Vector3D expected = new Vector3D(2.0d, 4.0d, 6.0d);
             Vector3D actual = Vector3D.Multiply(a, factor);
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (float, Vector3Df)
+        // A test for Multiply (double, Vector3Df)
         [Fact]
         public static void Vector3DMultiplyTest2()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            const float factor = 2.0f;
-            Vector3D expected = new Vector3D(2.0f, 4.0f, 6.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            const double factor = 2.0d;
+            Vector3D expected = new Vector3D(2.0d, 4.0d, 6.0d);
             Vector3D actual = Vector3D.Multiply(factor, a);
             Assert.Equal(expected, actual);
         }
@@ -1092,10 +1092,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DMultiplyTest3()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(5.0f, 6.0f, 7.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(5.0d, 6.0d, 7.0d);
 
-            Vector3D expected = new Vector3D(5.0f, 12.0f, 21.0f);
+            Vector3D expected = new Vector3D(5.0d, 12.0d, 21.0d);
             Vector3D actual;
 
             actual = Vector3D.Multiply(a, b);
@@ -1106,9 +1106,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DNegateTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
 
-            Vector3D expected = new Vector3D(-1.0f, -2.0f, -3.0f);
+            Vector3D expected = new Vector3D(-1.0d, -2.0d, -3.0d);
             Vector3D actual;
 
             actual = Vector3D.Negate(a);
@@ -1119,8 +1119,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DInequalityTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(1.0d, 2.0d, 3.0d);
 
             // case 1: compare between same values
             bool expected = false;
@@ -1128,7 +1128,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = true;
             actual = a != b;
             Assert.Equal(expected, actual);
@@ -1138,8 +1138,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DEqualityTest()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(1.0d, 2.0d, 3.0d);
 
             // case 1: compare between same values
             bool expected = true;
@@ -1147,7 +1147,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = false;
             actual = a == b;
             Assert.Equal(expected, actual);
@@ -1157,10 +1157,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DSubtractTest()
         {
-            Vector3D a = new Vector3D(1.0f, 6.0f, 3.0f);
-            Vector3D b = new Vector3D(5.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 6.0d, 3.0d);
+            Vector3D b = new Vector3D(5.0d, 2.0d, 3.0d);
 
-            Vector3D expected = new Vector3D(-4.0f, 4.0f, 0.0f);
+            Vector3D expected = new Vector3D(-4.0d, 4.0d, 0.0d);
             Vector3D actual;
 
             actual = Vector3D.Subtract(a, b);
@@ -1171,7 +1171,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DOneTest()
         {
-            Vector3D val = new Vector3D(1.0f, 1.0f, 1.0f);
+            Vector3D val = new Vector3D(1.0d, 1.0d, 1.0d);
             Assert.Equal(val, Vector3D.One);
         }
 
@@ -1179,7 +1179,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DUnitXTest()
         {
-            Vector3D val = new Vector3D(1.0f, 0.0f, 0.0f);
+            Vector3D val = new Vector3D(1.0d, 0.0d, 0.0d);
             Assert.Equal(val, Vector3D.UnitX);
         }
 
@@ -1187,7 +1187,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DUnitYTest()
         {
-            Vector3D val = new Vector3D(0.0f, 1.0f, 0.0f);
+            Vector3D val = new Vector3D(0.0d, 1.0d, 0.0d);
             Assert.Equal(val, Vector3D.UnitY);
         }
 
@@ -1195,7 +1195,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DUnitZTest()
         {
-            Vector3D val = new Vector3D(0.0f, 0.0f, 1.0f);
+            Vector3D val = new Vector3D(0.0d, 0.0d, 1.0d);
             Assert.Equal(val, Vector3D.UnitZ);
         }
 
@@ -1203,7 +1203,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DZeroTest()
         {
-            Vector3D val = new Vector3D(0.0f, 0.0f, 0.0f);
+            Vector3D val = new Vector3D(0.0d, 0.0d, 0.0d);
             Assert.Equal(val, Vector3D.Zero);
         }
 
@@ -1211,8 +1211,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DEqualsTest1()
         {
-            Vector3D a = new Vector3D(1.0f, 2.0f, 3.0f);
-            Vector3D b = new Vector3D(1.0f, 2.0f, 3.0f);
+            Vector3D a = new Vector3D(1.0d, 2.0d, 3.0d);
+            Vector3D b = new Vector3D(1.0d, 2.0d, 3.0d);
 
             // case 1: compare between same values
             bool expected = true;
@@ -1220,23 +1220,23 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // case 2: compare between different values
-            b.X = 10.0f;
+            b.X = 10.0d;
             expected = false;
             actual = a.Equals(b);
             Assert.Equal(expected, actual);
         }
 
-        // A test for Vector3Df (float)
+        // A test for Vector3Df (double)
         [Fact]
         public void Vector3DConstructorTest5()
         {
-            float value = 1.0f;
+            double value = 1.0d;
             Vector3D target = new Vector3D(value);
 
             Vector3D expected = new Vector3D(value, value, value);
             Assert.Equal(expected, target);
 
-            value = 2.0f;
+            value = 2.0d;
             target = new Vector3D(value);
             expected = new Vector3D(value, value, value);
             Assert.Equal(expected, target);
@@ -1246,9 +1246,9 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DEqualsNaNTest()
         {
-            Vector3D a = new Vector3D(float.NaN, 0, 0);
-            Vector3D b = new Vector3D(0, float.NaN, 0);
-            Vector3D c = new Vector3D(0, 0, float.NaN);
+            Vector3D a = new Vector3D(double.NaN, 0, 0);
+            Vector3D b = new Vector3D(0, double.NaN, 0);
+            Vector3D c = new Vector3D(0, 0, double.NaN);
 
             Assert.False(a == Vector3D.Zero);
             Assert.False(b == Vector3D.Zero);
@@ -1270,26 +1270,26 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DAbsTest()
         {
-            Vector3D v1 = new Vector3D(-2.5f, 2.0f, 0.5f);
-            Vector3D v3 = Vector3D.Abs(new Vector3D(0.0f, float.NegativeInfinity, float.NaN));
+            Vector3D v1 = new Vector3D(-2.5d, 2.0d, 0.5d);
+            Vector3D v3 = Vector3D.Abs(new Vector3D(0.0d, double.NegativeInfinity, double.NaN));
             Vector3D v = Vector3D.Abs(v1);
-            Assert.Equal(2.5f, v.X);
-            Assert.Equal(2.0f, v.Y);
-            Assert.Equal(0.5f, v.Z);
-            Assert.Equal(0.0f, v3.X);
-            Assert.Equal(float.PositiveInfinity, v3.Y);
-            Assert.Equal(float.NaN, v3.Z);
+            Assert.Equal(2.5d, v.X);
+            Assert.Equal(2.0d, v.Y);
+            Assert.Equal(0.5d, v.Z);
+            Assert.Equal(0.0d, v3.X);
+            Assert.Equal(double.PositiveInfinity, v3.Y);
+            Assert.Equal(double.NaN, v3.Z);
         }
 
         [Fact]
         public void Vector3DSqrtTest()
         {
-            Vector3D a = new Vector3D(-2.5f, 2.0f, 0.5f);
-            Vector3D b = new Vector3D(5.5f, 4.5f, 16.5f);
+            Vector3D a = new Vector3D(-2.5d, 2.0d, 0.5d);
+            Vector3D b = new Vector3D(5.5d, 4.5d, 16.5d);
             Assert.Equal(2, (int)Vector3D.SquareRoot(b).X);
             Assert.Equal(2, (int)Vector3D.SquareRoot(b).Y);
             Assert.Equal(4, (int)Vector3D.SquareRoot(b).Z);
-            Assert.Equal(float.NaN, Vector3D.SquareRoot(a).X);
+            Assert.Equal(double.NaN, Vector3D.SquareRoot(a).X);
         }
 
         // A test to make sure these types are blittable directly into GPU buffer memory layouts
@@ -1313,7 +1313,7 @@ namespace Invicta.Numerics.Tests
         struct Vector3DPlusFloat
         {
             private Vector3D _v;
-            private float _f;
+            private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1326,24 +1326,24 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void SetFieldsTest()
         {
-            Vector3D v3 = new Vector3D(4f, 5f, 6f);
-            v3.X = 1.0f;
-            v3.Y = 2.0f;
-            v3.Z = 3.0f;
-            Assert.Equal(1.0f, v3.X);
-            Assert.Equal(2.0f, v3.Y);
-            Assert.Equal(3.0f, v3.Z);
+            Vector3D v3 = new Vector3D(4d, 5d, 6d);
+            v3.X = 1.0d;
+            v3.Y = 2.0d;
+            v3.Z = 3.0d;
+            Assert.Equal(1.0d, v3.X);
+            Assert.Equal(2.0d, v3.Y);
+            Assert.Equal(3.0d, v3.Z);
             Vector3D v4 = v3;
-            v4.Y = 0.5f;
-            v4.Z = 2.2f;
-            Assert.Equal(1.0f, v4.X);
-            Assert.Equal(0.5f, v4.Y);
-            Assert.Equal(2.2f, v4.Z);
-            Assert.Equal(2.0f, v3.Y);
+            v4.Y = 0.5d;
+            v4.Z = 2.2d;
+            Assert.Equal(1.0d, v4.X);
+            Assert.Equal(0.5d, v4.Y);
+            Assert.Equal(2.2d, v4.Z);
+            Assert.Equal(2.0d, v3.Y);
 
-            Vector3D before = new Vector3D(1f, 2f, 3f);
+            Vector3D before = new Vector3D(1d, 2d, 3d);
             Vector3D after = before;
-            after.X = 500.0f;
+            after.X = 500.0d;
             Assert.NotEqual(before, after);
         }
 
@@ -1351,12 +1351,12 @@ namespace Invicta.Numerics.Tests
         public void EmbeddedVectorSetFields()
         {
             EmbeddedVectorObject evo = new EmbeddedVectorObject();
-            evo.FieldVector.X = 5.0f;
-            evo.FieldVector.Y = 5.0f;
-            evo.FieldVector.Z = 5.0f;
-            Assert.Equal(5.0f, evo.FieldVector.X);
-            Assert.Equal(5.0f, evo.FieldVector.Y);
-            Assert.Equal(5.0f, evo.FieldVector.Z);
+            evo.FieldVector.X = 5.0d;
+            evo.FieldVector.Y = 5.0d;
+            evo.FieldVector.Z = 5.0d;
+            Assert.Equal(5.0d, evo.FieldVector.X);
+            Assert.Equal(5.0d, evo.FieldVector.Y);
+            Assert.Equal(5.0d, evo.FieldVector.Z);
         }
 
         private class EmbeddedVectorObject
@@ -1366,7 +1366,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.CosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CosSingleTest(float value, float expectedResult, float variance)
+        public void CosSingleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Cos(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
@@ -1374,7 +1374,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.ExpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ExpSingleTest(float value, float expectedResult, float variance)
+        public void ExpSingleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Exp(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
@@ -1382,7 +1382,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.LogSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LogSingleTest(float value, float expectedResult, float variance)
+        public void LogSingleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Log(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
@@ -1390,7 +1390,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.Log2Single), MemberType = typeof(GenericMathTestMemberData))]
-        public void Log2SingleTest(float value, float expectedResult, float variance)
+        public void Log2SingleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Log2(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
@@ -1398,15 +1398,15 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.FusedMultiplyAddSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void FusedMultiplyAddSingleTest(float left, float right, float addend, float expectedResult)
+        public void FusedMultiplyAddSingleTest(double left, double right, double addend, double expectedResult)
         {
             AssertEqual(Vector3D.Create(expectedResult), Vector3D.FusedMultiplyAdd(Vector3D.Create(left), Vector3D.Create(right), Vector3D.Create(addend)), Vector3D.Zero);
-            AssertEqual(Vector3D.Create(float.MultiplyAddEstimate(left, right, addend)), Vector3D.MultiplyAddEstimate(Vector3D.Create(left), Vector3D.Create(right), Vector3D.Create(addend)), Vector3D.Zero);
+            AssertEqual(Vector3D.Create(double.MultiplyAddEstimate(left, right, addend)), Vector3D.MultiplyAddEstimate(Vector3D.Create(left), Vector3D.Create(right), Vector3D.Create(addend)), Vector3D.Zero);
         }
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.ClampSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void ClampSingleTest(float x, float min, float max, float expectedResult)
+        public void ClampSingleTest(double x, double min, double max, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Clamp(Vector3D.Create(x), Vector3D.Create(min), Vector3D.Create(max));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1414,7 +1414,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.CopySignSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void CopySignSingleTest(float x, float y, float expectedResult)
+        public void CopySignSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.CopySign(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1422,7 +1422,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.DegreesToRadiansSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void DegreesToRadiansSingleTest(float value, float expectedResult, float variance)
+        public void DegreesToRadiansSingleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector3D.Create(-expectedResult), Vector3D.DegreesToRadians(Vector3D.Create(-value)), Vector3D.Create(variance));
             AssertEqual(Vector3D.Create(+expectedResult), Vector3D.DegreesToRadians(Vector3D.Create(+value)), Vector3D.Create(variance));
@@ -1430,7 +1430,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.HypotSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void HypotSingleTest(float x, float y, float expectedResult, float variance)
+        public void HypotSingleTest(double x, double y, double expectedResult, double variance)
         {
             AssertEqual(Vector3D.Create(expectedResult), Vector3D.Hypot(Vector3D.Create(-x), Vector3D.Create(-y)), Vector3D.Create(variance));
             AssertEqual(Vector3D.Create(expectedResult), Vector3D.Hypot(Vector3D.Create(-x), Vector3D.Create(+y)), Vector3D.Create(variance));
@@ -1445,15 +1445,15 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.LerpSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void LerpSingleTest(float x, float y, float amount, float expectedResult)
+        public void LerpSingleTest(double x, double y, double amount, double expectedResult)
         {
             AssertEqual(Vector3D.Create(+expectedResult), Vector3D.Lerp(Vector3D.Create(+x), Vector3D.Create(+y), Vector3D.Create(amount)), Vector3D.Zero);
-            AssertEqual(Vector3D.Create((expectedResult == 0.0f) ? expectedResult : -expectedResult), Vector3D.Lerp(Vector3D.Create(-x), Vector3D.Create(-y), Vector3D.Create(amount)), Vector3D.Zero);
+            AssertEqual(Vector3D.Create((expectedResult == 0.0d) ? expectedResult : -expectedResult), Vector3D.Lerp(Vector3D.Create(-x), Vector3D.Create(-y), Vector3D.Create(amount)), Vector3D.Zero);
         }
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxSingleTest(float x, float y, float expectedResult)
+        public void MaxSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Max(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1461,7 +1461,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeSingleTest(float x, float y, float expectedResult)
+        public void MaxMagnitudeSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MaxMagnitude(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1469,7 +1469,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxMagnitudeNumberSingleTest(float x, float y, float expectedResult)
+        public void MaxMagnitudeNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MaxMagnitudeNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1477,7 +1477,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MaxNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MaxNumberSingleTest(float x, float y, float expectedResult)
+        public void MaxNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MaxNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1485,7 +1485,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinSingleTest(float x, float y, float expectedResult)
+        public void MinSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Min(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1493,7 +1493,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeSingleTest(float x, float y, float expectedResult)
+        public void MinMagnitudeSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MinMagnitude(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1501,7 +1501,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinMagnitudeNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinMagnitudeNumberSingleTest(float x, float y, float expectedResult)
+        public void MinMagnitudeNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MinMagnitudeNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1509,7 +1509,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.MinNumberSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void MinNumberSingleTest(float x, float y, float expectedResult)
+        public void MinNumberSingleTest(double x, double y, double expectedResult)
         {
             Vector3D actualResult = Vector3D.MinNumber(Vector3D.Create(x), Vector3D.Create(y));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1517,7 +1517,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RadiansToDegreesSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RadiansToDegreesSingleTest(float value, float expectedResult, float variance)
+        public void RadiansToDegreesSingleTest(double value, double expectedResult, double variance)
         {
             AssertEqual(Vector3D.Create(-expectedResult), Vector3D.RadiansToDegrees(Vector3D.Create(-value)), Vector3D.Create(variance));
             AssertEqual(Vector3D.Create(+expectedResult), Vector3D.RadiansToDegrees(Vector3D.Create(+value)), Vector3D.Create(variance));
@@ -1525,7 +1525,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RoundSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundSingleTest(float value, float expectedResult)
+        public void RoundSingleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Round(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1533,7 +1533,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RoundAwayFromZeroSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundAwayFromZeroSingleTest(float value, float expectedResult)
+        public void RoundAwayFromZeroSingleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Round(Vector3D.Create(value), MidpointRounding.AwayFromZero);
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1541,7 +1541,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.RoundToEvenSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void RoundToEvenSingleTest(float value, float expectedResult)
+        public void RoundToEvenSingleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Round(Vector3D.Create(value), MidpointRounding.ToEven);
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1549,7 +1549,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.SinSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinSingleTest(float value, float expectedResult, float variance)
+        public void SinSingleTest(double value, double expectedResult, double variance)
         {
             Vector3D actualResult = Vector3D.Sin(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Create(variance));
@@ -1557,7 +1557,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.SinCosSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void SinCosSingleTest(float value, float expectedResultSin, float expectedResultCos, float allowedVarianceSin, float allowedVarianceCos)
+        public void SinCosSingleTest(double value, double expectedResultSin, double expectedResultCos, double allowedVarianceSin, double allowedVarianceCos)
         {
             (Vector3D resultSin, Vector3D resultCos) = Vector3D.SinCos(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResultSin), resultSin, Vector3D.Create(allowedVarianceSin));
@@ -1566,7 +1566,7 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.TruncateSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void TruncateSingleTest(float value, float expectedResult)
+        public void TruncateSingleTest(double value, double expectedResult)
         {
             Vector3D actualResult = Vector3D.Truncate(Vector3D.Create(value));
             AssertEqual(Vector3D.Create(expectedResult), actualResult, Vector3D.Zero);
@@ -1578,7 +1578,7 @@ namespace Invicta.Numerics.Tests
             Test(3, 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value1, float value2)
+            void Test(double value1, double value2)
             {
                 var input1 = Vector3D.Create(value1);
                 var input2 = Vector3D.Create(value2);
@@ -1618,7 +1618,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value)
+            void Test(double value)
             {
                 var input = Vector3D.Create(value);
 
@@ -1634,7 +1634,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1), 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float allBitsSet, float value2)
+            void Test(double allBitsSet, double value2)
             {
                 var input1 = Vector3D.Create(allBitsSet);
                 var input2 = Vector3D.Create(value2);
@@ -1662,7 +1662,7 @@ namespace Invicta.Numerics.Tests
             Test(3, 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value1, float value2)
+            void Test(double value1, double value2)
             {
                 var input1 = Vector3D.Create(value1);
                 var input2 = Vector3D.Create(value2);
@@ -1702,7 +1702,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float value)
+            void Test(double value)
             {
                 var input = Vector3D.Create(value);
 
@@ -1718,7 +1718,7 @@ namespace Invicta.Numerics.Tests
             Test(BitConverter.Int32BitsToSingle(-1), 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            void Test(float allBitsSet, float value2)
+            void Test(double allBitsSet, double value2)
             {
                 var input1 = Vector3D.Create(allBitsSet);
                 var input2 = Vector3D.Create(value2);
@@ -1742,55 +1742,55 @@ namespace Invicta.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsEvenIntegerTest(float value) => Assert.Equal(float.IsEvenInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsEvenInteger(Vector3D.Create(value)));
+        public void IsEvenIntegerTest(double value) => Assert.Equal(double.IsEvenInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsEvenInteger(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsFiniteTest(float value) => Assert.Equal(float.IsFinite(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsFinite(Vector3D.Create(value)));
+        public void IsFiniteTest(double value) => Assert.Equal(double.IsFinite(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsFinite(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsInfinityTest(float value) => Assert.Equal(float.IsInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsInfinity(Vector3D.Create(value)));
+        public void IsInfinityTest(double value) => Assert.Equal(double.IsInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsInfinity(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsIntegerTest(float value) => Assert.Equal(float.IsInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsInteger(Vector3D.Create(value)));
+        public void IsIntegerTest(double value) => Assert.Equal(double.IsInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsInteger(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNaNTest(float value) => Assert.Equal(float.IsNaN(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNaN(Vector3D.Create(value)));
+        public void IsNaNTest(double value) => Assert.Equal(double.IsNaN(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNaN(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNegativeTest(float value) => Assert.Equal(float.IsNegative(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNegative(Vector3D.Create(value)));
+        public void IsNegativeTest(double value) => Assert.Equal(double.IsNegative(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNegative(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNegativeInfinityTest(float value) => Assert.Equal(float.IsNegativeInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNegativeInfinity(Vector3D.Create(value)));
+        public void IsNegativeInfinityTest(double value) => Assert.Equal(double.IsNegativeInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNegativeInfinity(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsNormalTest(float value) => Assert.Equal(float.IsNormal(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNormal(Vector3D.Create(value)));
+        public void IsNormalTest(double value) => Assert.Equal(double.IsNormal(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsNormal(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsOddIntegerTest(float value) => Assert.Equal(float.IsOddInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsOddInteger(Vector3D.Create(value)));
+        public void IsOddIntegerTest(double value) => Assert.Equal(double.IsOddInteger(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsOddInteger(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsPositiveTest(float value) => Assert.Equal(float.IsPositive(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsPositive(Vector3D.Create(value)));
+        public void IsPositiveTest(double value) => Assert.Equal(double.IsPositive(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsPositive(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsPositiveInfinityTest(float value) => Assert.Equal(float.IsPositiveInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsPositiveInfinity(Vector3D.Create(value)));
+        public void IsPositiveInfinityTest(double value) => Assert.Equal(double.IsPositiveInfinity(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsPositiveInfinity(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsSubnormalTest(float value) => Assert.Equal(float.IsSubnormal(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsSubnormal(Vector3D.Create(value)));
+        public void IsSubnormalTest(double value) => Assert.Equal(double.IsSubnormal(value) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsSubnormal(Vector3D.Create(value)));
 
         [Theory]
         [MemberData(nameof(GenericMathTestMemberData.IsTestSingle), MemberType = typeof(GenericMathTestMemberData))]
-        public void IsZeroSingleTest(float value) => Assert.Equal((value == 0) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsZero(Vector3D.Create(value)));
+        public void IsZeroSingleTest(double value) => Assert.Equal((value == 0) ? Vector3D.AllBitsSet : Vector3D.Zero, Vector3D.IsZero(Vector3D.Create(value)));
 
         [Fact]
         public void AllBitsSetTest()
@@ -1815,18 +1815,18 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(+0.0f, +0.0f, +0.0f, 0b000)]
-        [InlineData(-0.0f, +1.0f, -0.0f, 0b101)]
-        [InlineData(-0.0f, -0.0f, -0.0f, 0b111)]
-        public void ExtractMostSignificantBitsTest(float x, float y, float z, uint expectedResult)
+        [InlineData(+0.0d, +0.0d, +0.0d, 0b000)]
+        [InlineData(-0.0d, +1.0d, -0.0d, 0b101)]
+        [InlineData(-0.0d, -0.0d, -0.0d, 0b111)]
+        public void ExtractMostSignificantBitsTest(double x, double y, double z, uint expectedResult)
         {
             Assert.Equal(expectedResult, Vector3D.Create(x, y, z).ExtractMostSignificantBits());
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f)]
-        public void GetElementTest(float x, float y, float z)
+        [InlineData(1.0d, 2.0d, 3.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d)]
+        public void GetElementTest(double x, double y, double z)
         {
             Assert.Equal(x, Vector3D.Create(x, y, z).GetElement(0));
             Assert.Equal(y, Vector3D.Create(x, y, z).GetElement(1));
@@ -1834,34 +1834,34 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f)]
-        public void ShuffleTest(float x, float y, float z)
+        [InlineData(1.0d, 2.0d, 3.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d)]
+        public void ShuffleTest(double x, double y, double z)
         {
             Assert.Equal(Vector3D.Create(z, y, x), Vector3D.Shuffle(Vector3D.Create(x, y, z), 2, 1, 0));
             Assert.Equal(Vector3D.Create(y, x, z), Vector3D.Shuffle(Vector3D.Create(x, y, z), 1, 0, 2));
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f, 6.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f, 18.0f)]
-        public void SumTest(float x, float y, float z, float expectedResult)
+        [InlineData(1.0d, 2.0d, 3.0d, 6.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d, 18.0d)]
+        public void SumTest(double x, double y, double z, double expectedResult)
         {
             Assert.Equal(expectedResult, Vector3D.Sum(Vector3D.Create(x, y, z)));
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f)]
-        public void ToScalarTest(float x, float y, float z)
+        [InlineData(1.0d, 2.0d, 3.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d)]
+        public void ToScalarTest(double x, double y, double z)
         {
             Assert.Equal(x, Vector3D.Create(x, y, z).ToScalar());
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f)]
-        public void WithElementTest(float x, float y, float z)
+        [InlineData(1.0d, 2.0d, 3.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d)]
+        public void WithElementTest(double x, double y, double z)
         {
             var vector = Vector3D.Create(10);
 
@@ -1889,9 +1889,9 @@ namespace Invicta.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(1.0f, 2.0f, 3.0f)]
-        [InlineData(5.0f, 6.0f, 7.0f)]
-        public void AsVector2DTest(float x, float y, float z)
+        [InlineData(1.0d, 2.0d, 3.0d)]
+        [InlineData(5.0d, 6.0d, 7.0d)]
+        public void AsVector2DTest(double x, double y, double z)
         {
             var vector = Vector3D.Create(x, y, z).AsVector2D();
 
@@ -1902,15 +1902,15 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void CreateScalarTest()
         {
-            var vector = Vector3D.CreateScalar(float.Pi);
+            var vector = Vector3D.CreateScalar(double.Pi);
 
-            Assert.Equal(float.Pi, vector.X);
+            Assert.Equal(double.Pi, vector.X);
             Assert.Equal(0, vector.Y);
             Assert.Equal(0, vector.Z);
 
-            vector = Vector3D.CreateScalar(float.E);
+            vector = Vector3D.CreateScalar(double.E);
 
-            Assert.Equal(float.E, vector.X);
+            Assert.Equal(double.E, vector.X);
             Assert.Equal(0, vector.Y);
             Assert.Equal(0, vector.Z);
         }
@@ -1918,11 +1918,11 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void CreateScalarUnsafeTest()
         {
-            var vector = Vector3D.CreateScalarUnsafe(float.Pi);
-            Assert.Equal(float.Pi, vector.X);
+            var vector = Vector3D.CreateScalarUnsafe(double.Pi);
+            Assert.Equal(double.Pi, vector.X);
 
-            vector = Vector3D.CreateScalarUnsafe(float.E);
-            Assert.Equal(float.E, vector.X);
+            vector = Vector3D.CreateScalarUnsafe(double.E);
+            Assert.Equal(double.E, vector.X);
         }
     }
 }
