@@ -536,7 +536,7 @@ namespace Invicta.Numerics.Tests
             QuaternionD actual;
 
             actual = QuaternionD.Inverse(a);
-            Assert.Equal(expected, actual);
+            Assert.True(MathHelper.Equal(expected, actual));
         }
 
         // A test for Inverse (QuaternionD)
