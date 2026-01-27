@@ -1615,7 +1615,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void AllAnyNoneTest_AllBitsSet()
         {
-            Test(BitConverter.Int32BitsToSingle(-1));
+            Test(BitConverter.Int64BitsToDouble(-1));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(double value)
@@ -1631,7 +1631,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void AllAnyNoneWhereAllBitsSetTest()
         {
-            Test(BitConverter.Int32BitsToSingle(-1), 2);
+            Test(BitConverter.Int64BitsToDouble(-1), 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(double allBitsSet, double value2)
@@ -1699,7 +1699,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void CountIndexOfLastIndexOfSingleTest_AllBitsSet()
         {
-            Test(BitConverter.Int32BitsToSingle(-1));
+            Test(BitConverter.Int64BitsToDouble(-1));
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(double value)
@@ -1715,7 +1715,7 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void CountIndexOfLastIndexOfWhereAllBitsSetSingleTest()
         {
-            Test(BitConverter.Int32BitsToSingle(-1), 2);
+            Test(BitConverter.Int64BitsToDouble(-1), 2);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             void Test(double allBitsSet, double value2)

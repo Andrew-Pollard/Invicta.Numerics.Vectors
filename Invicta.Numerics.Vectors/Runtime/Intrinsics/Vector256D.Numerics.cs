@@ -25,12 +25,12 @@ namespace Invicta.Runtime.Intrinsics
             /// <inheritdoc cref="Vector4D.AllWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool AllWhereAllBitsSet(Vector2D vector) => vector.AsVector256().AsInt32() == Vector2D.AllBitsSet.AsVector256().AsInt32();
+            internal static bool AllWhereAllBitsSet(Vector2D vector) => vector.AsVector256().AsInt64() == Vector2D.AllBitsSet.AsVector256().AsInt64();
 
             /// <inheritdoc cref="Vector4D.AllWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool AllWhereAllBitsSet(Vector3D vector) => vector.AsVector256().AsInt32() == Vector3D.AllBitsSet.AsVector256().AsInt32();
+            internal static bool AllWhereAllBitsSet(Vector3D vector) => vector.AsVector256().AsInt64() == Vector3D.AllBitsSet.AsVector256().AsInt64();
 
             /// <inheritdoc cref="Vector4D.Any(Vector4D, double)" />
             [Intrinsic]
@@ -45,12 +45,12 @@ namespace Invicta.Runtime.Intrinsics
             /// <inheritdoc cref="Vector4D.AnyWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool AnyWhereAllBitsSet(Vector2D vector) => Vector256.EqualsAny(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet);
+            internal static bool AnyWhereAllBitsSet(Vector2D vector) => Vector256.EqualsAny(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet);
 
             /// <inheritdoc cref="Vector4D.AnyWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool AnyWhereAllBitsSet(Vector3D vector) => Vector256.EqualsAny(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet);
+            internal static bool AnyWhereAllBitsSet(Vector3D vector) => Vector256.EqualsAny(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet);
 
             /// <inheritdoc cref="Vector4D.Count(Vector4D, double)" />
             [Intrinsic]
@@ -65,12 +65,12 @@ namespace Invicta.Runtime.Intrinsics
             /// <inheritdoc cref="Vector4D.CountWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static int CountWhereAllBitsSet(Vector2D vector) => BitOperations.PopCount(Vector256.Equals(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet).ExtractMostSignificantBits());
+            internal static int CountWhereAllBitsSet(Vector2D vector) => BitOperations.PopCount(Vector256.Equals(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet).ExtractMostSignificantBits());
 
             /// <inheritdoc cref="Vector4D.CountWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static int CountWhereAllBitsSet(Vector3D vector) => BitOperations.PopCount(Vector256.Equals(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet).ExtractMostSignificantBits());
+            internal static int CountWhereAllBitsSet(Vector3D vector) => BitOperations.PopCount(Vector256.Equals(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet).ExtractMostSignificantBits());
 
             /// <inheritdoc cref="Vector4D.IndexOf(Vector4D, double)" />
             [Intrinsic]
@@ -95,7 +95,7 @@ namespace Invicta.Runtime.Intrinsics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static int IndexOfWhereAllBitsSet(Vector2D vector)
             {
-                int result = BitOperations.TrailingZeroCount(Vector256.Equals(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet).ExtractMostSignificantBits());
+                int result = BitOperations.TrailingZeroCount(Vector256.Equals(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet).ExtractMostSignificantBits());
                 return (result != 32) ? result : -1;
             }
 
@@ -104,7 +104,7 @@ namespace Invicta.Runtime.Intrinsics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static int IndexOfWhereAllBitsSet(Vector3D vector)
             {
-                int result = BitOperations.TrailingZeroCount(Vector256.Equals(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet).ExtractMostSignificantBits());
+                int result = BitOperations.TrailingZeroCount(Vector256.Equals(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet).ExtractMostSignificantBits());
                 return (result != 32) ? result : -1;
             }
 
@@ -121,12 +121,12 @@ namespace Invicta.Runtime.Intrinsics
             /// <inheritdoc cref="Vector4D.LastIndexOfWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static int LastIndexOfWhereAllBitsSet(Vector2D vector) => 31 - BitOperations.LeadingZeroCount(Vector256.Equals(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet).ExtractMostSignificantBits());
+            internal static int LastIndexOfWhereAllBitsSet(Vector2D vector) => 31 - BitOperations.LeadingZeroCount(Vector256.Equals(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet).ExtractMostSignificantBits());
 
             /// <inheritdoc cref="Vector4D.LastIndexOfWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static int LastIndexOfWhereAllBitsSet(Vector3D vector) => 31 - BitOperations.LeadingZeroCount(Vector256.Equals(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet).ExtractMostSignificantBits());
+            internal static int LastIndexOfWhereAllBitsSet(Vector3D vector) => 31 - BitOperations.LeadingZeroCount(Vector256.Equals(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet).ExtractMostSignificantBits());
 
             /// <inheritdoc cref="Vector4D.None(Vector4D, double)" />
             [Intrinsic]
@@ -141,12 +141,12 @@ namespace Invicta.Runtime.Intrinsics
             /// <inheritdoc cref="Vector4D.NoneWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool NoneWhereAllBitsSet(Vector2D vector) => !Vector256.EqualsAny(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet);
+            internal static bool NoneWhereAllBitsSet(Vector2D vector) => !Vector256.EqualsAny(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet);
 
             /// <inheritdoc cref="Vector4D.NoneWhereAllBitsSet(Vector4D)" />
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static bool NoneWhereAllBitsSet(Vector3D vector) => !Vector256.EqualsAny(vector.AsVector256().AsInt32(), Vector256<int>.AllBitsSet);
+            internal static bool NoneWhereAllBitsSet(Vector3D vector) => !Vector256.EqualsAny(vector.AsVector256().AsInt64(), Vector256<long>.AllBitsSet);
         }
         
         /// <summary>Reinterprets a <see langword="Vector256&lt;Double&gt;" /> as a new <see cref="PlaneD" />.</summary>
