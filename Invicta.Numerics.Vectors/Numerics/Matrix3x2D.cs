@@ -17,7 +17,7 @@ namespace Invicta.Numerics
         private const int ColumnCount = 2;
 
         // In an ideal world, we'd have 3x Vector2D fields. However, Matrix3x2D was shipped with
-        // 6x public float fields and as such we cannot change the "backing" fields without it being
+        // 6x public double fields and as such we cannot change the "backing" fields without it being
         // a breaking change. Likewise, we cannot switch to using something like ExplicitLayout
         // without it pessimizing other parts of the JIT and still preventing things like field promotion.
         //
@@ -28,27 +28,27 @@ namespace Invicta.Numerics
 
         /// <summary>The first element of the first row.</summary>
         /// <remarks>This element exists at index: <c>[0, 0]</c> and is part of row <see cref="X" />.</remarks>
-        public float M11;
+        public double M11;
 
         /// <summary>The second element of the first row.</summary>
         /// <remarks>This element exists at index: <c>[0, 1]</c> and is part of row <see cref="X" />.</remarks>
-        public float M12;
+        public double M12;
 
         /// <summary>The first element of the second row.</summary>
         /// <remarks>This element exists at index: <c>[1, 0]</c> and is part of row <see cref="Y" />.</remarks>
-        public float M21;
+        public double M21;
 
         /// <summary>The second element of the second row.</summary>
         /// <remarks>This element exists at index: <c>[1, 1]</c> and is part of row <see cref="Y" />.</remarks>
-        public float M22;
+        public double M22;
 
         /// <summary>The first element of the third row.</summary>
         /// <remarks>This element exists at index: <c>[2, 0]</c> and is part of row <see cref="Z" />.</remarks>
-        public float M31;
+        public double M31;
 
         /// <summary>The second element of the third row.</summary>
         /// <remarks>This element exists at index: <c>[2, 1]</c> and is part of row <see cref="Z" />.</remarks>
-        public float M32;
+        public double M32;
 
         /// <summary>Initializes a <see cref="Matrix3x2D"/> using the specified elements.</summary>
         /// <param name="m11">The value to assign to <see cref="M11" />.</param>
@@ -57,9 +57,9 @@ namespace Invicta.Numerics
         /// <param name="m22">The value to assign to <see cref="M22" />.</param>
         /// <param name="m31">The value to assign to <see cref="M31" />.</param>
         /// <param name="m32">The value to assign to <see cref="M32" />.</param>
-        public Matrix3x2D(float m11, float m12,
-                         float m21, float m22,
-                         float m31, float m32)
+        public Matrix3x2D(double m11, double m12,
+                         double m21, double m22,
+                         double m31, double m32)
         {
             this = Create(
                 m11, m12,
@@ -233,7 +233,7 @@ namespace Invicta.Numerics
         /// -or-
         /// <paramref name="column" /> was less than zero or greater than or equal to the number of columns (<c>2</c>).
         /// </exception>
-        public float this[int row, int column]
+        public double this[int row, int column]
         {
             // When both row and column are known constants, we can use a switch to
             // get optimal codegen as we are likely coming from register.
@@ -359,13 +359,13 @@ namespace Invicta.Numerics
         public static Matrix3x2D operator *(Matrix3x2D value1, Matrix3x2D value2)
             => (value1.AsImpl() * value2.AsImpl()).AsM3x2();
 
-        /// <summary>Multiplies a matrix by a float to compute the product.</summary>
+        /// <summary>Multiplies a matrix by a double to compute the product.</summary>
         /// <param name="value1">The matrix to scale.</param>
         /// <param name="value2">The scaling value to use.</param>
         /// <returns>The scaled matrix.</returns>
         /// <remarks>The <see cref="Matrix3x2D.op_Multiply" /> method defines the operation of the multiplication operator for <see cref="Matrix3x2D" /> objects.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D operator *(Matrix3x2D value1, float value2)
+        public static Matrix3x2D operator *(Matrix3x2D value1, double value2)
             => (value1.AsImpl() * value2).AsM3x2();
 
         /// <summary>Subtracts each element in a second matrix from its corresponding element in a first matrix.</summary>
@@ -397,7 +397,7 @@ namespace Invicta.Numerics
         /// <param name="value">The value to assign to all 6 elements.</param>
         /// <returns>A <see cref="Matrix3x2D" /> whose 6 elements are set to <paramref name="value" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Create(float value) => Create(Vector2D.Create(value));
+        public static Matrix3x2D Create(double value) => Create(Vector2D.Create(value));
 
         /// <summary>Creates a <see cref="Matrix3x2D" /> whose 3 rows are set to the specified value.</summary>
         /// <param name="value">The value to assign to all 3 rows.</param>
@@ -431,9 +431,9 @@ namespace Invicta.Numerics
         /// <param name="m32">The value to assign to <see cref="M32" />.</param>
         /// <returns>A <see cref="Matrix3x2D" /> whose elements are set to the specified values.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Create(float m11, float m12,
-                                       float m21, float m22,
-                                       float m31, float m32) => Create(
+        public static Matrix3x2D Create(double m11, double m12,
+                                       double m21, double m22,
+                                       double m31, double m32) => Create(
             Vector2D.Create(m11, m12),
             Vector2D.Create(m21, m22),
             Vector2D.Create(m31, m32)
@@ -442,14 +442,14 @@ namespace Invicta.Numerics
         /// <summary>Creates a rotation matrix using the given rotation in radians.</summary>
         /// <param name="radians">The amount of rotation, in radians.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix3x2D CreateRotation(float radians)
+        public static Matrix3x2D CreateRotation(double radians)
             => Impl.CreateRotation(radians).AsM3x2();
 
         /// <summary>Creates a rotation matrix using the specified rotation in radians and a center point.</summary>
         /// <param name="radians">The amount of rotation, in radians.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix3x2D CreateRotation(float radians, Vector2D centerPoint)
+        public static Matrix3x2D CreateRotation(double radians, Vector2D centerPoint)
             => Impl.CreateRotation(radians, centerPoint).AsM3x2();
 
         /// <summary>Creates a scaling matrix from the specified vector scale.</summary>
@@ -462,7 +462,7 @@ namespace Invicta.Numerics
         /// <param name="xScale">The value to scale by on the X axis.</param>
         /// <param name="yScale">The value to scale by on the Y axis.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(float xScale, float yScale)
+        public static Matrix3x2D CreateScale(double xScale, double yScale)
             => Impl.CreateScale(xScale, yScale).AsM3x2();
 
         /// <summary>Creates a scaling matrix that is offset by a given center point.</summary>
@@ -470,7 +470,7 @@ namespace Invicta.Numerics
         /// <param name="yScale">The value to scale by on the Y axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(float xScale, float yScale, Vector2D centerPoint)
+        public static Matrix3x2D CreateScale(double xScale, double yScale, Vector2D centerPoint)
             => Impl.CreateScale(xScale, yScale, centerPoint).AsM3x2();
 
         /// <summary>Creates a scaling matrix from the specified vector scale with an offset from the specified center point.</summary>
@@ -483,21 +483,21 @@ namespace Invicta.Numerics
         /// <summary>Creates a scaling matrix that scales uniformly with the given scale.</summary>
         /// <param name="scale">The uniform scale to use.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(float scale)
+        public static Matrix3x2D CreateScale(double scale)
             => Impl.CreateScale(scale).AsM3x2();
 
         /// <summary>Creates a scaling matrix that scales uniformly with the specified scale with an offset from the specified center.</summary>
         /// <param name="scale">The uniform scale to use.</param>
         /// <param name="centerPoint">The center offset.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix3x2D CreateScale(float scale, Vector2D centerPoint)
+        public static Matrix3x2D CreateScale(double scale, Vector2D centerPoint)
             => Impl.CreateScale(scale, centerPoint).AsM3x2();
 
         /// <summary>Creates a skew matrix from the specified angles in radians.</summary>
         /// <param name="radiansX">The X angle, in radians.</param>
         /// <param name="radiansY">The Y angle, in radians.</param>
         /// <returns>The skew matrix.</returns>
-        public static Matrix3x2D CreateSkew(float radiansX, float radiansY)
+        public static Matrix3x2D CreateSkew(double radiansX, double radiansY)
             => Impl.CreateSkew(radiansX, radiansY).AsM3x2();
 
         /// <summary>Creates a skew matrix from the specified angles in radians and a center point.</summary>
@@ -505,7 +505,7 @@ namespace Invicta.Numerics
         /// <param name="radiansY">The Y angle, in radians.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The skew matrix.</returns>
-        public static Matrix3x2D CreateSkew(float radiansX, float radiansY, Vector2D centerPoint)
+        public static Matrix3x2D CreateSkew(double radiansX, double radiansY, Vector2D centerPoint)
             => Impl.CreateSkew(radiansX, radiansY, centerPoint).AsM3x2();
 
         /// <summary>Creates a translation matrix from the specified 2-dimensional vector.</summary>
@@ -518,7 +518,7 @@ namespace Invicta.Numerics
         /// <param name="xPosition">The X position.</param>
         /// <param name="yPosition">The Y position.</param>
         /// <returns>The translation matrix.</returns>
-        public static Matrix3x2D CreateTranslation(float xPosition, float yPosition)
+        public static Matrix3x2D CreateTranslation(double xPosition, double yPosition)
             => Impl.CreateTranslation(xPosition, yPosition).AsM3x2();
 
         /// <summary>Tries to invert the specified matrix. The return value indicates whether the operation succeeded.</summary>
@@ -537,7 +537,7 @@ namespace Invicta.Numerics
         /// <param name="amount">The relative weighting of <paramref name="matrix2" />.</param>
         /// <returns>The interpolated matrix.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Lerp(Matrix3x2D matrix1, Matrix3x2D matrix2, float amount)
+        public static Matrix3x2D Lerp(Matrix3x2D matrix1, Matrix3x2D matrix2, double amount)
             => Impl.Lerp(in matrix1.AsImpl(), in matrix2.AsImpl(), amount).AsM3x2();
 
         /// <summary>Multiplies two matrices together to compute the product.</summary>
@@ -548,12 +548,12 @@ namespace Invicta.Numerics
         public static Matrix3x2D Multiply(Matrix3x2D value1, Matrix3x2D value2)
             => (value1.AsImpl() * value2.AsImpl()).AsM3x2();
 
-        /// <summary>Multiplies a matrix by a float to compute the product.</summary>
+        /// <summary>Multiplies a matrix by a double to compute the product.</summary>
         /// <param name="value1">The matrix to scale.</param>
         /// <param name="value2">The scaling value to use.</param>
         /// <returns>The scaled matrix.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix3x2D Multiply(Matrix3x2D value1, float value2)
+        public static Matrix3x2D Multiply(Matrix3x2D value1, double value2)
             => (value1.AsImpl() * value2).AsM3x2();
 
         /// <summary>Negates the specified matrix by multiplying all its values by -1.</summary>
@@ -591,7 +591,7 @@ namespace Invicta.Numerics
         /// <returns>The determinant.</returns>
         /// <remarks>The determinant is calculated by expanding the matrix with a third column whose values are (0,0,1).</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly float GetDeterminant()
+        public readonly double GetDeterminant()
             => AsROImpl().GetDeterminant();
 
         /// <summary>Gets the element at the specified row and column.</summary>
@@ -604,7 +604,7 @@ namespace Invicta.Numerics
         /// <paramref name="column" /> was less than zero or greater than or equal to the number of columns (<c>2</c>).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly float GetElement(int row, int column) => this[row, column];
+        public readonly double GetElement(int row, int column) => this[row, column];
 
         /// <summary>Gets or sets the row at the specified index.</summary>
         /// <param name="index">The index of the row to get.</param>
@@ -636,7 +636,7 @@ namespace Invicta.Numerics
         /// <paramref name="column" /> was less than zero or greater than or equal to the number of columns (<c>2</c>).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Matrix3x2D WithElement(int row, int column, float value)
+        public readonly Matrix3x2D WithElement(int row, int column, double value)
         {
             Matrix3x2D result = this;
             result[row, column] = value;
