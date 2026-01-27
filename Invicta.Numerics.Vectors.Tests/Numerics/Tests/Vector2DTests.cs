@@ -1768,8 +1768,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void AllBitsSetTest()
         {
-            Assert.Equal(-1, BitConverter.SingleToInt32Bits(Vector2D.AllBitsSet.X));
-            Assert.Equal(-1, BitConverter.SingleToInt32Bits(Vector2D.AllBitsSet.Y));
+            Assert.Equal(-1, BitConverter.DoubleToInt64Bits(Vector2D.AllBitsSet.X));
+            Assert.Equal(-1, BitConverter.DoubleToInt64Bits(Vector2D.AllBitsSet.Y));
         }
 
         [Fact]
