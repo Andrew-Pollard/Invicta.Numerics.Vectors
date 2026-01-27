@@ -14,16 +14,16 @@ namespace Invicta.Numerics
     public struct QuaternionD : IEquatable<QuaternionD>
     {
         /// <summary>The X value of the vector component of the quaternion.</summary>
-        public float X;
+        public double X;
 
         /// <summary>The Y value of the vector component of the quaternion.</summary>
-        public float Y;
+        public double Y;
 
         /// <summary>The Z value of the vector component of the quaternion.</summary>
-        public float Z;
+        public double Z;
 
         /// <summary>The rotation component of the quaternion.</summary>
-        public float W;
+        public double W;
 
         internal const int Count = 4;
 
@@ -33,7 +33,7 @@ namespace Invicta.Numerics
         /// <param name="z">The value to assign to the Z component of the quaternion.</param>
         /// <param name="w">The value to assign to the W component of the quaternion.</param>
         [Intrinsic]
-        public QuaternionD(float x, float y, float z, float w)
+        public QuaternionD(double x, double y, double z, double w)
         {
             this = Create(x, y, z, w);
         }
@@ -42,7 +42,7 @@ namespace Invicta.Numerics
         /// <param name="vectorPart">The vector part of the quaternion.</param>
         /// <param name="scalarPart">The rotation part of the quaternion.</param>
         [Intrinsic]
-        public QuaternionD(Vector3D vectorPart, float scalarPart)
+        public QuaternionD(Vector3D vectorPart, double scalarPart)
         {
             this = Create(vectorPart, scalarPart);
         }
@@ -60,14 +60,14 @@ namespace Invicta.Numerics
         public static QuaternionD Identity
         {
             [Intrinsic]
-            get => Create(0.0f, 0.0f, 0.0f, 1.0f);
+            get => Create(0.0d, 0.0d, 0.0d, 1.0d);
         }
 
         /// <summary>Gets or sets the element at the specified index.</summary>
         /// <param name="index">The index of the element to get or set.</param>
         /// <returns>The element at <paramref name="index" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than the number of elements.</exception>
-        public float this[int index]
+        public double this[int index]
         {
             [Intrinsic]
             readonly get => this.AsVector128().GetElement(index);
@@ -129,13 +129,13 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMQuaternionMultiply method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            Vector128<float> left = value1.AsVector128();
-            Vector128<float> right = value2.AsVector128();
+            Vector128<double> left = value1.AsVector128();
+            Vector128<double> right = value2.AsVector128();
 
-            Vector128<float> result = right * left.GetElement(3);
-            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(3, 2, 1, 0)) * left.GetElement(0), Vector128.Create(+1.0f, -1.0f, +1.0f, -1.0f), result);
-            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(2, 3, 0, 1)) * left.GetElement(1), Vector128.Create(+1.0f, +1.0f, -1.0f, -1.0f), result);
-            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(1, 0, 3, 2)) * left.GetElement(2), Vector128.Create(-1.0f, +1.0f, +1.0f, -1.0f), result);
+            Vector128<double> result = right * left.GetElement(3);
+            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(3, 2, 1, 0)) * left.GetElement(0), Vector128.Create(+1.0d, -1.0d, +1.0d, -1.0d), result);
+            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(2, 3, 0, 1)) * left.GetElement(1), Vector128.Create(+1.0d, +1.0d, -1.0d, -1.0d), result);
+            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(1, 0, 3, 2)) * left.GetElement(2), Vector128.Create(-1.0d, +1.0d, +1.0d, -1.0d), result);
             return result.AsQuaternionD();
         }
 
@@ -146,7 +146,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="QuaternionD.op_Multiply" /> method defines the operation of the multiplication operator for <see cref="QuaternionD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD operator *(QuaternionD value1, float value2) => (value1.AsVector128() * value2).AsQuaternionD();
+        public static QuaternionD operator *(QuaternionD value1, double value2) => (value1.AsVector128() * value2).AsQuaternionD();
 
         /// <summary>Subtracts each element in a second quaternion from its corresponding element in a first quaternion.</summary>
         /// <param name="value1">The first quaternion.</param>
@@ -188,7 +188,7 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMQuaternionConjugate method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            return (value.AsVector128() * Vector128.Create(-1.0f, -1.0f, -1.0f, 1.0f)).AsQuaternionD();
+            return (value.AsVector128() * Vector128.Create(-1.0d, -1.0d, -1.0d, 1.0d)).AsQuaternionD();
         }
 
         /// <summary>Creates a <see cref="QuaternionD" /> from the specified components.</summary>
@@ -198,14 +198,14 @@ namespace Invicta.Numerics
         /// <param name="w">The value to assign to the W component of the quaternion.</param>
         /// <returns>A <see cref="QuaternionD" /> created from the specified components.</returns>>
         [Intrinsic]
-        public static QuaternionD Create(float x, float y, float z, float w) => Vector128.Create(x, y, z, w).AsQuaternionD();
+        public static QuaternionD Create(double x, double y, double z, double w) => Vector128.Create(x, y, z, w).AsQuaternionD();
 
         /// <summary>Creates a <see cref="QuaternionD" /> from the specified vector and rotation parts.</summary>
         /// <param name="vectorPart">The vector part of the quaternion.</param>
         /// <param name="scalarPart">The rotation part of the quaternion.</param>
         /// <returns>A <see cref="QuaternionD" /> created from the specified vector and rotation parts.</returns>
         [Intrinsic]
-        public static QuaternionD Create(Vector3D vectorPart, float scalarPart) => Vector4D.Create(vectorPart, scalarPart).AsQuaternionD();
+        public static QuaternionD Create(Vector3D vectorPart, double scalarPart) => Vector4D.Create(vectorPart, scalarPart).AsQuaternionD();
 
         /// <summary>Creates a quaternion from a unit vector and an angle to rotate around the vector.</summary>
         /// <param name="axis">The unit vector to rotate around.</param>
@@ -213,12 +213,12 @@ namespace Invicta.Numerics
         /// <returns>The newly created quaternion.</returns>
         /// <remarks><paramref name="axis" /> vector must be normalized before calling this method or the resulting <see cref="QuaternionD" /> will be incorrect.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD CreateFromAxisAngle(Vector3D axis, float angle)
+        public static QuaternionD CreateFromAxisAngle(Vector3D axis, double angle)
         {
             // This implementation is based on the DirectX Math Library XMQuaternionRotationNormal method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            (float s, float c) = float.SinCos(angle * 0.5f);
+            (double s, double c) = double.SinCos(angle * 0.5d);
             return (Vector4D.Create(axis, 1) * Vector4D.Create(Vector3D.Create(s), c)).AsQuaternionD();
         }
 
@@ -227,15 +227,15 @@ namespace Invicta.Numerics
         /// <returns>The newly created quaternion.</returns>
         public static QuaternionD CreateFromRotationMatrix(Matrix4x4D matrix)
         {
-            float trace = matrix.M11 + matrix.M22 + matrix.M33;
+            double trace = matrix.M11 + matrix.M22 + matrix.M33;
 
             QuaternionD q = default;
 
-            if (trace > 0.0f)
+            if (trace > 0.0d)
             {
-                float s = float.Sqrt(trace + 1.0f);
-                q.W = s * 0.5f;
-                s = 0.5f / s;
+                double s = double.Sqrt(trace + 1.0d);
+                q.W = s * 0.5d;
+                s = 0.5d / s;
                 q.X = (matrix.M23 - matrix.M32) * s;
                 q.Y = (matrix.M31 - matrix.M13) * s;
                 q.Z = (matrix.M12 - matrix.M21) * s;
@@ -244,29 +244,29 @@ namespace Invicta.Numerics
             {
                 if (matrix.M11 >= matrix.M22 && matrix.M11 >= matrix.M33)
                 {
-                    float s = float.Sqrt(1.0f + matrix.M11 - matrix.M22 - matrix.M33);
-                    float invS = 0.5f / s;
-                    q.X = 0.5f * s;
+                    double s = double.Sqrt(1.0d + matrix.M11 - matrix.M22 - matrix.M33);
+                    double invS = 0.5d / s;
+                    q.X = 0.5d * s;
                     q.Y = (matrix.M12 + matrix.M21) * invS;
                     q.Z = (matrix.M13 + matrix.M31) * invS;
                     q.W = (matrix.M23 - matrix.M32) * invS;
                 }
                 else if (matrix.M22 > matrix.M33)
                 {
-                    float s = float.Sqrt(1.0f + matrix.M22 - matrix.M11 - matrix.M33);
-                    float invS = 0.5f / s;
+                    double s = double.Sqrt(1.0d + matrix.M22 - matrix.M11 - matrix.M33);
+                    double invS = 0.5d / s;
                     q.X = (matrix.M21 + matrix.M12) * invS;
-                    q.Y = 0.5f * s;
+                    q.Y = 0.5d * s;
                     q.Z = (matrix.M32 + matrix.M23) * invS;
                     q.W = (matrix.M31 - matrix.M13) * invS;
                 }
                 else
                 {
-                    float s = float.Sqrt(1.0f + matrix.M33 - matrix.M11 - matrix.M22);
-                    float invS = 0.5f / s;
+                    double s = double.Sqrt(1.0d + matrix.M33 - matrix.M11 - matrix.M22);
+                    double invS = 0.5d / s;
                     q.X = (matrix.M31 + matrix.M13) * invS;
                     q.Y = (matrix.M32 + matrix.M23) * invS;
-                    q.Z = 0.5f * s;
+                    q.Z = 0.5d * s;
                     q.W = (matrix.M12 - matrix.M21) * invS;
                 }
             }
@@ -279,13 +279,13 @@ namespace Invicta.Numerics
         /// <param name="pitch">The pitch angle, in radians, around the X axis.</param>
         /// <param name="roll">The roll angle, in radians, around the Z axis.</param>
         /// <returns>The resulting quaternion.</returns>
-        public static QuaternionD CreateFromYawPitchRoll(float yaw, float pitch, float roll)
+        public static QuaternionD CreateFromYawPitchRoll(double yaw, double pitch, double roll)
         {
-            (Vector3D sin, Vector3D cos) = Vector3D.SinCos(Vector3D.Create(roll, pitch, yaw) * 0.5f);
+            (Vector3D sin, Vector3D cos) = Vector3D.SinCos(Vector3D.Create(roll, pitch, yaw) * 0.5d);
 
-            (float sr, float cr) = (sin.X, cos.X);
-            (float sp, float cp) = (sin.Y, cos.Y);
-            (float sy, float cy) = (sin.Z, cos.Z);
+            (double sr, double cr) = (sin.X, cos.X);
+            (double sp, double cp) = (sin.Y, cos.Y);
+            (double sy, double cy) = (sin.Z, cos.Z);
 
             QuaternionD result;
 
@@ -309,7 +309,7 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(QuaternionD quaternion1, QuaternionD quaternion2) => Vector128.Dot(quaternion1.AsVector128(), quaternion2.AsVector128());
+        public static double Dot(QuaternionD quaternion1, QuaternionD quaternion2) => Vector128.Dot(quaternion1.AsVector128(), quaternion2.AsVector128());
 
         /// <summary>Returns the inverse of a quaternion.</summary>
         /// <param name="value">The quaternion.</param>
@@ -321,13 +321,13 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMQuaternionInverse method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            const float Epsilon = 1.192092896e-7f;
+            const double Epsilon = 1.192092896e-7d;
 
             //  -1   (       a              -v       )
             // q   = ( -------------   ------------- )
             //       (  a^2 + |v|^2  ,  a^2 + |v|^2  )
 
-            Vector128<float> lengthSquared = Vector128.Create(value.LengthSquared());
+            Vector128<double> lengthSquared = Vector128.Create(value.LengthSquared());
             return Vector128.AndNot(
                 (Conjugate(value).AsVector128() / lengthSquared),
                 Vector128.LessThanOrEqual(lengthSquared, Vector128.Create(Epsilon))
@@ -339,17 +339,17 @@ namespace Invicta.Numerics
         /// <param name="quaternion2">The second quaternion.</param>
         /// <param name="amount">The relative weight of <paramref name="quaternion2" /> in the interpolation.</param>
         /// <returns>The interpolated quaternion.</returns>
-        public static QuaternionD Lerp(QuaternionD quaternion1, QuaternionD quaternion2, float amount)
+        public static QuaternionD Lerp(QuaternionD quaternion1, QuaternionD quaternion2, double amount)
         {
-            Vector128<float> q2 = quaternion2.AsVector128();
+            Vector128<double> q2 = quaternion2.AsVector128();
 
             q2 = Vector128.ConditionalSelect(
-                Vector128.GreaterThanOrEqual(Vector128.Create(Dot(quaternion1, quaternion2)), Vector128<float>.Zero),
+                Vector128.GreaterThanOrEqual(Vector128.Create(Dot(quaternion1, quaternion2)), Vector128<double>.Zero),
                  q2,
                 -q2
             );
 
-            Vector128<float> result = Vector128.MultiplyAddEstimate(quaternion1.AsVector128(), Vector128.Create(1.0f - amount), q2 * amount);
+            Vector128<double> result = Vector128.MultiplyAddEstimate(quaternion1.AsVector128(), Vector128.Create(1.0d - amount), q2 * amount);
             return Normalize(result.AsQuaternionD());
         }
 
@@ -364,7 +364,7 @@ namespace Invicta.Numerics
         /// <param name="value2">The scalar value.</param>
         /// <returns>The scaled quaternion.</returns>
         [Intrinsic]
-        public static QuaternionD Multiply(QuaternionD value1, float value2) => value1 * value2;
+        public static QuaternionD Multiply(QuaternionD value1, double value2) => value1 * value2;
 
         /// <summary>Reverses the sign of each component of the quaternion.</summary>
         /// <param name="value">The quaternion to negate.</param>
@@ -384,34 +384,34 @@ namespace Invicta.Numerics
         /// <param name="quaternion2">The second quaternion.</param>
         /// <param name="amount">The relative weight of the second quaternion in the interpolation.</param>
         /// <returns>The interpolated quaternion.</returns>
-        public static QuaternionD Slerp(QuaternionD quaternion1, QuaternionD quaternion2, float amount)
+        public static QuaternionD Slerp(QuaternionD quaternion1, QuaternionD quaternion2, double amount)
         {
-            const float SlerpEpsilon = 1e-6f;
+            const double SlerpEpsilon = 1e-6d;
 
-            float cosOmega = Dot(quaternion1, quaternion2);
-            float sign = 1.0f;
+            double cosOmega = Dot(quaternion1, quaternion2);
+            double sign = 1.0d;
 
-            if (cosOmega < 0.0f)
+            if (cosOmega < 0.0d)
             {
                 cosOmega = -cosOmega;
-                sign = -1.0f;
+                sign = -1.0d;
             }
 
-            float s1, s2;
+            double s1, s2;
 
-            if (cosOmega > (1.0f - SlerpEpsilon))
+            if (cosOmega > (1.0d - SlerpEpsilon))
             {
                 // Too close, do straight linear interpolation.
-                s1 = 1.0f - amount;
+                s1 = 1.0d - amount;
                 s2 = amount * sign;
             }
             else
             {
-                float omega = float.Acos(cosOmega);
-                float invSinOmega = 1 / float.Sin(omega);
+                double omega = double.Acos(cosOmega);
+                double invSinOmega = 1 / double.Sin(omega);
 
-                s1 = float.Sin((1.0f - amount) * omega) * invSinOmega;
-                s2 = float.Sin(amount * omega) * invSinOmega * sign;
+                s1 = double.Sin((1.0d - amount) * omega) * invSinOmega;
+                s2 = double.Sin(amount * omega) * invSinOmega * sign;
             }
 
             return (quaternion1 * s1) + (quaternion2 * s2);
@@ -444,12 +444,12 @@ namespace Invicta.Numerics
         /// <summary>Calculates the length of the quaternion.</summary>
         /// <returns>The computed length of the quaternion.</returns>
         [Intrinsic]
-        public readonly float Length() => float.Sqrt(LengthSquared());
+        public readonly double Length() => double.Sqrt(LengthSquared());
 
         /// <summary>Calculates the squared length of the quaternion.</summary>
         /// <returns>The length squared of the quaternion.</returns>
         [Intrinsic]
-        public readonly float LengthSquared() => Dot(this, this);
+        public readonly double LengthSquared() => Dot(this, this);
 
         /// <summary>Returns a string that represents this quaternion.</summary>
         /// <returns>The string representation of this quaternion.</returns>
