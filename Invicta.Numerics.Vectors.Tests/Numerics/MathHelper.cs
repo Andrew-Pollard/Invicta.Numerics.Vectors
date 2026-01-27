@@ -5,20 +5,20 @@ namespace Invicta.Numerics
 {
     static class MathHelper
     {
-        public const float Pi = (float)Math.PI;
-        public const float PiOver2 = Pi / 2f;
-        public const float PiOver4 = Pi / 4f;
+        public const double Pi = (double)Math.PI;
+        public const double PiOver2 = Pi / 2f;
+        public const double PiOver4 = Pi / 4f;
 
 
         // Angle conversion helper.
-        public static float ToRadians(float degrees)
+        public static double ToRadians(double degrees)
         {
             return degrees * Pi / 180f;
         }
 
 
         // Comparison helpers with small tolerance to allow for floating point rounding during computations.
-        public static bool Equal(float a, float b)
+        public static bool Equal(double a, double b)
         {
             return (Math.Abs(a - b) < 1e-5);
         }
