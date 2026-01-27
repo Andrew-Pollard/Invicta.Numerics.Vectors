@@ -8,7 +8,7 @@ using System.Runtime.Intrinsics;
 
 namespace Invicta.Numerics
 {
-    /// <summary>Represents a vector with four single-precision floating-point values.</summary>
+    /// <summary>Represents a vector with four double-precision floating-point values.</summary>
     /// <remarks><format type="text/markdown"><![CDATA[
     /// The <xref:System.Numerics.Vector4D> structure provides support for hardware acceleration.
     /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
@@ -86,7 +86,7 @@ namespace Invicta.Numerics
             this = Create(x, y, z, w);
         }
 
-        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 4 elements.</summary>
+        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 4 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         [Intrinsic]
         public Vector4D(ReadOnlySpan<double> values)
@@ -480,7 +480,7 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector4D Create(double x, double y, double z, double w) => Vector128.Create(x, y, z, w).AsVector4D();
 
-        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 4 elements.</summary>
+        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 4 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         /// <returns>A new <see cref="Vector4D" /> whose elements have the specified values.</returns>
         [Intrinsic]
@@ -1072,7 +1072,7 @@ namespace Invicta.Numerics
         /// <exception cref="ArgumentException">If number of elements in source vector is greater than those available in destination span.</exception>
         public readonly void CopyTo(Span<double> destination) => this.AsVector128().CopyTo(destination);
 
-        /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 4.</summary>
+        /// <summary>Attempts to copy the vector to the given <see cref="Span{Double}" />. The length of the destination span must be at least 4.</summary>
         /// <param name="destination">The destination span which the values are copied into.</param>
         /// <returns><see langword="true" /> if the source vector was successfully copied to <paramref name="destination" />. <see langword="false" /> if <paramref name="destination" /> is not large enough to hold the source vector.</returns>
         public readonly bool TryCopyTo(Span<double> destination) => this.AsVector128().TryCopyTo(destination);

@@ -149,45 +149,45 @@ namespace Invicta.Runtime.Intrinsics
             internal static bool NoneWhereAllBitsSet(Vector3D vector) => !Vector128.EqualsAny(vector.AsVector128().AsInt32(), Vector128<int>.AllBitsSet);
         }
         
-        /// <summary>Reinterprets a <see langword="Vector128&lt;Single&gt;" /> as a new <see cref="PlaneD" />.</summary>
+        /// <summary>Reinterprets a <see langword="Vector128&lt;Double&gt;" /> as a new <see cref="PlaneD" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="PlaneD" />.</returns>
         [Intrinsic]
         public static PlaneD AsPlaneD(this Vector128<double> value) => Unsafe.BitCast<Vector128<double>, PlaneD>(value);
 
-        /// <summary>Reinterprets a <see langword="Vector128&lt;Single&gt;" /> as a new <see cref="QuaternionD" />.</summary>
+        /// <summary>Reinterprets a <see langword="Vector128&lt;Double&gt;" /> as a new <see cref="QuaternionD" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="QuaternionD" />.</returns>
         [Intrinsic]
         public static QuaternionD AsQuaternionD(this Vector128<double> value) => Unsafe.BitCast<Vector128<double>, QuaternionD>(value);
 
-        /// <summary>Reinterprets a <see cref="PlaneD" /> as a new <see langword="Vector128&lt;Single&gt;" />.</summary>
+        /// <summary>Reinterprets a <see cref="PlaneD" /> as a new <see langword="Vector128&lt;Double&gt;" />.</summary>
         /// <param name="value">The plane to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" />.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128(this PlaneD value) => Unsafe.BitCast<PlaneD, Vector128<double>>(value);
 
-        /// <summary>Reinterprets a <see cref="QuaternionD" /> as a new <see langword="Vector128&lt;Single&gt;" />.</summary>
+        /// <summary>Reinterprets a <see cref="QuaternionD" /> as a new <see langword="Vector128&lt;Double&gt;" />.</summary>
         /// <param name="value">The quaternion to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" />.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128(this QuaternionD value) => Unsafe.BitCast<QuaternionD, Vector128<double>>(value);
 
-        /// <summary>Reinterprets a <see langword="Vector2D" /> as a new <see cref="Vector128&lt;Single&gt;" /> with the new elements zeroed.</summary>
+        /// <summary>Reinterprets a <see langword="Vector2D" /> as a new <see cref="Vector128&lt;Double&gt;" /> with the new elements zeroed.</summary>
         /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" /> with the new elements zeroed.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" /> with the new elements zeroed.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128(this Vector2D value) => Vector4D.Create(value, 0, 0).AsVector128();
 
-        /// <summary>Reinterprets a <see langword="Vector3D" /> as a new <see cref="Vector128&lt;Single&gt;" /> with the new elements zeroed.</summary>
+        /// <summary>Reinterprets a <see langword="Vector3D" /> as a new <see cref="Vector128&lt;Double&gt;" /> with the new elements zeroed.</summary>
         /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" /> with the new elements zeroed.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" /> with the new elements zeroed.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128(this Vector3D value) => Vector4D.Create(value, 0).AsVector128();
 
-        /// <summary>Reinterprets a <see langword="Vector4D" /> as a new <see cref="Vector128&lt;Single&gt;" />.</summary>
+        /// <summary>Reinterprets a <see langword="Vector4D" /> as a new <see cref="Vector128&lt;Double&gt;" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" />.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128(this Vector4D value) => Unsafe.BitCast<Vector4D, Vector128<double>>(value);
 
@@ -207,9 +207,9 @@ namespace Invicta.Runtime.Intrinsics
             return Unsafe.ReadUnaligned<Vector128<T>>(ref address);
         }
 
-        /// <summary>Reinterprets a <see langword="Vector2D" /> as a new <see cref="Vector128&lt;Single&gt;" />, leaving the new elements undefined.</summary>
+        /// <summary>Reinterprets a <see langword="Vector2D" /> as a new <see cref="Vector128&lt;Double&gt;" />, leaving the new elements undefined.</summary>
         /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" />.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128Unsafe(this Vector2D value)
         {
@@ -221,9 +221,9 @@ namespace Invicta.Runtime.Intrinsics
             return result;
         }
 
-        /// <summary>Reinterprets a <see langword="Vector3D" /> as a new <see cref="Vector128&lt;Single&gt;" />, leaving the new elements undefined.</summary>
+        /// <summary>Reinterprets a <see langword="Vector3D" /> as a new <see cref="Vector128&lt;Double&gt;" />, leaving the new elements undefined.</summary>
         /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Single&gt;" />.</returns>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see langword="Vector128&lt;Double&gt;" />.</returns>
         [Intrinsic]
         public static Vector128<double> AsVector128Unsafe(this Vector3D value)
         {
@@ -235,7 +235,7 @@ namespace Invicta.Runtime.Intrinsics
             return result;
         }
 
-        /// <summary>Reinterprets a <see langword="Vector128&lt;Single&gt;" /> as a new <see cref="Vector2D" />.</summary>
+        /// <summary>Reinterprets a <see langword="Vector128&lt;Double&gt;" /> as a new <see cref="Vector2D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector2D" />.</returns>
         [Intrinsic]
@@ -246,7 +246,7 @@ namespace Invicta.Runtime.Intrinsics
             return Unsafe.ReadUnaligned<Vector2D>(ref address);
         }
 
-        /// <summary>Reinterprets a <see langword="Vector128&lt;Single&gt;" /> as a new <see cref="Vector3D" />.</summary>
+        /// <summary>Reinterprets a <see langword="Vector128&lt;Double&gt;" /> as a new <see cref="Vector3D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector3D" />.</returns>
         [Intrinsic]
@@ -257,7 +257,7 @@ namespace Invicta.Runtime.Intrinsics
             return Unsafe.ReadUnaligned<Vector3D>(ref address);
         }
 
-        /// <summary>Reinterprets a <see langword="Vector128&lt;Single&gt;" /> as a new <see cref="Vector4D" />.</summary>
+        /// <summary>Reinterprets a <see langword="Vector128&lt;Double&gt;" /> as a new <see cref="Vector4D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector4D" />.</returns>
         [Intrinsic]

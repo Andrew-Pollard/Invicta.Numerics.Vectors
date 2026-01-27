@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics;
 
 namespace Invicta.Numerics
 {
-    /// <summary>Represents a vector with three  single-precision floating-point values.</summary>
+    /// <summary>Represents a vector with three  double-precision floating-point values.</summary>
     /// <remarks><format type="text/markdown"><![CDATA[
     /// The <xref:System.Numerics.Vector3D> structure provides support for hardware acceleration.
     /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
@@ -73,7 +73,7 @@ namespace Invicta.Numerics
             this = Create(x, y, z);
         }
 
-        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 3 elements.</summary>
+        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 3 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         [Intrinsic]
         public Vector3D(ReadOnlySpan<double> values)
@@ -432,7 +432,7 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector3D Create(double x, double y, double z) => Vector128.Create(x, y, z, 0).AsVector3D();
 
-        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 3 elements.</summary>
+        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 3 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         /// <returns>A new <see cref="Vector3D" /> whose elements have the specified values.</returns>
         [Intrinsic]
@@ -1026,7 +1026,7 @@ namespace Invicta.Numerics
             Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
         }
 
-        /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 3.</summary>
+        /// <summary>Attempts to copy the vector to the given <see cref="Span{Double}" />. The length of the destination span must be at least 3.</summary>
         /// <param name="destination">The destination span which the values are copied into.</param>
         /// <returns><see langword="true" /> if the source vector was successfully copied to <paramref name="destination" />. <see langword="false" /> if <paramref name="destination" /> is not large enough to hold the source vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

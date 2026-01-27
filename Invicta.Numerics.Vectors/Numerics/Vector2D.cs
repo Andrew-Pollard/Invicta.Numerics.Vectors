@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics;
 
 namespace Invicta.Numerics
 {
-    /// <summary>Represents a vector with two single-precision floating-point values.</summary>
+    /// <summary>Represents a vector with two double-precision floating-point values.</summary>
     /// <remarks><format type="text/markdown"><![CDATA[
     /// The <xref:System.Numerics.Vector2D> structure provides support for hardware acceleration.
     /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
@@ -60,7 +60,7 @@ namespace Invicta.Numerics
             this = Create(x, y);
         }
 
-        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 2 elements.</summary>
+        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 2 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         [Intrinsic]
         public Vector2D(ReadOnlySpan<double> values)
@@ -397,7 +397,7 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector2D Create(double x, double y) => Vector128.Create(x, y, 0, 0).AsVector2D();
 
-        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 2 elements.</summary>
+        /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 2 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         /// <returns>A new <see cref="Vector2D" /> whose elements have the specified values.</returns>
         [Intrinsic]
@@ -1016,7 +1016,7 @@ namespace Invicta.Numerics
             Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
         }
 
-        /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 2.</summary>
+        /// <summary>Attempts to copy the vector to the given <see cref="Span{Double}" />. The length of the destination span must be at least 2.</summary>
         /// <param name="destination">The destination span which the values are copied into.</param>
         /// <returns><see langword="true" /> if the source vector was successfully copied to <paramref name="destination" />. <see langword="false" /> if <paramref name="destination" /> is not large enough to hold the source vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
