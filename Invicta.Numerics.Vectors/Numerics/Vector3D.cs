@@ -17,7 +17,7 @@ namespace Invicta.Numerics
     [Intrinsic]
     public partial struct Vector3D : IEquatable<Vector3D>, IFormattable
     {
-        /// <summary>Specifies the alignment of the vector as used by the <see cref="LoadAligned(float*)" /> and <see cref="Vector.StoreAligned(Vector3D, float*)" /> APIs.</summary>
+        /// <summary>Specifies the alignment of the vector as used by the <see cref="LoadAligned(double*)" /> and <see cref="Vector.StoreAligned(Vector3D, double*)" /> APIs.</summary>
         /// <remarks>
         ///     <para>
         ///       Different environments all have their own concepts of alignment/packing.
@@ -36,20 +36,20 @@ namespace Invicta.Numerics
         internal const int Alignment = 8;
 
         /// <summary>The X component of the vector.</summary>
-        public float X;
+        public double X;
 
         /// <summary>The Y component of the vector.</summary>
-        public float Y;
+        public double Y;
 
         /// <summary>The Z component of the vector.</summary>
-        public float Z;
+        public double Z;
 
         internal const int ElementCount = 3;
 
         /// <summary>Creates a new <see cref="Vector3D" /> object whose three elements have the same value.</summary>
         /// <param name="value">The value to assign to all three elements.</param>
         [Intrinsic]
-        public Vector3D(float value)
+        public Vector3D(double value)
         {
             this = Create(value);
         }
@@ -58,7 +58,7 @@ namespace Invicta.Numerics
         /// <param name="value">The vector with two elements.</param>
         /// <param name="z">The additional value to assign to the <see cref="Z" /> field.</param>
         [Intrinsic]
-        public Vector3D(Vector2D value, float z)
+        public Vector3D(Vector2D value, double z)
         {
             this = Create(value, z);
         }
@@ -68,7 +68,7 @@ namespace Invicta.Numerics
         /// <param name="y">The value to assign to the <see cref="Y" /> field.</param>
         /// <param name="z">The value to assign to the <see cref="Z" /> field.</param>
         [Intrinsic]
-        public Vector3D(float x, float y, float z)
+        public Vector3D(double x, double y, double z)
         {
             this = Create(x, y, z);
         }
@@ -76,7 +76,7 @@ namespace Invicta.Numerics
         /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 3 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         [Intrinsic]
-        public Vector3D(ReadOnlySpan<float> values)
+        public Vector3D(ReadOnlySpan<double> values)
         {
             this = Create(values);
         }
@@ -85,70 +85,70 @@ namespace Invicta.Numerics
         public static Vector3D AllBitsSet
         {
             [Intrinsic]
-            get => Vector128<float>.AllBitsSet.AsVector3D();
+            get => Vector128<double>.AllBitsSet.AsVector3D();
         }
 
         /// <inheritdoc cref="Vector4D.E" />
         public static Vector3D E
         {
             [Intrinsic]
-            get => Create(float.E);
+            get => Create(double.E);
         }
 
         /// <inheritdoc cref="Vector4D.Epsilon" />
         public static Vector3D Epsilon
         {
             [Intrinsic]
-            get => Create(float.Epsilon);
+            get => Create(double.Epsilon);
         }
 
         /// <inheritdoc cref="Vector4D.NaN" />
         public static Vector3D NaN
         {
             [Intrinsic]
-            get => Create(float.NaN);
+            get => Create(double.NaN);
         }
 
         /// <inheritdoc cref="Vector4D.NegativeInfinity" />
         public static Vector3D NegativeInfinity
         {
             [Intrinsic]
-            get => Create(float.NegativeInfinity);
+            get => Create(double.NegativeInfinity);
         }
 
         /// <inheritdoc cref="Vector4D.NegativeZero" />
         public static Vector3D NegativeZero
         {
             [Intrinsic]
-            get => Create(float.NegativeZero);
+            get => Create(double.NegativeZero);
         }
 
         /// <inheritdoc cref="Vector4D.One" />
         public static Vector3D One
         {
             [Intrinsic]
-            get => Create(1.0f);
+            get => Create(1.0d);
         }
 
         /// <inheritdoc cref="Vector4D.Pi" />
         public static Vector3D Pi
         {
             [Intrinsic]
-            get => Create(float.Pi);
+            get => Create(double.Pi);
         }
 
         /// <inheritdoc cref="Vector4D.PositiveInfinity" />
         public static Vector3D PositiveInfinity
         {
             [Intrinsic]
-            get => Create(float.PositiveInfinity);
+            get => Create(double.PositiveInfinity);
         }
 
         /// <inheritdoc cref="Vector4D.Tau" />
         public static Vector3D Tau
         {
             [Intrinsic]
-            get => Create(float.Tau);
+            get => Create(double.Tau);
         }
 
         /// <summary>Gets the vector (1,0,0).</summary>
@@ -156,7 +156,7 @@ namespace Invicta.Numerics
         public static Vector3D UnitX
         {
             [Intrinsic]
-            get => CreateScalar(1.0f);
+            get => CreateScalar(1.0d);
         }
 
         /// <summary>Gets the vector (0,1,0).</summary>
@@ -164,7 +164,7 @@ namespace Invicta.Numerics
         public static Vector3D UnitY
         {
             [Intrinsic]
-            get => Create(0.0f, 1.0f, 0.0f);
+            get => Create(0.0d, 1.0d, 0.0d);
         }
 
         /// <summary>Gets the vector (0,0,1).</summary>
@@ -172,7 +172,7 @@ namespace Invicta.Numerics
         public static Vector3D UnitZ
         {
             [Intrinsic]
-            get => Create(0.0f, 0.0f, 1.0f);
+            get => Create(0.0d, 0.0d, 1.0d);
         }
 
         /// <inheritdoc cref="Vector4D.Zero" />
@@ -186,7 +186,7 @@ namespace Invicta.Numerics
         /// <param name="index">The index of the element to get or set.</param>
         /// <returns>The the element at <paramref name="index" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than the number of elements.</exception>
-        public float this[int index]
+        public double this[int index]
         {
             [Intrinsic]
             readonly get => this.GetElement(index);
@@ -223,7 +223,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Vector3D.op_Division" /> method defines the division operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator /(Vector3D value1, float value2) => (value1.AsVector128Unsafe() / value2).AsVector3D();
+        public static Vector3D operator /(Vector3D value1, double value2) => (value1.AsVector128Unsafe() / value2).AsVector3D();
 
         /// <summary>Returns a value that indicates whether each pair of elements in two specified vectors is equal.</summary>
         /// <param name="left">The first vector to compare.</param>
@@ -257,7 +257,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Vector3D.op_Multiply" /> method defines the multiplication operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator *(Vector3D left, float right) => (left.AsVector128Unsafe() * right).AsVector3D();
+        public static Vector3D operator *(Vector3D left, double right) => (left.AsVector128Unsafe() * right).AsVector3D();
 
         /// <summary>Multiplies the scalar value by the specified vector.</summary>
         /// <param name="left">The vector.</param>
@@ -265,7 +265,7 @@ namespace Invicta.Numerics
         /// <returns>The scaled vector.</returns>
         /// <remarks>The <see cref="Vector3D.op_Multiply" /> method defines the multiplication operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
-        public static Vector3D operator *(float left, Vector3D right) => right * left;
+        public static Vector3D operator *(double left, Vector3D right) => right * left;
 
         /// <summary>Subtracts the second vector from the first.</summary>
         /// <param name="left">The first vector.</param>
@@ -338,10 +338,10 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector3D Add(Vector3D left, Vector3D right) => left + right;
 
-        /// <inheritdoc cref="Vector4D.All(Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.All(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool All(Vector3D vector, float value) => Vector128.All(vector, value);
+        public static bool All(Vector3D vector, double value) => Vector128.All(vector, value);
 
         /// <inheritdoc cref="Vector4D.AllWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
@@ -353,10 +353,10 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D AndNot(Vector3D left, Vector3D right) => Vector128.AndNot(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
 
-        /// <inheritdoc cref="Vector4D.Any(Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.Any(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Any(Vector3D vector, float value) => Vector128.Any(vector, value);
+        public static bool Any(Vector3D vector, double value) => Vector128.Any(vector, value);
 
         /// <inheritdoc cref="Vector4D.AnyWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
@@ -395,10 +395,10 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Cos(Vector3D vector) => Vector128.Cos(vector.AsVector128()).AsVector3D();
 
-        /// <inheritdoc cref="Vector4D.Count(Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.Count(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Count(Vector3D vector, float value) => Vector128.Count(vector, value);
+        public static int Count(Vector3D vector, double value) => Vector128.Count(vector, value);
 
         /// <inheritdoc cref="Vector4D.CountWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
@@ -409,7 +409,7 @@ namespace Invicta.Numerics
         /// <param name="value">The value to assign to all three elements.</param>
         /// <returns>A new <see cref="Vector3D" /> whose three elements have the same value.</returns>
         [Intrinsic]
-        public static Vector3D Create(float value) => Vector128.Create(value).AsVector3D();
+        public static Vector3D Create(double value) => Vector128.Create(value).AsVector3D();
 
         /// <summary>Creates a new <see cref="Vector3D" /> object from the specified <see cref="Vector2D" /> object and a Z and a W component.</summary>
         /// <param name="vector">The vector to use for the X and Y components.</param>
@@ -417,7 +417,7 @@ namespace Invicta.Numerics
         /// <returns>A new <see cref="Vector3D" /> from the specified <see cref="Vector2D" /> object and a Z and a W component.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Create(Vector2D vector, float z)
+        public static Vector3D Create(Vector2D vector, double z)
         {
             return vector.AsVector128Unsafe()
                          .WithElement(2, z)
@@ -430,33 +430,33 @@ namespace Invicta.Numerics
         /// <param name="z">The value to assign to the <see cref="Z" /> field.</param>
         /// <returns>A new <see cref="Vector3D" /> whose elements have the specified values.</returns>
         [Intrinsic]
-        public static Vector3D Create(float x, float y, float z) => Vector128.Create(x, y, z, 0).AsVector3D();
+        public static Vector3D Create(double x, double y, double z) => Vector128.Create(x, y, z, 0).AsVector3D();
 
         /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Single}" />. The span must contain at least 3 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
         /// <returns>A new <see cref="Vector3D" /> whose elements have the specified values.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Create(ReadOnlySpan<float> values)
+        public static Vector3D Create(ReadOnlySpan<double> values)
         {
             if (values.Length < ElementCount)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.values);
             }
-            return Unsafe.ReadUnaligned<Vector3D>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+            return Unsafe.ReadUnaligned<Vector3D>(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(values)));
         }
 
         /// <summary>Creates a vector with <see cref="X" /> initialized to the specified value and the remaining elements initialized to zero.</summary>
         /// <param name="x">The value to assign to the <see cref="X" /> field.</param>
         /// <returns>A new <see cref="Vector3D" /> with <see cref="X" /> initialized <paramref name="x" /> and the remaining elements initialized to zero.</returns>
         [Intrinsic]
-        public static Vector3D CreateScalar(float x) => Vector128.CreateScalar(x).AsVector3D();
+        public static Vector3D CreateScalar(double x) => Vector128.CreateScalar(x).AsVector3D();
 
         /// <summary>Creates a vector with <see cref="X" /> initialized to the specified value and the remaining elements left uninitialized.</summary>
         /// <param name="x">The value to assign to the <see cref="X" /> field.</param>
         /// <returns>A new <see cref="Vector3D" /> with <see cref="X" /> initialized <paramref name="x" /> and the remaining elements left uninitialized.</returns>
         [Intrinsic]
-        public static Vector3D CreateScalarUnsafe(float x) => Vector128.CreateScalarUnsafe(x).AsVector3D();
+        public static Vector3D CreateScalarUnsafe(double x) => Vector128.CreateScalarUnsafe(x).AsVector3D();
 
         /// <summary>Computes the cross product of two vectors.</summary>
         /// <param name="vector1">The first vector.</param>
@@ -468,11 +468,11 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMVector3Cross method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
-            Vector128<float> v1 = vector1.AsVector128Unsafe();
-            Vector128<float> v2 = vector2.AsVector128Unsafe();
+            Vector128<double> v1 = vector1.AsVector128Unsafe();
+            Vector128<double> v2 = vector2.AsVector128Unsafe();
 
-            Vector128<float> temp1 = Vector128.Shuffle(v1, Vector128.Create(1, 2, 0, 0)) * Vector128.Shuffle(v2, Vector128.Create(2, 0, 1, 0));
-            Vector128<float> temp2 = Vector128.Shuffle(v1, Vector128.Create(2, 0, 1, 0)) * Vector128.Shuffle(v2, Vector128.Create(1, 2, 0, 0));
+            Vector128<double> temp1 = Vector128.Shuffle(v1, Vector128.Create(1, 2, 0, 0)) * Vector128.Shuffle(v2, Vector128.Create(2, 0, 1, 0));
+            Vector128<double> temp2 = Vector128.Shuffle(v1, Vector128.Create(2, 0, 1, 0)) * Vector128.Shuffle(v2, Vector128.Create(1, 2, 0, 0));
 
             return (temp1 - temp2).AsVector3D();
         }
@@ -487,14 +487,14 @@ namespace Invicta.Numerics
         /// <param name="value2">The second point.</param>
         /// <returns>The distance.</returns>
         [Intrinsic]
-        public static float Distance(Vector3D value1, Vector3D value2) => float.Sqrt(DistanceSquared(value1, value2));
+        public static double Distance(Vector3D value1, Vector3D value2) => double.Sqrt(DistanceSquared(value1, value2));
 
         /// <summary>Returns the Euclidean distance squared between two specified points.</summary>
         /// <param name="value1">The first point.</param>
         /// <param name="value2">The second point.</param>
         /// <returns>The distance squared.</returns>
         [Intrinsic]
-        public static float DistanceSquared(Vector3D value1, Vector3D value2) => (value1 - value2).LengthSquared();
+        public static double DistanceSquared(Vector3D value1, Vector3D value2) => (value1 - value2).LengthSquared();
 
         /// <summary>Divides the first vector by the second.</summary>
         /// <param name="left">The first vector.</param>
@@ -508,7 +508,7 @@ namespace Invicta.Numerics
         /// <param name="divisor">The scalar value.</param>
         /// <returns>The vector that results from the division.</returns>
         [Intrinsic]
-        public static Vector3D Divide(Vector3D left, float divisor) => left / divisor;
+        public static Vector3D Divide(Vector3D left, double divisor) => left / divisor;
 
         /// <summary>Returns the dot product of two vectors.</summary>
         /// <param name="vector1">The first vector.</param>
@@ -516,7 +516,7 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(Vector3D vector1, Vector3D vector2) => Vector128.Dot(vector1.AsVector128(), vector2.AsVector128());
+        public static double Dot(Vector3D vector1, Vector3D vector2) => Vector128.Dot(vector1.AsVector128(), vector2.AsVector128());
 
         /// <inheritdoc cref="Vector4D.Exp(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -537,7 +537,7 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool EqualsAny(Vector3D left, Vector3D right) => Vector128.EqualsAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector128.MultiplyAddEstimate(Vector128{float}, Vector128{float}, Vector128{float})" />
+        /// <inheritdoc cref="Vector128.MultiplyAddEstimate(Vector128{double}, Vector128{double}, Vector128{double})" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D FusedMultiplyAdd(Vector3D left, Vector3D right, Vector3D addend) => Vector128.FusedMultiplyAdd(left.AsVector128Unsafe(), right.AsVector128Unsafe(), addend.AsVector128Unsafe()).AsVector3D();
@@ -577,10 +577,10 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Hypot(Vector3D x, Vector3D y) => Vector128.Hypot(x.AsVector128Unsafe(), y.AsVector128Unsafe()).AsVector3D();
 
-        /// <inheritdoc cref="Vector4D.IndexOf(Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.IndexOf(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOf(Vector3D vector, float value) => Vector128.IndexOf(vector, value);
+        public static int IndexOf(Vector3D vector, double value) => Vector128.IndexOf(vector, value);
 
         /// <inheritdoc cref="Vector4D.IndexOfWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
@@ -652,20 +652,20 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D IsZero(Vector3D vector) => Vector128.IsZero(vector.AsVector128()).AsVector3D();
 
-        /// <inheritdoc cref="Vector4D.LastIndexOf(Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.LastIndexOf(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int LastIndexOf(Vector3D vector, float value) => Vector128.LastIndexOf(vector, value);
+        public static int LastIndexOf(Vector3D vector, double value) => Vector128.LastIndexOf(vector, value);
 
         /// <inheritdoc cref="Vector4D.LastIndexOfWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LastIndexOfWhereAllBitsSet(Vector3D vector) => Vector128.LastIndexOfWhereAllBitsSet(vector);
 
-        /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Lerp(Vector3D value1, Vector3D value2, float amount) => Lerp(value1, value2, Create(amount));
+        public static Vector3D Lerp(Vector3D value1, Vector3D value2, double amount) => Lerp(value1, value2, Create(amount));
 
         /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
@@ -702,16 +702,16 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool LessThanOrEqualAny(Vector3D left, Vector3D right) => Vector128.LessThanOrEqualAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
 
-        /// <inheritdoc cref="Vector4D.Load(float*)" />
+        /// <inheritdoc cref="Vector4D.Load(double*)" />
         [Intrinsic]
         [CLSCompliant(false)]
-        public static unsafe Vector3D Load(float* source) => LoadUnsafe(in *source);
+        public static unsafe Vector3D Load(double* source) => LoadUnsafe(in *source);
 
-        /// <inheritdoc cref="Vector4D.LoadAligned(float*)" />
+        /// <inheritdoc cref="Vector4D.LoadAligned(double*)" />
         [Intrinsic]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Vector3D LoadAligned(float* source)
+        public static unsafe Vector3D LoadAligned(double* source)
         {
             if (((nuint)(source) % Alignment) != 0)
             {
@@ -721,37 +721,37 @@ namespace Invicta.Numerics
             return *(Vector3D*)source;
         }
 
-        /// <inheritdoc cref="Vector4D.LoadAlignedNonTemporal(float*)" />
+        /// <inheritdoc cref="Vector4D.LoadAlignedNonTemporal(double*)" />
         [Intrinsic]
         [CLSCompliant(false)]
-        public static unsafe Vector3D LoadAlignedNonTemporal(float* source) => LoadAligned(source);
+        public static unsafe Vector3D LoadAlignedNonTemporal(double* source) => LoadAligned(source);
 
         /// <inheritdoc cref="Vector128.LoadUnsafe{T}(ref readonly T)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D LoadUnsafe(ref readonly float source)
+        public static Vector3D LoadUnsafe(ref readonly double source)
         {
-            ref readonly byte address = ref Unsafe.As<float, byte>(ref Unsafe.AsRef(in source));
+            ref readonly byte address = ref Unsafe.As<double, byte>(ref Unsafe.AsRef(in source));
             return Unsafe.ReadUnaligned<Vector3D>(in address);
         }
 
-        /// <inheritdoc cref="Vector4D.LoadUnsafe(ref readonly float, nuint)" />
+        /// <inheritdoc cref="Vector4D.LoadUnsafe(ref readonly double, nuint)" />
         [Intrinsic]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D LoadUnsafe(ref readonly float source, nuint elementOffset)
+        public static Vector3D LoadUnsafe(ref readonly double source, nuint elementOffset)
         {
-            ref readonly byte address = ref Unsafe.As<float, byte>(ref Unsafe.Add(ref Unsafe.AsRef(in source), (nint)elementOffset));
+            ref readonly byte address = ref Unsafe.As<double, byte>(ref Unsafe.Add(ref Unsafe.AsRef(in source), (nint)elementOffset));
             return Unsafe.ReadUnaligned<Vector3D>(in address);
         }
 
         /// <inheritdoc cref="Vector4D.Log(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Log(Vector3D vector) => Vector128.Log(Vector4D.Create(vector, 1.0f).AsVector128()).AsVector3D();
+        public static Vector3D Log(Vector3D vector) => Vector128.Log(Vector4D.Create(vector, 1.0d).AsVector128()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Log2(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Log2(Vector3D vector) => Vector128.Log2(Vector4D.Create(vector, 1.0f).AsVector128()).AsVector3D();
+        public static Vector3D Log2(Vector3D vector) => Vector128.Log2(Vector4D.Create(vector, 1.0d).AsVector128()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Max(Vector4D, Vector4D)" />
         [Intrinsic]
@@ -815,16 +815,16 @@ namespace Invicta.Numerics
         /// <param name="right">The scalar value.</param>
         /// <returns>The scaled vector.</returns>
         [Intrinsic]
-        public static Vector3D Multiply(Vector3D left, float right) => left * right;
+        public static Vector3D Multiply(Vector3D left, double right) => left * right;
 
         /// <summary>Multiplies a scalar value by a specified vector.</summary>
         /// <param name="left">The scaled value.</param>
         /// <param name="right">The vector.</param>
         /// <returns>The scaled vector.</returns>
         [Intrinsic]
-        public static Vector3D Multiply(float left, Vector3D right) => left * right;
+        public static Vector3D Multiply(double left, Vector3D right) => left * right;
 
-        /// <inheritdoc cref="Vector128.MultiplyAddEstimate(Vector128{float}, Vector128{float}, Vector128{float})" />
+        /// <inheritdoc cref="Vector128.MultiplyAddEstimate(Vector128{double}, Vector128{double}, Vector128{double})" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D MultiplyAddEstimate(Vector3D left, Vector3D right, Vector3D addend) => Vector128.MultiplyAddEstimate(left.AsVector128Unsafe(), right.AsVector128Unsafe(), addend.AsVector128Unsafe()).AsVector3D();
@@ -835,10 +835,10 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector3D Negate(Vector3D value) => -value;
 
-        /// <inheritdoc cref="Vector4D.None(Vector4D, float)" />
+        /// <inheritdoc cref="Vector4D.None(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool None(Vector3D vector, float value) => Vector128.None(vector, value);
+        public static bool None(Vector3D vector, double value) => Vector128.None(vector, value);
 
         /// <inheritdoc cref="Vector4D.NoneWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
@@ -905,7 +905,7 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector3D Sin, Vector3D Cos) SinCos(Vector3D vector)
         {
-            (Vector128<float> sin, Vector128<float> cos) = Vector128.SinCos(vector.AsVector128());
+            (Vector128<double> sin, Vector128<double> cos) = Vector128.SinCos(vector.AsVector128());
             return (sin.AsVector3D(), cos.AsVector3D());
         }
 
@@ -926,7 +926,7 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.Sum(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Sum(Vector3D value) => Vector128.Sum(value.AsVector128());
+        public static double Sum(Vector3D value) => Vector128.Sum(value.AsVector128());
 
         /// <summary>Transforms a vector by a specified 4x4 matrix.</summary>
         /// <param name="position">The vector to transform.</param>
@@ -972,7 +972,7 @@ namespace Invicta.Numerics
         /// <exception cref="ArgumentException">The number of elements in the current instance is greater than in the array.</exception>
         /// <exception cref="RankException"><paramref name="array" /> is multidimensional.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly void CopyTo(float[] array)
+        public readonly void CopyTo(double[] array)
         {
             // We explicitly don't check for `null` because historically this has thrown `NullReferenceException` for perf reasons
 
@@ -981,7 +981,7 @@ namespace Invicta.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref array[0]), this);
+            Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref array[0]), this);
         }
 
         /// <summary>Copies the elements of the vector to a specified array starting at a specified index position.</summary>
@@ -995,7 +995,7 @@ namespace Invicta.Numerics
         /// <paramref name="index" /> is greater than or equal to the array length.</exception>
         /// <exception cref="RankException"><paramref name="array" /> is multidimensional.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly void CopyTo(float[] array, int index)
+        public readonly void CopyTo(double[] array, int index)
         {
             // We explicitly don't check for `null` because historically this has thrown `NullReferenceException` for perf reasons
 
@@ -1009,35 +1009,35 @@ namespace Invicta.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref array[index]), this);
+            Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref array[index]), this);
         }
 
         /// <summary>Copies the vector to the given <see cref="Span{T}" />. The length of the destination span must be at least 3.</summary>
         /// <param name="destination">The destination span which the values are copied into.</param>
         /// <exception cref="ArgumentException">If number of elements in source vector is greater than those available in destination span.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly void CopyTo(Span<float> destination)
+        public readonly void CopyTo(Span<double> destination)
         {
             if (destination.Length < ElementCount)
             {
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
         }
 
         /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 3.</summary>
         /// <param name="destination">The destination span which the values are copied into.</param>
         /// <returns><see langword="true" /> if the source vector was successfully copied to <paramref name="destination" />. <see langword="false" /> if <paramref name="destination" /> is not large enough to hold the source vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool TryCopyTo(Span<float> destination)
+        public readonly bool TryCopyTo(Span<double> destination)
         {
             if (destination.Length < ElementCount)
             {
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
             return true;
         }
 
@@ -1062,14 +1062,14 @@ namespace Invicta.Numerics
         /// <returns>The vector's length.</returns>
         /// <altmember cref="LengthSquared" />
         [Intrinsic]
-        public readonly float Length() => float.Sqrt(LengthSquared());
+        public readonly double Length() => double.Sqrt(LengthSquared());
 
         /// <summary>Returns the length of the vector squared.</summary>
         /// <returns>The vector's length squared.</returns>
         /// <remarks>This operation offers better performance than a call to the <see cref="Length" /> method.</remarks>
         /// <altmember cref="Length" />
         [Intrinsic]
-        public readonly float LengthSquared() => Dot(this, this);
+        public readonly double LengthSquared() => Dot(this, this);
 
         /// <summary>Returns the string representation of the current instance using default formatting.</summary>
         /// <returns>The string representation of the current instance.</returns>
