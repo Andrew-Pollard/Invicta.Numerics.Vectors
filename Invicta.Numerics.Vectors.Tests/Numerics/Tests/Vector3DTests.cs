@@ -29,8 +29,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector3DMarshalSizeTest()
         {
-            Assert.Equal(12, Marshal.SizeOf<Vector3D>());
-            Assert.Equal(12, Marshal.SizeOf<Vector3D>(new Vector3D()));
+            Assert.Equal(24, Marshal.SizeOf<Vector3D>());
+            Assert.Equal(24, Marshal.SizeOf<Vector3D>(new Vector3D()));
         }
 
         [Theory]
@@ -1296,10 +1296,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public unsafe void Vector3DSizeofTest()
         {
-            Assert.Equal(12, sizeof(Vector3D));
-            Assert.Equal(24, sizeof(Vector3D_2x));
-            Assert.Equal(16, sizeof(Vector3DPlusFloat));
-            Assert.Equal(32, sizeof(Vector3DPlusFloat_2x));
+            Assert.Equal(24, sizeof(Vector3D));
+            Assert.Equal(48, sizeof(Vector3D_2x));
+            Assert.Equal(32, sizeof(Vector3DPlusDouble));
+            Assert.Equal(64, sizeof(Vector3DPlusDouble_2x));
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1310,17 +1310,17 @@ namespace Invicta.Numerics.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Vector3DPlusFloat
+        struct Vector3DPlusDouble
         {
             private Vector3D _v;
             private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Vector3DPlusFloat_2x
+        struct Vector3DPlusDouble_2x
         {
-            private Vector3DPlusFloat _a;
-            private Vector3DPlusFloat _b;
+            private Vector3DPlusDouble _a;
+            private Vector3DPlusDouble _b;
         }
 
         [Fact]

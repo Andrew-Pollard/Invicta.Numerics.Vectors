@@ -321,8 +321,8 @@ namespace Invicta.Numerics.Tests
         {
             Assert.Equal(16, sizeof(PlaneD));
             Assert.Equal(32, sizeof(PlaneD_2x));
-            Assert.Equal(20, sizeof(PlaneDPlusFloat));
-            Assert.Equal(40, sizeof(PlaneDPlusFloat_2x));
+            Assert.Equal(20, sizeof(PlaneDPlusDouble));
+            Assert.Equal(40, sizeof(PlaneDPlusDouble_2x));
         }
         */
 
@@ -347,17 +347,17 @@ namespace Invicta.Numerics.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct PlaneDPlusFloat
+        struct PlaneDPlusDouble
         {
             private PlaneD _v;
             private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct PlaneDPlusFloat_2x
+        struct PlaneDPlusDouble_2x
         {
-            private PlaneDPlusFloat _a;
-            private PlaneDPlusFloat _b;
+            private PlaneDPlusDouble _a;
+            private PlaneDPlusDouble _b;
         }
 
         // A test to make sure the fields are laid out how we expect

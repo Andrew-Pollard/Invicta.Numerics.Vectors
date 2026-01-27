@@ -1037,10 +1037,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public unsafe void Matrix3x2DSizeofTest()
         {
-            Assert.Equal(24, sizeof(Matrix3x2D));
-            Assert.Equal(48, sizeof(Matrix3x2D_2x));
-            Assert.Equal(28, sizeof(Matrix3x2DPlusFloat));
-            Assert.Equal(56, sizeof(Matrix3x2DPlusFloat_2x));
+            Assert.Equal(48, sizeof(Matrix3x2D));
+            Assert.Equal(96, sizeof(Matrix3x2D_2x));
+            Assert.Equal(56, sizeof(Matrix3x2DPlusDouble));
+            Assert.Equal(112, sizeof(Matrix3x2DPlusDouble_2x));
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1051,17 +1051,17 @@ namespace Invicta.Numerics.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Matrix3x2DPlusFloat
+        struct Matrix3x2DPlusDouble
         {
             private Matrix3x2D _v;
             private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Matrix3x2DPlusFloat_2x
+        struct Matrix3x2DPlusDouble_2x
         {
-            private Matrix3x2DPlusFloat _a;
-            private Matrix3x2DPlusFloat _b;
+            private Matrix3x2DPlusDouble _a;
+            private Matrix3x2DPlusDouble _b;
         }
 
         // A test to make sure the fields are laid out how we expect

@@ -987,10 +987,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public unsafe void QuaternionDSizeofTest()
         {
-            Assert.Equal(16, sizeof(QuaternionD));
-            Assert.Equal(32, sizeof(QuaternionD_2x));
-            Assert.Equal(20, sizeof(QuaternionDPlusFloat));
-            Assert.Equal(40, sizeof(QuaternionDPlusFloat_2x));
+            Assert.Equal(32, sizeof(QuaternionD));
+            Assert.Equal(64, sizeof(QuaternionD_2x));
+            Assert.Equal(40, sizeof(QuaternionDPlusDouble));
+            Assert.Equal(80, sizeof(QuaternionDPlusDouble_2x));
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1001,17 +1001,17 @@ namespace Invicta.Numerics.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct QuaternionDPlusFloat
+        struct QuaternionDPlusDouble
         {
             private QuaternionD _v;
             private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct QuaternionDPlusFloat_2x
+        struct QuaternionDPlusDouble_2x
         {
-            private QuaternionDPlusFloat _a;
-            private QuaternionDPlusFloat _b;
+            private QuaternionDPlusDouble _a;
+            private QuaternionDPlusDouble _b;
         }
 
         // A test to make sure the fields are laid out how we expect

@@ -30,8 +30,8 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public void Vector4DMarshalSizeTest()
         {
-            Assert.Equal(16, Marshal.SizeOf<Vector4D>());
-            Assert.Equal(16, Marshal.SizeOf<Vector4D>(new Vector4D()));
+            Assert.Equal(32, Marshal.SizeOf<Vector4D>());
+            Assert.Equal(32, Marshal.SizeOf<Vector4D>(new Vector4D()));
         }
 
         [Theory]
@@ -1550,10 +1550,10 @@ namespace Invicta.Numerics.Tests
         [Fact]
         public unsafe void Vector4DSizeofTest()
         {
-            Assert.Equal(16, sizeof(Vector4D));
-            Assert.Equal(32, sizeof(Vector4D_2x));
-            Assert.Equal(20, sizeof(Vector4DPlusFloat));
-            Assert.Equal(40, sizeof(Vector4DPlusFloat_2x));
+            Assert.Equal(32, sizeof(Vector4D));
+            Assert.Equal(64, sizeof(Vector4D_2x));
+            Assert.Equal(40, sizeof(Vector4DPlusDouble));
+            Assert.Equal(80, sizeof(Vector4DPlusDouble_2x));
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1564,17 +1564,17 @@ namespace Invicta.Numerics.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Vector4DPlusFloat
+        struct Vector4DPlusDouble
         {
             private Vector4D _v;
             private double _f;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Vector4DPlusFloat_2x
+        struct Vector4DPlusDouble_2x
         {
-            private Vector4DPlusFloat _a;
-            private Vector4DPlusFloat _b;
+            private Vector4DPlusDouble _a;
+            private Vector4DPlusDouble _b;
         }
 
         [Fact]
