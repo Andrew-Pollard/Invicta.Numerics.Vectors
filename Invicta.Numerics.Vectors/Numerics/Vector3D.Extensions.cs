@@ -12,22 +12,22 @@ namespace Invicta.Numerics
         /// <summary>Reinterprets a <see cref="Vector3D" /> as a new <see cref="Vector2D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector2D" />.</returns>
-        public static Vector2D AsVector2D(this Vector3D value) => value.AsVector128().AsVector2D();
+        public static Vector2D AsVector2D(this Vector3D value) => value.AsVector256().AsVector2D();
 
         /// <summary>Converts a <see cref="Vector3D" /> to a new <see cref="Vector4D" /> with the new elements zeroed.</summary>
         /// <param name="value">The vector to convert.</param>
         /// <returns><paramref name="value" /> converted to a new <see cref="Vector4D" /> with the new elements zeroed.</returns>
-        public static Vector4D AsVector4D(this Vector3D value) => value.AsVector128().AsVector4D();
+        public static Vector4D AsVector4D(this Vector3D value) => value.AsVector256().AsVector4D();
 
         /// <summary>Converts a <see cref="Vector3D" /> to a new <see cref="Vector4D" /> with the new elements undefined.</summary>
         /// <param name="value">The vector to convert.</param>
         /// <returns><paramref name="value" /> converted to a new <see cref="Vector4D" /> with the new elements undefined.</returns>
-        public static Vector4D AsVector4DUnsafe(this Vector3D value) => value.AsVector128Unsafe().AsVector4D();
+        public static Vector4D AsVector4DUnsafe(this Vector3D value) => value.AsVector256Unsafe().AsVector4D();
 
         /// <inheritdoc cref="ExtractMostSignificantBits(Vector4D)" />
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint ExtractMostSignificantBits(this Vector3D vector) => vector.AsVector128().ExtractMostSignificantBits();
+        public static uint ExtractMostSignificantBits(this Vector3D vector) => vector.AsVector256().ExtractMostSignificantBits();
 
         /// <inheritdoc cref="GetElement(Vector4D, int)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -37,7 +37,7 @@ namespace Invicta.Numerics
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
             }
-            return vector.AsVector128Unsafe().GetElement(index);
+            return vector.AsVector256Unsafe().GetElement(index);
         }
 
         /// <summary>Stores a vector at the given destination.</summary>
@@ -94,7 +94,7 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="ToScalar(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double ToScalar(this Vector3D vector) => vector.AsVector128Unsafe().ToScalar();
+        public static double ToScalar(this Vector3D vector) => vector.AsVector256Unsafe().ToScalar();
 
         /// <inheritdoc cref="WithElement(Vector4D, int, double)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -104,7 +104,7 @@ namespace Invicta.Numerics
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index);
             }
-            return vector.AsVector128Unsafe().WithElement(index, value).AsVector3D();
+            return vector.AsVector256Unsafe().WithElement(index, value).AsVector3D();
         }
     }
 }

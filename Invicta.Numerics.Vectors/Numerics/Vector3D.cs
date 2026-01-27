@@ -85,7 +85,7 @@ namespace Invicta.Numerics
         public static Vector3D AllBitsSet
         {
             [Intrinsic]
-            get => Vector128<double>.AllBitsSet.AsVector3D();
+            get => Vector256<double>.AllBitsSet.AsVector3D();
         }
 
         /// <inheritdoc cref="Vector4D.E" />
@@ -205,7 +205,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="op_Addition" /> method defines the addition operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator +(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() + right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator +(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() + right.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Divides the first vector by the second.</summary>
         /// <param name="left">The first vector.</param>
@@ -214,7 +214,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Vector3D.op_Division" /> method defines the division operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator /(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() / right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator /(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() / right.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Divides the specified vector by a specified scalar value.</summary>
         /// <param name="value1">The vector.</param>
@@ -223,7 +223,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Vector3D.op_Division" /> method defines the division operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator /(Vector3D value1, double value2) => (value1.AsVector128Unsafe() / value2).AsVector3D();
+        public static Vector3D operator /(Vector3D value1, double value2) => (value1.AsVector256Unsafe() / value2).AsVector3D();
 
         /// <summary>Returns a value that indicates whether each pair of elements in two specified vectors is equal.</summary>
         /// <param name="left">The first vector to compare.</param>
@@ -232,7 +232,7 @@ namespace Invicta.Numerics
         /// <remarks>Two <see cref="Vector3D" /> objects are equal if each element in <paramref name="left" /> is equal to the corresponding element in <paramref name="right" />.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator ==(Vector3D left, Vector3D right) => left.AsVector128() == right.AsVector128();
+        public static bool operator ==(Vector3D left, Vector3D right) => left.AsVector256() == right.AsVector256();
 
         /// <summary>Returns a value that indicates whether two specified vectors are not equal.</summary>
         /// <param name="left">The first vector to compare.</param>
@@ -248,7 +248,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Vector3D.op_Multiply" /> method defines the multiplication operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator *(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() * right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator *(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() * right.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Multiplies the specified vector by the specified scalar value.</summary>
         /// <param name="left">The vector.</param>
@@ -257,7 +257,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="Vector3D.op_Multiply" /> method defines the multiplication operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator *(Vector3D left, double right) => (left.AsVector128Unsafe() * right).AsVector3D();
+        public static Vector3D operator *(Vector3D left, double right) => (left.AsVector256Unsafe() * right).AsVector3D();
 
         /// <summary>Multiplies the scalar value by the specified vector.</summary>
         /// <param name="left">The vector.</param>
@@ -274,7 +274,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="op_Subtraction" /> method defines the subtraction operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator -(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() - right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator -(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() - right.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Negates the specified vector.</summary>
         /// <param name="value">The vector to negate.</param>
@@ -282,37 +282,37 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="op_UnaryNegation" /> method defines the unary negation operation for <see cref="Vector3D" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator -(Vector3D value) => (-value.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator -(Vector3D value) => (-value.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_BitwiseAnd(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator &(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() & right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator &(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() & right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_BitwiseOr(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator |(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() | right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator |(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() | right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_ExclusiveOr(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator ^(Vector3D left, Vector3D right) => (left.AsVector128Unsafe() ^ right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator ^(Vector3D left, Vector3D right) => (left.AsVector256Unsafe() ^ right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_LeftShift(Vector4D, int)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator <<(Vector3D value, int shiftAmount) => (value.AsVector128Unsafe() << shiftAmount).AsVector3D();
+        public static Vector3D operator <<(Vector3D value, int shiftAmount) => (value.AsVector256Unsafe() << shiftAmount).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_OnesComplement(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator ~(Vector3D value) => (~value.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D operator ~(Vector3D value) => (~value.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_RightShift(Vector4D, int)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator >>(Vector3D value, int shiftAmount) => (value.AsVector128Unsafe() >> shiftAmount).AsVector3D();
+        public static Vector3D operator >>(Vector3D value, int shiftAmount) => (value.AsVector256Unsafe() >> shiftAmount).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.op_UnaryPlus(Vector4D)" />
         [Intrinsic]
@@ -322,14 +322,14 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.op_UnsignedRightShift(Vector4D, int)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D operator >>>(Vector3D value, int shiftAmount) => (value.AsVector128Unsafe() >>> shiftAmount).AsVector3D();
+        public static Vector3D operator >>>(Vector3D value, int shiftAmount) => (value.AsVector256Unsafe() >>> shiftAmount).AsVector3D();
 
         /// <summary>Returns a vector whose elements are the absolute values of each of the specified vector's elements.</summary>
         /// <param name="value">A vector.</param>
         /// <returns>The absolute value vector.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Abs(Vector3D value) => Vector128.Abs(value.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Abs(Vector3D value) => Vector256.Abs(value.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Adds two vectors together.</summary>
         /// <param name="left">The first vector to add.</param>
@@ -341,27 +341,27 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.All(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool All(Vector3D vector, double value) => Vector128.All(vector, value);
+        public static bool All(Vector3D vector, double value) => Vector256.All(vector, value);
 
         /// <inheritdoc cref="Vector4D.AllWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AllWhereAllBitsSet(Vector3D vector) => Vector128.AllWhereAllBitsSet(vector);
+        public static bool AllWhereAllBitsSet(Vector3D vector) => Vector256.AllWhereAllBitsSet(vector);
 
         /// <inheritdoc cref="Vector4D.AndNot(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D AndNot(Vector3D left, Vector3D right) => Vector128.AndNot(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D AndNot(Vector3D left, Vector3D right) => Vector256.AndNot(left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Any(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Any(Vector3D vector, double value) => Vector128.Any(vector, value);
+        public static bool Any(Vector3D vector, double value) => Vector256.Any(vector, value);
 
         /// <inheritdoc cref="Vector4D.AnyWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AnyWhereAllBitsSet(Vector3D vector) => Vector128.AnyWhereAllBitsSet(vector);
+        public static bool AnyWhereAllBitsSet(Vector3D vector) => Vector256.AnyWhereAllBitsSet(vector);
 
         /// <inheritdoc cref="Vector4D.BitwiseAnd(Vector4D, Vector4D)" />
         [Intrinsic]
@@ -374,42 +374,42 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.Clamp(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Clamp(Vector3D value1, Vector3D min, Vector3D max) => Vector128.Clamp(value1.AsVector128Unsafe(), min.AsVector128Unsafe(), max.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Clamp(Vector3D value1, Vector3D min, Vector3D max) => Vector256.Clamp(value1.AsVector256Unsafe(), min.AsVector256Unsafe(), max.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.ClampNative(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D ClampNative(Vector3D value1, Vector3D min, Vector3D max) => Vector128.ClampNative(value1.AsVector128Unsafe(), min.AsVector128Unsafe(), max.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D ClampNative(Vector3D value1, Vector3D min, Vector3D max) => Vector256.ClampNative(value1.AsVector256Unsafe(), min.AsVector256Unsafe(), max.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.ConditionalSelect(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D ConditionalSelect(Vector3D condition, Vector3D left, Vector3D right) => Vector128.ConditionalSelect(condition.AsVector128Unsafe(), left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D ConditionalSelect(Vector3D condition, Vector3D left, Vector3D right) => Vector256.ConditionalSelect(condition.AsVector256Unsafe(), left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.CopySign(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D CopySign(Vector3D value, Vector3D sign) => Vector128.CopySign(value.AsVector128Unsafe(), sign.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D CopySign(Vector3D value, Vector3D sign) => Vector256.CopySign(value.AsVector256Unsafe(), sign.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Cos(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Cos(Vector3D vector) => Vector128.Cos(vector.AsVector128()).AsVector3D();
+        public static Vector3D Cos(Vector3D vector) => Vector256.Cos(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Count(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Count(Vector3D vector, double value) => Vector128.Count(vector, value);
+        public static int Count(Vector3D vector, double value) => Vector256.Count(vector, value);
 
         /// <inheritdoc cref="Vector4D.CountWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int CountWhereAllBitsSet(Vector3D vector) => Vector128.CountWhereAllBitsSet(vector);
+        public static int CountWhereAllBitsSet(Vector3D vector) => Vector256.CountWhereAllBitsSet(vector);
 
         /// <summary>Creates a new <see cref="Vector3D" /> object whose three elements have the same value.</summary>
         /// <param name="value">The value to assign to all three elements.</param>
         /// <returns>A new <see cref="Vector3D" /> whose three elements have the same value.</returns>
         [Intrinsic]
-        public static Vector3D Create(double value) => Vector128.Create(value).AsVector3D();
+        public static Vector3D Create(double value) => Vector256.Create(value).AsVector3D();
 
         /// <summary>Creates a new <see cref="Vector3D" /> object from the specified <see cref="Vector2D" /> object and a Z and a W component.</summary>
         /// <param name="vector">The vector to use for the X and Y components.</param>
@@ -419,7 +419,7 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Create(Vector2D vector, double z)
         {
-            return vector.AsVector128Unsafe()
+            return vector.AsVector256Unsafe()
                          .WithElement(2, z)
                          .AsVector3D();
         }
@@ -430,7 +430,7 @@ namespace Invicta.Numerics
         /// <param name="z">The value to assign to the <see cref="Z" /> field.</param>
         /// <returns>A new <see cref="Vector3D" /> whose elements have the specified values.</returns>
         [Intrinsic]
-        public static Vector3D Create(double x, double y, double z) => Vector128.Create(x, y, z, 0).AsVector3D();
+        public static Vector3D Create(double x, double y, double z) => Vector256.Create(x, y, z, 0).AsVector3D();
 
         /// <summary>Constructs a vector from the given <see cref="ReadOnlySpan{Double}" />. The span must contain at least 3 elements.</summary>
         /// <param name="values">The span of elements to assign to the vector.</param>
@@ -450,13 +450,13 @@ namespace Invicta.Numerics
         /// <param name="x">The value to assign to the <see cref="X" /> field.</param>
         /// <returns>A new <see cref="Vector3D" /> with <see cref="X" /> initialized <paramref name="x" /> and the remaining elements initialized to zero.</returns>
         [Intrinsic]
-        public static Vector3D CreateScalar(double x) => Vector128.CreateScalar(x).AsVector3D();
+        public static Vector3D CreateScalar(double x) => Vector256.CreateScalar(x).AsVector3D();
 
         /// <summary>Creates a vector with <see cref="X" /> initialized to the specified value and the remaining elements left uninitialized.</summary>
         /// <param name="x">The value to assign to the <see cref="X" /> field.</param>
         /// <returns>A new <see cref="Vector3D" /> with <see cref="X" /> initialized <paramref name="x" /> and the remaining elements left uninitialized.</returns>
         [Intrinsic]
-        public static Vector3D CreateScalarUnsafe(double x) => Vector128.CreateScalarUnsafe(x).AsVector3D();
+        public static Vector3D CreateScalarUnsafe(double x) => Vector256.CreateScalarUnsafe(x).AsVector3D();
 
         /// <summary>Computes the cross product of two vectors.</summary>
         /// <param name="vector1">The first vector.</param>
@@ -468,11 +468,11 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMVector3Cross method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
-            Vector128<double> v1 = vector1.AsVector128Unsafe();
-            Vector128<double> v2 = vector2.AsVector128Unsafe();
+            Vector256<double> v1 = vector1.AsVector256Unsafe();
+            Vector256<double> v2 = vector2.AsVector256Unsafe();
 
-            Vector128<double> temp1 = Vector128.Shuffle(v1, Vector128.Create(1, 2, 0, 0)) * Vector128.Shuffle(v2, Vector128.Create(2, 0, 1, 0));
-            Vector128<double> temp2 = Vector128.Shuffle(v1, Vector128.Create(2, 0, 1, 0)) * Vector128.Shuffle(v2, Vector128.Create(1, 2, 0, 0));
+            Vector256<double> temp1 = Vector256.Shuffle(v1, Vector256.Create(1, 2, 0, 0)) * Vector256.Shuffle(v2, Vector256.Create(2, 0, 1, 0));
+            Vector256<double> temp2 = Vector256.Shuffle(v1, Vector256.Create(2, 0, 1, 0)) * Vector256.Shuffle(v2, Vector256.Create(1, 2, 0, 0));
 
             return (temp1 - temp2).AsVector3D();
         }
@@ -480,7 +480,7 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.DegreesToRadians(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D DegreesToRadians(Vector3D degrees) => Vector128.DegreesToRadians(degrees.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D DegreesToRadians(Vector3D degrees) => Vector256.DegreesToRadians(degrees.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Computes the Euclidean distance between the two given points.</summary>
         /// <param name="value1">The first point.</param>
@@ -516,151 +516,151 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Dot(Vector3D vector1, Vector3D vector2) => Vector128.Dot(vector1.AsVector128(), vector2.AsVector128());
+        public static double Dot(Vector3D vector1, Vector3D vector2) => Vector256.Dot(vector1.AsVector256(), vector2.AsVector256());
 
         /// <inheritdoc cref="Vector4D.Exp(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Exp(Vector3D vector) => Vector128.Exp(vector.AsVector128()).AsVector3D();
+        public static Vector3D Exp(Vector3D vector) => Vector256.Exp(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Equals(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Equals(Vector3D left, Vector3D right) => Vector128.Equals(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Equals(Vector3D left, Vector3D right) => Vector256.Equals(left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.EqualsAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EqualsAll(Vector3D left, Vector3D right) => Vector128.EqualsAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool EqualsAll(Vector3D left, Vector3D right) => Vector256.EqualsAll(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.EqualsAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EqualsAny(Vector3D left, Vector3D right) => Vector128.EqualsAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool EqualsAny(Vector3D left, Vector3D right) => Vector256.EqualsAny(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
-        /// <inheritdoc cref="Vector128.MultiplyAddEstimate(Vector128{double}, Vector128{double}, Vector128{double})" />
+        /// <inheritdoc cref="Vector256.MultiplyAddEstimate(Vector256{double}, Vector256{double}, Vector256{double})" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D FusedMultiplyAdd(Vector3D left, Vector3D right, Vector3D addend) => Vector128.FusedMultiplyAdd(left.AsVector128Unsafe(), right.AsVector128Unsafe(), addend.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D FusedMultiplyAdd(Vector3D left, Vector3D right, Vector3D addend) => Vector256.FusedMultiplyAdd(left.AsVector256Unsafe(), right.AsVector256Unsafe(), addend.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.GreaterThan(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D GreaterThan(Vector3D left, Vector3D right) => Vector128.GreaterThan(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D GreaterThan(Vector3D left, Vector3D right) => Vector256.GreaterThan(left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.GreaterThanAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GreaterThanAll(Vector3D left, Vector3D right) => Vector128.GreaterThanAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool GreaterThanAll(Vector3D left, Vector3D right) => Vector256.GreaterThanAll(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.GreaterThanAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GreaterThanAny(Vector3D left, Vector3D right) => Vector128.GreaterThanAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool GreaterThanAny(Vector3D left, Vector3D right) => Vector256.GreaterThanAny(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.GreaterThanOrEqual(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D GreaterThanOrEqual(Vector3D left, Vector3D right) => Vector128.GreaterThanOrEqual(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D GreaterThanOrEqual(Vector3D left, Vector3D right) => Vector256.GreaterThanOrEqual(left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.GreaterThanOrEqualAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GreaterThanOrEqualAll(Vector3D left, Vector3D right) => Vector128.GreaterThanOrEqualAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool GreaterThanOrEqualAll(Vector3D left, Vector3D right) => Vector256.GreaterThanOrEqualAll(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.GreaterThanOrEqualAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GreaterThanOrEqualAny(Vector3D left, Vector3D right) => Vector128.GreaterThanOrEqualAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool GreaterThanOrEqualAny(Vector3D left, Vector3D right) => Vector256.GreaterThanOrEqualAny(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.Hypot(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Hypot(Vector3D x, Vector3D y) => Vector128.Hypot(x.AsVector128Unsafe(), y.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Hypot(Vector3D x, Vector3D y) => Vector256.Hypot(x.AsVector256Unsafe(), y.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IndexOf(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOf(Vector3D vector, double value) => Vector128.IndexOf(vector, value);
+        public static int IndexOf(Vector3D vector, double value) => Vector256.IndexOf(vector, value);
 
         /// <inheritdoc cref="Vector4D.IndexOfWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOfWhereAllBitsSet(Vector3D vector) => Vector128.IndexOfWhereAllBitsSet(vector);
+        public static int IndexOfWhereAllBitsSet(Vector3D vector) => Vector256.IndexOfWhereAllBitsSet(vector);
 
         /// <inheritdoc cref="Vector4D.IsEvenInteger(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsEvenInteger(Vector3D vector) => Vector128.IsEvenInteger(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsEvenInteger(Vector3D vector) => Vector256.IsEvenInteger(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsFinite(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsFinite(Vector3D vector) => Vector128.IsFinite(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsFinite(Vector3D vector) => Vector256.IsFinite(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsInfinity(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsInfinity(Vector3D vector) => Vector128.IsInfinity(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsInfinity(Vector3D vector) => Vector256.IsInfinity(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsInteger(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsInteger(Vector3D vector) => Vector128.IsInteger(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsInteger(Vector3D vector) => Vector256.IsInteger(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsNaN(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsNaN(Vector3D vector) => Vector128.IsNaN(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsNaN(Vector3D vector) => Vector256.IsNaN(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsNegative(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsNegative(Vector3D vector) => Vector128.IsNegative(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsNegative(Vector3D vector) => Vector256.IsNegative(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsNegativeInfinity(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsNegativeInfinity(Vector3D vector) => Vector128.IsNegativeInfinity(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsNegativeInfinity(Vector3D vector) => Vector256.IsNegativeInfinity(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsNormal(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsNormal(Vector3D vector) => Vector128.IsNormal(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsNormal(Vector3D vector) => Vector256.IsNormal(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsOddInteger(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsOddInteger(Vector3D vector) => Vector128.IsOddInteger(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsOddInteger(Vector3D vector) => Vector256.IsOddInteger(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsPositive(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsPositive(Vector3D vector) => Vector128.IsPositive(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsPositive(Vector3D vector) => Vector256.IsPositive(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsPositiveInfinity(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsPositiveInfinity(Vector3D vector) => Vector128.IsPositiveInfinity(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsPositiveInfinity(Vector3D vector) => Vector256.IsPositiveInfinity(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsSubnormal(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsSubnormal(Vector3D vector) => Vector128.IsSubnormal(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsSubnormal(Vector3D vector) => Vector256.IsSubnormal(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.IsZero(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D IsZero(Vector3D vector) => Vector128.IsZero(vector.AsVector128()).AsVector3D();
+        public static Vector3D IsZero(Vector3D vector) => Vector256.IsZero(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.LastIndexOf(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int LastIndexOf(Vector3D vector, double value) => Vector128.LastIndexOf(vector, value);
+        public static int LastIndexOf(Vector3D vector, double value) => Vector256.LastIndexOf(vector, value);
 
         /// <inheritdoc cref="Vector4D.LastIndexOfWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int LastIndexOfWhereAllBitsSet(Vector3D vector) => Vector128.LastIndexOfWhereAllBitsSet(vector);
+        public static int LastIndexOfWhereAllBitsSet(Vector3D vector) => Vector256.LastIndexOfWhereAllBitsSet(vector);
 
         /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, double)" />
         [Intrinsic]
@@ -670,37 +670,37 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.Lerp(Vector4D, Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Lerp(Vector3D value1, Vector3D value2, Vector3D amount) => Vector128.Lerp(value1.AsVector128Unsafe(), value2.AsVector128Unsafe(), amount.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Lerp(Vector3D value1, Vector3D value2, Vector3D amount) => Vector256.Lerp(value1.AsVector256Unsafe(), value2.AsVector256Unsafe(), amount.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.LessThan(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D LessThan(Vector3D left, Vector3D right) => Vector128.LessThan(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D LessThan(Vector3D left, Vector3D right) => Vector256.LessThan(left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.LessThanAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool LessThanAll(Vector3D left, Vector3D right) => Vector128.LessThanAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool LessThanAll(Vector3D left, Vector3D right) => Vector256.LessThanAll(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.LessThanAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool LessThanAny(Vector3D left, Vector3D right) => Vector128.LessThanAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool LessThanAny(Vector3D left, Vector3D right) => Vector256.LessThanAny(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.LessThanOrEqual(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D LessThanOrEqual(Vector3D left, Vector3D right) => Vector128.LessThanOrEqual(left.AsVector128Unsafe(), right.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D LessThanOrEqual(Vector3D left, Vector3D right) => Vector256.LessThanOrEqual(left.AsVector256Unsafe(), right.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.LessThanOrEqualAll(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool LessThanOrEqualAll(Vector3D left, Vector3D right) => Vector128.LessThanOrEqualAll(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool LessThanOrEqualAll(Vector3D left, Vector3D right) => Vector256.LessThanOrEqualAll(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.LessThanOrEqualAny(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool LessThanOrEqualAny(Vector3D left, Vector3D right) => Vector128.LessThanOrEqualAny(left.AsVector128Unsafe(), right.AsVector128Unsafe());
+        public static bool LessThanOrEqualAny(Vector3D left, Vector3D right) => Vector256.LessThanOrEqualAny(left.AsVector256Unsafe(), right.AsVector256Unsafe());
 
         /// <inheritdoc cref="Vector4D.Load(double*)" />
         [Intrinsic]
@@ -726,7 +726,7 @@ namespace Invicta.Numerics
         [CLSCompliant(false)]
         public static unsafe Vector3D LoadAlignedNonTemporal(double* source) => LoadAligned(source);
 
-        /// <inheritdoc cref="Vector128.LoadUnsafe{T}(ref readonly T)" />
+        /// <inheritdoc cref="Vector256.LoadUnsafe{T}(ref readonly T)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D LoadUnsafe(ref readonly double source)
@@ -747,61 +747,61 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="Vector4D.Log(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Log(Vector3D vector) => Vector128.Log(Vector4D.Create(vector, 1.0d).AsVector128()).AsVector3D();
+        public static Vector3D Log(Vector3D vector) => Vector256.Log(Vector4D.Create(vector, 1.0d).AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Log2(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Log2(Vector3D vector) => Vector128.Log2(Vector4D.Create(vector, 1.0d).AsVector128()).AsVector3D();
+        public static Vector3D Log2(Vector3D vector) => Vector256.Log2(Vector4D.Create(vector, 1.0d).AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Max(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Max(Vector3D value1, Vector3D value2) => Vector128.Max(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Max(Vector3D value1, Vector3D value2) => Vector256.Max(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MaxMagnitude(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MaxMagnitude(Vector3D value1, Vector3D value2) => Vector128.MaxMagnitude(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MaxMagnitude(Vector3D value1, Vector3D value2) => Vector256.MaxMagnitude(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MaxMagnitudeNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MaxMagnitudeNumber(Vector3D value1, Vector3D value2) => Vector128.MaxMagnitudeNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MaxMagnitudeNumber(Vector3D value1, Vector3D value2) => Vector256.MaxMagnitudeNumber(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MaxNative(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MaxNative(Vector3D value1, Vector3D value2) => Vector128.MaxNative(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MaxNative(Vector3D value1, Vector3D value2) => Vector256.MaxNative(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MaxNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MaxNumber(Vector3D value1, Vector3D value2) => Vector128.MaxNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MaxNumber(Vector3D value1, Vector3D value2) => Vector256.MaxNumber(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Min(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Min(Vector3D value1, Vector3D value2) => Vector128.Min(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Min(Vector3D value1, Vector3D value2) => Vector256.Min(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MinMagnitude(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MinMagnitude(Vector3D value1, Vector3D value2) => Vector128.MinMagnitude(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MinMagnitude(Vector3D value1, Vector3D value2) => Vector256.MinMagnitude(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MinMagnitudeNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MinMagnitudeNumber(Vector3D value1, Vector3D value2) => Vector128.MinMagnitudeNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MinMagnitudeNumber(Vector3D value1, Vector3D value2) => Vector256.MinMagnitudeNumber(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MinNative(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MinNative(Vector3D value1, Vector3D value2) => Vector128.MinNative(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MinNative(Vector3D value1, Vector3D value2) => Vector256.MinNative(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.MinNumber(Vector4D, Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MinNumber(Vector3D value1, Vector3D value2) => Vector128.MinNumber(value1.AsVector128Unsafe(), value2.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MinNumber(Vector3D value1, Vector3D value2) => Vector256.MinNumber(value1.AsVector256Unsafe(), value2.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Returns a new vector whose values are the product of each pair of elements in two specified vectors.</summary>
         /// <param name="left">The first vector.</param>
@@ -824,10 +824,10 @@ namespace Invicta.Numerics
         [Intrinsic]
         public static Vector3D Multiply(double left, Vector3D right) => left * right;
 
-        /// <inheritdoc cref="Vector128.MultiplyAddEstimate(Vector128{double}, Vector128{double}, Vector128{double})" />
+        /// <inheritdoc cref="Vector256.MultiplyAddEstimate(Vector256{double}, Vector256{double}, Vector256{double})" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D MultiplyAddEstimate(Vector3D left, Vector3D right, Vector3D addend) => Vector128.MultiplyAddEstimate(left.AsVector128Unsafe(), right.AsVector128Unsafe(), addend.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D MultiplyAddEstimate(Vector3D left, Vector3D right, Vector3D addend) => Vector256.MultiplyAddEstimate(left.AsVector256Unsafe(), right.AsVector256Unsafe(), addend.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Negates a specified vector.</summary>
         /// <param name="value">The vector to negate.</param>
@@ -838,12 +838,12 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.None(Vector4D, double)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool None(Vector3D vector, double value) => Vector128.None(vector, value);
+        public static bool None(Vector3D vector, double value) => Vector256.None(vector, value);
 
         /// <inheritdoc cref="Vector4D.NoneWhereAllBitsSet(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool NoneWhereAllBitsSet(Vector3D vector) => Vector128.NoneWhereAllBitsSet(vector);
+        public static bool NoneWhereAllBitsSet(Vector3D vector) => Vector256.NoneWhereAllBitsSet(vector);
 
         /// <summary>Returns a vector with the same direction as the specified vector, but with a length of one.</summary>
         /// <param name="value">The vector to normalize.</param>
@@ -858,7 +858,7 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.RadiansToDegrees(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D RadiansToDegrees(Vector3D radians) => Vector128.RadiansToDegrees(radians.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D RadiansToDegrees(Vector3D radians) => Vector256.RadiansToDegrees(radians.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Returns the reflection of a vector off a surface that has the specified normal.</summary>
         /// <param name="vector">The source vector.</param>
@@ -877,11 +877,11 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="Vector4D.Round(Vector4D)" />
         [Intrinsic]
-        public static Vector3D Round(Vector3D vector) => Vector128.Round(vector.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Round(Vector3D vector) => Vector256.Round(vector.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Round(Vector4D, MidpointRounding)" />
         [Intrinsic]
-        public static Vector3D Round(Vector3D vector, MidpointRounding mode) => Vector128.Round(vector.AsVector128Unsafe(), mode).AsVector3D();
+        public static Vector3D Round(Vector3D vector, MidpointRounding mode) => Vector256.Round(vector.AsVector256Unsafe(), mode).AsVector3D();
 
         /// <summary>Creates a new vector by selecting values from an input vector using a set of indices.</summary>
         /// <param name="vector">The input vector from which values are selected.</param>
@@ -892,20 +892,20 @@ namespace Invicta.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Shuffle(Vector3D vector, byte xIndex, byte yIndex, byte zIndex)
         {
-            // We do `AsVector128` instead of `AsVector128Unsafe` so that indices which
-            // are out of range for Vector3D but in range for Vector128 still produce 0
-            return Vector128.Shuffle(vector.AsVector128(), Vector128.Create(xIndex, yIndex, zIndex, 3)).AsVector3D();
+            // We do `AsVector256` instead of `AsVector256Unsafe` so that indices which
+            // are out of range for Vector3D but in range for Vector256 still produce 0
+            return Vector256.Shuffle(vector.AsVector256(), Vector256.Create(xIndex, yIndex, zIndex, 3)).AsVector3D();
         }
 
         /// <inheritdoc cref="Vector4D.Sin(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D Sin(Vector3D vector) => Vector128.Sin(vector.AsVector128()).AsVector3D();
+        public static Vector3D Sin(Vector3D vector) => Vector256.Sin(vector.AsVector256()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.SinCos(Vector4D)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector3D Sin, Vector3D Cos) SinCos(Vector3D vector)
         {
-            (Vector128<double> sin, Vector128<double> cos) = Vector128.SinCos(vector.AsVector128());
+            (Vector256<double> sin, Vector256<double> cos) = Vector256.SinCos(vector.AsVector256());
             return (sin.AsVector3D(), cos.AsVector3D());
         }
 
@@ -914,7 +914,7 @@ namespace Invicta.Numerics
         /// <returns>The square root vector.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3D SquareRoot(Vector3D value) => Vector128.Sqrt(value.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D SquareRoot(Vector3D value) => Vector256.Sqrt(value.AsVector256Unsafe()).AsVector3D();
 
         /// <summary>Subtracts the second vector from the first.</summary>
         /// <param name="left">The first vector.</param>
@@ -926,7 +926,7 @@ namespace Invicta.Numerics
         /// <inheritdoc cref="Vector4D.Sum(Vector4D)" />
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Sum(Vector3D value) => Vector128.Sum(value.AsVector128());
+        public static double Sum(Vector3D value) => Vector256.Sum(value.AsVector256());
 
         /// <summary>Transforms a vector by a specified 4x4 matrix.</summary>
         /// <param name="position">The vector to transform.</param>
@@ -959,7 +959,7 @@ namespace Invicta.Numerics
 
         /// <inheritdoc cref="Vector4D.Truncate(Vector4D)" />
         [Intrinsic]
-        public static Vector3D Truncate(Vector3D vector) => Vector128.Truncate(vector.AsVector128Unsafe()).AsVector3D();
+        public static Vector3D Truncate(Vector3D vector) => Vector256.Truncate(vector.AsVector256Unsafe()).AsVector3D();
 
         /// <inheritdoc cref="Vector4D.Xor(Vector4D, Vector4D)" />
         [Intrinsic]
@@ -1052,7 +1052,7 @@ namespace Invicta.Numerics
         /// <returns><see langword="true" /> if the two vectors are equal; otherwise, <see langword="false" />.</returns>
         /// <remarks>Two vectors are equal if their <see cref="X" />, <see cref="Y" />, and <see cref="Z" /> elements are equal.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Equals(Vector3D other) => this.AsVector128().Equals(other.AsVector128());
+        public readonly bool Equals(Vector3D other) => this.AsVector256().Equals(other.AsVector256());
 
         /// <summary>Returns the hash code for this instance.</summary>
         /// <returns>The hash code.</returns>

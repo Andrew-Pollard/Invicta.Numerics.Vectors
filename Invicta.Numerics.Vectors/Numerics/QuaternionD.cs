@@ -70,13 +70,13 @@ namespace Invicta.Numerics
         public double this[int index]
         {
             [Intrinsic]
-            readonly get => this.AsVector128().GetElement(index);
+            readonly get => this.AsVector256().GetElement(index);
 
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                this = this.AsVector128().WithElement(index, value).AsQuaternionD();
+                this = this.AsVector256().WithElement(index, value).AsQuaternionD();
             }
         }
 
@@ -92,7 +92,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="op_Addition" /> method defines the operation of the addition operator for <see cref="QuaternionD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD operator +(QuaternionD value1, QuaternionD value2) => (value1.AsVector128() + value2.AsVector128()).AsQuaternionD();
+        public static QuaternionD operator +(QuaternionD value1, QuaternionD value2) => (value1.AsVector256() + value2.AsVector256()).AsQuaternionD();
 
         /// <summary>Divides one quaternion by a second quaternion.</summary>
         /// <param name="value1">The dividend.</param>
@@ -109,7 +109,7 @@ namespace Invicta.Numerics
         /// The <see cref="op_Equality" /> method defines the operation of the equality operator for <see cref="QuaternionD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator ==(QuaternionD value1, QuaternionD value2) => value1.AsVector128() == value2.AsVector128();
+        public static bool operator ==(QuaternionD value1, QuaternionD value2) => value1.AsVector256() == value2.AsVector256();
 
         /// <summary>Returns a value that indicates whether two quaternions are not equal.</summary>
         /// <param name="value1">The first quaternion to compare.</param>
@@ -129,13 +129,13 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMQuaternionMultiply method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            Vector128<double> left = value1.AsVector128();
-            Vector128<double> right = value2.AsVector128();
+            Vector256<double> left = value1.AsVector256();
+            Vector256<double> right = value2.AsVector256();
 
-            Vector128<double> result = right * left.GetElement(3);
-            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(3, 2, 1, 0)) * left.GetElement(0), Vector128.Create(+1.0d, -1.0d, +1.0d, -1.0d), result);
-            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(2, 3, 0, 1)) * left.GetElement(1), Vector128.Create(+1.0d, +1.0d, -1.0d, -1.0d), result);
-            result = Vector128.MultiplyAddEstimate(Vector128.Shuffle(right, Vector128.Create(1, 0, 3, 2)) * left.GetElement(2), Vector128.Create(-1.0d, +1.0d, +1.0d, -1.0d), result);
+            Vector256<double> result = right * left.GetElement(3);
+            result = Vector256.MultiplyAddEstimate(Vector256.Shuffle(right, Vector256.Create(3, 2, 1, 0)) * left.GetElement(0), Vector256.Create(+1.0d, -1.0d, +1.0d, -1.0d), result);
+            result = Vector256.MultiplyAddEstimate(Vector256.Shuffle(right, Vector256.Create(2, 3, 0, 1)) * left.GetElement(1), Vector256.Create(+1.0d, +1.0d, -1.0d, -1.0d), result);
+            result = Vector256.MultiplyAddEstimate(Vector256.Shuffle(right, Vector256.Create(1, 0, 3, 2)) * left.GetElement(2), Vector256.Create(-1.0d, +1.0d, +1.0d, -1.0d), result);
             return result.AsQuaternionD();
         }
 
@@ -146,7 +146,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="QuaternionD.op_Multiply" /> method defines the operation of the multiplication operator for <see cref="QuaternionD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD operator *(QuaternionD value1, double value2) => (value1.AsVector128() * value2).AsQuaternionD();
+        public static QuaternionD operator *(QuaternionD value1, double value2) => (value1.AsVector256() * value2).AsQuaternionD();
 
         /// <summary>Subtracts each element in a second quaternion from its corresponding element in a first quaternion.</summary>
         /// <param name="value1">The first quaternion.</param>
@@ -155,7 +155,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="op_Subtraction" /> method defines the operation of the subtraction operator for <see cref="QuaternionD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD operator -(QuaternionD value1, QuaternionD value2) => (value1.AsVector128() - value2.AsVector128()).AsQuaternionD();
+        public static QuaternionD operator -(QuaternionD value1, QuaternionD value2) => (value1.AsVector256() - value2.AsVector256()).AsQuaternionD();
 
         /// <summary>Reverses the sign of each component of the quaternion.</summary>
         /// <param name="value">The quaternion to negate.</param>
@@ -163,7 +163,7 @@ namespace Invicta.Numerics
         /// <remarks>The <see cref="op_UnaryNegation" /> method defines the operation of the unary negation operator for <see cref="QuaternionD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD operator -(QuaternionD value) => (-value.AsVector128()).AsQuaternionD();
+        public static QuaternionD operator -(QuaternionD value) => (-value.AsVector256()).AsQuaternionD();
 
         /// <summary>Adds each element in one quaternion with its corresponding element in a second quaternion.</summary>
         /// <param name="value1">The first quaternion.</param>
@@ -188,7 +188,7 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMQuaternionConjugate method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            return (value.AsVector128() * Vector128.Create(-1.0d, -1.0d, -1.0d, 1.0d)).AsQuaternionD();
+            return (value.AsVector256() * Vector256.Create(-1.0d, -1.0d, -1.0d, 1.0d)).AsQuaternionD();
         }
 
         /// <summary>Creates a <see cref="QuaternionD" /> from the specified components.</summary>
@@ -198,7 +198,7 @@ namespace Invicta.Numerics
         /// <param name="w">The value to assign to the W component of the quaternion.</param>
         /// <returns>A <see cref="QuaternionD" /> created from the specified components.</returns>>
         [Intrinsic]
-        public static QuaternionD Create(double x, double y, double z, double w) => Vector128.Create(x, y, z, w).AsQuaternionD();
+        public static QuaternionD Create(double x, double y, double z, double w) => Vector256.Create(x, y, z, w).AsQuaternionD();
 
         /// <summary>Creates a <see cref="QuaternionD" /> from the specified vector and rotation parts.</summary>
         /// <param name="vectorPart">The vector part of the quaternion.</param>
@@ -309,7 +309,7 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Dot(QuaternionD quaternion1, QuaternionD quaternion2) => Vector128.Dot(quaternion1.AsVector128(), quaternion2.AsVector128());
+        public static double Dot(QuaternionD quaternion1, QuaternionD quaternion2) => Vector256.Dot(quaternion1.AsVector256(), quaternion2.AsVector256());
 
         /// <summary>Returns the inverse of a quaternion.</summary>
         /// <param name="value">The quaternion.</param>
@@ -327,10 +327,10 @@ namespace Invicta.Numerics
             // q   = ( -------------   ------------- )
             //       (  a^2 + |v|^2  ,  a^2 + |v|^2  )
 
-            Vector128<double> lengthSquared = Vector128.Create(value.LengthSquared());
-            return Vector128.AndNot(
-                (Conjugate(value).AsVector128() / lengthSquared),
-                Vector128.LessThanOrEqual(lengthSquared, Vector128.Create(Epsilon))
+            Vector256<double> lengthSquared = Vector256.Create(value.LengthSquared());
+            return Vector256.AndNot(
+                (Conjugate(value).AsVector256() / lengthSquared),
+                Vector256.LessThanOrEqual(lengthSquared, Vector256.Create(Epsilon))
             ).AsQuaternionD();
         }
 
@@ -341,15 +341,15 @@ namespace Invicta.Numerics
         /// <returns>The interpolated quaternion.</returns>
         public static QuaternionD Lerp(QuaternionD quaternion1, QuaternionD quaternion2, double amount)
         {
-            Vector128<double> q2 = quaternion2.AsVector128();
+            Vector256<double> q2 = quaternion2.AsVector256();
 
-            q2 = Vector128.ConditionalSelect(
-                Vector128.GreaterThanOrEqual(Vector128.Create(Dot(quaternion1, quaternion2)), Vector128<double>.Zero),
+            q2 = Vector256.ConditionalSelect(
+                Vector256.GreaterThanOrEqual(Vector256.Create(Dot(quaternion1, quaternion2)), Vector256<double>.Zero),
                  q2,
                 -q2
             );
 
-            Vector128<double> result = Vector128.MultiplyAddEstimate(quaternion1.AsVector128(), Vector128.Create(1.0d - amount), q2 * amount);
+            Vector256<double> result = Vector256.MultiplyAddEstimate(quaternion1.AsVector256(), Vector256.Create(1.0d - amount), q2 * amount);
             return Normalize(result.AsQuaternionD());
         }
 
@@ -377,7 +377,7 @@ namespace Invicta.Numerics
         /// <returns>The normalized quaternion.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QuaternionD Normalize(QuaternionD value) => (value.AsVector128() / value.Length()).AsQuaternionD();
+        public static QuaternionD Normalize(QuaternionD value) => (value.AsVector256() / value.Length()).AsQuaternionD();
 
         /// <summary>Interpolates between two quaternions, using spherical linear interpolation.</summary>
         /// <param name="quaternion1">The first quaternion.</param>
@@ -435,7 +435,7 @@ namespace Invicta.Numerics
         /// <returns><see langword="true" /> if the two quaternions are equal; otherwise, <see langword="false" />.</returns>
         /// <remarks>Two quaternions are equal if each of their corresponding components is equal.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Equals(QuaternionD other) => this.AsVector128().Equals(other.AsVector128());
+        public readonly bool Equals(QuaternionD other) => this.AsVector256().Equals(other.AsVector256());
 
         /// <summary>Returns the hash code for this instance.</summary>
         /// <returns>The hash code.</returns>

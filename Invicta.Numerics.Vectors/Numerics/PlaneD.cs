@@ -68,7 +68,7 @@ namespace Invicta.Numerics
         /// <param name="d">The distance of the plane along its normal from the origin.</param>
         /// <returns>A <see cref="PlaneD" /> created from the X, Y, and Z components of its normal, and its distance from the origin on that normal.</returns>
         [Intrinsic]
-        public static PlaneD Create(double x, double y, double z, double d) => Vector128.Create(x, y, z, d).AsPlaneD();
+        public static PlaneD Create(double x, double y, double z, double d) => Vector256.Create(x, y, z, d).AsPlaneD();
 
         /// <summary>Creates a <see cref="PlaneD" /> object that contains three specified points.</summary>
         /// <param name="point1">The first point defining the plane.</param>
@@ -95,7 +95,7 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Dot(PlaneD plane, Vector4D value) => Vector128.Dot(plane.AsVector128(), value.AsVector128());
+        public static double Dot(PlaneD plane, Vector4D value) => Vector256.Dot(plane.AsVector256(), value.AsVector256());
 
         /// <summary>Returns the dot product of a specified three-dimensional vector and the normal vector of this plane plus the distance (<see cref="D" />) value of the plane.</summary>
         /// <param name="plane">The plane.</param>
@@ -129,11 +129,11 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMPlaneNormalize method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            Vector128<double> lengthSquared = Vector128.Create(value.Normal.LengthSquared());
+            Vector256<double> lengthSquared = Vector256.Create(value.Normal.LengthSquared());
 
-            return Vector128.AndNot(
-                (value.AsVector128() / Vector128.Sqrt(lengthSquared)),
-                Vector128.Equals(lengthSquared, Vector128.Create(double.PositiveInfinity))
+            return Vector256.AndNot(
+                (value.AsVector256() / Vector256.Sqrt(lengthSquared)),
+                Vector256.Equals(lengthSquared, Vector256.Create(double.PositiveInfinity))
             ).AsPlaneD();
         }
 
@@ -165,7 +165,7 @@ namespace Invicta.Numerics
         /// The <see cref="op_Equality" /> method defines the operation of the equality operator for <see cref="PlaneD" /> objects.</remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator ==(PlaneD value1, PlaneD value2) => value1.AsVector128() == value2.AsVector128();
+        public static bool operator ==(PlaneD value1, PlaneD value2) => value1.AsVector256() == value2.AsVector256();
 
         /// <summary>Returns a value that indicates whether two planes are not equal.</summary>
         /// <param name="value1">The first plane to compare.</param>
@@ -186,7 +186,7 @@ namespace Invicta.Numerics
         /// <returns><see langword="true" /> if the two planes are equal; otherwise, <see langword="false" />.</returns>
         /// <remarks>Two <see cref="PlaneD" /> objects are equal if their <see cref="Normal" /> and <see cref="D" /> fields are equal.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Equals(PlaneD other) => this.AsVector128().Equals(other.AsVector128());
+        public readonly bool Equals(PlaneD other) => this.AsVector256().Equals(other.AsVector256());
 
         /// <summary>Returns the hash code for this instance.</summary>
         /// <returns>The hash code.</returns>
