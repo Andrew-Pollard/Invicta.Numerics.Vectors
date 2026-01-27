@@ -18,7 +18,7 @@ namespace Invicta.Numerics
         public Vector3D Normal;
 
         /// <summary>The distance of the plane along its normal from the origin.</summary>
-        public float D;
+        public double D;
 
         /// <summary>Initializes a <see cref="PlaneD" /> from the X, Y, and Z components of its normal, and its distance from the origin on that normal.</summary>
         /// <param name="x">The X component of the normal.</param>
@@ -26,7 +26,7 @@ namespace Invicta.Numerics
         /// <param name="z">The Z component of the normal.</param>
         /// <param name="d">The distance of the plane along its normal from the origin.</param>
         [Intrinsic]
-        public PlaneD(float x, float y, float z, float d)
+        public PlaneD(double x, double y, double z, double d)
         {
             this = Create(x, y, z, d);
         }
@@ -35,7 +35,7 @@ namespace Invicta.Numerics
         /// <param name="normal">The plane's normal vector.</param>
         /// <param name="d">The plane's distance from the origin along its normal vector.</param>
         [Intrinsic]
-        public PlaneD(Vector3D normal, float d)
+        public PlaneD(Vector3D normal, double d)
         {
             this = Create(normal, d);
         }
@@ -59,7 +59,7 @@ namespace Invicta.Numerics
         /// <param name="d">The plane's distance from the origin along its normal vector.</param>\
         /// <returns>A <see cref="PlaneD" /> created from a specified normal and the distance along the normal from the origin.</returns>
         [Intrinsic]
-        public static PlaneD Create(Vector3D normal, float d) => Vector4D.Create(normal, d).AsPlaneD();
+        public static PlaneD Create(Vector3D normal, double d) => Vector4D.Create(normal, d).AsPlaneD();
 
         /// <summary>Creates a <see cref="PlaneD" /> from the X, Y, and Z components of its normal, and its distance from the origin on that normal.</summary>
         /// <param name="x">The X component of the normal.</param>
@@ -68,7 +68,7 @@ namespace Invicta.Numerics
         /// <param name="d">The distance of the plane along its normal from the origin.</param>
         /// <returns>A <see cref="PlaneD" /> created from the X, Y, and Z components of its normal, and its distance from the origin on that normal.</returns>
         [Intrinsic]
-        public static PlaneD Create(float x, float y, float z, float d) => Vector128.Create(x, y, z, d).AsPlaneD();
+        public static PlaneD Create(double x, double y, double z, double d) => Vector128.Create(x, y, z, d).AsPlaneD();
 
         /// <summary>Creates a <see cref="PlaneD" /> object that contains three specified points.</summary>
         /// <param name="point1">The first point defining the plane.</param>
@@ -95,25 +95,25 @@ namespace Invicta.Numerics
         /// <returns>The dot product.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(PlaneD plane, Vector4D value) => Vector128.Dot(plane.AsVector128(), value.AsVector128());
+        public static double Dot(PlaneD plane, Vector4D value) => Vector128.Dot(plane.AsVector128(), value.AsVector128());
 
         /// <summary>Returns the dot product of a specified three-dimensional vector and the normal vector of this plane plus the distance (<see cref="D" />) value of the plane.</summary>
         /// <param name="plane">The plane.</param>
         /// <param name="value">The 3-dimensional vector.</param>
         /// <returns>The dot product.</returns>
-        public static float DotCoordinate(PlaneD plane, Vector3D value)
+        public static double DotCoordinate(PlaneD plane, Vector3D value)
         {
             // This implementation is based on the DirectX Math Library XMPlaneDotCoord method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            return Dot(plane, Vector4D.Create(value, 1.0f));
+            return Dot(plane, Vector4D.Create(value, 1.0d));
         }
 
         /// <summary>Returns the dot product of a specified three-dimensional vector and the <see cref="Normal" /> vector of this plane.</summary>
         /// <param name="plane">The plane.</param>
         /// <param name="value">The three-dimensional vector.</param>
         /// <returns>The dot product.</returns>
-        public static float DotNormal(PlaneD plane, Vector3D value)
+        public static double DotNormal(PlaneD plane, Vector3D value)
         {
             // This implementation is based on the DirectX Math Library XMPlaneDotNormal method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
@@ -129,11 +129,11 @@ namespace Invicta.Numerics
             // This implementation is based on the DirectX Math Library XMPlaneNormalize method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathMisc.inl
 
-            Vector128<float> lengthSquared = Vector128.Create(value.Normal.LengthSquared());
+            Vector128<double> lengthSquared = Vector128.Create(value.Normal.LengthSquared());
 
             return Vector128.AndNot(
                 (value.AsVector128() / Vector128.Sqrt(lengthSquared)),
-                Vector128.Equals(lengthSquared, Vector128.Create(float.PositiveInfinity))
+                Vector128.Equals(lengthSquared, Vector128.Create(double.PositiveInfinity))
             ).AsPlaneD();
         }
 
