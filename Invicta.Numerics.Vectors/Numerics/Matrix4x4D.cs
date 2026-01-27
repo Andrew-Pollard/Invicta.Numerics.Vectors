@@ -17,7 +17,7 @@ namespace Invicta.Numerics
         internal const int ColumnCount = 4;
 
         // In an ideal world, we'd have 4x Vector4D fields. However, Matrix4x4D was shipped with
-        // 16x public float fields and as such we cannot change the "backing" fields without it being
+        // 16x public double fields and as such we cannot change the "backing" fields without it being
         // a breaking change. Likewise, we cannot switch to using something like ExplicitLayout
         // without it pessimizing other parts of the JIT and still preventing things like field promotion.
         //
@@ -28,67 +28,67 @@ namespace Invicta.Numerics
 
         /// <summary>The first element of the first row.</summary>
         /// <remarks>This element exists at index: <c>[0, 0]</c> and is part of row <see cref="X" />.</remarks>
-        public float M11;
+        public double M11;
 
         /// <summary>The second element of the first row.</summary>
         /// <remarks>This element exists at index: <c>[0, 1]</c> and is part of row <see cref="X" />.</remarks>
-        public float M12;
+        public double M12;
 
         /// <summary>The third element of the first row.</summary>
         /// <remarks>This element exists at index: <c>[0, 2]</c> and is part of row <see cref="X" />.</remarks>
-        public float M13;
+        public double M13;
 
         /// <summary>The fourth element of the first row.</summary>
         /// <remarks>This element exists at index: <c>[0, 3]</c> and is part of row <see cref="X" />.</remarks>
-        public float M14;
+        public double M14;
 
         /// <summary>The first element of the second row.</summary>
         /// <remarks>This element exists at index: <c>[1, 0]</c> and is part of row <see cref="Y" />.</remarks>
-        public float M21;
+        public double M21;
 
         /// <summary>The second element of the second row.</summary>
         /// <remarks>This element exists at index: <c>[1, 1]</c> and is part of row <see cref="Y" />.</remarks>
-        public float M22;
+        public double M22;
 
         /// <summary>The third element of the second row.</summary>
         /// <remarks>This element exists at index: <c>[1, 2]</c> and is part of row <see cref="Y" />.</remarks>
-        public float M23;
+        public double M23;
 
         /// <summary>The fourth element of the second row.</summary>
         /// <remarks>This element exists at index: <c>[1, 3]</c> and is part of row <see cref="Y" />.</remarks>
-        public float M24;
+        public double M24;
 
         /// <summary>The first element of the third row.</summary>
         /// <remarks>This element exists at index: <c>[2, 0]</c> and is part of row <see cref="Z" />.</remarks>
-        public float M31;
+        public double M31;
 
         /// <summary>The second element of the third row.</summary>
         /// <remarks>This element exists at index: <c>[2, 1]</c> and is part of row <see cref="Z" />.</remarks>
-        public float M32;
+        public double M32;
 
         /// <summary>The third element of the third row.</summary>
         /// <remarks>This element exists at index: <c>[2, 2]</c> and is part of row <see cref="Z" />.</remarks>
-        public float M33;
+        public double M33;
 
         /// <summary>The fourth element of the third row.</summary>
         /// <remarks>This element exists at index: <c>[2, 3]</c> and is part of row <see cref="Z" />.</remarks>
-        public float M34;
+        public double M34;
 
         /// <summary>The first element of the fourth row.</summary>
         /// <remarks>This element exists at index: <c>[3, 0]</c> and is part of row <see cref="W" />.</remarks>
-        public float M41;
+        public double M41;
 
         /// <summary>The second element of the fourth row.</summary>
         /// <remarks>This element exists at index: <c>[3, 1]</c> and is part of row <see cref="W" />.</remarks>
-        public float M42;
+        public double M42;
 
         /// <summary>The third element of the fourth row.</summary>
         /// <remarks>This element exists at index: <c>[3, 2]</c> and is part of row <see cref="W" />.</remarks>
-        public float M43;
+        public double M43;
 
         /// <summary>The fourth element of the fourth row.</summary>
         /// <remarks>This element exists at index: <c>[3, 3]</c> and is part of row <see cref="W" />.</remarks>
-        public float M44;
+        public double M44;
 
         /// <summary>Initializes a <see cref="Matrix4x4D"/> using the specified elements.</summary>
         /// <param name="m11">The value to assign to <see cref="M11" />.</param>
@@ -107,10 +107,10 @@ namespace Invicta.Numerics
         /// <param name="m42">The value to assign to <see cref="M42" />.</param>
         /// <param name="m43">The value to assign to <see cref="M43" />.</param>
         /// <param name="m44">The value to assign to <see cref="M44" />.</param>
-        public Matrix4x4D(float m11, float m12, float m13, float m14,
-                         float m21, float m22, float m23, float m24,
-                         float m31, float m32, float m33, float m34,
-                         float m41, float m42, float m43, float m44)
+        public Matrix4x4D(double m11, double m12, double m13, double m14,
+                         double m21, double m22, double m23, double m24,
+                         double m31, double m32, double m33, double m34,
+                         double m41, double m42, double m43, double m44)
         {
             this = Create(
                 m11, m12, m13, m14,
@@ -320,7 +320,7 @@ namespace Invicta.Numerics
         /// -or-
         /// <paramref name="column" /> was less than zero or greater than or equal to the number of columns (<c>4</c>).
         /// </exception>
-        public float this[int row, int column]
+        public double this[int row, int column]
         {
             // When both row and column are known constants, we can use a switch to
             // get optimal codegen as we are likely coming from register.
@@ -466,13 +466,13 @@ namespace Invicta.Numerics
             Vector4D.Transform(value1.W, value2)
         );
 
-        /// <summary>Multiplies a matrix by a float to compute the product.</summary>
+        /// <summary>Multiplies a matrix by a double to compute the product.</summary>
         /// <param name="value1">The matrix to scale.</param>
         /// <param name="value2">The scaling value to use.</param>
         /// <returns>The scaled matrix.</returns>
         /// <remarks>The <see cref="Matrix4x4D.op_Multiply" /> method defines the operation of the multiplication operator for <see cref="Matrix4x4D" /> objects.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D operator *(Matrix4x4D value1, float value2)
+        public static Matrix4x4D operator *(Matrix4x4D value1, double value2)
             => (value1.AsImpl() * value2).AsM4x4();
 
         /// <summary>Subtracts each element in a second matrix from its corresponding element in a first matrix.</summary>
@@ -503,7 +503,7 @@ namespace Invicta.Numerics
         /// <param name="value">The value to assign to all 16 elements.</param>
         /// <returns>A <see cref="Matrix4x4D" /> whose 16 elements are set to <paramref name="value" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Create(float value) => Create(Vector4D.Create(value));
+        public static Matrix4x4D Create(double value) => Create(Vector4D.Create(value));
 
         /// <summary>Creates a <see cref="Matrix4x4D" /> from the specified <see cref="Matrix3x2D" />.</summary>
         /// <param name="value">The <see cref="Matrix3x2D" /> to assign to the first two elements of <see cref="X" />, <see cref="Y" />, and <see cref="W" />.</param>
@@ -561,10 +561,10 @@ namespace Invicta.Numerics
         /// <param name="m44">The value to assign to <see cref="M44" />.</param>
         /// <returns>A <see cref="Matrix4x4D" /> whose elements are set to the specified values.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Create(float m11, float m12, float m13, float m14,
-                                       float m21, float m22, float m23, float m24,
-                                       float m31, float m32, float m33, float m34,
-                                       float m41, float m42, float m43, float m44) => Create(
+        public static Matrix4x4D Create(double m11, double m12, double m13, double m14,
+                                       double m21, double m22, double m23, double m24,
+                                       double m31, double m32, double m33, double m34,
+                                       double m41, double m42, double m43, double m44) => Create(
             Vector4D.Create(m11, m12, m13, m14),
             Vector4D.Create(m21, m22, m23, m24),
             Vector4D.Create(m31, m32, m33, m34),
@@ -613,7 +613,7 @@ namespace Invicta.Numerics
         /// <param name="axis">The axis to rotate around.</param>
         /// <param name="angle">The angle to rotate around <paramref name="axis" />, in radians.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateFromAxisAngle(Vector3D axis, float angle)
+        public static Matrix4x4D CreateFromAxisAngle(Vector3D axis, double angle)
             => Impl.CreateFromAxisAngle(in axis, angle).AsM4x4();
 
         /// <summary>Creates a rotation matrix from the specified QuaternionD rotation value.</summary>
@@ -627,7 +627,7 @@ namespace Invicta.Numerics
         /// <param name="pitch">The angle of rotation, in radians, around the X axis.</param>
         /// <param name="roll">The angle of rotation, in radians, around the Z axis.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateFromYawPitchRoll(float yaw, float pitch, float roll)
+        public static Matrix4x4D CreateFromYawPitchRoll(double yaw, double pitch, double roll)
             => Impl.CreateFromYawPitchRoll(yaw, pitch, roll).AsM4x4();
 
         /// <summary>Creates a right-handed view matrix.</summary>
@@ -676,7 +676,7 @@ namespace Invicta.Numerics
         /// <param name="zNearPlane">The minimum Z-value of the view volume.</param>
         /// <param name="zFarPlane">The maximum Z-value of the view volume.</param>
         /// <returns>The right-handed orthographic projection matrix.</returns>
-        public static Matrix4x4D CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane)
+        public static Matrix4x4D CreateOrthographic(double width, double height, double zNearPlane, double zFarPlane)
             => Impl.CreateOrthographic(width, height, zNearPlane, zFarPlane).AsM4x4();
 
         /// <summary>Creates a left-handed orthographic perspective matrix from the given view volume dimensions.</summary>
@@ -685,7 +685,7 @@ namespace Invicta.Numerics
         /// <param name="zNearPlane">The minimum Z-value of the view volume.</param>
         /// <param name="zFarPlane">The maximum Z-value of the view volume.</param>
         /// <returns>The left-handed orthographic projection matrix.</returns>
-        public static Matrix4x4D CreateOrthographicLeftHanded(float width, float height, float zNearPlane, float zFarPlane)
+        public static Matrix4x4D CreateOrthographicLeftHanded(double width, double height, double zNearPlane, double zFarPlane)
             => Impl.CreateOrthographicLeftHanded(width, height, zNearPlane, zFarPlane).AsM4x4();
 
         /// <summary>Creates a right-handed customized orthographic projection matrix.</summary>
@@ -696,7 +696,7 @@ namespace Invicta.Numerics
         /// <param name="zNearPlane">The minimum Z-value of the view volume.</param>
         /// <param name="zFarPlane">The maximum Z-value of the view volume.</param>
         /// <returns>The right-handed orthographic projection matrix.</returns>
-        public static Matrix4x4D CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+        public static Matrix4x4D CreateOrthographicOffCenter(double left, double right, double bottom, double top, double zNearPlane, double zFarPlane)
             => Impl.CreateOrthographicOffCenter(left, right, bottom, top, zNearPlane, zFarPlane).AsM4x4();
 
         /// <summary>Creates a left-handed customized orthographic projection matrix.</summary>
@@ -707,7 +707,7 @@ namespace Invicta.Numerics
         /// <param name="zNearPlane">The minimum Z-value of the view volume.</param>
         /// <param name="zFarPlane">The maximum Z-value of the view volume.</param>
         /// <returns>The left-handed orthographic projection matrix.</returns>
-        public static Matrix4x4D CreateOrthographicOffCenterLeftHanded(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+        public static Matrix4x4D CreateOrthographicOffCenterLeftHanded(double left, double right, double bottom, double top, double zNearPlane, double zFarPlane)
             => Impl.CreateOrthographicOffCenterLeftHanded(left, right, bottom, top, zNearPlane, zFarPlane).AsM4x4();
 
         /// <summary>Creates a right-handed perspective projection matrix from the given view volume dimensions.</summary>
@@ -721,7 +721,7 @@ namespace Invicta.Numerics
         /// <paramref name="farPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
-        public static Matrix4x4D CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4D CreatePerspective(double width, double height, double nearPlaneDistance, double farPlaneDistance)
             => Impl.CreatePerspective(width, height, nearPlaneDistance, farPlaneDistance).AsM4x4();
 
         /// <summary>Creates a left-handed perspective projection matrix from the given view volume dimensions.</summary>
@@ -735,7 +735,7 @@ namespace Invicta.Numerics
         /// <paramref name="farPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
-        public static Matrix4x4D CreatePerspectiveLeftHanded(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4D CreatePerspectiveLeftHanded(double width, double height, double nearPlaneDistance, double farPlaneDistance)
             => Impl.CreatePerspectiveLeftHanded(width, height, nearPlaneDistance, farPlaneDistance).AsM4x4();
 
         /// <summary>Creates a right-handed perspective projection matrix based on a field of view, aspect ratio, and near and far view plane distances.</summary>
@@ -746,13 +746,13 @@ namespace Invicta.Numerics
         /// <returns>The right-handed perspective projection matrix.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="fieldOfView" /> is less than or equal to zero.
         /// -or-
-        /// <paramref name="fieldOfView" /> is greater than or equal to <see cref="float.Pi" />.
+        /// <paramref name="fieldOfView" /> is greater than or equal to <see cref="double.Pi" />.
         /// <paramref name="nearPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="farPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
-        public static Matrix4x4D CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4D CreatePerspectiveFieldOfView(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance)
             => Impl.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearPlaneDistance, farPlaneDistance).AsM4x4();
 
         /// <summary>Creates a left-handed perspective projection matrix based on a field of view, aspect ratio, and near and far view plane distances.</summary>
@@ -763,13 +763,13 @@ namespace Invicta.Numerics
         /// <returns>The left-handed perspective projection matrix.</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="fieldOfView" /> is less than or equal to zero.
         /// -or-
-        /// <paramref name="fieldOfView" /> is greater than or equal to <see cref="float.Pi" />.
+        /// <paramref name="fieldOfView" /> is greater than or equal to <see cref="double.Pi" />.
         /// <paramref name="nearPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="farPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
-        public static Matrix4x4D CreatePerspectiveFieldOfViewLeftHanded(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4D CreatePerspectiveFieldOfViewLeftHanded(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance)
             => Impl.CreatePerspectiveFieldOfViewLeftHanded(fieldOfView, aspectRatio, nearPlaneDistance, farPlaneDistance).AsM4x4();
 
         /// <summary>Creates a right-handed customized perspective projection matrix.</summary>
@@ -785,7 +785,7 @@ namespace Invicta.Numerics
         /// <paramref name="farPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
-        public static Matrix4x4D CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4D CreatePerspectiveOffCenter(double left, double right, double bottom, double top, double nearPlaneDistance, double farPlaneDistance)
             => Impl.CreatePerspectiveOffCenter(left, right, bottom, top, nearPlaneDistance, farPlaneDistance).AsM4x4();
 
         /// <summary>Creates a left-handed customized perspective projection matrix.</summary>
@@ -801,7 +801,7 @@ namespace Invicta.Numerics
         /// <paramref name="farPlaneDistance" /> is less than or equal to zero.
         /// -or-
         /// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
-        public static Matrix4x4D CreatePerspectiveOffCenterLeftHanded(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4D CreatePerspectiveOffCenterLeftHanded(double left, double right, double bottom, double top, double nearPlaneDistance, double farPlaneDistance)
             => Impl.CreatePerspectiveOffCenterLeftHanded(left, right, bottom, top, nearPlaneDistance, farPlaneDistance).AsM4x4();
 
         /// <summary>Creates a matrix that reflects the coordinate system about a specified plane.</summary>
@@ -813,40 +813,40 @@ namespace Invicta.Numerics
         /// <summary>Creates a matrix for rotating points around the X axis.</summary>
         /// <param name="radians">The amount, in radians, by which to rotate around the X axis.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationX(float radians)
+        public static Matrix4x4D CreateRotationX(double radians)
             => Impl.CreateRotationX(radians).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the X axis from a center point.</summary>
         /// <param name="radians">The amount, in radians, by which to rotate around the X axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationX(float radians, Vector3D centerPoint)
+        public static Matrix4x4D CreateRotationX(double radians, Vector3D centerPoint)
             => Impl.CreateRotationX(radians, in centerPoint).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the Y axis.</summary>
         /// <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationY(float radians)
+        public static Matrix4x4D CreateRotationY(double radians)
             => Impl.CreateRotationY(radians).AsM4x4();
 
         /// <summary>The amount, in radians, by which to rotate around the Y axis from a center point.</summary>
         /// <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationY(float radians, Vector3D centerPoint)
+        public static Matrix4x4D CreateRotationY(double radians, Vector3D centerPoint)
             => Impl.CreateRotationY(radians, in centerPoint).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the Z axis.</summary>
         /// <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationZ(float radians)
+        public static Matrix4x4D CreateRotationZ(double radians)
             => Impl.CreateRotationZ(radians).AsM4x4();
 
         /// <summary>Creates a matrix for rotating points around the Z axis from a center point.</summary>
         /// <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The rotation matrix.</returns>
-        public static Matrix4x4D CreateRotationZ(float radians, Vector3D centerPoint)
+        public static Matrix4x4D CreateRotationZ(double radians, Vector3D centerPoint)
             => Impl.CreateRotationZ(radians, in centerPoint).AsM4x4();
 
         /// <summary>Creates a scaling matrix from the specified X, Y, and Z components.</summary>
@@ -854,7 +854,7 @@ namespace Invicta.Numerics
         /// <param name="yScale">The value to scale by on the Y axis.</param>
         /// <param name="zScale">The value to scale by on the Z axis.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(float xScale, float yScale, float zScale)
+        public static Matrix4x4D CreateScale(double xScale, double yScale, double zScale)
             => Impl.CreateScale(xScale, yScale, zScale).AsM4x4();
 
         /// <summary>Creates a scaling matrix that is offset by a given center point.</summary>
@@ -863,7 +863,7 @@ namespace Invicta.Numerics
         /// <param name="zScale">The value to scale by on the Z axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(float xScale, float yScale, float zScale, Vector3D centerPoint)
+        public static Matrix4x4D CreateScale(double xScale, double yScale, double zScale, Vector3D centerPoint)
             => Impl.CreateScale(xScale, yScale, zScale, in centerPoint).AsM4x4();
 
         /// <summary>Creates a scaling matrix from the specified vector scale.</summary>
@@ -882,14 +882,14 @@ namespace Invicta.Numerics
         /// <summary>Creates a uniform scaling matrix that scale equally on each axis.</summary>
         /// <param name="scale">The uniform scaling factor.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(float scale)
+        public static Matrix4x4D CreateScale(double scale)
             => Impl.CreateScale(scale).AsM4x4();
 
         /// <summary>Creates a uniform scaling matrix that scales equally on each axis with a center point.</summary>
         /// <param name="scale">The uniform scaling factor.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4D CreateScale(float scale, Vector3D centerPoint)
+        public static Matrix4x4D CreateScale(double scale, Vector3D centerPoint)
             => Impl.CreateScale(scale, in centerPoint).AsM4x4();
 
         /// <summary>Creates a matrix that flattens geometry into a specified plane as if casting a shadow from a specified light source.</summary>
@@ -910,7 +910,7 @@ namespace Invicta.Numerics
         /// <param name="yPosition">The amount to translate on the Y axis.</param>
         /// <param name="zPosition">The amount to translate on the Z axis.</param>
         /// <returns>The translation matrix.</returns>
-        public static Matrix4x4D CreateTranslation(float xPosition, float yPosition, float zPosition)
+        public static Matrix4x4D CreateTranslation(double xPosition, double yPosition, double zPosition)
             => Impl.CreateTranslation(xPosition, yPosition, zPosition).AsM4x4();
 
         /// <summary>Creates a right-handed viewport matrix from the specified parameters.</summary>
@@ -928,7 +928,7 @@ namespace Invicta.Numerics
         /// |       0       |        0       | minDepth - maxDepth | 0 |
         /// | x + width / 2 | y + height / 2 |       minDepth      | 1 |
         /// </remarks>
-        public static Matrix4x4D CreateViewport(float x, float y, float width, float height, float minDepth, float maxDepth)
+        public static Matrix4x4D CreateViewport(double x, double y, double width, double height, double minDepth, double maxDepth)
             => Impl.CreateViewport(x, y, width, height, minDepth, maxDepth).AsM4x4();
 
         /// <summary>Creates a left-handed viewport matrix from the specified parameters.</summary>
@@ -946,7 +946,7 @@ namespace Invicta.Numerics
         /// |       0       |        0       | maxDepth - minDepth | 0 |
         /// | x + width / 2 | y + height / 2 |       minDepth      | 1 |
         /// </remarks>
-        public static Matrix4x4D CreateViewportLeftHanded(float x, float y, float width, float height, float minDepth, float maxDepth)
+        public static Matrix4x4D CreateViewportLeftHanded(double x, double y, double width, double height, double minDepth, double maxDepth)
             => Impl.CreateViewportLeftHanded(x, y, width, height, minDepth, maxDepth).AsM4x4();
 
         /// <summary>Creates a world matrix with the specified parameters.</summary>
@@ -983,7 +983,7 @@ namespace Invicta.Numerics
         /// <param name="amount">The relative weighting of <paramref name="matrix2" />.</param>
         /// <returns>The interpolated matrix.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Lerp(Matrix4x4D matrix1, Matrix4x4D matrix2, float amount)
+        public static Matrix4x4D Lerp(Matrix4x4D matrix1, Matrix4x4D matrix2, double amount)
             => Impl.Lerp(in matrix1.AsImpl(), in matrix2.AsImpl(), amount).AsM4x4();
 
         /// <summary>Multiplies two matrices together to compute the product.</summary>
@@ -992,12 +992,12 @@ namespace Invicta.Numerics
         /// <returns>The product matrix.</returns>
         public static Matrix4x4D Multiply(Matrix4x4D value1, Matrix4x4D value2) => value1 * value2;
 
-        /// <summary>Multiplies a matrix by a float to compute the product.</summary>
+        /// <summary>Multiplies a matrix by a double to compute the product.</summary>
         /// <param name="value1">The matrix to scale.</param>
         /// <param name="value2">The scaling value to use.</param>
         /// <returns>The scaled matrix.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Matrix4x4D Multiply(Matrix4x4D value1, float value2)
+        public static Matrix4x4D Multiply(Matrix4x4D value1, double value2)
             => (value1.AsImpl() * value2).AsM4x4();
 
         /// <summary>Negates the specified matrix by multiplying all its values by -1.</summary>
@@ -1045,7 +1045,7 @@ namespace Invicta.Numerics
 
         /// <summary>Calculates the determinant of the current 4x4 matrix.</summary>
         /// <returns>The determinant.</returns>
-        public readonly float GetDeterminant()
+        public readonly double GetDeterminant()
             => AsROImpl().GetDeterminant();
 
         /// <summary>Gets the element at the specified row and column.</summary>
@@ -1058,7 +1058,7 @@ namespace Invicta.Numerics
         /// <paramref name="column" /> was less than zero or greater than or equal to the number of columns (<c>4</c>).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly float GetElement(int row, int column) => this[row, column];
+        public readonly double GetElement(int row, int column) => this[row, column];
 
         /// <summary>Gets or sets the row at the specified index.</summary>
         /// <param name="index">The index of the row to get.</param>
@@ -1090,7 +1090,7 @@ namespace Invicta.Numerics
         /// <paramref name="column" /> was less than zero or greater than or equal to the number of columns (<c>4</c>).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Matrix4x4D WithElement(int row, int column, float value)
+        public readonly Matrix4x4D WithElement(int row, int column, double value)
         {
             Matrix4x4D result = this;
             result[row, column] = value;
