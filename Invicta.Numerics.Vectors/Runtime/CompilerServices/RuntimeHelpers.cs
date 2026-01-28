@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Invicta.Runtime.CompilerServices
 {
-    public static partial class RuntimeHelpers
+    internal static partial class RuntimeHelpers
     {
         // The special dll name to be used for DllImport of QCalls
 #if NATIVEAOT
