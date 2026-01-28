@@ -192,20 +192,20 @@ namespace Invicta.Runtime.Intrinsics
         [Intrinsic]
         public static Vector256<double> AsVector256(this Vector4D value) => Unsafe.BitCast<Vector4D, Vector256<double>>(value);
 
-        ///// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector256{T}" />.</summary>
+        ///// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector128{T}" />.</summary>
         ///// <typeparam name="T">The type of the elements in the vector.</typeparam>
         ///// <param name="value">The vector to reinterpret.</param>
-        ///// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector256{T}" />.</returns>
+        ///// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector128{T}" />.</returns>
         ///// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         //[Intrinsic]
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static Vector256<T> AsVector256<T>(this Vector<T> value)
+        //public static Vector128<T> AsVector128<T>(this Vector<T> value)
         //{
-        //    Debug.Assert(Vector<T>.Count >= Vector256<T>.Count);
-        //    ThrowHelper.ThrowForUnsupportedIntrinsicsVector256BaseType<T>();
+        //    Debug.Assert(Vector<T>.Count >= Vector128<T>.Count);
+        //    ThrowHelper.ThrowForUnsupportedIntrinsicsVector128BaseType<T>();
 
         //    ref byte address = ref Unsafe.As<Vector<T>, byte>(ref value);
-        //    return Unsafe.ReadUnaligned<Vector256<T>>(ref address);
+        //    return Unsafe.ReadUnaligned<Vector128<T>>(ref address);
         //}
 
         /// <summary>Reinterprets a <see langword="Vector2D" /> as a new <see cref="Vector256&lt;Double&gt;" />, leaving the new elements undefined.</summary>
@@ -264,17 +264,17 @@ namespace Invicta.Runtime.Intrinsics
         [Intrinsic]
         public static Vector4D AsVector4D(this Vector256<double> value) => Unsafe.BitCast<Vector256<double>, Vector4D>(value);
 
-        ///// <summary>Reinterprets a <see cref="Vector256{T}" /> as a new <see cref="Vector{T}" />.</summary>
+        ///// <summary>Reinterprets a <see cref="Vector128{T}" /> as a new <see cref="Vector{T}" />.</summary>
         ///// <typeparam name="T">The type of the elements in the vector.</typeparam>
         ///// <param name="value">The vector to reinterpret.</param>
-        ///// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector256{T}" />.</returns>
+        ///// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector128{T}" />.</returns>
         ///// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         //[Intrinsic]
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static Vector<T> AsVector<T>(this Vector256<T> value)
+        //public static Vector<T> AsVector<T>(this Vector128<T> value)
         //{
-        //    Debug.Assert(Vector<T>.Count >= Vector256<T>.Count);
-        //    ThrowHelper.ThrowForUnsupportedIntrinsicsVector256BaseType<T>();
+        //    Debug.Assert(Vector<T>.Count >= Vector128<T>.Count);
+        //    ThrowHelper.ThrowForUnsupportedIntrinsicsVector128BaseType<T>();
 
         //    Vector<T> result = default;
         //    Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref result), value);
