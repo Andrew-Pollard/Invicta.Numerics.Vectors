@@ -17,7 +17,7 @@ namespace Invicta.Numerics
     [Intrinsic]
     public partial struct Vector3D : IEquatable<Vector3D>, IFormattable
     {
-        /// <summary>Specifies the alignment of the vector as used by the <see cref="LoadAligned(double*)" /> and <see cref="Vector.StoreAligned(Vector3D, double*)" /> APIs.</summary>
+        /// <summary>Specifies the alignment of the vector as used by the <see cref="LoadAligned(double*)" /> and <see cref="VectorD.StoreAligned(Vector3D, double*)" /> APIs.</summary>
         /// <remarks>
         ///     <para>
         ///       Different environments all have their own concepts of alignment/packing.

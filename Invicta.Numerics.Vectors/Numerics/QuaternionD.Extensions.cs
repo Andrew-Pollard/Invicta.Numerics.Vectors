@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Invicta.Numerics
 {
-    public static partial class Vector
+    public static partial class VectorD
     {
         /// <summary>Reinterprets a <see cref="QuaternionD" /> as a new <see cref="Vector4D" />.</summary>
         /// <param name="value">The quaternion to reinterpret.</param>

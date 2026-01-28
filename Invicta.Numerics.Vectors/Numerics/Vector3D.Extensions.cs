@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 
 namespace Invicta.Numerics
 {
-    public static unsafe partial class Vector
+    public static unsafe partial class VectorD
     {
         /// <summary>Reinterprets a <see cref="Vector3D" /> as a new <see cref="Vector2D" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>

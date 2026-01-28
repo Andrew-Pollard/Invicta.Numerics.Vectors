@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Invicta.Numerics
 {
-    public static partial class Vector
+    public static partial class VectorD
     {
         /// <summary>Reinterprets a <see cref="PlaneD" /> as a new <see cref="Vector4D" />.</summary>
         /// <param name="value">The plane to reinterpret.</param>
