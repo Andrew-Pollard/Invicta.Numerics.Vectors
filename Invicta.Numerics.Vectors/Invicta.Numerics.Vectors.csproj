@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Invicta.Numerics.Vectors</PackageId>
-    <Version>10.0.0-alpha.1</Version>
+    <Version>10.0.0-alpha.2</Version>
     <Authors>Andrew Pollard, .NET Foundation and Contributors</Authors>
     <Description>Double-precision versions of the structs from System.Numerics.Vectors.</Description>
     <Copyright>Copyright (c) Andrew Pollard, .NET Foundation and Contributors.</Copyright>
