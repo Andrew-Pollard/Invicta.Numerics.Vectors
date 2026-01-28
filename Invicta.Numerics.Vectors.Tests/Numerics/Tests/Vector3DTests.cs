@@ -969,7 +969,7 @@ namespace Invicta.Numerics.Tests
         }
 
         // A test for Vector2D (double, double)
-        // Constructor with special doubleing values
+        // Constructor with special floating values
         [Fact]
         public void Vector3DConstructorTest4()
         {

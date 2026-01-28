@@ -1209,7 +1209,7 @@ namespace Invicta.Numerics.Tests
         }
 
         // A test for Vector4D ()
-        // Constructor with special doubleing values
+        // Constructor with special floating values
         [Fact]
         public void Vector4DConstructorTest5()
         {
