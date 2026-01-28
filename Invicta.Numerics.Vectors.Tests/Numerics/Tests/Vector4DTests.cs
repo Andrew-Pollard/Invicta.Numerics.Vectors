@@ -191,7 +191,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expectedv3dormatted, v3strformatted);
         }
 
-        // A test for DistanceSquared (Vector4Df, Vector4Df)
+        // A test for DistanceSquared (Vector4D, Vector4D)
         [Fact]
         public void Vector4DDistanceSquaredTest()
         {
@@ -202,10 +202,10 @@ namespace Invicta.Numerics.Tests
             double actual;
 
             actual = Vector4D.DistanceSquared(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.DistanceSquared did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.DistanceSquared did not return the expected value.");
         }
 
-        // A test for Distance (Vector4Df, Vector4Df)
+        // A test for Distance (Vector4D, Vector4D)
         [Fact]
         public void Vector4DDistanceTest()
         {
@@ -216,10 +216,10 @@ namespace Invicta.Numerics.Tests
             double actual;
 
             actual = Vector4D.Distance(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Distance did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Distance did not return the expected value.");
         }
 
-        // A test for Distance (Vector4Df, Vector4Df)
+        // A test for Distance (Vector4D, Vector4D)
         // Distance from the same point
         [Fact]
         public void Vector4DDistanceTest1()
@@ -232,7 +232,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(0.0d, actual);
         }
 
-        // A test for Dot (Vector4Df, Vector4Df)
+        // A test for Dot (Vector4D, Vector4D)
         [Fact]
         public void Vector4DDotTest()
         {
@@ -243,10 +243,10 @@ namespace Invicta.Numerics.Tests
             double actual;
 
             actual = Vector4D.Dot(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Dot did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Dot did not return the expected value.");
         }
 
-        // A test for Dot (Vector4Df, Vector4Df)
+        // A test for Dot (Vector4D, Vector4D)
         // Dot test for perpendicular vector
         [Fact]
         public void Vector4DDotTest1()
@@ -259,7 +259,7 @@ namespace Invicta.Numerics.Tests
             Vector4D e = new Vector4D(c, 0);
 
             double actual = Vector4D.Dot(d, e);
-            Assert.True(MathHelper.Equal(0.0d, actual), "Vector4Df.Dot did not return the expected value.");
+            Assert.True(MathHelper.Equal(0.0d, actual), "Vector4D.Dot did not return the expected value.");
         }
 
         [Fact]
@@ -274,7 +274,7 @@ namespace Invicta.Numerics.Tests
             Vector4D e4 = new Vector4D(e3, a4.W * b4.W);
 
             Vector4D actual = Vector4D.Cross(a4, b4);
-            Assert.True(MathHelper.Equal(e4, actual), "Vector4Df.Cross did not return the expected value.");
+            Assert.True(MathHelper.Equal(e4, actual), "Vector4D.Cross did not return the expected value.");
         }
 
         [Fact]
@@ -290,7 +290,7 @@ namespace Invicta.Numerics.Tests
             Vector4D e4 = new Vector4D(e3, a4.W * b4.W);
 
             Vector4D actual = Vector4D.Cross(a4, b4);
-            Assert.True(MathHelper.Equal(e4, actual), "Vector4Df.Cross did not return the expected value.");
+            Assert.True(MathHelper.Equal(e4, actual), "Vector4D.Cross did not return the expected value.");
         }
 
         // A test for Length ()
@@ -307,7 +307,7 @@ namespace Invicta.Numerics.Tests
 
             actual = target.Length();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Length did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Length did not return the expected value.");
         }
 
         // A test for Length ()
@@ -320,7 +320,7 @@ namespace Invicta.Numerics.Tests
             double expected = 0.0d;
             double actual = target.Length();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Length did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Length did not return the expected value.");
         }
 
         // A test for LengthSquared ()
@@ -337,10 +337,10 @@ namespace Invicta.Numerics.Tests
 
             actual = target.LengthSquared();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.LengthSquared did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.LengthSquared did not return the expected value.");
         }
 
-        // A test for Min (Vector4Df, Vector4Df)
+        // A test for Min (Vector4D, Vector4D)
         [Fact]
         public void Vector4DMinTest()
         {
@@ -350,10 +350,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(-1.0d, 1.0d, -3.0d, 0.0d);
             Vector4D actual;
             actual = Vector4D.Min(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Min did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Min did not return the expected value.");
         }
 
-        // A test for Max (Vector4Df, Vector4Df)
+        // A test for Max (Vector4D, Vector4D)
         [Fact]
         public void Vector4DMaxTest()
         {
@@ -363,7 +363,7 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(2.0d, 4.0d, -1.0d, 1000.0d);
             Vector4D actual;
             actual = Vector4D.Max(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Max did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Max did not return the expected value.");
         }
 
         [Fact]
@@ -388,7 +388,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(actual, max);
         }
 
-        // A test for Clamp (Vector4Df, Vector4Df, Vector4Df)
+        // A test for Clamp (Vector4D, Vector4D, Vector4D)
         [Fact]
         public void Vector4DClampTest()
         {
@@ -400,26 +400,26 @@ namespace Invicta.Numerics.Tests
             // Case N1: specified value is in the range.
             Vector4D expected = new Vector4D(0.5d, 0.3d, 0.33d, 0.44d);
             Vector4D actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
 
             // Normal case.
             // Case N2: specified value is bigger than max value.
             a = new Vector4D(2.0d, 3.0d, 4.0d, 5.0d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
 
             // Case N3: specified value is smaller than max value.
             a = new Vector4D(-2.0d, -3.0d, -4.0d, -5.0d);
             expected = min;
             actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
 
             // Case N4: combination case.
             a = new Vector4D(-2.0d, 0.5d, 4.0d, -5.0d);
             expected = new Vector4D(min.X, a.Y, max.Z, min.W);
             actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
 
             // User specified min value is bigger than max value.
             max = new Vector4D(0.0d, 0.1d, 0.13d, 0.14d);
@@ -429,23 +429,23 @@ namespace Invicta.Numerics.Tests
             a = new Vector4D(0.5d, 0.3d, 0.33d, 0.44d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
 
             // Normal case.
             // Case W2: specified value is bigger than max and min value.
             a = new Vector4D(2.0d, 3.0d, 4.0d, 5.0d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
 
             // Case W3: specified value is smaller than min and max value.
             a = new Vector4D(-2.0d, -3.0d, -4.0d, -5.0d);
             expected = max;
             actual = Vector4D.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Clamp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Clamp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         [Fact]
         public void Vector4DLerpTest()
         {
@@ -458,10 +458,10 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with factor zero
         [Fact]
         public void Vector4DLerpTest1()
@@ -472,10 +472,10 @@ namespace Invicta.Numerics.Tests
             double t = 0.0d;
             Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 4.0d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with factor one
         [Fact]
         public void Vector4DLerpTest2()
@@ -486,10 +486,10 @@ namespace Invicta.Numerics.Tests
             double t = 1.0d;
             Vector4D expected = new Vector4D(4.0d, 5.0d, 6.0d, 7.0d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with factor > 1
         [Fact]
         public void Vector4DLerpTest3()
@@ -500,10 +500,10 @@ namespace Invicta.Numerics.Tests
             double t = 2.0d;
             Vector4D expected = new Vector4D(8.0d, 10.0d, 12.0d, 14.0d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with factor < 0
         [Fact]
         public void Vector4DLerpTest4()
@@ -514,10 +514,10 @@ namespace Invicta.Numerics.Tests
             double t = -2.0d;
             Vector4D expected = -(b * 2);
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with special double value
         [Fact]
         public void Vector4DLerpTest5()
@@ -527,11 +527,11 @@ namespace Invicta.Numerics.Tests
 
             double t = 0.408d;
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(double.IsPositiveInfinity(actual.X), "Vector4Df.Lerp did not return the expected value.");
-            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.X), "Vector4D.Lerp did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test from the same point
         [Fact]
         public void Vector4DLerpTest6()
@@ -542,10 +542,10 @@ namespace Invicta.Numerics.Tests
             double t = 0.85d;
             Vector4D expected = a;
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with values known to be inaccurate with the old lerp impl
         [Fact]
         public void Vector4DLerpTest7()
@@ -557,10 +557,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = new Vector4D(0.45155275d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Lerp (Vector4Df, Vector4Df, double)
+        // A test for Lerp (Vector4D, Vector4D, double)
         // Lerp test with values known to be inaccurate with the old lerp impl
         // (Old code incorrectly gets 0.33333588)
         [Fact]
@@ -573,10 +573,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = new Vector4D(0.33333334d);
             Vector4D actual = Vector4D.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Lerp did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Lerp did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, Matrix4x4D)
+        // A test for Transform (Vector2D, Matrix4x4D)
         [Fact]
         public void Vector4DTransformTest1()
         {
@@ -594,10 +594,10 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, Matrix4x4D)
+        // A test for Transform (Vector3D, Matrix4x4D)
         [Fact]
         public void Vector4DTransformTest2()
         {
@@ -618,7 +618,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "vector4.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector4Df, Matrix4x4D)
+        // A test for Transform (Vector4D, Matrix4x4D)
         [Fact]
         public void Vector4DTransformVector4DTest()
         {
@@ -636,17 +636,17 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
 
             //
             v.W = 1.0d;
 
             expected = new Vector4D(12.19198728d, 21.53349376d, 32.61602545d, 1.0d);
             actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector4Df, Matrix4x4D)
+        // A test for Transform (Vector4D, Matrix4x4D)
         // Transform vector4 with zero matrix
         [Fact]
         public void Vector4DTransformVector4DTest1()
@@ -656,10 +656,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(0, 0, 0, 0);
 
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector4Df, Matrix4x4D)
+        // A test for Transform (Vector4D, Matrix4x4D)
         // Transform vector4 with identity matrix
         [Fact]
         public void Vector4DTransformVector4DTest2()
@@ -669,11 +669,11 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
 
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, Matrix4x4D)
-        // Transform Vector3Df test
+        // A test for Transform (Vector3D, Matrix4x4D)
+        // Transform Vector3D test
         [Fact]
         public void Vector4DTransformVector3DTest()
         {
@@ -689,10 +689,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = Vector4D.Transform(new Vector4D(v, 1.0d), m);
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, Matrix4x4D)
+        // A test for Transform (Vector3D, Matrix4x4D)
         // Transform vector3 with zero matrix
         [Fact]
         public void Vector4DTransformVector3DTest1()
@@ -702,10 +702,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(0, 0, 0, 0);
 
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, Matrix4x4D)
+        // A test for Transform (Vector3D, Matrix4x4D)
         // Transform vector3 with identity matrix
         [Fact]
         public void Vector4DTransformVector3DTest2()
@@ -715,11 +715,11 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, Matrix4x4D)
-        // Transform Vector2Df test
+        // A test for Transform (Vector2D, Matrix4x4D)
+        // Transform Vector2D test
         [Fact]
         public void Vector4DTransformVector2DTest()
         {
@@ -735,11 +735,11 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = Vector4D.Transform(new Vector4D(v, 0.0d, 1.0d), m);
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, Matrix4x4D)
-        // Transform Vector2Df with zero matrix
+        // A test for Transform (Vector2D, Matrix4x4D)
+        // Transform Vector2D with zero matrix
         [Fact]
         public void Vector4DTransformVector2DTest1()
         {
@@ -748,10 +748,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(0, 0, 0, 0);
 
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, Matrix4x4D)
+        // A test for Transform (Vector2D, Matrix4x4D)
         // Transform vector2 with identity matrix
         [Fact]
         public void Vector4DTransformVector2DTest2()
@@ -761,10 +761,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(1.0d, 2.0d, 0, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, QuaternionD)
+        // A test for Transform (Vector2D, QuaternionD)
         [Fact]
         public void Vector4DTransformVector2DQuatanionTest()
         {
@@ -781,10 +781,10 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, QuaternionD)
+        // A test for Transform (Vector3D, QuaternionD)
         [Fact]
         public void Vector4DTransformVector3DQuaternionD()
         {
@@ -803,7 +803,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "vector4.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector4Df, QuaternionD)
+        // A test for Transform (Vector4D, QuaternionD)
         [Fact]
         public void Vector4DTransformVector4DQuaternionDTest()
         {
@@ -819,16 +819,16 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
 
             //
             v.W = 1.0d;
             expected.W = 1.0d;
             actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector4Df, QuaternionD)
+        // A test for Transform (Vector4D, QuaternionD)
         // Transform vector4 with zero quaternion
         [Fact]
         public void Vector4DTransformVector4DQuaternionDTest1()
@@ -838,10 +838,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = Vector4D.Zero;
 
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector4Df, QuaternionD)
+        // A test for Transform (Vector4D, QuaternionD)
         // Transform vector4 with identity matrix
         [Fact]
         public void Vector4DTransformVector4DQuaternionDTest2()
@@ -851,11 +851,11 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 0.0d);
 
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, QuaternionD)
-        // Transform Vector3Df test
+        // A test for Transform (Vector3D, QuaternionD)
+        // Transform Vector3D test
         [Fact]
         public void Vector4DTransformVector3DQuaternionDTest()
         {
@@ -869,10 +869,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = Vector4D.Transform(v, m);
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, QuaternionD)
+        // A test for Transform (Vector3D, QuaternionD)
         // Transform vector3 with zero quaternion
         [Fact]
         public void Vector4DTransformVector3DQuaternionDTest1()
@@ -882,10 +882,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = Vector4D.Zero;
 
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector3Df, QuaternionD)
+        // A test for Transform (Vector3D, QuaternionD)
         // Transform vector3 with identity quaternion
         [Fact]
         public void Vector4DTransformVector3DQuaternionDTest2()
@@ -895,11 +895,11 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(1.0d, 2.0d, 3.0d, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, QuaternionD)
-        // Transform Vector2Df by quaternion test
+        // A test for Transform (Vector2D, QuaternionD)
+        // Transform Vector2D by quaternion test
         [Fact]
         public void Vector4DTransformVector2DQuaternionDTest()
         {
@@ -913,11 +913,11 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = Vector4D.Transform(v, m);
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, QuaternionD)
-        // Transform Vector2Df with zero quaternion
+        // A test for Transform (Vector2D, QuaternionD)
+        // Transform Vector2D with zero quaternion
         [Fact]
         public void Vector4DTransformVector2DQuaternionDTest1()
         {
@@ -926,10 +926,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = Vector4D.Zero;
 
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Transform (Vector2Df, Matrix4x4D)
+        // A test for Transform (Vector2D, Matrix4x4D)
         // Transform vector2 with identity QuaternionD
         [Fact]
         public void Vector4DTransformVector2DQuaternionDTest2()
@@ -939,10 +939,10 @@ namespace Invicta.Numerics.Tests
             Vector4D expected = new Vector4D(1.0d, 2.0d, 0, 1.0d);
 
             Vector4D actual = Vector4D.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Transform did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Transform did not return the expected value.");
         }
 
-        // A test for Normalize (Vector4Df)
+        // A test for Normalize (Vector4D)
         [Fact]
         public void Vector4DNormalizeTest()
         {
@@ -956,10 +956,10 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = Vector4D.Normalize(a);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Normalize did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Normalize did not return the expected value.");
         }
 
-        // A test for Normalize (Vector4Df)
+        // A test for Normalize (Vector4D)
         // Normalize vector of length one
         [Fact]
         public void Vector4DNormalizeTest1()
@@ -968,10 +968,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = new Vector4D(1.0d, 0.0d, 0.0d, 0.0d);
             Vector4D actual = Vector4D.Normalize(a);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.Normalize did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.Normalize did not return the expected value.");
         }
 
-        // A test for Normalize (Vector4Df)
+        // A test for Normalize (Vector4D)
         // Normalize vector of length zero
         [Fact]
         public void Vector4DNormalizeTest2()
@@ -980,10 +980,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D expected = new Vector4D(0.0d, 0.0d, 0.0d, 0.0d);
             Vector4D actual = Vector4D.Normalize(a);
-            Assert.True(double.IsNaN(actual.X) && double.IsNaN(actual.Y) && double.IsNaN(actual.Z) && double.IsNaN(actual.W), "Vector4Df.Normalize did not return the expected value.");
+            Assert.True(double.IsNaN(actual.X) && double.IsNaN(actual.Y) && double.IsNaN(actual.Z) && double.IsNaN(actual.W), "Vector4D.Normalize did not return the expected value.");
         }
 
-        // A test for operator - (Vector4Df)
+        // A test for operator - (Vector4D)
         [Fact]
         public void Vector4DUnaryNegationTest()
         {
@@ -994,10 +994,10 @@ namespace Invicta.Numerics.Tests
 
             actual = -a;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator - did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator - did not return the expected value.");
         }
 
-        // A test for operator - (Vector4Df, Vector4Df)
+        // A test for operator - (Vector4D, Vector4D)
         [Fact]
         public void Vector4DSubtractionTest()
         {
@@ -1009,10 +1009,10 @@ namespace Invicta.Numerics.Tests
 
             actual = a - b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator - did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator - did not return the expected value.");
         }
 
-        // A test for operator * (Vector4Df, double)
+        // A test for operator * (Vector4D, double)
         [Fact]
         public void Vector4DMultiplyOperatorTest()
         {
@@ -1024,10 +1024,10 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = a * factor;
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator * did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator * did not return the expected value.");
         }
 
-        // A test for operator * (double, Vector4Df)
+        // A test for operator * (double, Vector4D)
         [Fact]
         public void Vector4DMultiplyOperatorTest2()
         {
@@ -1038,10 +1038,10 @@ namespace Invicta.Numerics.Tests
             Vector4D actual;
 
             actual = factor * a;
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator * did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator * did not return the expected value.");
         }
 
-        // A test for operator * (Vector4Df, Vector4Df)
+        // A test for operator * (Vector4D, Vector4D)
         [Fact]
         public void Vector4DMultiplyOperatorTest3()
         {
@@ -1053,10 +1053,10 @@ namespace Invicta.Numerics.Tests
 
             actual = a * b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator * did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator * did not return the expected value.");
         }
 
-        // A test for operator / (Vector4Df, double)
+        // A test for operator / (Vector4D, double)
         [Fact]
         public void Vector4DDivisionTest()
         {
@@ -1069,10 +1069,10 @@ namespace Invicta.Numerics.Tests
 
             actual = a / div;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator / did not return the expected value.");
         }
 
-        // A test for operator / (Vector4Df, Vector4Df)
+        // A test for operator / (Vector4D, Vector4D)
         [Fact]
         public void Vector4DDivisionTest1()
         {
@@ -1084,10 +1084,10 @@ namespace Invicta.Numerics.Tests
 
             actual = a / b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator / did not return the expected value.");
         }
 
-        // A test for operator / (Vector4Df, Vector4Df)
+        // A test for operator / (Vector4D, Vector4D)
         // Divide by zero
         [Fact]
         public void Vector4DDivisionTest2()
@@ -1098,13 +1098,13 @@ namespace Invicta.Numerics.Tests
 
             Vector4D actual = a / div;
 
-            Assert.True(double.IsNegativeInfinity(actual.X), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(double.IsPositiveInfinity(actual.Y), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(double.IsPositiveInfinity(actual.Z), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(double.IsNaN(actual.W), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.X), "Vector4D.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.Y), "Vector4D.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.Z), "Vector4D.operator / did not return the expected value.");
+            Assert.True(double.IsNaN(actual.W), "Vector4D.operator / did not return the expected value.");
         }
 
-        // A test for operator / (Vector4Df, Vector4Df)
+        // A test for operator / (Vector4D, Vector4D)
         // Divide by zero
         [Fact]
         public void Vector4DDivisionTest3()
@@ -1114,13 +1114,13 @@ namespace Invicta.Numerics.Tests
 
             Vector4D actual = a / b;
 
-            Assert.True(double.IsPositiveInfinity(actual.X), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(double.IsNegativeInfinity(actual.Z), "Vector4Df.operator / did not return the expected value.");
-            Assert.True(double.IsNegativeInfinity(actual.W), "Vector4Df.operator / did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(actual.X), "Vector4D.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Y), "Vector4D.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.Z), "Vector4D.operator / did not return the expected value.");
+            Assert.True(double.IsNegativeInfinity(actual.W), "Vector4D.operator / did not return the expected value.");
         }
 
-        // A test for operator + (Vector4Df, Vector4Df)
+        // A test for operator + (Vector4D, Vector4D)
         [Fact]
         public void Vector4DAdditionTest()
         {
@@ -1132,7 +1132,7 @@ namespace Invicta.Numerics.Tests
 
             actual = a + b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4Df.operator + did not return the expected value.");
+            Assert.True(MathHelper.Equal(expected, actual), "Vector4D.operator + did not return the expected value.");
         }
 
         [Fact]
@@ -1154,7 +1154,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(double.NaN, v4.W);
         }
 
-        // A test for Vector4Df (double, double, double, double)
+        // A test for Vector4D (double, double, double, double)
         [Fact]
         public void Vector4DConstructorTest()
         {
@@ -1166,10 +1166,10 @@ namespace Invicta.Numerics.Tests
             Vector4D target = new Vector4D(x, y, z, w);
 
             Assert.True(MathHelper.Equal(target.X, x) && MathHelper.Equal(target.Y, y) && MathHelper.Equal(target.Z, z) && MathHelper.Equal(target.W, w),
-                "Vector4Df constructor(x,y,z,w) did not return the expected value.");
+                "Vector4D constructor(x,y,z,w) did not return the expected value.");
         }
 
-        // A test for Vector4Df (Vector2Df, double, double)
+        // A test for Vector4D (Vector2D, double, double)
         [Fact]
         public void Vector4DConstructorTest1()
         {
@@ -1179,10 +1179,10 @@ namespace Invicta.Numerics.Tests
 
             Vector4D target = new Vector4D(a, z, w);
             Assert.True(MathHelper.Equal(target.X, a.X) && MathHelper.Equal(target.Y, a.Y) && MathHelper.Equal(target.Z, z) && MathHelper.Equal(target.W, w),
-                "Vector4Df constructor(Vector2Df,z,w) did not return the expected value.");
+                "Vector4D constructor(Vector2D,z,w) did not return the expected value.");
         }
 
-        // A test for Vector4Df (Vector3Df, double)
+        // A test for Vector4D (Vector3D, double)
         [Fact]
         public void Vector4DConstructorTest2()
         {
@@ -1192,10 +1192,10 @@ namespace Invicta.Numerics.Tests
             Vector4D target = new Vector4D(a, w);
 
             Assert.True(MathHelper.Equal(target.X, a.X) && MathHelper.Equal(target.Y, a.Y) && MathHelper.Equal(target.Z, a.Z) && MathHelper.Equal(target.W, w),
-                "Vector4Df constructor(Vector3Df,w) did not return the expected value.");
+                "Vector4D constructor(Vector3D,w) did not return the expected value.");
         }
 
-        // A test for Vector4Df ()
+        // A test for Vector4D ()
         // Constructor with no parameter
         [Fact]
         public void Vector4DConstructorTest4()
@@ -1208,20 +1208,20 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(0.0d, a.W);
         }
 
-        // A test for Vector4Df ()
+        // A test for Vector4D ()
         // Constructor with special doubleing values
         [Fact]
         public void Vector4DConstructorTest5()
         {
             Vector4D target = new Vector4D(double.NaN, double.MaxValue, double.PositiveInfinity, double.Epsilon);
 
-            Assert.True(double.IsNaN(target.X), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
-            Assert.True(double.Equals(double.MaxValue, target.Y), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
-            Assert.True(double.IsPositiveInfinity(target.Z), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
-            Assert.True(double.Equals(double.Epsilon, target.W), "Vector4Df.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.IsNaN(target.X), "Vector4D.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.Equals(double.MaxValue, target.Y), "Vector4D.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.IsPositiveInfinity(target.Z), "Vector4D.constructor (double, double, double, double) did not return the expected value.");
+            Assert.True(double.Equals(double.Epsilon, target.W), "Vector4D.constructor (double, double, double, double) did not return the expected value.");
         }
 
-        // A test for Vector4Df (ReadOnlySpan<double>)
+        // A test for Vector4D (ReadOnlySpan<double>)
         [Fact]
         public void Vector4DConstructorTest7()
         {
@@ -1233,7 +1233,7 @@ namespace Invicta.Numerics.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new Vector4D(new double[3]));
         }
 
-        // A test for Add (Vector4Df, Vector4Df)
+        // A test for Add (Vector4D, Vector4D)
         [Fact]
         public void Vector4DAddTest()
         {
@@ -1247,7 +1247,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Divide (Vector4Df, double)
+        // A test for Divide (Vector4D, double)
         [Fact]
         public void Vector4DDivideTest()
         {
@@ -1259,7 +1259,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Divide (Vector4Df, Vector4Df)
+        // A test for Divide (Vector4D, Vector4D)
         [Fact]
         public void Vector4DDivideTest1()
         {
@@ -1307,7 +1307,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (double, Vector4Df)
+        // A test for Multiply (double, Vector4D)
         [Fact]
         public void Vector4DMultiplyTest()
         {
@@ -1318,7 +1318,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Vector4Df, double)
+        // A test for Multiply (Vector4D, double)
         [Fact]
         public void Vector4DMultiplyTest2()
         {
@@ -1329,7 +1329,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Multiply (Vector4Df, Vector4Df)
+        // A test for Multiply (Vector4D, Vector4D)
         [Fact]
         public void Vector4DMultiplyTest3()
         {
@@ -1343,7 +1343,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Negate (Vector4Df)
+        // A test for Negate (Vector4D)
         [Fact]
         public void Vector4DNegateTest()
         {
@@ -1356,7 +1356,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for operator != (Vector4Df, Vector4Df)
+        // A test for operator != (Vector4D, Vector4D)
         [Fact]
         public void Vector4DInequalityTest()
         {
@@ -1375,7 +1375,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for operator == (Vector4Df, Vector4Df)
+        // A test for operator == (Vector4D, Vector4D)
         [Fact]
         public void Vector4DEqualityTest()
         {
@@ -1394,7 +1394,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for Subtract (Vector4Df, Vector4Df)
+        // A test for Subtract (Vector4D, Vector4D)
         [Fact]
         public void Vector4DSubtractTest()
         {
@@ -1457,7 +1457,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(val, Vector4D.Zero);
         }
 
-        // A test for Equals (Vector4Df)
+        // A test for Equals (Vector4D)
         [Fact]
         public void Vector4DEqualsTest1()
         {
@@ -1472,7 +1472,7 @@ namespace Invicta.Numerics.Tests
             Assert.False(a.Equals(b));
         }
 
-        // A test for Vector4Df (double)
+        // A test for Vector4D (double)
         [Fact]
         public void Vector4DConstructorTest6()
         {
@@ -1488,7 +1488,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, target);
         }
 
-        // A test for Vector4Df comparison involving NaN values
+        // A test for Vector4D comparison involving NaN values
         [Fact]
         public void Vector4DEqualsNaNTest()
         {

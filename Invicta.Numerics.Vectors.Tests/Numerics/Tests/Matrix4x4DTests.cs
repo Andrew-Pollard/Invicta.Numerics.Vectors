@@ -558,7 +558,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationX did not return the expected value.");
         }
 
-        // A test for CreateRotationX (double, Vector3Df)
+        // A test for CreateRotationX (double, Vector3D)
         [Fact]
         public void Matrix4x4DCreateRotationXCenterTest()
         {
@@ -614,7 +614,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationY did not return the expected value.");
         }
 
-        // A test for CreateRotationY (double, Vector3Df)
+        // A test for CreateRotationY (double, Vector3D)
         [Fact]
         public void Matrix4x4DCreateRotationYCenterTest()
         {
@@ -630,7 +630,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(rotateAroundCenter, rotateAroundCenterExpected));
         }
 
-        // A test for CreateFromAxisAngle(Vector3Df,double)
+        // A test for CreateFromAxisAngle(Vector3D,double)
         [Fact]
         public void Matrix4x4DCreateFromAxisAngleTest()
         {
@@ -922,7 +922,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), "Matrix4x4D.CreateRotationZ did not return the expected value.");
         }
 
-        // A test for CreateRotationZ (double, Vector3Df)
+        // A test for CreateRotationZ (double, Vector3D)
         [Fact]
         public void Matrix4x4DCreateRotationZCenterTest()
         {
@@ -1099,7 +1099,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), $"{nameof(Matrix4x4D)}.{nameof(Matrix4x4D.CreateViewportLeftHanded)} did not return the expected value.");
         }
 
-        // A test for CreateWorld (Vector3Df, Vector3Df, Vector3Df)
+        // A test for CreateWorld (Vector3D, Vector3D, Vector3D)
         [Fact]
         public void Matrix4x4DCreateWorldTest()
         {
@@ -2210,7 +2210,7 @@ namespace Invicta.Numerics.Tests
             AssertEqual(InverseHandedness(actualRH), actualLH, DefaultVarianceMatrix);
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Forward side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest01()
@@ -2223,7 +2223,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Backward side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest02()
@@ -2236,7 +2236,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(0)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Right side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest03()
@@ -2249,7 +2249,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Left side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest04()
@@ -2262,7 +2262,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(90)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Up side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest05()
@@ -2275,7 +2275,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Down side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest06()
@@ -2288,7 +2288,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Right side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest07()
@@ -2301,7 +2301,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Left side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest08()
@@ -2314,7 +2314,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Up side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest09()
@@ -2327,7 +2327,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Down side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest10()
@@ -2340,7 +2340,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Forward side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest11()
@@ -2353,7 +2353,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Backward side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateBillboardTest12()
@@ -2366,7 +2366,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0d)));
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Object and camera positions are too close and doesn't pass cameraForwardVector.
         [Fact]
         public void Matrix4x4DCreateBillboardTooCloseTest1()
@@ -2375,7 +2375,7 @@ namespace Invicta.Numerics.Tests
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
-            // Doesn't pass camera face direction. CreateBillboard uses new Vector3Df(0, 0, -1) direction. Result must be same as 180 degrees rotate along y-axis.
+            // Doesn't pass camera face direction. CreateBillboard uses new Vector3D(0, 0, -1) direction. Result must be same as 180 degrees rotate along y-axis.
             Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitZ);
             Assert.True(MathHelper.Equal(expected, actualRH), "Matrix4x4D.CreateBillboard did not return the expected value.");
@@ -2392,7 +2392,7 @@ namespace Invicta.Numerics.Tests
             AssertEqual(InverseHandedness(actualRH), actualLH, DefaultVarianceMatrix);
         }
 
-        // A test for CreateBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Object and camera positions are too close and passed cameraForwardVector.
         [Fact]
         public void Matrix4x4DCreateBillboardTooCloseTest2()
@@ -2401,7 +2401,7 @@ namespace Invicta.Numerics.Tests
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
-            // Passes Vector3Df.Right as camera face direction. Result must be same as -90 degrees rotate along y-axis.
+            // Passes Vector3D.Right as camera face direction. Result must be same as -90 degrees rotate along y-axis.
             Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitX);
             Assert.True(MathHelper.Equal(expected, actualRH), "Matrix4x4D.CreateBillboard did not return the expected value.");
@@ -2460,7 +2460,7 @@ namespace Invicta.Numerics.Tests
             AssertEqual(InverseHandedness(actualTranslatedDownRH), actualTranslatedDownLH, DefaultVarianceMatrix);
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Forward side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest01()
@@ -2473,7 +2473,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Backward side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest02()
@@ -2486,7 +2486,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(0)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Right side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest03()
@@ -2499,7 +2499,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Left side of camera on XZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest04()
@@ -2512,7 +2512,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(90)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Up side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest05()
@@ -2525,7 +2525,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(180)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Down side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest06()
@@ -2538,7 +2538,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(0)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Right side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest07()
@@ -2551,7 +2551,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Left side of camera on XY-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest08()
@@ -2564,7 +2564,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Up side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest09()
@@ -2577,7 +2577,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Down side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest10()
@@ -2590,7 +2590,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Forward side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest11()
@@ -2603,7 +2603,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Place object at Backward side of camera on YZ-plane
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTest12()
@@ -2616,7 +2616,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationX(MathHelper.ToRadians(0.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Object and camera positions are too close and doesn't pass cameraForwardVector.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTooCloseTest1()
@@ -2625,7 +2625,7 @@ namespace Invicta.Numerics.Tests
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
-            // Doesn't pass camera face direction. CreateConstrainedBillboard uses new Vector3Df(0, 0, -1) direction. Result must be same as 180 degrees rotate along y-axis.
+            // Doesn't pass camera face direction. CreateConstrainedBillboard uses new Vector3D(0, 0, -1) direction. Result must be same as 180 degrees rotate along y-axis.
             Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitZ, new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
@@ -2642,7 +2642,7 @@ namespace Invicta.Numerics.Tests
             AssertEqual(InverseHandedness(actualRH), actualLH, DefaultVarianceMatrix);
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Object and camera positions are too close and passed cameraForwardVector.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardTooCloseTest2()
@@ -2651,7 +2651,7 @@ namespace Invicta.Numerics.Tests
             Vector3D cameraPosition = objectPosition;
             Vector3D cameraUpVector = Vector3D.UnitY;
 
-            // Passes Vector3Df.Right as camera face direction. Result must be same as -90 degrees rotate along y-axis.
+            // Passes Vector3D.Right as camera face direction. Result must be same as -90 degrees rotate along y-axis.
             Matrix4x4D expected = Matrix4x4D.CreateRotationY(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateTranslation(objectPosition);
             Matrix4x4D actualRH = Matrix4x4D.CreateConstrainedBillboard(objectPosition, cameraPosition, cameraUpVector, Vector3D.UnitX, new Vector3D(0, 0, -1));
             Assert.True(MathHelper.Equal(expected, actualRH), $"{nameof(Matrix4x4D.CreateConstrainedBillboard)} did not return the expected value.");
@@ -2693,31 +2693,31 @@ namespace Invicta.Numerics.Tests
             AssertEqual(InverseHandedness(actualRH), actualLH, DefaultVarianceMatrix);
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Angle between rotateAxis and camera to object vector is too small. And use doesn't passed objectForwardVector parameter.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardAlongAxisTest1()
         {
-            // In this case, CreateConstrainedBillboard picks new Vector3Df(0, 0, -1) as object forward vector.
+            // In this case, CreateConstrainedBillboard picks new Vector3D(0, 0, -1) as object forward vector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 Vector3D.UnitY, new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)),
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Angle between rotateAxis and camera to object vector is too small. And user doesn't passed objectForwardVector parameter.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardAlongAxisTest2()
         {
-            // In this case, CreateConstrainedBillboard picks new Vector3Df(1, 0, 0) as object forward vector.
+            // In this case, CreateConstrainedBillboard picks new Vector3D(1, 0, 0) as object forward vector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 new Vector3D(0, 0, -1), new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)),
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Angle between rotateAxis and camera to object vector is too small. And user passed correct objectForwardVector parameter.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardAlongAxisTest3()
@@ -2729,7 +2729,7 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Angle between rotateAxis and camera to object vector is too small. And user passed incorrect objectForwardVector parameter.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardAlongAxisTest4()
@@ -2741,19 +2741,19 @@ namespace Invicta.Numerics.Tests
                 Matrix4x4D.CreateRotationY(MathHelper.ToRadians(180.0d)));
         }
 
-        // A test for CreateConstrainedBillboard (Vector3Df, Vector3Df, Vector3Df, Vector3Df?)
+        // A test for CreateConstrainedBillboard (Vector3D, Vector3D, Vector3D, Vector3D?)
         // Angle between rotateAxis and camera to object vector is too small. And user passed incorrect objectForwardVector parameter.
         [Fact]
         public void Matrix4x4DCreateConstrainedBillboardAlongAxisTest5()
         {
-            // In this case, CreateConstrainedBillboard picks Vector3Df.Right as object forward vector.
+            // In this case, CreateConstrainedBillboard picks Vector3D.Right as object forward vector.
             Matrix4x4DCreateConstrainedBillboardAlongAxisFact(
                 new Vector3D(0, 0, -1), new Vector3D(0, 0, -1), new Vector3D(0, 0, -1),
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(-90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)),
                 Matrix4x4D.CreateRotationX(MathHelper.ToRadians(90.0d)) * Matrix4x4D.CreateRotationZ(MathHelper.ToRadians(-90.0d)));
         }
 
-        // A test for CreateScale (Vector3Df)
+        // A test for CreateScale (Vector3D)
         [Fact]
         public void Matrix4x4DCreateScaleTest1()
         {
@@ -2767,7 +2767,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (Vector3Df, Vector3Df)
+        // A test for CreateScale (Vector3D, Vector3D)
         [Fact]
         public void Matrix4x4DCreateScaleCenterTest1()
         {
@@ -2797,7 +2797,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (double, Vector3Df)
+        // A test for CreateScale (double, Vector3D)
         [Fact]
         public void Matrix4x4DCreateScaleCenterTest2()
         {
@@ -2829,7 +2829,7 @@ namespace Invicta.Numerics.Tests
             Assert.Equal(expected, actual);
         }
 
-        // A test for CreateScale (double, double, double, Vector3Df)
+        // A test for CreateScale (double, double, double, Vector3D)
         [Fact]
         public void Matrix4x4DCreateScaleCenterTest3()
         {
@@ -2845,7 +2845,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
-        // A test for CreateTranslation (Vector3Df)
+        // A test for CreateTranslation (Vector3D)
         [Fact]
         public void Matrix4x4DCreateTranslationTest1()
         {

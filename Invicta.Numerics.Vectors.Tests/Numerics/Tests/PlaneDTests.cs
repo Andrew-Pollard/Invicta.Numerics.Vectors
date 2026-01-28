@@ -152,7 +152,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(target, expected), "PlaneD.cstor did not return the expected value.");
         }
 
-        // A test for PlaneD (Vector3Df, double)
+        // A test for PlaneD (Vector3D, double)
         [Fact]
         public void PlaneDConstructorTest3()
         {
@@ -165,7 +165,7 @@ namespace Invicta.Numerics.Tests
                 "PlaneD.cstor did not return the expected value.");
         }
 
-        // A test for PlaneD (Vector4Df)
+        // A test for PlaneD (Vector4D)
         [Fact]
         public void PlaneDConstructorTest()
         {

@@ -307,7 +307,7 @@ namespace Invicta.Numerics.Tests
                 "QuaternionD.constructor (x,y,z,w) did not return the expected value.");
         }
 
-        // A test for QuaternionD (Vector3Df, double)
+        // A test for QuaternionD (Vector3D, double)
         [Fact]
         public void QuaternionDConstructorTest1()
         {
@@ -316,10 +316,10 @@ namespace Invicta.Numerics.Tests
 
             QuaternionD target = new QuaternionD(v, w);
             Assert.True(MathHelper.Equal(target.X, v.X) && MathHelper.Equal(target.Y, v.Y) && MathHelper.Equal(target.Z, v.Z) && MathHelper.Equal(target.W, w),
-                "QuaternionD.constructor (Vector3Df,w) did not return the expected value.");
+                "QuaternionD.constructor (Vector3D,w) did not return the expected value.");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, double)
+        // A test for CreateFromAxisAngle (Vector3D, double)
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest()
         {
@@ -333,7 +333,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(expected, actual), $"QuaternionD.CreateFromAxisAngle did not return the expected value: expected {expected} actual {actual}");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, double)
+        // A test for CreateFromAxisAngle (Vector3D, double)
         // CreateFromAxisAngle of zero vector
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest1()
@@ -348,7 +348,7 @@ namespace Invicta.Numerics.Tests
                 , "QuaternionD.CreateFromAxisAngle did not return the expected value.");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, double)
+        // A test for CreateFromAxisAngle (Vector3D, double)
         // CreateFromAxisAngle of angle = 30 && 750
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest2()
@@ -362,7 +362,7 @@ namespace Invicta.Numerics.Tests
             Assert.True(MathHelper.Equal(actual1, actual2), $"QuaternionD.CreateFromAxisAngle did not return the expected value: actual1 {actual1} actual2 {actual2}");
         }
 
-        // A test for CreateFromAxisAngle (Vector3Df, double)
+        // A test for CreateFromAxisAngle (Vector3D, double)
         // CreateFromAxisAngle of angle = 30 && 390
         [Fact]
         public void QuaternionDCreateFromAxisAngleTest3()
