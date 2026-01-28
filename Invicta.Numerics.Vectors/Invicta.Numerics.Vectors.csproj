@@ -1,12 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Invicta.Numerics.Vectors</PackageId>
+    <Version>10.0.0-alpha.1</Version>
+    <Authors>Andrew Pollard, .NET Foundation and Contributors</Authors>
+    <Description>Double-precision versions of the structs from System.Numerics.Vectors.</Description>
+    <Copyright>Copyright (c) Andrew Pollard, .NET Foundation and Contributors.</Copyright>
+    <PackageProjectUrl>https://github.com/Andrew-Pollard/Invicta.Numerics.Vectors</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Andrew-Pollard/Invicta.Numerics.Vectors</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>invicta numerics vectors double binary64 matrix matrix3x2 matrix4x4 plane quaternion vector vector2 vector3 vector4</PackageTags>
+    <PackageReleaseNotes>Test upload to Nuget.org.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+ 
+  <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Invicta</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath=""/>
+    <None Include="../LICENSE.txt" Pack="true" PackagePath=""/>
+    <None Include="../THIRD-PARTY-NOTICES.txt" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Strings.resx">

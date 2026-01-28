@@ -1,5 +1,5 @@
 # Invicta.Numerics.Vectors
-This library contains double-precision copies of [the single-precision structs contained within the `System.Numerics.Vectors` assembly](https://learn.microsoft.com/en-us/dotnet/api/system.numerics#structs).
+This library contains double-precision versions of [the single-precision structs contained within the `System.Numerics.Vectors` assembly](https://learn.microsoft.com/en-us/dotnet/api/system.numerics#structs).
 
 ## Design Philosophy
 
