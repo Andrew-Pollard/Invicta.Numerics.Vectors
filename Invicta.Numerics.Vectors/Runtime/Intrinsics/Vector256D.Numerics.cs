@@ -8,7 +8,7 @@ using System.Runtime.Intrinsics;
 
 namespace Invicta.Runtime.Intrinsics
 {
-    public static class Vector256D
+    public static partial class Vector256D
     {
         extension(Vector256)
         {
