@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Invicta.Numerics.Vectors</PackageId>
-    <Version>10.0.0-alpha.3</Version>
+    <Version>10.0.0-alpha.4</Version>
     <Authors>Andrew Pollard, .NET Foundation and Contributors</Authors>
     <Description>Double-precision versions of the structs from System.Numerics.Vectors.</Description>
     <Copyright>Copyright (c) Andrew Pollard, .NET Foundation and Contributors.</Copyright>
@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/Andrew-Pollard/Invicta.Numerics.Vectors</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>invicta numerics vectors double binary64 matrix matrix3x2 matrix4x4 plane quaternion vector vector2 vector3 vector4</PackageTags>
-    <PackageReleaseNotes>Test upload to Nuget.org.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed Docfx markdown comments.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 

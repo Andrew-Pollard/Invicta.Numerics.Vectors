@@ -9,10 +9,10 @@ using System.Runtime.Intrinsics;
 namespace Invicta.Numerics
 {
     /// <summary>Represents a vector with four double-precision floating-point values.</summary>
-    /// <remarks><format type="text/markdown"><![CDATA[
-    /// The <xref:System.Numerics.Vector4D> structure provides support for hardware acceleration.
-    /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
-    /// ]]></format></remarks>
+    ///// <remarks><format type="text/markdown"><![CDATA[
+    ///// The <xref:System.Numerics.Vector4D> structure provides support for hardware acceleration.
+    ///// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
+    ///// ]]></format></remarks>
     [Intrinsic]
     public partial struct Vector4D : IEquatable<Vector4D>, IFormattable
     {
@@ -724,9 +724,9 @@ namespace Invicta.Numerics
         public static int LastIndexOfWhereAllBitsSet(Vector4D vector) => Vector256.LastIndexOfWhereAllBitsSet(vector.AsVector256());
 
         /// <inheritdoc cref="Lerp(Vector4D, Vector4D, Vector4D)" />
-        /// <remarks><format type="text/markdown"><![CDATA[
-        /// The behavior of this method changed in .NET 5.0. For more information, see [Behavior change for Vector2D.Lerp and Vector4D.Lerp](/dotnet/core/compatibility/3.1-5.0#behavior-change-for-vector2lerp-and-vector4lerp).
-        /// ]]></format></remarks>
+        ///// <remarks><format type="text/markdown"><![CDATA[
+        ///// The behavior of this method changed in .NET 5.0. For more information, see [Behavior change for Vector2D.Lerp and Vector4D.Lerp](/dotnet/core/compatibility/3.1-5.0#behavior-change-for-vector2lerp-and-vector4lerp).
+        ///// ]]></format></remarks>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D Lerp(Vector4D value1, Vector4D value2, double amount) => Lerp(value1, value2, Create(amount));

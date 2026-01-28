@@ -8,9 +8,9 @@ using System.Runtime.Intrinsics;
 namespace Invicta.Numerics
 {
     /// <summary>Represents a plane in three-dimensional space.</summary>
-    /// <remarks><format type="text/markdown"><![CDATA[
-    /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
-    /// ]]></format></remarks>
+    ///// <remarks><format type="text/markdown"><![CDATA[
+    ///// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
+    ///// ]]></format></remarks>
     [Intrinsic]
     public struct PlaneD : IEquatable<PlaneD>
     {

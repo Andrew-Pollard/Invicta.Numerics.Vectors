@@ -7,9 +7,9 @@ using System.Runtime.CompilerServices;
 namespace Invicta.Numerics
 {
     /// <summary>Represents a 4x4 matrix.</summary>
-    /// <remarks><format type="text/markdown"><![CDATA[
-    /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
-    /// ]]></format></remarks>
+    ///// <remarks><format type="text/markdown"><![CDATA[
+    ///// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
+    ///// ]]></format></remarks>
     [Intrinsic]
     public partial struct Matrix4x4D : IEquatable<Matrix4x4D>
     {

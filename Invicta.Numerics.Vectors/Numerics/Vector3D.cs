@@ -10,10 +10,10 @@ using System.Runtime.Intrinsics;
 namespace Invicta.Numerics
 {
     /// <summary>Represents a vector with three  double-precision floating-point values.</summary>
-    /// <remarks><format type="text/markdown"><![CDATA[
-    /// The <xref:System.Numerics.Vector3D> structure provides support for hardware acceleration.
-    /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
-    /// ]]></format></remarks>
+    ///// <remarks><format type="text/markdown"><![CDATA[
+    ///// The <xref:System.Numerics.Vector3D> structure provides support for hardware acceleration.
+    ///// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
+    ///// ]]></format></remarks>
     [Intrinsic]
     public partial struct Vector3D : IEquatable<Vector3D>, IFormattable
     {
