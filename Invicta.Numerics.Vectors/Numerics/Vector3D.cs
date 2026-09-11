@@ -21,9 +21,9 @@ namespace Invicta.Numerics
         /// <remarks>
         ///     <para>
         ///       Different environments all have their own concepts of alignment/packing.
-        ///       For example, a <c>Vector3D</c> in .NET is 4-byte aligned and 12-bytes in size,
-        ///       in GLSL a <c>vec3</c> is 16-byte aligned and 16-byte sized, while in HLSL a
-        ///       <c>float3</c> is functionally 8-byte aligned and 12-byte sized. These differences
+        ///       For example, a <c>Vector3D</c> in .NET is 8-byte aligned and 24-bytes in size,
+        ///       in GLSL a <c>dvec3</c> is 32-byte aligned and 32-byte sized, while in HLSL a
+        ///       <c>double3</c> is functionally 16-byte aligned and 24-byte sized. These differences
         ///       make it impossible to define a "correct" alignment; additionally, the nuance
         ///       in environments like HLSL where size is not a multiple of alignment introduce complications.
         ///     </para>
